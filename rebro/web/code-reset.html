@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- Head -->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="robots" content="Connect along with the world" />
+
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com https://polyfill.io http://oramla.atwebpages.com https://oramla.000webhostapp.com https://developers.google.com https://maps.googleapis.com/maps/api/staticmap https://maps.googleapis.com https://js.api.here.com https://developer.here.com https://image.maps.ls.hereapi.com https://oramla.com http://192.168.0.102 http://localhost https://itunes.apple.com 'unsafe-eval' 'unsafe-inline' ws://*; style-src 'self' 'unsafe-inline'; media-src *; img-src * data:">
+        <title>Loliping | Connect along with the world</title>
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="./assets/img/favicon/favicon.ico" type="image/x-icon">
+
+        <!-- Font -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+    	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700" rel="stylesheet">
+
+        <!-- Template CSS -->
+        <link rel="stylesheet" href="./assets/css/template.bundle.css">
+        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="./assets/css/template.dark.bundle.css" media="(prefers-color-scheme: dark)">
+    </head>
+
+    <body class="bg-light">
+
+        <div class="container">
+            <div class="row align-items-center justify-content-center min-vh-100 gx-0">
+
+                <div class="col-12 col-md-5 col-lg-4">
+                    <div class="card card-shadow border-0">
+                        <div class="card-body">
+                            <div class="row g-6">
+                                <div class="col-12">
+                                    <div class="text-center">
+                                        <h3 class="fw-bold mb-2">Verification</h3>
+                                        <p>Enter the verification code sent to the email</p>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="number" class="form-control" id="resetpassword-code" placeholder="Code">
+                                        <label for="resetpassword-code">Code</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <button id="code_button" class="btn btn-block btn-lg btn-primary w-100" type="submit">Verify code</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text -->
+                    <div class="text-center mt-8">
+                        <a id="resend_code" href="#">Resend code</a>
+                        <p>Already have an account? <a href="./signin.html">Sign in</a></p>
+                    </div>
+                </div>
+            </div> <!-- / .row -->
+        </div>
+
+        <!-- The actual snackbar -->
+        <div id="snackbar"></div>
+        
+        <!-- Scripts -->
+        <script src="js/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="assets/js/template.js"></script>
+        <script src="assets/js/vendor.js"></script>
+        <script src="cordova.js"></script>
+        <script src="js/code_reset.js"></script>
+    </body>
+</html>
