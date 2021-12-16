@@ -23,8 +23,8 @@
 $(document).ready(function(){
     let hostname = window.location.hostname;
     let path_protocol = location.protocol;
-    if (hostname.includes("benn-co.github.io") || hostname.includes("oramla") || hostname.includes("localhost") || hostname.includes("192.168.8.106")) {
-        if (hostname.includes("localhost") || hostname.includes("192.168.8.106")) {            
+    if (hostname.includes("benn-co.github.io") || hostname.includes("oramla") || hostname.includes("localhost") || hostname.includes("192.168.8.100")) {
+        if (hostname.includes("localhost") || hostname.includes("192.168.8.100")) {            
             onDeviceReady();
         } else {
             if (location.protocol !== 'https:') {
