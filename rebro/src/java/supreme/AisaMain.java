@@ -22,6 +22,7 @@ import com.google.gson.internal.*;
 
 import java.io.*;
 import java.util.*;
+import java.util.Date;
 
 
 /**
@@ -52,52 +53,47 @@ public class AisaMain {
     static String mkt_options = "";
     
     static String mkt_json = "";
+    
+    static String file_path = "C:/Users/admin/OneDrive/Documents/GitHub/refactored-broccoli/"; 
+    static String stock_training = "stock_training_data.arff";
+    static String stock_data = "stock_data.arff";    
 
-    //static String stock_data ="";
-    static String file_path = "C:/Users/admin/OneDrive/Documents/GitHub/refactored-broccoli/";  
-
-    //static String file_path = "C:/Users/admin/OneDrive/Documents/GitHub/refactored-broccoli/rebro/src/java/supreme/";  
-    //static String file_path = "http://localhost/";
-    // static String nae;
     private static String price_open;
     private static String price;
-    private static String close_yesterday;
     private static String options;    
     private static String given_value = "option";
     private static String predicted_value ="AI option";
-    private static String error = "";
-    static private String results = "Option " + getGiven_value() + " : " + "AI option " + getPredicted_value();
-     
+    
     public static String getGiven_value(){
         return given_value;
     }
-    public static String getPredicted_value(){
-        return predicted_value;
-    }
-    public static String getError(){
-        return error;
-    }
-    public static String getResults(){
-        return results;
-    }
-
-
-    public AisaMain(String mkt_data_json){
-        setJson(mkt_data_json);
-    }
-    
     public void setGiven_value(String given_value){
         this.given_value = given_value;
+    }
+
+    public static String getPredicted_value(){
+        return predicted_value;
     }
     public void setPredicted_value(String predicted_value){
         this.predicted_value = predicted_value;
     }
-    public void setError(String error){
-        this.error = error;
-    }
 
-    public void setResults(String results){
-        this.results = results;
+    public void setStock_training(String stock_training){
+        this.stock_training = stock_training;
+    }
+    
+
+    public static Double gambler(Double q, int z){
+        /**double p = 1.0 - q;
+        double lambda = z * (q / p);
+        double sum = 1.0;
+        int i, k;
+        for (k = 0; k <= z; k++) {
+            double poisson = exp(-lambda);
+            for (i = 1; i <= k; i++) poisson *= lambda / i;
+            sum -= poisson * (1 - pow(q / p, z - k));
+        }*/
+        return 2.4;
     }
 
     public void setJson(String json){
@@ -151,8 +147,22 @@ public class AisaMain {
 
     public void writeArffFile() {
         //Write ARFF file
-        /**try (FileWriter file = new FileWriter(file_path + "stock_data.arff")) {
-            String stock_data = "@relation stock" + "\n" + "\n" + 
+        File f = new File(file_path + stock_data);
+        if(f.exists() && !f.isDirectory()) {
+            try (FileWriter file = new FileWriter(file_path + stock_data, true)) {
+                String stock_data_app = "\n" +
+                                percent_change_since_open + "," + percent_change_from_day_low + "," + percent_change_from_day_high + "," + mkt_options ;
+                                file.write(stock_data_app);
+                                file.flush();
+                                
+                                aisaDecision();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try (FileWriter file = new FileWriter(file_path + stock_data)) {
+                String stock_data = "@relation stock" + "\n" + "\n" + 
                                 "@attribute percent_change_since_open real" + "\n" +
                                 "@attribute percent_change_from_day_low real" + "\n" +
                                 "@attribute percent_change_from_day_high real" + "\n" +
@@ -165,22 +175,10 @@ public class AisaMain {
                                 
                                 aisaDecision();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } */
-        try (FileWriter file = new FileWriter(file_path + "stock_data.arff", true)) {
-            String stock_data_app = "\n" +
-                                percent_change_since_open + "," + percent_change_from_day_low + "," + percent_change_from_day_high + "," + mkt_options ;
-                                file.write(stock_data_app);
-                                file.flush();
-                                
-                                aisaDecision();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
- 
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } 
     }
 
     public void aisaDecision(){
@@ -193,10 +191,14 @@ public class AisaMain {
     }
     
     public void readArffFile() throws Exception {
-        Instances training_data = new Instances(new BufferedReader(new FileReader(file_path + "stock_training_data.arff")));
+        
+        // train using stock_data.arff:
+        setStock_training(stock_data);
+
+        Instances training_data = new Instances(new BufferedReader(new FileReader(file_path + stock_training)));
 		training_data.setClassIndex(training_data.numAttributes() - 1);
         
-        Instances testing_data = new Instances(new BufferedReader(new FileReader(file_path + "stock_data.arff")));
+        Instances testing_data = new Instances(new BufferedReader(new FileReader(file_path + stock_data)));
 		testing_data.setClassIndex(training_data.numAttributes() - 1);
 
 		String summary = training_data.toSummaryString();
@@ -224,8 +226,12 @@ public class AisaMain {
         for (int i = 0; i < testing_data.numInstances(); i++) {
             double pred = fc.classifyInstance(testing_data.instance(i));
             setGiven_value(testing_data.classAttribute().value((int)testing_data.instance(i).classValue()));
-            setPredicted_value(testing_data.classAttribute().value((int) pred));
-            setResults("Summary: " + summary + " \n\nPredicted value " + getPredicted_value());
+            setPredicted_value("Predicted value " + testing_data.classAttribute().value((int) pred));
         }
 	}
+
+    //Costructor
+    public AisaMain(String mkt_data_json){
+        setJson(mkt_data_json);
+    }    
 }

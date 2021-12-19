@@ -1,7 +1,1 @@
-{
-            "price": "14.00",
-            "price_open": "13.55",
-            "day_high": "14.6",
-            "day_low": "13.5",
-            "options": "buy"
-            }
+{ "price": "48230.33", "price_open": "48189.95","day_high": "48245.18" ,"day_low": "48189.06", "options":"sell", "asset":"btc"}

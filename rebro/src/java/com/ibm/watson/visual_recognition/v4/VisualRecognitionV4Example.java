@@ -74,7 +74,7 @@ public class VisualRecognitionExample {
 
     // analyze an image at a URL
     String imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/American_Eskimo_Dog" +
-        ".jpg/1280px-American_Eskimo_Dog.jpg"
+        ".jpg/1280px-American_Eskimo_Dog.jpg";
     AnalyzeOptions options = new AnalyzeOptions.Builder()
         .addImageUrl(imageUrl)
         .addColectionId(exampleCollectionId)

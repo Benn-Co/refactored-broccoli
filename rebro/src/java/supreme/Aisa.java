@@ -17,13 +17,23 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Date;
+import java.io.StringReader;
+ 
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonToken;
+import com.google.gson.Gson;
+
 /**
  *
  * @author admin
  */
 @WebServlet(name = "Aisa", urlPatterns = {"/aisa"})
 public class Aisa extends HttpServlet {
-    private static final long serialVersionUID = 1L;    /**
+    private static final long serialVersionUID = 1L;  
+    private Gson gson = new Gson();
+
+    /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -33,38 +43,35 @@ public class Aisa extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String json = "{\n" +
+                       "\"price\":\"14.00\",\n" +
+                       "\"price_open\": \"14.6\",\n" +
+                       "\"day_high\": \"14.6\",\n" +
+                       "\"day_low\": \"13.5\",\n" +
+                       "\"options\": \"buy\"\n" +
+                       "}";
         // 1. get received JSON data from request
-		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
-		String json = "{\n" +
-"            \"price\": \"14.00\",\n" +
-"            \"price_open\": \"13.55\",\n" +
-"            \"day_high\": \"14.6\",\n" +
-"            \"day_low\": \"13.5\",\n" +
-"            \"options\": \"buy\"\n" +
-"            }";
-		if(br != null){
-			//json = br.readLine();
-			//System.out.println(json);
-            //Article.read_Json_Stirng(json);
+		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));        
+        if(br != null){
+            new AisaMain(br.readLine());
 		}
 
-        new AisaMain(json);
+        AisaJson aisajson = new AisaJson();
+        aisajson.setPrice(14.00);
+        aisajson.setDay_high(13.55);
+        aisajson.setPrice_open(14.6);
+        aisajson.setDay_low(13.5);
+        aisajson.setOptions(AisaMain.getPredicted_value());
+        aisajson.setUpdatedAt(new Date());
 
-        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Aisa</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println(AisaMain.getResults());
-            out.println("</body>");
-            out.println("</html>");
-        }
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            out.print(this.gson.toJson(aisajson));
+            out.flush();
+        } 
     }
-
+ 
     /**
      * Handles the HTTP <code>GET</code> method.
      *

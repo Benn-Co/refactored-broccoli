@@ -281,7 +281,7 @@ public class Article {
                         ", ai_options=" + predicted_value +
                         "]";
 	}	
-	
+	 
         
        static Stock analysis;
         
