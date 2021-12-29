@@ -101,6 +101,11 @@ function login_user(login_email,login_password,login_details_username,login_deta
                     username = response.username;
                     var role = response.role;
                     var email = response.email;
+                    //alert(response.account_balance);
+                    var account_balance = response.account_balance;
+                    $(".account_balance").attr("account_balance",account_balance);
+                    $(".account_balance").html("$" + account_balance);
+                    localStorage.setItem("account_balance", account_balance);
 
                     //first = response.first_name;
                     //last = response.last_name;
@@ -115,15 +120,17 @@ function login_user(login_email,login_password,login_details_username,login_deta
                     localStorage.setItem("username", username);
                     localStorage.setItem("role", role);
                     localStorage.setItem("email", email);
+                    $("#signin_html").hide();
+                    $("#index_html").show();
 
-                    let fik_path = "dashboard.html";
+                    /**let fik_path = "dashboard.html";
                     let file_name = window.location.pathname;
                     let text = file_name;
                     const myArray = text.split("/");
                     let newText = text.replace(myArray[myArray.length - 1], "");
                     let new_window_location_pathname = newText + fik_path;
                     let window_location_href ="" + location.protocol + "//" + window.location.hostname + "" + ":" + "" + window.location.port + new_window_location_pathname;
-                    window.location.href= window_location_href;
+                    window.location.href= window_location_href; */
 
                     /**if (file_name.includes("light")) {
                         window.location.href="" + location.protocol + "//" + window.location.hostname + "" + ":" + "" + window.location.port + window.location.pathname + fik_path;

@@ -19,6 +19,10 @@
  .loliping {
     text-shadow: 2px 2px 5px red;
  }
+ .colorblack {
+  background-color: #212529;
+  color: #fff;
+ }
  /* The snackbar - position it at the bottom and in the middle of the screen */
 #snackbar {
     visibility: hidden; /* Hidden by default. Visible on click */
@@ -64,3 +68,57 @@
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
   }
+
+
+  .skills, .langs {
+    text-transform:uppercase;
+    font-family:'Anton', sans-serif;
+    font-size:1vw;
+    display: inline-block;
+    white-space: nowrap;
+    animation: floatText 200s infinite linear;
+    padding-left: 100%; /*Initial offset*/
+    color:#ada97d;
+  
+  }
+  .skillsleft, .langsright {
+    display: none;  
+  }
+  
+  .langs {
+   animation-delay:5s;
+  }
+  
+  .skills:hover, .langs:hover  {
+    animation-play-state: paused;
+  
+  }
+  .skillsleft:hover, .langsright:hover  {
+    display: block;
+  }
+  
+  
+  @keyframes floatText {
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  .classul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  .classli {
+    float: left;
+  }
+  
+  .classli a {
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+

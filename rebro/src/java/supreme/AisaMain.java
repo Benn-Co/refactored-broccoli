@@ -226,7 +226,11 @@ public class AisaMain {
         for (int i = 0; i < testing_data.numInstances(); i++) {
             double pred = fc.classifyInstance(testing_data.instance(i));
             setGiven_value(testing_data.classAttribute().value((int)testing_data.instance(i).classValue()));
-            setPredicted_value("Predicted value " + testing_data.classAttribute().value((int) pred));
+            if(testing_data.classAttribute().value((int)testing_data.instance(i).classValue()) == testing_data.classAttribute().value((int) pred)){
+                setPredicted_value("Aisa: Great! to " + testing_data.classAttribute().value((int) pred) + ".");
+            } else {
+                setPredicted_value("Aisa: I'd suggest you " + testing_data.classAttribute().value((int) pred) + ".");
+            }
         }
 	}
 

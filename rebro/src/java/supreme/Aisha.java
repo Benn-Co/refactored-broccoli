@@ -28,8 +28,9 @@ import com.google.gson.Gson;
  *
  * @author admin
  */
-@WebServlet(name = "Aisa", urlPatterns = {"/aisa"})
-public class Aisa extends HttpServlet {
+@WebServlet(name = "Aisha", urlPatterns = {"/Aisha"})
+public class Aisha extends HttpServlet {
+
     private static final long serialVersionUID = 1L;  
     private Gson gson = new Gson();
 

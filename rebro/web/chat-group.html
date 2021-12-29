@@ -3,10 +3,8 @@
     <!-- Head -->
     <head>
         <meta charset="UTF-8">
-        <meta name="robots" content="Connect along with the world" />
-
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com https://polyfill.io http://oramla.atwebpages.com https://oramla.000webhostapp.com https://developers.google.com https://maps.googleapis.com/maps/api/staticmap https://maps.googleapis.com https://js.api.here.com https://developer.here.com https://image.maps.ls.hereapi.com https://oramla.com http://192.168.0.102 http://localhost https://itunes.apple.com 'unsafe-eval' 'unsafe-inline' ws://*; style-src 'self' 'unsafe-inline'; media-src *; img-src * data:">
-        <title>Loliping | Connect along with the world</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, shrink-to-fit=no, viewport-fit=cover">
+        <title>loliping</title>
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="./assets/img/favicon/favicon.ico" type="image/x-icon">
@@ -17,7 +15,6 @@
 
         <!-- Template CSS -->
         <link rel="stylesheet" href="./assets/css/template.bundle.css">
-        <link rel="stylesheet" href="css/index.css">
         <link rel="stylesheet" href="./assets/css/template.dark.bundle.css" media="(prefers-color-scheme: dark)">
     </head>
 
@@ -27,10 +24,16 @@
             <!-- Navigation -->
             <nav class="navigation d-flex flex-column text-center navbar navbar-light hide-scrollbar">
                 <!-- Brand -->
-                <a href="index.html" title="Loliping" class="d-none d-xl-block mb-6">
-                    <div class="avatar">
-                        <img src="./assets/img/favicon/favicon-256x256.png" alt="#" class="avatar-img">
-                    </div>
+                <a href="index.html" title="Messenger" class="d-none d-xl-block mb-6">
+                    <svg version="1.1" width="46px" height="46px" fill="currentColor" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 46 46" enable-background="new 0 0 46 46" xml:space="preserve">
+                        <polygon opacity="0.7" points="45,11 36,11 35.5,1 "/>
+                        <polygon points="35.5,1 25.4,14.1 39,21 "/>
+                        <polygon opacity="0.4" points="17,9.8 39,21 17,26 "/>
+                        <polygon opacity="0.7" points="2,12 17,26 17,9.8 "/>
+                        <polygon opacity="0.7" points="17,26 39,21 28,36 "/>
+                        <polygon points="28,36 4.5,44 17,26 "/>
+                        <polygon points="17,26 1,26 10.8,20.1 "/>
+                    </svg>
 
                 </a>
 
@@ -45,11 +48,11 @@
                         </a>
                     </li>
 
-                    <!-- Support -->
+                    <!-- New chat -->
                     <li class="nav-item">
-                        <a class="nav-link py-0 py-lg-8" id="ttab-support">
+                        <a class="nav-link py-0 py-lg-8" id="tab-create-chat" href="#tab-content-create-chat" title="Create chat" data-bs-toggle="tab" role="tab">
                             <div class="icon icon-xl">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layout"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
                             </div>
                         </a>
                     </li>
@@ -69,7 +72,7 @@
                             <div class="icon icon-xl icon-badged">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                                 <div class="badge badge-circle bg-primary">
-                                    <span id="tab_count_chats">4</span>
+                                    <span>4</span>
                                 </div>
                             </div>
                         </a>
@@ -84,11 +87,11 @@
                         </a>
                     </li>
 
-                     <!-- New chat -->
-                     <li class="nav-item d-none d-xl-block flex-xl-grow-1">
-                        <a class="nav-link py-0 py-lg-8" id="tab-create-chat" href="#tab-content-create-chat" title="Create chat" data-bs-toggle="tab" role="tab">
+                    <!-- Support -->
+                    <li class="nav-item d-none d-xl-block flex-xl-grow-1">
+                        <a class="nav-link py-0 py-lg-8" id="tab-support" href="#tab-content-support" title="Support" data-bs-toggle="tab" role="tab">
                             <div class="icon icon-xl">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layout"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
                             </div>
                         </a>
                     </li>
@@ -1050,7 +1053,7 @@
                                     </div>
 
                                     <!-- Chats -->
-                                    <div id="connects_chat" class="card-list">
+                                    <div class="card-list">
                                         <!-- Card -->
                                         <a href="chat-group.html" class="card border-0 text-reset">
                                             <div class="card-body">
@@ -1835,7 +1838,7 @@
                                                         <p>Classic light theme</p>
                                                     </div>
                                                     <div class="col-auto">
-                                                        <a href="./light/index.html" class="btn btn-sm btn-icon btn-primary rounded-circle">
+                                                        <a href="./light/" class="btn btn-sm btn-icon btn-primary rounded-circle">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
                                                         </a>
                                                     </div>
@@ -1852,7 +1855,7 @@
                                                         <p>Classic dark theme</p>
                                                     </div>
                                                     <div class="col-auto">
-                                                        <a href="./dark/index.html" class="btn btn-sm btn-icon btn-primary rounded-circle">
+                                                        <a href="./dark/" class="btn btn-sm btn-icon btn-primary rounded-circle">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
                                                         </a>
                                                     </div>
@@ -2372,14 +2375,14 @@
                                         <div class="col-12 col-xl-6">
                                             <div class="row align-items-center gx-5">
                                                 <div class="col-auto">
-                                                    <div id="connect_from_online" class="avatar avatar-online d-none d-xl-inline-block">
-                                                        <img class="avatar-img" id="connect_from_image" src="assets/img/avatars/2.jpg" alt="">
+                                                    <div class="avatar d-none d-xl-inline-block">
+                                                        <img class="avatar-img" src="assets/img/avatars/bootstrap.svg" alt="">
                                                     </div>
                                                 </div>
 
                                                 <div class="col overflow-hidden">
-                                                    <h5 class="text-truncate" id="connect_from_title">Ollie Chandler</h5>
-                                                    <p class="text-truncate" id="connect_from_action">is typing<span class='typing-dots'><span>.</span><span>.</span><span>.</span></span></p>
+                                                    <h5 class="text-truncate">Bootstrap Community</h5>
+                                                    <p class="text-truncate">35 members, 3 online</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -2450,7 +2453,7 @@
                         <!-- Chat: Content -->
                         <div class="chat-body hide-scrollbar flex-1 h-100">
                             <div class="chat-body-inner">
-                                <div id="chat" class="py-6 py-lg-12">
+                                <div class="py-6 py-lg-12">
 
                                     <!-- Message -->
                                     <div class="message">
@@ -3268,7 +3271,7 @@
 
                                     <div class="col">
                                         <div class="input-group">
-                                            <textarea id="chat_message" class="form-control px-0" placeholder="Type your message..." rows="1" data-emoji-input="" data-autosize="true"></textarea>
+                                            <textarea class="form-control px-0" placeholder="Type your message..." rows="1" data-emoji-input="" data-autosize="true"></textarea>
 
                                             <a href="#" class="input-group-text text-body pe-0" data-emoji-btn="">
                                                 <span class="icon icon-lg">
@@ -3279,7 +3282,7 @@
                                     </div>
 
                                     <div class="col-auto">
-                                        <button id="send_button" class="btn btn-icon btn-primary rounded-circle ms-5">
+                                        <button class="btn btn-icon btn-primary rounded-circle ms-5">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
                                         </button>
                                     </div>
@@ -4670,7 +4673,7 @@
                                 <a href="#tab-settings" class="text-reset" data-theme-toggle="tab" title="Settings" data-bs-dismiss="modal">Settings</a>
                             </li>
 
-                            <li class="list-group-item logout_me">
+                            <li class="list-group-item">
                                 <a href="#" class="text-danger">Logout</a>
                             </li>
                         </ul>
@@ -4876,14 +4879,8 @@
             </div>
         </div>
 
-        <!-- The actual snackbar -->
-        <div id="snackbar"></div>
-
         <!-- Scripts -->
-        <script src="js/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="assets/js/template.js"></script>
-        <script src="assets/js/vendor.js"></script>
-        <script src="cordova.js"></script>
-        <script src="js/index.js"></script>
+        <script src="./assets/js/vendor.js"></script>
+        <script src="./assets/js/template.js"></script>
     </body>
 </html>

@@ -23,8 +23,8 @@
 $(document).ready(function(){
     let hostname = window.location.hostname;
     let path_protocol = location.protocol;
-    if (hostname.includes("benn-co.github.io") || hostname.includes("oramla") || hostname.includes("localhost") || hostname.includes("192.168.8.100")) {
-        if (hostname.includes("localhost") || hostname.includes("192.168.8.100")) {            
+    if (hostname.includes("benn-co.github.io") || hostname.includes("oramla") || hostname.includes("localhost") || hostname.includes("192.")) {
+        if (hostname.includes("localhost") || hostname.includes("192.")) {            
             onDeviceReady();
         } else {
             if (location.protocol !== 'https:') {
@@ -51,6 +51,15 @@ function onDeviceReady() {
     // Cordova is now initialized. Have fun!   
     username = localStorage.getItem("username");
     //alert(username);
+    if (username == null || username == '') {
+        //$("#pills-account-tab").addClass("is-visible");
+        $("#pills-account-tab").removeClass("d-none");
+
+        //$("#pills-account-tab").show();
+    } else {
+        $("#pills-account-tab").addClass("d-none");
+        //pills-account-tab").hide();
+    }
     let file_name = window.location.pathname;
     if (file_name.includes("chat-direct")) {
         var connect_from = localStorage.getItem("connect_from");

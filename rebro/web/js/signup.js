@@ -82,15 +82,22 @@ function signup_user(signup_username,signup_email,signup_password) {
                     localStorage.setItem("username", username);
                     localStorage.setItem("role", role);
                     localStorage.setItem("email", email);
+                    var account_balance = response.account_balance;
+                    $(".account_balance").attr("account_balance",account_balance);
+                    $(".account_balance").html("$" + account_balance);
+                    localStorage.setItem("account_balance", account_balance);
 
-                    let fik_path = "dashboard.html";
+                    $("#signup_html").hide();
+                    $("#index_html").show();
+
+                    /**let fik_path = "dashboard.html";
                     let file_name = window.location.pathname;
                     let text = file_name;
                     const myArray = text.split("/");
                     let newText = text.replace(myArray[myArray.length - 1], "");
                     let new_window_location_pathname = newText + fik_path;
                     let window_location_href ="" + location.protocol + "//" + window.location.hostname + "" + ":" + "" + window.location.port + new_window_location_pathname;
-                    window.location.href= window_location_href;
+                    window.location.href= window_location_href; */
 
                     /**let file_name = window.location.pathname;
                     if (file_name.includes("light")) {
