@@ -122,6 +122,7 @@ function login_user(login_email,login_password,login_details_username,login_deta
                     localStorage.setItem("email", email);
                     $("#signin_html").hide();
                     $("#index_html").show();
+                    $("#pills-account-tab").removeClass("d-none");
 
                     /**let fik_path = "dashboard.html";
                     let file_name = window.location.pathname;

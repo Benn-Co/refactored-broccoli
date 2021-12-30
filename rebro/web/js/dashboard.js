@@ -2,8 +2,69 @@
 $("body").delegate(".mkt_option","click",function(event){
     event.preventDefault(); 
     var order_price = $(".order_price").val();
-    var order_quantity = localStorage.getItem("account_balance");
-    $(".account_balance").attr("account_balance",localStorage.getItem("account_balance"));
+    $(".account_balance").attr("account_balance",localStorage.getItem("account_balance")); 
+    localStorage.setItem("asset",$(this).attr('asset'));
+    localStorage.setItem("aisa_options",$(this).attr('aisa_options'));
+
+    //But, before I can make a trade I have to buy bitcoins from the sell side at the lowest sell_price
+    // I must have minimum balance in USD to buy some bitcoins.
+    // BTCUSD rate would be the lowest sell_price to get 1 bitcoin
+    // thus, 1 bitcoin = USD sell_price
+    // if 1 bitcoin = USD sell_price, what about 0.0001 bitcoins
+    // (0.0001/1)*sell_price = USD account balance
+    // (bitcoin_amount * sell_price)/1 = account bitcoin balance
+    // therefore, 
+    //           let sell_price = 47403.5;
+    //           let bitcoin_amount = 0.0001;
+    //           let account_balance = USD 1000
+    //           let account_balance_stake = USD 100
+    //     if USD sell_price = 1 bitcoin,
+    //       how many USD account_balance = ?, well it depends with the account_balance at stake,
+    //                                         if (a) account_balance_stake is < than sell_price, 
+    //                                                                       it will give you less bitcoins
+    //                                         if (b) account_balance_stake is > than sell_price,
+    //                                                                       it will give you less bitcoins
+    //            if (a) account_balance_stake = USD 100   : < sell_price
+    //                   (USD account_balance_stake/USD sell_price) * 1 bitcoin = BTC bitcoin_balance
+    //
+    //            if (b) account_balance_stake = USD 100000   : > sell_price
+    //                  (USD account_balance_stake/USD sell_price) * 1 bitcoin = BTC bitcoin_balance
+
+    if ($(this).attr('aisa_options') =="buy") {
+        //If it's buying I would buy from the seller on the sell side at the lowest sell_price
+        var order_quantity = localStorage.getItem("account_balance");//USD
+        localStorage.setItem("order_quantity",order_quantity);//USD
+
+        let lowest_sell_price = localStorage.getItem("sell_price"); //USD
+
+        let account_balance_stake = localStorage.getItem("order_quantity"); //USD
+        let bitcoin_balance = (account_balance_stake/lowest_sell_price)*1; //BTC
+        localStorage.setItem("bitcoin_balance",bitcoin_balance);//BTC
+
+        $(".bitcoin_balance").html(bitcoin_balance);
+        localStorage.setItem("price",lowest_sell_price);
+    } else {
+        //If it's selling I would sell to the buyer on the buy side at the highest buy_price
+        var order_quantity = localStorage.getItem("bitcoin_balance");//BTC
+        localStorage.setItem("order_quantity",order_quantity);//BTC
+
+        let highest_buy_price = localStorage.getItem("buy_price");//USD
+
+        let bitcoin_balance_stake = localStorage.getItem("order_quantity"); //BTC
+        let account_balance = (bitcoin_balance_stake/1)*highest_buy_price; //USD
+        localStorage.setItem("account_balance",account_balance);//USD
+
+        $(".bitcoin_balance").html(account_balance);
+        localStorage.setItem("price",highest_buy_price);
+        $(".bitcoin_balance_usd").html(account_balance);
+
+    }
+    $(".order_price").val(localStorage.getItem("price"));
+    $(".order_quantity").val(localStorage.getItem("order_quantity"));
+    localStorage.setItem("price_open",$(this).attr('price_open'));
+    localStorage.setItem("day_high",$(this).attr('day_high'));
+    localStorage.setItem("day_low",$(this).attr('day_low'));
+    $("#main_mkt").addClass("is-visible");
     if (order_quantity !== "") {
         $(".order_quantity").removeClass("is-invalid");
         $(".order_quantity").addClass("is-valid");
@@ -14,34 +75,17 @@ $("body").delegate(".mkt_option","click",function(event){
     if (order_price !== "") {
         $(".order_price").removeClass("is-invalid");
         $(".order_price").addClass("is-valid");
+        rebro_Aisha(localStorage.getItem("asset"),localStorage.getItem("aisa_options"),localStorage.getItem("price"),localStorage.getItem("price_open"),localStorage.getItem("day_high"),localStorage.getItem("day_low"));
     } else {
         $(".order_price").removeClass("is-valid");
         $(".order_price").addClass("is-invalid");
-    }  
-    localStorage.setItem("order_quantity",order_quantity);
- 
-    localStorage.setItem("asset",$(this).attr('asset'));
-    localStorage.setItem("aisa_options",$(this).attr('aisa_options'));
-
-    if ($(this).attr('aisa_options') =="buy") {
-        localStorage.setItem("price",localStorage.getItem("buy_price"));
-    } else {
-        localStorage.setItem("price",localStorage.getItem("sell_price"));
     }
-    localStorage.setItem("price_open",$(this).attr('price_open'));
-    localStorage.setItem("day_high",$(this).attr('day_high'));
-    localStorage.setItem("day_low",$(this).attr('day_low'));
-    $("#main_mkt").addClass("is-visible");
-    $(".order_price").val(localStorage.getItem("price"));
-    $(".order_quantity").val(localStorage.getItem("order_quantity"));
-
-    rebro_Aisha(localStorage.getItem("asset"),localStorage.getItem("aisa_options"),localStorage.getItem("price"),localStorage.getItem("price_open"),localStorage.getItem("day_high"),localStorage.getItem("day_low"));
 });
 $("body").delegate(".order_book_mkt","click",function(event){
     event.preventDefault();
+    $(".order_price").val(localStorage.getItem("price"));
     var order_price = $(".order_price").val();
-    var order_quantity = $(".account_balance").attr('account_balance');//$(".order_quantity").val();
-    //alert($(".account_balance").attr('account_balance'));
+    var order_quantity = $(".account_balance").attr('account_balance');
     if (order_quantity !== "") {
         $(".order_quantity").removeClass("is-invalid");
         $(".order_quantity").addClass("is-valid");
@@ -64,7 +108,14 @@ $("body").delegate(".order_book_mkt","click",function(event){
     } else {
         localStorage.setItem("aisa_options","sell");
     }
-    $(".order_price").val(localStorage.getItem("price"));
+    ///////////////////////////////////////////////////
+    if (localStorage.getItem("aisa_options") =="buy") {
+        //localStorage.setItem("price",localStorage.getItem("buy_price"));
+    } else {
+        //localStorage.setItem("price",localStorage.getItem("sell_price"));
+    }
+    ////////////////////////////////////////////////////
+    //$(".order_price").val(localStorage.getItem("price"));
     rebro_Aisha(localStorage.getItem("asset"),localStorage.getItem("aisa_options"),localStorage.getItem("price"),localStorage.getItem("price_open"),localStorage.getItem("day_high"),localStorage.getItem("day_low"));
 });
 $("body").delegate(".currency_option","click",function(event){
@@ -152,7 +203,37 @@ function rebro_Aisha(asset,aisa_options,price,price_open,day_high,day_low) {
         url: Aisha_url,
         success: function searchSuccess(response) { 
             try {
-                mysnackbar(response.options);
+                mysnackbar(response.options + " buy_price " + localStorage.getItem("buy_price") + " sell_price " + localStorage.getItem("sell_price"));
+                localStorage.setItem("aisa_options",response.options);//USD
+                if (response.options =="buy") {
+                    //If it's buying I would buy from the seller on the sell side at the lowest sell_price
+                    var order_quantity = localStorage.getItem("account_balance");//USD
+                    localStorage.setItem("order_quantity",order_quantity);//USD
+            
+                    let lowest_sell_price = localStorage.getItem("sell_price"); //USD
+            
+                    let account_balance_stake = localStorage.getItem("order_quantity"); //USD
+                    let bitcoin_balance = (account_balance_stake/lowest_sell_price)*1; //BTC
+                    localStorage.setItem("bitcoin_balance",bitcoin_balance);//BTC
+            
+                    $(".bitcoin_balance").html(bitcoin_balance);
+                    localStorage.setItem("price",lowest_sell_price);
+                } else {
+                    //If it's selling I would sell to the buyer on the buy side at the highest buy_price
+                    var order_quantity = localStorage.getItem("bitcoin_balance");//BTC
+                    localStorage.setItem("order_quantity",order_quantity);//BTC
+            
+                    let highest_buy_price = localStorage.getItem("buy_price");//USD
+            
+                    let bitcoin_balance_stake = localStorage.getItem("order_quantity"); //BTC
+                    let account_balance = (bitcoin_balance_stake/1)*highest_buy_price; //USD
+                    localStorage.setItem("account_balance",account_balance);//USD
+            
+                    $(".bitcoin_balance").html(account_balance);
+                    localStorage.setItem("price",highest_buy_price);
+                    $(".bitcoin_balance_usd").html(account_balance);
+            
+                } 
             } catch (error) {
                 mysnackbar(error);
             }
@@ -281,12 +362,30 @@ function bybit_mkt(crypto,asset,aisa_options) {
                                 '<span class="text-danger"><small>' + trade_time + '</small></span>'+
                                 '</li>';
                                 if (sell_price_i < 1) {
+                                    $(".bitcoin_balance_price").html("$" + results[i].price);
                                     localStorage.setItem("sell_price",results[i].price);
+                                    localStorage.setItem("price",results[i].price);
+                                    $(".order_price").val(localStorage.getItem("price"));
                                 }
                                 sell_price_i++;
                                 $(".crypto_mkt_sell").append(order_book);
-                            }
+                            }                            
                         }
+                        var order_quantity = localStorage.getItem("account_balance");//USD
+                        localStorage.setItem("order_quantity",order_quantity);//USD
+                
+                        let lowest_sell_price = localStorage.getItem("sell_price"); //USD
+                
+                        let account_balance_stake = localStorage.getItem("order_quantity"); //USD
+                        let bitcoin_balance = (account_balance_stake/lowest_sell_price)*1; //BTC
+                        localStorage.setItem("bitcoin_balance",bitcoin_balance);//BTC
+                
+                        $(".bitcoin_balance").html(bitcoin_balance);
+                        localStorage.setItem("price",lowest_sell_price);
+                        //alert(localStorage.getItem("account_balance"));
+                        $(".account_balance").attr("account_balance",localStorage.getItem("account_balance"));
+                        $(".account_balance").html("$" + localStorage.getItem("account_balance"));
+
                     } else if (crypto == 'Query Kline') {
                         var results = response.result;
                         var response_time_now = response.time_now;
@@ -323,6 +422,8 @@ function bybit_mkt(crypto,asset,aisa_options) {
                             $(".asset_info").html('');
 
                             $(".asset_info").append(asset_info);
+                            //rebro_Aisha(localStorage.getItem("asset"),localStorage.getItem("aisa_options"),localStorage.getItem("price"),localStorage.getItem("price_open"),localStorage.getItem("day_high"),localStorage.getItem("day_low"));
+
                         }                        
                     }
                     /**var order_price = $(".order_price").val();

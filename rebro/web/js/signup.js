@@ -89,6 +89,7 @@ function signup_user(signup_username,signup_email,signup_password) {
 
                     $("#signup_html").hide();
                     $("#index_html").show();
+                    $("#pills-account-tab").removeClass("d-none");
 
                     /**let fik_path = "dashboard.html";
                     let file_name = window.location.pathname;

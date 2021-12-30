@@ -839,8 +839,10 @@ $("body").delegate(".reply_ref","click",function(event){
     window.location.href="#" + $(this).attr('mess_ref') + "";
 });
 $("body").delegate(".logout_me","click",function(event){
+    event.preventDefault(); 
     username = '';
     localStorage.setItem("username", username);
+    $("#pills-account-tab").removeClass("d-none");
     loadconnects();
 });
 $("#ttab-support").click(function(){ 
