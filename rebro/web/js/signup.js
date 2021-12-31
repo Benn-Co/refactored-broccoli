@@ -79,6 +79,17 @@ function signup_user(signup_username,signup_email,signup_password) {
                     username = response.username;
                     var role = response.role;
                     var email = response.email;
+                    var phone_number = response.phone_number;
+                    var username_pic = response.username_pic;
+                    
+                    var location = JSON.parse(response.location_name);
+                        postal = location.postal;
+                        country = location.country;
+                        city = location.city;
+                        address = location.address;
+
+                    var user_location = country + ", "+ city;
+
                     localStorage.setItem("username", username);
                     localStorage.setItem("role", role);
                     localStorage.setItem("email", email);
@@ -87,9 +98,20 @@ function signup_user(signup_username,signup_email,signup_password) {
                     $(".account_balance").html("$" + account_balance);
                     localStorage.setItem("account_balance", account_balance);
 
+                    localStorage.setItem("username_pic", username_pic);
+                    localStorage.setItem("user_location", user_location);
+                    localStorage.setItem("user_email", email);
+                    localStorage.setItem("user_phone", phone_number);
+                    $(".username").html(username);
+                    $(".username_seen").html("last seen " + new Date());
+                    $(".username_pic").html('<img class="avatar-img" src="' + localStorage.getItem("username_pic") + '" alt="#">');
+                    $(".user_location").html(localStorage.getItem("user_location"));
+                    $(".user_email").html(localStorage.getItem("user_email"));
+                    $(".user_phone").html(localStorage.getItem("user_phone"));
+
                     $("#signup_html").hide();
                     $("#index_html").show();
-                    $("#pills-account-tab").removeClass("d-none");
+                    $("#pills-account-tab").addClass("d-none");
 
                     /**let fik_path = "dashboard.html";
                     let file_name = window.location.pathname;

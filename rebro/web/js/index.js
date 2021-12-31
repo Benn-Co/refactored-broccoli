@@ -55,10 +55,29 @@ function onDeviceReady() {
         $("#pills-account-tab").removeClass("d-none");
         localStorage.setItem("account_balance",0);//USD
         localStorage.setItem("bitcoin_balance",0);//BTC
+        localStorage.setItem("username_pic","");
+        localStorage.setItem("user_location","");
+        localStorage.setItem("user_email","");
+        localStorage.setItem("user_phone","");
+        $(".username").html(username);
+        $(".username_seen").html("last seen " + new Date());
+        $(".username_pic").html('<img class="avatar-img" src="./assets/img/favicon/favicon-256x256.png" alt="#">');
+        $(".user_location").html(localStorage.getItem("user_location"));
+        $(".user_email").html(localStorage.getItem("user_email"));
+        $(".user_phone").html(localStorage.getItem("user_phone"));
         $(".bitcoin_balance").html(0);
         $(".bitcoin_balance_usd").html(0);
     } else {
         $("#pills-account-tab").addClass("d-none");
+        //alert(username);
+        $(".username").html(username);
+        $(".username_seen").html("last seen " + new Date());
+        $(".username_pic").html('<img class="avatar-img" src="' + localStorage.getItem("username_pic") + '" alt="#">');
+        $(".user_location").html(localStorage.getItem("user_location"));
+        $(".user_email").html(localStorage.getItem("user_email"));
+        $(".user_phone").html(localStorage.getItem("user_phone"));
+        //alert(username);
+
     }
     let file_name = window.location.pathname;
     if (file_name.includes("chat-direct")) {
@@ -851,6 +870,7 @@ $("body").delegate(".logout_me","click",function(event){
                     $(".bitcoin_balance_usd").html(account_balance); */
     localStorage.setItem("username", username);
     $("#pills-account-tab").removeClass("d-none");
+    onDeviceReady()
     loadconnects();
 });
 $("#ttab-support").click(function(){ 
