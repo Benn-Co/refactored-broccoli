@@ -50,15 +50,15 @@ var IMAGE_url_path_name = 'https://'  + api_server_url + '/product_images/';
 function onDeviceReady() {
     // Cordova is now initialized. Have fun!   
     username = localStorage.getItem("username");
-    //alert(username);
+    //mysnackbar(localStorage.getItem("account_balance"));
     if (username == null || username == '') {
-        //$("#pills-account-tab").addClass("is-visible");
         $("#pills-account-tab").removeClass("d-none");
-
-        //$("#pills-account-tab").show();
+        localStorage.setItem("account_balance",0);//USD
+        localStorage.setItem("bitcoin_balance",0);//BTC
+        $(".bitcoin_balance").html(0);
+        $(".bitcoin_balance_usd").html(0);
     } else {
         $("#pills-account-tab").addClass("d-none");
-        //pills-account-tab").hide();
     }
     let file_name = window.location.pathname;
     if (file_name.includes("chat-direct")) {
@@ -841,6 +841,14 @@ $("body").delegate(".reply_ref","click",function(event){
 $("body").delegate(".logout_me","click",function(event){
     event.preventDefault(); 
     username = '';
+    localStorage.setItem("account_balance",0);//USD
+    localStorage.setItem("bitcoin_balance",0);//BTC
+    $(".bitcoin_balance").html(0);
+    $(".bitcoin_balance_usd").html(0);
+    /**localStorage.setItem("account_balance",account_balance);//USD
+                    localStorage.setItem("bitcoin_balance",bitcoin_balance);//BTC
+                    $(".bitcoin_balance").html(account_balance);
+                    $(".bitcoin_balance_usd").html(account_balance); */
     localStorage.setItem("username", username);
     $("#pills-account-tab").removeClass("d-none");
     loadconnects();
