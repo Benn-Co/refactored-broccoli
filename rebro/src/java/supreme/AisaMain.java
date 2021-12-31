@@ -55,9 +55,9 @@ public class AisaMain {
     static String mkt_json = "";
     
     static String file_path = "C:/Users/admin/OneDrive/Documents/GitHub/refactored-broccoli/"; 
-    static String stock_training = "stock_training_data.arff";
+    static String stock_training = "stock_data.arff";//"stock_training_data.arff";
     static String stock_data = "stock_data.arff";    
-
+                  //stock_training = stock_data;
     private static String price_open;
     private static String price;
     private static String options;    

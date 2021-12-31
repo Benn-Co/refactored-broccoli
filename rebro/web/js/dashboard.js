@@ -384,7 +384,7 @@ function bybit_mkt(crypto,asset,aisa_options) {
                             $(".asset_info").html('');
 
                             $(".asset_info").append(asset_info);
-                            //rebro_Aisha(localStorage.getItem("asset"),localStorage.getItem("aisa_options"),localStorage.getItem("price"),localStorage.getItem("price_open"),localStorage.getItem("day_high"),localStorage.getItem("day_low"));
+                            rebro_Aisha(localStorage.getItem("asset"),'hold',localStorage.getItem("price"),localStorage.getItem("price_open"),localStorage.getItem("day_high"),localStorage.getItem("day_low"));
 
                         }                        
                     }
