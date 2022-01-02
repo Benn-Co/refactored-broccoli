@@ -75,7 +75,9 @@ $("body").delegate(".order_book_mkt","click",function(event){
     ////////////////////////////////////////////////////
     //$(".order_price").val(localStorage.getItem("price"));
 
-    $(".order_price").val(localStorage.getItem("price"));
+    if ($(".order_price").val(localStorage.getItem("price")) == '' || $(".order_price").val(localStorage.getItem("price")) == null) {
+        $(".order_price").val(localStorage.getItem("price"));  
+    }
     account_mkt_balance(localStorage.getItem("aisa_options"));
 
     /**var order_price = $(".order_price").val();
@@ -329,7 +331,9 @@ function bybit_mkt(crypto,asset,aisa_options) {
                                     $(".bitcoin_balance_price").html("$" + results[i].price);
                                     localStorage.setItem("sell_price",results[i].price);
                                     localStorage.setItem("price",results[i].price);
-                                    $(".order_price").val(localStorage.getItem("price"));
+                                    if ($(".order_price").val(localStorage.getItem("price")) == '' || $(".order_price").val(localStorage.getItem("price")) == null) {
+                                        $(".order_price").val(localStorage.getItem("price"));  
+                                    }
                                 }
                                 sell_price_i++;
                                 $(".crypto_mkt_sell").append(order_book);
@@ -479,7 +483,9 @@ function account_mkt_balance(aisa_options) {
 
         $(".bitcoin_balance").html(bitcoin_balance);
         localStorage.setItem("price",lowest_sell_price);
-        $(".order_price").val(localStorage.getItem("price"));
+        if ($(".order_price").val(localStorage.getItem("price")) == '' || $(".order_price").val(localStorage.getItem("price")) == null) {
+            $(".order_price").val(localStorage.getItem("price"));  
+        }
         $(".order_quantity").val(localStorage.getItem("order_account_quantity"));
         //localStorage.setItem("aisa_options","");
         bought_bitcoins = 1;
@@ -499,7 +505,9 @@ function account_mkt_balance(aisa_options) {
 
         $(".account_balance").html(account_balance);
         localStorage.setItem("price",highest_buy_price);
-        $(".order_price").val(localStorage.getItem("price"));
+        if ($(".order_price").val(localStorage.getItem("price")) == '' || $(".order_price").val(localStorage.getItem("price")) == null) {
+            $(".order_price").val(localStorage.getItem("price"));  
+        }
         $(".order_quantity").val(localStorage.getItem("order_bitcoin_quantity"));
         //localStorage.setItem("aisa_options","");
         sold_bitcoins = 1;
