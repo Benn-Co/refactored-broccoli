@@ -145,8 +145,10 @@ function Order_Book() {
         local_asset = localStorage.getItem("asset");
         bybit_mkt('Query Kline',localStorage.getItem("asset"),'');
     } else {
-        bybit_mkt('Order Book',localStorage.getItem("asset"),'');
+       // bybit_mkt('Order Book',localStorage.getItem("asset"),'');
     }
+    bybit_mkt('Latest Information for Symbol',localStorage.getItem("asset"),'');
+
     setTimeout(Order_Book, 3000);
 }
 
@@ -387,6 +389,13 @@ function bybit_mkt(crypto,asset,aisa_options) {
                             rebro_Aisha(localStorage.getItem("asset"),'hold',localStorage.getItem("price"),localStorage.getItem("price_open"),localStorage.getItem("day_high"),localStorage.getItem("day_low"));
 
                         }                        
+                    } else if (crypto == 'Latest Information for Symbol') {
+                        //alert();
+                        var results = response.result;
+                        for (let i = 0; i < results.length; i++) {
+
+                        }
+                        //myChart();
                     }
                     /**var order_price = $(".order_price").val();
                     var order_quantity = localStorage.getItem("account_balance");
@@ -557,7 +566,114 @@ $("#pills-signup-tab").click(function(){
     $("#index_html").hide();
     $("#signup_html").show();
 });
+$(".pills-home-tab").click(function(){
+    $("#main_mkt").addClass("is-visible");
+    $("#leanders_mkt").addClass("d-none");
+    $("#oder_book").removeClass("d-none");
+});
+//myChart();
+function myChart(){
+    // Graphs
+    /**var ctx = document.getElementById('myChart')
+    // eslint-disable-next-line no-unused-vars
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: [
+          'Sunday',
+          'Monday',
+          'Tuesday',
+          'Wednesday',
+          'Thursday',
+          'Friday',
+          'Saturday'
+        ],
+        datasets: [{
+          data: [
+            15339,
+            21345,
+            18483,
+            24003,
+            23489,
+            24092,
+            12034
+          ],
+          lineTension: 0,
+          backgroundColor: 'transparent',
+          borderColor: '#007bff',
+          borderWidth: 4,
+          pointBackgroundColor: '#007bff'
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: false
+            }
+          }]
+        },
+        legend: {
+          display: false
+        }
+      }
+    }); */
+    var dataPoints = [];
 
+    var chart = new CanvasJS.Chart("myChart", {
+        animationEnabled: true,
+        theme: "light2", // "light1", "light2", "dark1", "dark2"
+        exportEnabled: true,
+        title: {
+            text: "Netflix Stock Price in 2016"
+        },
+        subtitles: [{
+            text: "Weekly Averages"
+        }],
+        axisX: {
+            interval: 1,
+            valueFormatString: "MMM"
+        },
+        axisY: {
+            prefix: "$",
+            title: "Price"
+        },
+        toolTip: {
+            content: "Date: {x}<br /><strong>Price:</strong><br />Open: {y[0]}, Close: {y[3]}<br />High: {y[1]}, Low: {y[2]}"
+        },
+        data: [{
+            type: "candlestick",
+            yValueFormatString: "$##0.00",
+            dataPoints: dataPoints
+        }]
+    });
+    
+    $.get("https://canvasjs.com/data/gallery/javascript/netflix-stock-price.csv", getDataPointsFromCSV);
+    
+    function getDataPointsFromCSV(csv) {
+        var csvLines = points = [];
+        csvLines = csv.split(/[\r?\n|\r|\n]+/);
+        for (var i = 0; i < csvLines.length; i++) {
+            if (csvLines[i].length > 0) {
+                points = csvLines[i].split(",");
+                dataPoints.push({
+                    x: new Date(
+                        parseInt(points[0].split("-")[0]),
+                        parseInt(points[0].split("-")[1]),
+                        parseInt(points[0].split("-")[2])
+                    ),
+                    y: [
+                        parseFloat(points[1]),
+                        parseFloat(points[2]),
+                        parseFloat(points[3]),
+                        parseFloat(points[4])
+                    ]
+                });
+            }
+        }
+        chart.render();
+    }
+}
 
 
 function mysnackbar(text) {

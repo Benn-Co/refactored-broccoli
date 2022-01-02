@@ -108,15 +108,26 @@
                 <!-- Sidebar -->
                 <aside class="sidebar bg-light">
                     <div class="tab-content h-100" role="tablist">
-                        <ul class="nav nav-pills mb-3 d-flex justify-content-between align-items-center" id="pills-account-tab" role="tablist">
+                        <ul class="nav nav-pills mb-3 d-flex justify-content-between align-items-center" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Home</button>
+                                <button class="nav-link active pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Order Book</button>
                             </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pills-signin-tab" data-bs-toggle="pill" data-bs-target="signin.html" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Log In</button>
-                            </li>
+                            <ul class="nav nav-pills mb-3 d-flex justify-content-between align-items-center" id="pills-account-tab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="pills-signin-tab" data-bs-toggle="pill" data-bs-target="signin.html" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Log In</button>
+                                </li>
+                                <li class="nav-item float-right" role="presentation" style="float: right;">
+                                    <button class="nav-link" id="pills-signup-tab" data-bs-toggle="pill" data-bs-target="signup.html" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Sign Up</button>
+                                </li>
+                            </ul>
                             <li class="nav-item float-right" role="presentation" style="float: right;">
-                                <button class="nav-link" id="pills-signup-tab" data-bs-toggle="pill" data-bs-target="signup.html" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Sign Up</button>
+                                <a class="btn btn-sm btn-soft-primary w-100 nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Offers</a>
+                                <ul class="dropdown-menu h-3">
+                                    <ul class="hide-scrollbar flex-1 list-group query_symbols" style="height: 250px;">
+                                                    
+                                    </ul>
+                                </ul>  
+                                                  
                             </li>
                         </ul>
                         <!-- Resources - Notices -->
@@ -125,13 +136,13 @@
                                 <div class="hide-scrollbar">
                                     <div class="container py-8">                                        
                                         <div class="raw">
-                                            <div class="btn-group skills query_symbols_skills dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                                            <div class="btn-group skills query_symbols_skills">
                                             </div>
-                                            <div class="dropdown-menu hide-scrollbar" style="height: 20rem;width: 100%;">
+                                            <!-- <div class="dropdown-menu hide-scrollbar" style="height: 20rem;width: 100%;">
                                                 <ul class="list-group query_symbols">
                                                     
                                                 </ul> 
-                                            </div>
+                                            </div>-->                                            
                                         </div>                                    
                                         
                                         <!-- Resources -->
@@ -153,9 +164,7 @@
                                                     <!-- <div id="validationServer03Feedback" class="invalid-feedback">
                                                         Quantity.
                                                     </div> -->
-                                                    <div class="progress mb-2 mt-2">
-                                                        <div class="progress-bar bg-soft-success order_quantity_progress" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                                                    </div>
+                                                    <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRange3">
                                                 </div>                                            
                                             </div>                                        
                                         </div>
@@ -776,8 +785,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-    
+                        </div>    
     
                         <!-- Create -->
                         <div class="tab-pane fade h-100" id="tab-content-create-chat" role="tabpanel">
@@ -2642,77 +2650,95 @@
                             <!-- Chat: Header -->
                             <div class="chat-header border-bottom py-0 py-lg-1">
                                 <div class="row align-items-center">
-    
-                                    <!-- Mobile: close -->
-                                    <div class="col-2 d-xl-none">
-                                        <a class="icon icon-lg text-muted" href="#" data-toggle-chat="">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg>
-                                        </a>
-                                    </div>
-                                    <!-- Mobile: close -->
-    
-                                    <!-- Content -->
-                                    <div class="col-8 col-xl-12">
-                                        <nav class="nav nav-pills nav-fill">
-    
-                                            <a href="#" class="nav-link btn btn-sm btn-soft-danger d-none d-lg-block mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="sell">Sell</a>
-                                            <a href="#" class="nav-link btn btn-sm btn-success d-none d-lg-block mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="buy">Buy</a>
-                                                        
-                                            <a class="nav-link dropdown-toggle refresh_" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Refresh interval</a>
+                                    <ul class="nav nav-pills nav-fill d-flex justify-content-between align-items-center" role="tablist">
+                                        <li class="nav-item d-xl-none" role="presentation">
+                                            <a class="icon icon-lg text-muted" href="#" data-toggle-chat="">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link btn btn-sm btn-soft-danger d-none d-lg-block mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="sell">Sell</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link btn btn-sm btn-success d-none d-lg-block mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="buy">Buy</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-item dropdown-toggle refresh_" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Refresh interval</a>
                                             <ul class="dropdown-menu hide-scrollbar flex-1 h-3" style="height: 250px;">
-                                              <li><a class="dropdown-item active refresh_interval" interval="1">1 Minute</a></li>
-                                              <li><hr class="dropdown-divider d-lg-none"></li>
-                                              <li><a class="dropdown-item active refresh_interval" interval="3">3 Minutes</a></li>
-                                              <li><hr class="dropdown-divider d-lg-none"></li>
-                                              <li><a class="dropdown-item active refresh_interval" interval="5">5 Minutes</a></li>
-                                              <li><hr class="dropdown-divider d-lg-none"></li>
-                                              <li><a class="dropdown-item active refresh_interval" interval="15">15 Minutes</a></li>
-                                              <li><hr class="dropdown-divider d-lg-none"></li>
-                                              <li><a class="dropdown-item active refresh_interval" interval="30">30 Minutes</a></li>
-                                              <li><hr class="dropdown-divider d-lg-none"></li>
-                                              <li><a class="dropdown-item active refresh_interval" interval="60">60 Minutes</a></li>
-                                              <li><hr class="dropdown-divider d-lg-none"></li>
-                                              <li><a class="dropdown-item active refresh_interval" interval="120">120 Minutes</a></li>
-                                              <li><hr class="dropdown-divider d-lg-none"></li>
-                                              <li><a class="dropdown-item active refresh_interval" interval="240">240 Minutes</a></li>
-                                              <li><hr class="dropdown-divider d-lg-none"></li>
-                                              <li><a class="dropdown-item active refresh_interval" interval="360">360 Minutes</a></li>
-                                              <li><hr class="dropdown-divider d-lg-none"></li>
-                                              <li><a class="dropdown-item active refresh_interval" interval="720">720 Minutes</a></li>
-                                              <li><hr class="dropdown-divider d-lg-none"></li>
-                                              <li><a class="dropdown-item active refresh_interval" interval="D">Day</a></li>
-                                              <li><hr class="dropdown-divider d-lg-none"></li>
-                                              <li><a class="dropdown-item active refresh_interval" interval="W">Week</a></li>
-                                              <li><hr class="dropdown-divider d-lg-none"></li>
-                                              <li><a class="dropdown-item active refresh_interval" interval="M">Month</a></li>
-                                              <li><hr class="dropdown-divider d-lg-none"></li>
-                                              <li><a href="#" class="nav-link btn btn-sm btn-soft-danger d-lg-none mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="sell">Sell</a></li>
-                                              <li><hr class="dropdown-divider d-lg-none"></li>
-                                              <li><a href="#" class="nav-link btn btn-sm btn-success d-lg-none mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="buy">Buy</a></li>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                    <!-- Content -->
-    
-                                    <!-- Mobile: more -->
-                                    <div class="col-2 d-xl-none text-end">
-                                        <a href="#" class="icon icon-lg text-muted" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-more" aria-controls="offcanvas-more">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                                        </a>
-                                    </div>
-                                    <!-- Mobile: more -->
-    
+                                                <li><a class="dropdown-item active refresh_interval" interval="1">1 Minute</a></li>
+                                                <li><hr class="dropdown-divider d-lg-none"></li>
+                                                <li><a class="dropdown-item active refresh_interval" interval="3">3 Minutes</a></li>
+                                                <li><hr class="dropdown-divider d-lg-none"></li>
+                                                <li><a class="dropdown-item active refresh_interval" interval="5">5 Minutes</a></li>
+                                                <li><hr class="dropdown-divider d-lg-none"></li>
+                                                <li><a class="dropdown-item active refresh_interval" interval="15">15 Minutes</a></li>
+                                                <li><hr class="dropdown-divider d-lg-none"></li>
+                                                <li><a class="dropdown-item active refresh_interval" interval="30">30 Minutes</a></li>
+                                                <li><hr class="dropdown-divider d-lg-none"></li>
+                                                <li><a class="dropdown-item active refresh_interval" interval="60">60 Minutes</a></li>
+                                                <li><hr class="dropdown-divider d-lg-none"></li>
+                                                <li><a class="dropdown-item active refresh_interval" interval="120">120 Minutes</a></li>
+                                                <li><hr class="dropdown-divider d-lg-none"></li>
+                                                <li><a class="dropdown-item active refresh_interval" interval="240">240 Minutes</a></li>
+                                                <li><hr class="dropdown-divider d-lg-none"></li>
+                                                <li><a class="dropdown-item active refresh_interval" interval="360">360 Minutes</a></li>
+                                                <li><hr class="dropdown-divider d-lg-none"></li>
+                                                <li><a class="dropdown-item active refresh_interval" interval="720">720 Minutes</a></li>
+                                                <li><hr class="dropdown-divider d-lg-none"></li>
+                                                <li><a class="dropdown-item active refresh_interval" interval="D">Day</a></li>
+                                                <li><hr class="dropdown-divider d-lg-none"></li>
+                                                <li><a class="dropdown-item active refresh_interval" interval="W">Week</a></li>
+                                                <li><hr class="dropdown-divider d-lg-none"></li>
+                                                <li><a class="dropdown-item active refresh_interval" interval="M">Month</a></li>
+                                                <li><hr class="dropdown-divider d-lg-none"></li>
+                                                <li><a href="#" class="nav-link btn btn-sm btn-soft-danger d-lg-none mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="sell">Sell</a></li>
+                                                <li><hr class="dropdown-divider d-lg-none"></li>
+                                                <li><a href="#" class="nav-link btn btn-sm btn-success d-lg-none mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="buy">Buy</a></li>
+                                            </ul>                                            
+                                        </li>
+                                        <li class="nav-item float-right" role="presentation" style="float: right;">
+                                            <button class="nav-link active pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Order Book</button>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <div class="callout asset_info">
+                                <div class="row align-items-center asset_info">
                                     
-                                </div>                            
-                            </div>
+                                </div>                          
+                            </div>                            
                             <!--  -->                        
     
                             <!-- Chat: Content -->
                             <div class="chat-body hide-scrollbar flex-1 h-100">
                                 <div class="chat-body-inner">
-                                    <div class="py-6 py-lg-12">
+                                    <div class="me-auto mb-3">
+                                        <div class="row gx-3">                                                        
+                                            <div class="col">
+                                                <a class="btn btn-sm btn-soft-primary w-100 nav-link dropdown-toggle select_currency" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">USD</a>
+                                                    <ul class="dropdown-menu hide-scrollbar flex-1 h-3 currency_list" style="height: 250px;">
+                                                    </ul>
+                                            </div>
+                                            <div class="col">
+                                                <a class="btn btn-sm btn-soft-primary w-100 nav-link dropdown-toggle select_country" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">United States</a>
+                                                    <ul class="dropdown-menu hide-scrollbar flex-1 h-3 country_list" style="height: 250px;">
+                                                    </ul>
+                                            </div>
+                                            <div class="col">
+                                                <a class="btn btn-sm btn-primary w-100 nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Online offers</a>
+                                                    <ul class="dropdown-menu hide-scrollbar flex-1 h-3" style="height: 250px;">
+                                                      <li><a class="dropdown-item active" href="#">Online offers</a></li>
+                                                      <li><hr class="dropdown-divider"></li>
+                                                      <li><a class="dropdown-item active" href="#">Bank transfer</a></li>
+                                                      <li><hr class="dropdown-divider"></li>
+                                                      <li><a class="dropdown-item" href="#">Paypal</a></li>
+                                                      <li><hr class="dropdown-divider"></li>
+                                                      <li><a class="dropdown-item" href="#">Visa/Credit Card</a></li>
+                                                      <li><hr class="dropdown-divider"></li>
+                                                      <li><a class="dropdown-item" href="#">Western union</a></li>
+                                                    </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="oder_book" class="py-6 py-lg-12 d-none">
     
                                         <!-- Divider -->
                                         <div class="message-divider">
@@ -2731,39 +2757,10 @@
                                                     <!-- <div id="validationServer03Feedback" class="invalid-feedback">
                                                         Quantity.
                                                     </div> -->
-                                                    <div class="progress mb-2 mt-2">
-                                                        <div class="progress-bar bg-soft-success order_quantity_progress" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                                                    </div>
+                                                    <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRange3">
+
                                                 </div>                                            
-                                            </div>
-                                            <div class="me-auto mb-3">
-                                                <div class="row gx-3">                                                        
-                                                    <div class="col">
-                                                        <a class="btn btn-sm btn-soft-primary w-100 nav-link dropdown-toggle select_currency" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">USD</a>
-                                                            <ul class="dropdown-menu hide-scrollbar flex-1 h-3 currency_list" style="height: 250px;">
-                                                            </ul>
-                                                    </div>
-                                                    <div class="col">
-                                                        <a class="btn btn-sm btn-soft-primary w-100 nav-link dropdown-toggle select_country" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">United States</a>
-                                                            <ul class="dropdown-menu hide-scrollbar flex-1 h-3 country_list" style="height: 250px;">
-                                                            </ul>
-                                                    </div>
-                                                    <div class="col">
-                                                        <a class="btn btn-sm btn-primary w-100 nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Online offers</a>
-                                                            <ul class="dropdown-menu hide-scrollbar flex-1 h-3" style="height: 250px;">
-                                                              <li><a class="dropdown-item active" href="#">Online offers</a></li>
-                                                              <li><hr class="dropdown-divider"></li>
-                                                              <li><a class="dropdown-item active" href="#">Bank transfer</a></li>
-                                                              <li><hr class="dropdown-divider"></li>
-                                                              <li><a class="dropdown-item" href="#">Paypal</a></li>
-                                                              <li><hr class="dropdown-divider"></li>
-                                                              <li><a class="dropdown-item" href="#">Visa/Credit Card</a></li>
-                                                              <li><hr class="dropdown-divider"></li>
-                                                              <li><a class="dropdown-item" href="#">Western union</a></li>
-                                                            </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            </div>                                            
                                         </div>
     
                                         <div class="row g-0">
@@ -2831,8 +2828,7 @@
                                             </div>
                                         </div>
 
-                                        <!-- Buy Crypto -->
-                                        <div class="card border-0 mb-5 bg-light">
+                                        <!-- <div class="card border-0 mb-5 bg-light">
                                             <ul class="nav nav-pills nav-fill">
                                                 <li class="nav-item">
                                                     <a href="#" class="avatar position-relative mt-3">                                                  
@@ -2867,47 +2863,213 @@
                                                     <a href="#" class="me-0 btn btn-sm btn-soft-success mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="buy">Buy</a>
                                                 </li>
                                             </ul>
-                                        </div>
-    
-                                        <!-- Sell Crypto -->
-                                        <div class="card border-0 mb-5 bg-soft-info">
-                                            <ul class="nav nav-pills nav-fill bg-transparent">
-                                                <li class="nav-item">
-                                                    <span class="nav-link me-0">$3,959.01 <span class="badge bg-soft-success">+0.1%</span></span>                                                
-                                                    <a href="#" class="btn btn-sm btn-soft-danger mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="sell">Sell</a>
-                                                </li>                                                
-                                                <li class="nav-item">
-                                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Bank transfer</a>
-                                                    <ul class="dropdown-menu hide-scrollbar flex-1 h-3" style="height: 250px;">
-                                                      <li><a class="dropdown-item active" href="#">Bank transfer</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Paypal</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Visa/Credit Card</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Western union</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="nav-item d-none d-lg-block d-md-block">
-                                                  <a class="nav-link" href="#">100 - 1,000 USD</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a href="#" class="avatar position-relative mt-3">                                                  
-                                                        <img class="avatar-img" src="https://images.coinbase.com/avatar?h=615b0a8e30d43c00a2869VC0Hvux7ZlkGQKEhxD8d2SLZVdijiw176MpoXlU%0AieR9&s=128" alt="">
-                                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99</span>
-    
-                                                        <div class="badge-circle bg-transparent position-absolute bottom-0 end-0">
-                                                            <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill="#F90" fill-rule="evenodd" d="M23.6408156,14.9046858 C22.0378949,21.3339956 15.5260763,25.2467873 9.09601649,23.6434916 C2.66858193,22.0405708 -1.24420981,15.5283772 0.359460996,9.09944253 C1.96163164,2.66938268 8.47345019,-1.24378409 14.9016348,0.359136628 C21.3313196,1.96205735 25.2437363,8.47500102 23.6408156,14.9046858 L23.6408156,14.9046858 Z M17.2913894,10.2916945 C17.5302898,8.69477443 16.3144103,7.83630799 14.6518582,7.263622 L15.1911657,5.1003916 L13.8744004,4.77223165 L13.3493445,6.87845598 C13.0031826,6.79219679 12.6476448,6.71081312 12.2943571,6.63017953 L12.8231635,4.51007873 L11.5071483,4.18191878 L10.9674658,6.3443991 C10.6809353,6.27914215 10.3996553,6.21463528 10.1266263,6.14675305 L10.1281264,6.14000233 L8.31218301,5.68657903 L7.9618957,7.09297883 C7.9618957,7.09297883 8.93887476,7.31687767 8.91824756,7.33075415 C9.45155436,7.46389333 9.54793963,7.81680592 9.53181291,8.09658572 L8.91749748,10.5609732 C8.9542514,10.5703492 9.00188147,10.5838506 9.05438706,10.6048529 C9.01050739,10.5939767 8.96362739,10.5819754 8.91524724,10.5703492 L8.05415553,14.0225919 C7.98889858,14.1846091 7.82350596,14.427635 7.45071626,14.3353752 C7.46384266,14.3545022 6.49361432,14.0964747 6.49361432,14.0964747 L5.8399197,15.6037603 L7.5534772,16.0309308 C7.87226116,16.1108143 8.18466943,16.1944482 8.49220218,16.2732066 L7.94726915,18.4611896 L9.26253423,18.7893496 L9.80221671,16.624619 C10.161505,16.7221294 10.5102921,16.812139 10.8515785,16.896898 L10.3137712,19.0515025 L11.6305364,19.3796624 L12.1754695,17.1958048 C14.4208336,17.6207251 16.1092634,17.4493318 16.8199641,15.4184905 C17.3926501,13.7833164 16.7914611,12.8400909 15.6100853,12.2250254 C16.4704269,12.0266293 17.1184959,11.460694 17.2913894,10.2916945 L17.2913894,10.2916945 Z M14.2828189,14.5105188 C13.8759006,16.145693 11.1227324,15.2617238 10.2301373,15.0400752 L10.9532143,12.1413915 C11.8458094,12.3641652 14.7081142,12.8052122 14.2828189,14.5105188 L14.2828189,14.5105188 Z M14.6901123,10.268067 C14.3188228,11.7554754 12.0273287,10.9997699 11.2839995,10.8145002 L11.9395694,8.18547018 C12.6828985,8.37073991 15.0767785,8.71652674 14.6901123,10.268067 L14.6901123,10.268067 Z"/>
-                                                            </svg>
-                                                        </div>
-                                                    </a>
-                                                    <span class="bottom-0 ms-0">0 trades</span>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        </div> -->
                                         
-                                        <!-- Buy Crypto -->
+    
+                                        <!-- <div class="card border-0 mb-5 bg-soft-info">
+                                            <ul class="nav nav-pills nav-fill bg-transparent">
+                                                <li class="nav-item">
+                                                    <span class="nav-link me-0">$3,959.01 <span class="badge bg-soft-success">+0.1%</span></span>                                                
+                                                    <a href="#" class="btn btn-sm btn-soft-danger mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="sell">Sell</a>
+                                                </li>                                                
+                                                <li class="nav-item">
+                                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Bank transfer</a>
+                                                    <ul class="dropdown-menu hide-scrollbar flex-1 h-3" style="height: 250px;">
+                                                      <li><a class="dropdown-item active" href="#">Bank transfer</a></li>
+                                                      <li><hr class="dropdown-divider"></li>
+                                                      <li><a class="dropdown-item" href="#">Paypal</a></li>
+                                                      <li><hr class="dropdown-divider"></li>
+                                                      <li><a class="dropdown-item" href="#">Visa/Credit Card</a></li>
+                                                      <li><hr class="dropdown-divider"></li>
+                                                      <li><a class="dropdown-item" href="#">Western union</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="nav-item d-none d-lg-block d-md-block">
+                                                  <a class="nav-link" href="#">100 - 1,000 USD</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="#" class="avatar position-relative mt-3">                                                  
+                                                        <img class="avatar-img" src="https://images.coinbase.com/avatar?h=615b0a8e30d43c00a2869VC0Hvux7ZlkGQKEhxD8d2SLZVdijiw176MpoXlU%0AieR9&s=128" alt="">
+                                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99</span>
+    
+                                                        <div class="badge-circle bg-transparent position-absolute bottom-0 end-0">
+                                                            <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill="#F90" fill-rule="evenodd" d="M23.6408156,14.9046858 C22.0378949,21.3339956 15.5260763,25.2467873 9.09601649,23.6434916 C2.66858193,22.0405708 -1.24420981,15.5283772 0.359460996,9.09944253 C1.96163164,2.66938268 8.47345019,-1.24378409 14.9016348,0.359136628 C21.3313196,1.96205735 25.2437363,8.47500102 23.6408156,14.9046858 L23.6408156,14.9046858 Z M17.2913894,10.2916945 C17.5302898,8.69477443 16.3144103,7.83630799 14.6518582,7.263622 L15.1911657,5.1003916 L13.8744004,4.77223165 L13.3493445,6.87845598 C13.0031826,6.79219679 12.6476448,6.71081312 12.2943571,6.63017953 L12.8231635,4.51007873 L11.5071483,4.18191878 L10.9674658,6.3443991 C10.6809353,6.27914215 10.3996553,6.21463528 10.1266263,6.14675305 L10.1281264,6.14000233 L8.31218301,5.68657903 L7.9618957,7.09297883 C7.9618957,7.09297883 8.93887476,7.31687767 8.91824756,7.33075415 C9.45155436,7.46389333 9.54793963,7.81680592 9.53181291,8.09658572 L8.91749748,10.5609732 C8.9542514,10.5703492 9.00188147,10.5838506 9.05438706,10.6048529 C9.01050739,10.5939767 8.96362739,10.5819754 8.91524724,10.5703492 L8.05415553,14.0225919 C7.98889858,14.1846091 7.82350596,14.427635 7.45071626,14.3353752 C7.46384266,14.3545022 6.49361432,14.0964747 6.49361432,14.0964747 L5.8399197,15.6037603 L7.5534772,16.0309308 C7.87226116,16.1108143 8.18466943,16.1944482 8.49220218,16.2732066 L7.94726915,18.4611896 L9.26253423,18.7893496 L9.80221671,16.624619 C10.161505,16.7221294 10.5102921,16.812139 10.8515785,16.896898 L10.3137712,19.0515025 L11.6305364,19.3796624 L12.1754695,17.1958048 C14.4208336,17.6207251 16.1092634,17.4493318 16.8199641,15.4184905 C17.3926501,13.7833164 16.7914611,12.8400909 15.6100853,12.2250254 C16.4704269,12.0266293 17.1184959,11.460694 17.2913894,10.2916945 L17.2913894,10.2916945 Z M14.2828189,14.5105188 C13.8759006,16.145693 11.1227324,15.2617238 10.2301373,15.0400752 L10.9532143,12.1413915 C11.8458094,12.3641652 14.7081142,12.8052122 14.2828189,14.5105188 L14.2828189,14.5105188 Z M14.6901123,10.268067 C14.3188228,11.7554754 12.0273287,10.9997699 11.2839995,10.8145002 L11.9395694,8.18547018 C12.6828985,8.37073991 15.0767785,8.71652674 14.6901123,10.268067 L14.6901123,10.268067 Z"/>
+                                                            </svg>
+                                                        </div>
+                                                    </a>
+                                                    <span class="bottom-0 ms-0">0 trades</span>
+                                                </li>
+                                            </ul>
+                                        </div> -->
+                                        
+                                        
+                                        <!-- <div class="card border-0 mb-5 bg-light">
+                                            <ul class="nav nav-pills nav-fill">
+                                                <li class="nav-item">
+                                                    <a href="#" class="avatar position-relative mt-3">                                                  
+                                                        <img class="avatar-img" src="https://images.coinbase.com/avatar?h=615b0a8e30d43c00a2869VC0Hvux7ZlkGQKEhxD8d2SLZVdijiw176MpoXlU%0AieR9&s=128" alt="">
+                                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99</span>
+    
+                                                        <div class="badge-circle bg-transparent position-absolute bottom-0 end-0">
+                                                            <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill="#F90" fill-rule="evenodd" d="M23.6408156,14.9046858 C22.0378949,21.3339956 15.5260763,25.2467873 9.09601649,23.6434916 C2.66858193,22.0405708 -1.24420981,15.5283772 0.359460996,9.09944253 C1.96163164,2.66938268 8.47345019,-1.24378409 14.9016348,0.359136628 C21.3313196,1.96205735 25.2437363,8.47500102 23.6408156,14.9046858 L23.6408156,14.9046858 Z M17.2913894,10.2916945 C17.5302898,8.69477443 16.3144103,7.83630799 14.6518582,7.263622 L15.1911657,5.1003916 L13.8744004,4.77223165 L13.3493445,6.87845598 C13.0031826,6.79219679 12.6476448,6.71081312 12.2943571,6.63017953 L12.8231635,4.51007873 L11.5071483,4.18191878 L10.9674658,6.3443991 C10.6809353,6.27914215 10.3996553,6.21463528 10.1266263,6.14675305 L10.1281264,6.14000233 L8.31218301,5.68657903 L7.9618957,7.09297883 C7.9618957,7.09297883 8.93887476,7.31687767 8.91824756,7.33075415 C9.45155436,7.46389333 9.54793963,7.81680592 9.53181291,8.09658572 L8.91749748,10.5609732 C8.9542514,10.5703492 9.00188147,10.5838506 9.05438706,10.6048529 C9.01050739,10.5939767 8.96362739,10.5819754 8.91524724,10.5703492 L8.05415553,14.0225919 C7.98889858,14.1846091 7.82350596,14.427635 7.45071626,14.3353752 C7.46384266,14.3545022 6.49361432,14.0964747 6.49361432,14.0964747 L5.8399197,15.6037603 L7.5534772,16.0309308 C7.87226116,16.1108143 8.18466943,16.1944482 8.49220218,16.2732066 L7.94726915,18.4611896 L9.26253423,18.7893496 L9.80221671,16.624619 C10.161505,16.7221294 10.5102921,16.812139 10.8515785,16.896898 L10.3137712,19.0515025 L11.6305364,19.3796624 L12.1754695,17.1958048 C14.4208336,17.6207251 16.1092634,17.4493318 16.8199641,15.4184905 C17.3926501,13.7833164 16.7914611,12.8400909 15.6100853,12.2250254 C16.4704269,12.0266293 17.1184959,11.460694 17.2913894,10.2916945 L17.2913894,10.2916945 Z M14.2828189,14.5105188 C13.8759006,16.145693 11.1227324,15.2617238 10.2301373,15.0400752 L10.9532143,12.1413915 C11.8458094,12.3641652 14.7081142,12.8052122 14.2828189,14.5105188 L14.2828189,14.5105188 Z M14.6901123,10.268067 C14.3188228,11.7554754 12.0273287,10.9997699 11.2839995,10.8145002 L11.9395694,8.18547018 C12.6828985,8.37073991 15.0767785,8.71652674 14.6901123,10.268067 L14.6901123,10.268067 Z"/>
+                                                            </svg>
+                                                        </div>
+                                                    </a>
+                                                    <span class="bottom-0 ms-0">0 trades</span>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Bank transfer</a>
+                                                    <ul class="dropdown-menu hide-scrollbar flex-1 h-3" style="height: 250px;">
+                                                      <li><a class="dropdown-item active" href="#">Bank transfer</a></li>
+                                                      <li><hr class="dropdown-divider"></li>
+                                                      <li><a class="dropdown-item" href="#">Paypal</a></li>
+                                                      <li><hr class="dropdown-divider"></li>
+                                                      <li><a class="dropdown-item" href="#">Visa/Credit Card</a></li>
+                                                      <li><hr class="dropdown-divider"></li>
+                                                      <li><a class="dropdown-item" href="#">Western union</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="nav-item d-none d-lg-block d-md-block">
+                                                  <a class="nav-link" href="#">100 - 1,000 USD</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <span class="nav-link me-0">$3,959.01 <span class="badge bg-soft-success">-0.1%</span></span>                                                
+                                                    <a href="#" class="me-0 btn btn-sm btn-soft-success mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="buy">Buy</a>
+                                                </li>
+                                            </ul>
+                                        </div> -->
+                                        
+    
+                                        <!-- <div class="card border-0 mb-5 bg-soft-info">
+                                            <ul class="nav nav-pills nav-fill bg-transparent">
+                                                <li class="nav-item">
+                                                    <span class="nav-link me-0">$3,959.01 <span class="badge bg-soft-success">+0.1%</span></span>                                                
+                                                    <a href="#" class="btn btn-sm btn-soft-danger mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="sell">Sell</a>
+                                                </li>                                                
+                                                <li class="nav-item">
+                                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Bank transfer</a>
+                                                    <ul class="dropdown-menu hide-scrollbar flex-1 h-3" style="height: 250px;">
+                                                      <li><a class="dropdown-item active" href="#">Bank transfer</a></li>
+                                                      <li><hr class="dropdown-divider"></li>
+                                                      <li><a class="dropdown-item" href="#">Paypal</a></li>
+                                                      <li><hr class="dropdown-divider"></li>
+                                                      <li><a class="dropdown-item" href="#">Visa/Credit Card</a></li>
+                                                      <li><hr class="dropdown-divider"></li>
+                                                      <li><a class="dropdown-item" href="#">Western union</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="nav-item d-none d-lg-block d-md-block">
+                                                  <a class="nav-link" href="#">100 - 1,000 USD</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="#" class="avatar position-relative mt-3">                                                  
+                                                        <img class="avatar-img" src="https://images.coinbase.com/avatar?h=615b0a8e30d43c00a2869VC0Hvux7ZlkGQKEhxD8d2SLZVdijiw176MpoXlU%0AieR9&s=128" alt="">
+                                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99</span>
+    
+                                                        <div class="badge-circle bg-transparent position-absolute bottom-0 end-0">
+                                                            <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill="#F90" fill-rule="evenodd" d="M23.6408156,14.9046858 C22.0378949,21.3339956 15.5260763,25.2467873 9.09601649,23.6434916 C2.66858193,22.0405708 -1.24420981,15.5283772 0.359460996,9.09944253 C1.96163164,2.66938268 8.47345019,-1.24378409 14.9016348,0.359136628 C21.3313196,1.96205735 25.2437363,8.47500102 23.6408156,14.9046858 L23.6408156,14.9046858 Z M17.2913894,10.2916945 C17.5302898,8.69477443 16.3144103,7.83630799 14.6518582,7.263622 L15.1911657,5.1003916 L13.8744004,4.77223165 L13.3493445,6.87845598 C13.0031826,6.79219679 12.6476448,6.71081312 12.2943571,6.63017953 L12.8231635,4.51007873 L11.5071483,4.18191878 L10.9674658,6.3443991 C10.6809353,6.27914215 10.3996553,6.21463528 10.1266263,6.14675305 L10.1281264,6.14000233 L8.31218301,5.68657903 L7.9618957,7.09297883 C7.9618957,7.09297883 8.93887476,7.31687767 8.91824756,7.33075415 C9.45155436,7.46389333 9.54793963,7.81680592 9.53181291,8.09658572 L8.91749748,10.5609732 C8.9542514,10.5703492 9.00188147,10.5838506 9.05438706,10.6048529 C9.01050739,10.5939767 8.96362739,10.5819754 8.91524724,10.5703492 L8.05415553,14.0225919 C7.98889858,14.1846091 7.82350596,14.427635 7.45071626,14.3353752 C7.46384266,14.3545022 6.49361432,14.0964747 6.49361432,14.0964747 L5.8399197,15.6037603 L7.5534772,16.0309308 C7.87226116,16.1108143 8.18466943,16.1944482 8.49220218,16.2732066 L7.94726915,18.4611896 L9.26253423,18.7893496 L9.80221671,16.624619 C10.161505,16.7221294 10.5102921,16.812139 10.8515785,16.896898 L10.3137712,19.0515025 L11.6305364,19.3796624 L12.1754695,17.1958048 C14.4208336,17.6207251 16.1092634,17.4493318 16.8199641,15.4184905 C17.3926501,13.7833164 16.7914611,12.8400909 15.6100853,12.2250254 C16.4704269,12.0266293 17.1184959,11.460694 17.2913894,10.2916945 L17.2913894,10.2916945 Z M14.2828189,14.5105188 C13.8759006,16.145693 11.1227324,15.2617238 10.2301373,15.0400752 L10.9532143,12.1413915 C11.8458094,12.3641652 14.7081142,12.8052122 14.2828189,14.5105188 L14.2828189,14.5105188 Z M14.6901123,10.268067 C14.3188228,11.7554754 12.0273287,10.9997699 11.2839995,10.8145002 L11.9395694,8.18547018 C12.6828985,8.37073991 15.0767785,8.71652674 14.6901123,10.268067 L14.6901123,10.268067 Z"/>
+                                                            </svg>
+                                                        </div>
+                                                    </a>
+                                                    <span class="bottom-0 ms-0">0 trades</span>
+                                                </li>
+                                            </ul>
+                                        </div> -->
+                                        
+    
+                                        <!-- <div class="card border-0 mb-5 bg-light">
+                                            <ul class="nav nav-pills nav-fill">
+                                                <li class="nav-item">
+                                                    <a href="#" class="avatar position-relative mt-3">                                                  
+                                                        <img class="avatar-img" src="https://images.coinbase.com/avatar?h=615b0a8e30d43c00a2869VC0Hvux7ZlkGQKEhxD8d2SLZVdijiw176MpoXlU%0AieR9&s=128" alt="">
+                                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99</span>
+    
+                                                        <div class="badge-circle bg-transparent position-absolute bottom-0 end-0">
+                                                            <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill="#F90" fill-rule="evenodd" d="M23.6408156,14.9046858 C22.0378949,21.3339956 15.5260763,25.2467873 9.09601649,23.6434916 C2.66858193,22.0405708 -1.24420981,15.5283772 0.359460996,9.09944253 C1.96163164,2.66938268 8.47345019,-1.24378409 14.9016348,0.359136628 C21.3313196,1.96205735 25.2437363,8.47500102 23.6408156,14.9046858 L23.6408156,14.9046858 Z M17.2913894,10.2916945 C17.5302898,8.69477443 16.3144103,7.83630799 14.6518582,7.263622 L15.1911657,5.1003916 L13.8744004,4.77223165 L13.3493445,6.87845598 C13.0031826,6.79219679 12.6476448,6.71081312 12.2943571,6.63017953 L12.8231635,4.51007873 L11.5071483,4.18191878 L10.9674658,6.3443991 C10.6809353,6.27914215 10.3996553,6.21463528 10.1266263,6.14675305 L10.1281264,6.14000233 L8.31218301,5.68657903 L7.9618957,7.09297883 C7.9618957,7.09297883 8.93887476,7.31687767 8.91824756,7.33075415 C9.45155436,7.46389333 9.54793963,7.81680592 9.53181291,8.09658572 L8.91749748,10.5609732 C8.9542514,10.5703492 9.00188147,10.5838506 9.05438706,10.6048529 C9.01050739,10.5939767 8.96362739,10.5819754 8.91524724,10.5703492 L8.05415553,14.0225919 C7.98889858,14.1846091 7.82350596,14.427635 7.45071626,14.3353752 C7.46384266,14.3545022 6.49361432,14.0964747 6.49361432,14.0964747 L5.8399197,15.6037603 L7.5534772,16.0309308 C7.87226116,16.1108143 8.18466943,16.1944482 8.49220218,16.2732066 L7.94726915,18.4611896 L9.26253423,18.7893496 L9.80221671,16.624619 C10.161505,16.7221294 10.5102921,16.812139 10.8515785,16.896898 L10.3137712,19.0515025 L11.6305364,19.3796624 L12.1754695,17.1958048 C14.4208336,17.6207251 16.1092634,17.4493318 16.8199641,15.4184905 C17.3926501,13.7833164 16.7914611,12.8400909 15.6100853,12.2250254 C16.4704269,12.0266293 17.1184959,11.460694 17.2913894,10.2916945 L17.2913894,10.2916945 Z M14.2828189,14.5105188 C13.8759006,16.145693 11.1227324,15.2617238 10.2301373,15.0400752 L10.9532143,12.1413915 C11.8458094,12.3641652 14.7081142,12.8052122 14.2828189,14.5105188 L14.2828189,14.5105188 Z M14.6901123,10.268067 C14.3188228,11.7554754 12.0273287,10.9997699 11.2839995,10.8145002 L11.9395694,8.18547018 C12.6828985,8.37073991 15.0767785,8.71652674 14.6901123,10.268067 L14.6901123,10.268067 Z"/>
+                                                            </svg>
+                                                        </div>
+                                                    </a>
+                                                    <span class="bottom-0 ms-0">0 trades</span>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Bank transfer</a>
+                                                    <ul class="dropdown-menu hide-scrollbar flex-1 h-3" style="height: 250px;">
+                                                      <li><a class="dropdown-item active" href="#">Bank transfer</a></li>
+                                                      <li><hr class="dropdown-divider"></li>
+                                                      <li><a class="dropdown-item" href="#">Paypal</a></li>
+                                                      <li><hr class="dropdown-divider"></li>
+                                                      <li><a class="dropdown-item" href="#">Visa/Credit Card</a></li>
+                                                      <li><hr class="dropdown-divider"></li>
+                                                      <li><a class="dropdown-item" href="#">Western union</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="nav-item d-none d-lg-block d-md-block">
+                                                  <a class="nav-link" href="#">100 - 1,000 USD</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <span class="nav-link me-0">$3,959.01 <span class="badge bg-soft-success">-0.1%</span></span>                                                
+                                                    <a href="#" class="me-0 btn btn-sm btn-soft-success mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="buy">Buy</a>
+                                                </li>
+                                            </ul>
+                                        </div> -->
+                                        
+    
+                                        <!-- <div class="card border-0 mb-5 bg-soft-info">
+                                            <ul class="nav nav-pills nav-fill bg-transparent">
+                                                <li class="nav-item">
+                                                    <span class="nav-link me-0">$3,959.01 <span class="badge bg-soft-success">+0.1%</span></span>                                                
+                                                    <a href="#" class="btn btn-sm btn-soft-danger mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="sell">Sell</a>
+                                                </li>                                                
+                                                <li class="nav-item">
+                                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Bank transfer</a>
+                                                    <ul class="dropdown-menu hide-scrollbar flex-1 h-3" style="height: 250px;">
+                                                      <li><a class="dropdown-item active" href="#">Bank transfer</a></li>
+                                                      <li><hr class="dropdown-divider"></li>
+                                                      <li><a class="dropdown-item" href="#">Paypal</a></li>
+                                                      <li><hr class="dropdown-divider"></li>
+                                                      <li><a class="dropdown-item" href="#">Visa/Credit Card</a></li>
+                                                      <li><hr class="dropdown-divider"></li>
+                                                      <li><a class="dropdown-item" href="#">Western union</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="nav-item d-none d-lg-block d-md-block">
+                                                  <a class="nav-link" href="#">100 - 1,000 USD</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="#" class="avatar position-relative mt-3">                                                  
+                                                        <img class="avatar-img" src="https://images.coinbase.com/avatar?h=615b0a8e30d43c00a2869VC0Hvux7ZlkGQKEhxD8d2SLZVdijiw176MpoXlU%0AieR9&s=128" alt="">
+                                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99</span>
+    
+                                                        <div class="badge-circle bg-transparent position-absolute bottom-0 end-0">
+                                                            <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill="#F90" fill-rule="evenodd" d="M23.6408156,14.9046858 C22.0378949,21.3339956 15.5260763,25.2467873 9.09601649,23.6434916 C2.66858193,22.0405708 -1.24420981,15.5283772 0.359460996,9.09944253 C1.96163164,2.66938268 8.47345019,-1.24378409 14.9016348,0.359136628 C21.3313196,1.96205735 25.2437363,8.47500102 23.6408156,14.9046858 L23.6408156,14.9046858 Z M17.2913894,10.2916945 C17.5302898,8.69477443 16.3144103,7.83630799 14.6518582,7.263622 L15.1911657,5.1003916 L13.8744004,4.77223165 L13.3493445,6.87845598 C13.0031826,6.79219679 12.6476448,6.71081312 12.2943571,6.63017953 L12.8231635,4.51007873 L11.5071483,4.18191878 L10.9674658,6.3443991 C10.6809353,6.27914215 10.3996553,6.21463528 10.1266263,6.14675305 L10.1281264,6.14000233 L8.31218301,5.68657903 L7.9618957,7.09297883 C7.9618957,7.09297883 8.93887476,7.31687767 8.91824756,7.33075415 C9.45155436,7.46389333 9.54793963,7.81680592 9.53181291,8.09658572 L8.91749748,10.5609732 C8.9542514,10.5703492 9.00188147,10.5838506 9.05438706,10.6048529 C9.01050739,10.5939767 8.96362739,10.5819754 8.91524724,10.5703492 L8.05415553,14.0225919 C7.98889858,14.1846091 7.82350596,14.427635 7.45071626,14.3353752 C7.46384266,14.3545022 6.49361432,14.0964747 6.49361432,14.0964747 L5.8399197,15.6037603 L7.5534772,16.0309308 C7.87226116,16.1108143 8.18466943,16.1944482 8.49220218,16.2732066 L7.94726915,18.4611896 L9.26253423,18.7893496 L9.80221671,16.624619 C10.161505,16.7221294 10.5102921,16.812139 10.8515785,16.896898 L10.3137712,19.0515025 L11.6305364,19.3796624 L12.1754695,17.1958048 C14.4208336,17.6207251 16.1092634,17.4493318 16.8199641,15.4184905 C17.3926501,13.7833164 16.7914611,12.8400909 15.6100853,12.2250254 C16.4704269,12.0266293 17.1184959,11.460694 17.2913894,10.2916945 L17.2913894,10.2916945 Z M14.2828189,14.5105188 C13.8759006,16.145693 11.1227324,15.2617238 10.2301373,15.0400752 L10.9532143,12.1413915 C11.8458094,12.3641652 14.7081142,12.8052122 14.2828189,14.5105188 L14.2828189,14.5105188 Z M14.6901123,10.268067 C14.3188228,11.7554754 12.0273287,10.9997699 11.2839995,10.8145002 L11.9395694,8.18547018 C12.6828985,8.37073991 15.0767785,8.71652674 14.6901123,10.268067 L14.6901123,10.268067 Z"/>
+                                                            </svg>
+                                                        </div>
+                                                    </a>
+                                                    <span class="bottom-0 ms-0">0 trades</span>
+                                                </li>
+                                            </ul>
+                                        </div> -->
+                                        
+    
+                                    </div>
+                                    <div id="leanders_mkt" class="py-6 py-lg-12">
+                                         
+                                        <div class="card">
+                                            <div class="card-header">
+                                                Featured
+                                            </div>
+                                            <div class="card-body">
+                                                <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                                            </div>
+                                            <div class="card-footer text-muted">
+                                                2 days ago
+                                            </div>
+                                        </div>
                                         <div class="card border-0 mb-5 bg-light">
                                             <ul class="nav nav-pills nav-fill">
                                                 <li class="nav-item">
@@ -2944,121 +3106,6 @@
                                                 </li>
                                             </ul>
                                         </div>
-    
-                                        <!-- Sell Crypto -->
-                                        <div class="card border-0 mb-5 bg-soft-info">
-                                            <ul class="nav nav-pills nav-fill bg-transparent">
-                                                <li class="nav-item">
-                                                    <span class="nav-link me-0">$3,959.01 <span class="badge bg-soft-success">+0.1%</span></span>                                                
-                                                    <a href="#" class="btn btn-sm btn-soft-danger mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="sell">Sell</a>
-                                                </li>                                                
-                                                <li class="nav-item">
-                                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Bank transfer</a>
-                                                    <ul class="dropdown-menu hide-scrollbar flex-1 h-3" style="height: 250px;">
-                                                      <li><a class="dropdown-item active" href="#">Bank transfer</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Paypal</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Visa/Credit Card</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Western union</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="nav-item d-none d-lg-block d-md-block">
-                                                  <a class="nav-link" href="#">100 - 1,000 USD</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a href="#" class="avatar position-relative mt-3">                                                  
-                                                        <img class="avatar-img" src="https://images.coinbase.com/avatar?h=615b0a8e30d43c00a2869VC0Hvux7ZlkGQKEhxD8d2SLZVdijiw176MpoXlU%0AieR9&s=128" alt="">
-                                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99</span>
-    
-                                                        <div class="badge-circle bg-transparent position-absolute bottom-0 end-0">
-                                                            <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill="#F90" fill-rule="evenodd" d="M23.6408156,14.9046858 C22.0378949,21.3339956 15.5260763,25.2467873 9.09601649,23.6434916 C2.66858193,22.0405708 -1.24420981,15.5283772 0.359460996,9.09944253 C1.96163164,2.66938268 8.47345019,-1.24378409 14.9016348,0.359136628 C21.3313196,1.96205735 25.2437363,8.47500102 23.6408156,14.9046858 L23.6408156,14.9046858 Z M17.2913894,10.2916945 C17.5302898,8.69477443 16.3144103,7.83630799 14.6518582,7.263622 L15.1911657,5.1003916 L13.8744004,4.77223165 L13.3493445,6.87845598 C13.0031826,6.79219679 12.6476448,6.71081312 12.2943571,6.63017953 L12.8231635,4.51007873 L11.5071483,4.18191878 L10.9674658,6.3443991 C10.6809353,6.27914215 10.3996553,6.21463528 10.1266263,6.14675305 L10.1281264,6.14000233 L8.31218301,5.68657903 L7.9618957,7.09297883 C7.9618957,7.09297883 8.93887476,7.31687767 8.91824756,7.33075415 C9.45155436,7.46389333 9.54793963,7.81680592 9.53181291,8.09658572 L8.91749748,10.5609732 C8.9542514,10.5703492 9.00188147,10.5838506 9.05438706,10.6048529 C9.01050739,10.5939767 8.96362739,10.5819754 8.91524724,10.5703492 L8.05415553,14.0225919 C7.98889858,14.1846091 7.82350596,14.427635 7.45071626,14.3353752 C7.46384266,14.3545022 6.49361432,14.0964747 6.49361432,14.0964747 L5.8399197,15.6037603 L7.5534772,16.0309308 C7.87226116,16.1108143 8.18466943,16.1944482 8.49220218,16.2732066 L7.94726915,18.4611896 L9.26253423,18.7893496 L9.80221671,16.624619 C10.161505,16.7221294 10.5102921,16.812139 10.8515785,16.896898 L10.3137712,19.0515025 L11.6305364,19.3796624 L12.1754695,17.1958048 C14.4208336,17.6207251 16.1092634,17.4493318 16.8199641,15.4184905 C17.3926501,13.7833164 16.7914611,12.8400909 15.6100853,12.2250254 C16.4704269,12.0266293 17.1184959,11.460694 17.2913894,10.2916945 L17.2913894,10.2916945 Z M14.2828189,14.5105188 C13.8759006,16.145693 11.1227324,15.2617238 10.2301373,15.0400752 L10.9532143,12.1413915 C11.8458094,12.3641652 14.7081142,12.8052122 14.2828189,14.5105188 L14.2828189,14.5105188 Z M14.6901123,10.268067 C14.3188228,11.7554754 12.0273287,10.9997699 11.2839995,10.8145002 L11.9395694,8.18547018 C12.6828985,8.37073991 15.0767785,8.71652674 14.6901123,10.268067 L14.6901123,10.268067 Z"/>
-                                                            </svg>
-                                                        </div>
-                                                    </a>
-                                                    <span class="bottom-0 ms-0">0 trades</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-    
-                                        <!-- Buy Crypto -->
-                                        <div class="card border-0 mb-5 bg-light">
-                                            <ul class="nav nav-pills nav-fill">
-                                                <li class="nav-item">
-                                                    <a href="#" class="avatar position-relative mt-3">                                                  
-                                                        <img class="avatar-img" src="https://images.coinbase.com/avatar?h=615b0a8e30d43c00a2869VC0Hvux7ZlkGQKEhxD8d2SLZVdijiw176MpoXlU%0AieR9&s=128" alt="">
-                                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99</span>
-    
-                                                        <div class="badge-circle bg-transparent position-absolute bottom-0 end-0">
-                                                            <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill="#F90" fill-rule="evenodd" d="M23.6408156,14.9046858 C22.0378949,21.3339956 15.5260763,25.2467873 9.09601649,23.6434916 C2.66858193,22.0405708 -1.24420981,15.5283772 0.359460996,9.09944253 C1.96163164,2.66938268 8.47345019,-1.24378409 14.9016348,0.359136628 C21.3313196,1.96205735 25.2437363,8.47500102 23.6408156,14.9046858 L23.6408156,14.9046858 Z M17.2913894,10.2916945 C17.5302898,8.69477443 16.3144103,7.83630799 14.6518582,7.263622 L15.1911657,5.1003916 L13.8744004,4.77223165 L13.3493445,6.87845598 C13.0031826,6.79219679 12.6476448,6.71081312 12.2943571,6.63017953 L12.8231635,4.51007873 L11.5071483,4.18191878 L10.9674658,6.3443991 C10.6809353,6.27914215 10.3996553,6.21463528 10.1266263,6.14675305 L10.1281264,6.14000233 L8.31218301,5.68657903 L7.9618957,7.09297883 C7.9618957,7.09297883 8.93887476,7.31687767 8.91824756,7.33075415 C9.45155436,7.46389333 9.54793963,7.81680592 9.53181291,8.09658572 L8.91749748,10.5609732 C8.9542514,10.5703492 9.00188147,10.5838506 9.05438706,10.6048529 C9.01050739,10.5939767 8.96362739,10.5819754 8.91524724,10.5703492 L8.05415553,14.0225919 C7.98889858,14.1846091 7.82350596,14.427635 7.45071626,14.3353752 C7.46384266,14.3545022 6.49361432,14.0964747 6.49361432,14.0964747 L5.8399197,15.6037603 L7.5534772,16.0309308 C7.87226116,16.1108143 8.18466943,16.1944482 8.49220218,16.2732066 L7.94726915,18.4611896 L9.26253423,18.7893496 L9.80221671,16.624619 C10.161505,16.7221294 10.5102921,16.812139 10.8515785,16.896898 L10.3137712,19.0515025 L11.6305364,19.3796624 L12.1754695,17.1958048 C14.4208336,17.6207251 16.1092634,17.4493318 16.8199641,15.4184905 C17.3926501,13.7833164 16.7914611,12.8400909 15.6100853,12.2250254 C16.4704269,12.0266293 17.1184959,11.460694 17.2913894,10.2916945 L17.2913894,10.2916945 Z M14.2828189,14.5105188 C13.8759006,16.145693 11.1227324,15.2617238 10.2301373,15.0400752 L10.9532143,12.1413915 C11.8458094,12.3641652 14.7081142,12.8052122 14.2828189,14.5105188 L14.2828189,14.5105188 Z M14.6901123,10.268067 C14.3188228,11.7554754 12.0273287,10.9997699 11.2839995,10.8145002 L11.9395694,8.18547018 C12.6828985,8.37073991 15.0767785,8.71652674 14.6901123,10.268067 L14.6901123,10.268067 Z"/>
-                                                            </svg>
-                                                        </div>
-                                                    </a>
-                                                    <span class="bottom-0 ms-0">0 trades</span>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Bank transfer</a>
-                                                    <ul class="dropdown-menu hide-scrollbar flex-1 h-3" style="height: 250px;">
-                                                      <li><a class="dropdown-item active" href="#">Bank transfer</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Paypal</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Visa/Credit Card</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Western union</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="nav-item d-none d-lg-block d-md-block">
-                                                  <a class="nav-link" href="#">100 - 1,000 USD</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <span class="nav-link me-0">$3,959.01 <span class="badge bg-soft-success">-0.1%</span></span>                                                
-                                                    <a href="#" class="me-0 btn btn-sm btn-soft-success mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="buy">Buy</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-    
-                                        <!-- Sell Crypto -->
-                                        <div class="card border-0 mb-5 bg-soft-info">
-                                            <ul class="nav nav-pills nav-fill bg-transparent">
-                                                <li class="nav-item">
-                                                    <span class="nav-link me-0">$3,959.01 <span class="badge bg-soft-success">+0.1%</span></span>                                                
-                                                    <a href="#" class="btn btn-sm btn-soft-danger mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="sell">Sell</a>
-                                                </li>                                                
-                                                <li class="nav-item">
-                                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Bank transfer</a>
-                                                    <ul class="dropdown-menu hide-scrollbar flex-1 h-3" style="height: 250px;">
-                                                      <li><a class="dropdown-item active" href="#">Bank transfer</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Paypal</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Visa/Credit Card</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Western union</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="nav-item d-none d-lg-block d-md-block">
-                                                  <a class="nav-link" href="#">100 - 1,000 USD</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a href="#" class="avatar position-relative mt-3">                                                  
-                                                        <img class="avatar-img" src="https://images.coinbase.com/avatar?h=615b0a8e30d43c00a2869VC0Hvux7ZlkGQKEhxD8d2SLZVdijiw176MpoXlU%0AieR9&s=128" alt="">
-                                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99</span>
-    
-                                                        <div class="badge-circle bg-transparent position-absolute bottom-0 end-0">
-                                                            <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill="#F90" fill-rule="evenodd" d="M23.6408156,14.9046858 C22.0378949,21.3339956 15.5260763,25.2467873 9.09601649,23.6434916 C2.66858193,22.0405708 -1.24420981,15.5283772 0.359460996,9.09944253 C1.96163164,2.66938268 8.47345019,-1.24378409 14.9016348,0.359136628 C21.3313196,1.96205735 25.2437363,8.47500102 23.6408156,14.9046858 L23.6408156,14.9046858 Z M17.2913894,10.2916945 C17.5302898,8.69477443 16.3144103,7.83630799 14.6518582,7.263622 L15.1911657,5.1003916 L13.8744004,4.77223165 L13.3493445,6.87845598 C13.0031826,6.79219679 12.6476448,6.71081312 12.2943571,6.63017953 L12.8231635,4.51007873 L11.5071483,4.18191878 L10.9674658,6.3443991 C10.6809353,6.27914215 10.3996553,6.21463528 10.1266263,6.14675305 L10.1281264,6.14000233 L8.31218301,5.68657903 L7.9618957,7.09297883 C7.9618957,7.09297883 8.93887476,7.31687767 8.91824756,7.33075415 C9.45155436,7.46389333 9.54793963,7.81680592 9.53181291,8.09658572 L8.91749748,10.5609732 C8.9542514,10.5703492 9.00188147,10.5838506 9.05438706,10.6048529 C9.01050739,10.5939767 8.96362739,10.5819754 8.91524724,10.5703492 L8.05415553,14.0225919 C7.98889858,14.1846091 7.82350596,14.427635 7.45071626,14.3353752 C7.46384266,14.3545022 6.49361432,14.0964747 6.49361432,14.0964747 L5.8399197,15.6037603 L7.5534772,16.0309308 C7.87226116,16.1108143 8.18466943,16.1944482 8.49220218,16.2732066 L7.94726915,18.4611896 L9.26253423,18.7893496 L9.80221671,16.624619 C10.161505,16.7221294 10.5102921,16.812139 10.8515785,16.896898 L10.3137712,19.0515025 L11.6305364,19.3796624 L12.1754695,17.1958048 C14.4208336,17.6207251 16.1092634,17.4493318 16.8199641,15.4184905 C17.3926501,13.7833164 16.7914611,12.8400909 15.6100853,12.2250254 C16.4704269,12.0266293 17.1184959,11.460694 17.2913894,10.2916945 L17.2913894,10.2916945 Z M14.2828189,14.5105188 C13.8759006,16.145693 11.1227324,15.2617238 10.2301373,15.0400752 L10.9532143,12.1413915 C11.8458094,12.3641652 14.7081142,12.8052122 14.2828189,14.5105188 L14.2828189,14.5105188 Z M14.6901123,10.268067 C14.3188228,11.7554754 12.0273287,10.9997699 11.2839995,10.8145002 L11.9395694,8.18547018 C12.6828985,8.37073991 15.0767785,8.71652674 14.6901123,10.268067 L14.6901123,10.268067 Z"/>
-                                                            </svg>
-                                                        </div>
-                                                    </a>
-                                                    <span class="bottom-0 ms-0">0 trades</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-    
                                     </div>
                                 </div>
                             </div>
@@ -3086,7 +3133,6 @@
                                         © 2022 Rebro
                                     </span>                             
                                   </span>
-                                  <span class="text-muted me-0" style="float:right"><a href="#support" class="btn btn-sm btn-info">Need assistant?</a></span>
                                 </div>
                             </footer>
                         </div>
@@ -3586,9 +3632,11 @@
         <div id="snackbar"></div>
 
         <!-- Scripts -->
+        <script src="./assets/script/canvasjs.min.js"></script>
         <script src="js/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="./assets/js/vendor.js"></script>
         <script src="./assets/js/template.js"></script>
+
         <script src="js/index.js"></script>
         <script src="js/dashboard.js"></script>
         <script src="js/country_codes.js"></script>

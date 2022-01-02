@@ -50,6 +50,10 @@ var IMAGE_url_path_name = 'https://'  + api_server_url + '/product_images/';
 function onDeviceReady() {
     // Cordova is now initialized. Have fun!   
     username = localStorage.getItem("username");
+    if (localStorage.getItem("account_balance") == null || localStorage.getItem("bitcoin_balance") == null) {
+        localStorage.setItem("account_balance",0);//BTC
+        localStorage.setItem("bitcoin_balance",0);//BTC
+    }
     //mysnackbar(localStorage.getItem("account_balance"));
     if (username == null || username == '') {
         $("#pills-account-tab").removeClass("d-none");
@@ -870,8 +874,9 @@ $("body").delegate(".logout_me","click",function(event){
                     $(".bitcoin_balance_usd").html(account_balance); */
     localStorage.setItem("username", username);
     $("#pills-account-tab").removeClass("d-none");
+    localStorage.clear();
     onDeviceReady()
-    loadconnects();
+    //loadconnects();
 });
 $("#ttab-support").click(function(){ 
     //pings.html
