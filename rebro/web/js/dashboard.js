@@ -144,10 +144,11 @@ function Order_Book() {
     if (local_asset != localStorage.getItem("asset") || local_asset_time.getSeconds() <= 5 ) {
         local_asset = localStorage.getItem("asset");
         bybit_mkt('Query Kline',localStorage.getItem("asset"),'');
+        bybit_mkt('Latest Information for Symbol',localStorage.getItem("asset"),'');
+
     } else {
-       // bybit_mkt('Order Book',localStorage.getItem("asset"),'');
+       bybit_mkt('Order Book',localStorage.getItem("asset"),'');
     }
-    bybit_mkt('Latest Information for Symbol',localStorage.getItem("asset"),'');
 
     setTimeout(Order_Book, 3000);
 }
@@ -365,12 +366,12 @@ function bybit_mkt(crypto,asset,aisa_options) {
                             var open_trade_time = "" + open_t_time.getHours() + ":" + open_t_time.getMinutes() + ":" + open_t_time.getSeconds() + "";
                             var asset_info = '<ul id="" class="list-group">'+
                             '<li class="list-group-item d-flex justify-content-between align-items-center bg-soft-secondary" style="height: 10px">'+
-                            '<span class="text-primary position-relative" title="Symbol">' + results[i].symbol + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-soft-primary">Symbol</span></span>'+                            
+                            '<span class="text-primary position-relative mr-2" title="Symbol">' + results[i].symbol + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-soft-primary">Symbol</span></span>'+                            
                             '<span class="text-info d-none d-xl-block position-relative" title="Interval">' + results[i].interval + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-soft-info">Interval</span></span>'+
                             '<span class="text-info d-none d-xl-block position-relative" title="Open time">' + open_trade_time + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-soft-info">Open time</span></span>'+
-                            '<span class="text-primary position-relative" title="' + results[i].interval + 'Min Open">' + results[i].open + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-soft-primary">' + results[i].interval + 'Min Open</span></span>'+
-                            '<span class="text-success position-relative" title="' + results[i].interval + 'Min High">' + results[i].high + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-soft-success">' + results[i].interval + 'Min High</span></span>'+
-                            '<span class="text-danger position-relative" title="' + results[i].interval + 'Min Low">' + results[i].low + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-soft-danger">' + results[i].interval + 'Min Low</span></span>'+
+                            '<span class="text-primary position-relative mr-2" title="' + results[i].interval + 'Min Open">' + results[i].open + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-soft-primary">' + results[i].interval + 'Min Open</span></span>'+
+                            '<span class="text-success position-relative mr-2" title="' + results[i].interval + 'Min High">' + results[i].high + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-soft-success">' + results[i].interval + 'Min High</span></span>'+
+                            '<span class="text-danger position-relative mr-2" title="' + results[i].interval + 'Min Low">' + results[i].low + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-soft-danger">' + results[i].interval + 'Min Low</span></span>'+
                             '<span class="text-warning position-relative" title="' + results[i].interval + 'Min Clase">' + results[i].close + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-soft-warning">' + results[i].interval + 'Min Close</span></span>'+
                             '<span class="text-info d-none d-xl-block position-relative" title="Volume">' + results[i].volume + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-soft-info">Volume</span></span>'+
                             '<span class="text-info d-none d-xl-block position-relative" title="Turnover">' + results[i].turnover + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-soft-info">Turnover</span></span>'+
@@ -390,12 +391,41 @@ function bybit_mkt(crypto,asset,aisa_options) {
 
                         }                        
                     } else if (crypto == 'Latest Information for Symbol') {
-                        //alert();
-                        var results = response.result;
+                        $(".leanders_mkt_assets").html('');                        var results = response.result;
                         for (let i = 0; i < results.length; i++) {
+                            //results[i].open
+ 
+                            //leanders_mkt_assets
+                            var leanders_mkt_assets = '<div class="card border-0 mb-5 bg-light">' +
+                            '<ul class="nav nav-pills nav-fill">' +
+                            '<li class="nav-item">' +
+                            '<a class="nav-link" href="#">'+ results[i].symbol + '</a>' +
 
+                            /**'<a href="#" class="avatar position-relative mt-3">' +
+                            '<img class="avatar-img" src="https://images.coinbase.com/avatar?h=615b0a8e30d43c00a2869VC0Hvux7ZlkGQKEhxD8d2SLZVdijiw176MpoXlU%0AieR9&s=128" alt="">' +
+                            '<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99</span>' +
+
+                            '<div class="badge-circle bg-transparent position-absolute bottom-0 end-0">' +
+                            '<svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">' +
+                            '<path fill="#F90" fill-rule="evenodd" d="M23.6408156,14.9046858 C22.0378949,21.3339956 15.5260763,25.2467873 9.09601649,23.6434916 C2.66858193,22.0405708 -1.24420981,15.5283772 0.359460996,9.09944253 C1.96163164,2.66938268 8.47345019,-1.24378409 14.9016348,0.359136628 C21.3313196,1.96205735 25.2437363,8.47500102 23.6408156,14.9046858 L23.6408156,14.9046858 Z M17.2913894,10.2916945 C17.5302898,8.69477443 16.3144103,7.83630799 14.6518582,7.263622 L15.1911657,5.1003916 L13.8744004,4.77223165 L13.3493445,6.87845598 C13.0031826,6.79219679 12.6476448,6.71081312 12.2943571,6.63017953 L12.8231635,4.51007873 L11.5071483,4.18191878 L10.9674658,6.3443991 C10.6809353,6.27914215 10.3996553,6.21463528 10.1266263,6.14675305 L10.1281264,6.14000233 L8.31218301,5.68657903 L7.9618957,7.09297883 C7.9618957,7.09297883 8.93887476,7.31687767 8.91824756,7.33075415 C9.45155436,7.46389333 9.54793963,7.81680592 9.53181291,8.09658572 L8.91749748,10.5609732 C8.9542514,10.5703492 9.00188147,10.5838506 9.05438706,10.6048529 C9.01050739,10.5939767 8.96362739,10.5819754 8.91524724,10.5703492 L8.05415553,14.0225919 C7.98889858,14.1846091 7.82350596,14.427635 7.45071626,14.3353752 C7.46384266,14.3545022 6.49361432,14.0964747 6.49361432,14.0964747 L5.8399197,15.6037603 L7.5534772,16.0309308 C7.87226116,16.1108143 8.18466943,16.1944482 8.49220218,16.2732066 L7.94726915,18.4611896 L9.26253423,18.7893496 L9.80221671,16.624619 C10.161505,16.7221294 10.5102921,16.812139 10.8515785,16.896898 L10.3137712,19.0515025 L11.6305364,19.3796624 L12.1754695,17.1958048 C14.4208336,17.6207251 16.1092634,17.4493318 16.8199641,15.4184905 C17.3926501,13.7833164 16.7914611,12.8400909 15.6100853,12.2250254 C16.4704269,12.0266293 17.1184959,11.460694 17.2913894,10.2916945 L17.2913894,10.2916945 Z M14.2828189,14.5105188 C13.8759006,16.145693 11.1227324,15.2617238 10.2301373,15.0400752 L10.9532143,12.1413915 C11.8458094,12.3641652 14.7081142,12.8052122 14.2828189,14.5105188 L14.2828189,14.5105188 Z M14.6901123,10.268067 C14.3188228,11.7554754 12.0273287,10.9997699 11.2839995,10.8145002 L11.9395694,8.18547018 C12.6828985,8.37073991 15.0767785,8.71652674 14.6901123,10.268067 L14.6901123,10.268067 Z"/>' +
+                            '</svg>' +
+                            '</div>' +
+                            '</a>' + */
+                            '</li>' +
+                            '<li class="nav-item d-none d-lg-block d-md-block">' +
+                            '<a class="nav-link" href="#">$'+ results[i].last_price + ' </a>' +
+                            '</li>' +
+                            '<li class="nav-item d-none d-lg-block d-md-block">' +
+                            '<span class="badge bg-soft-success">'+ results[i].price_1h_pcnt + '%</span>' +
+                            '</li>' +
+                            '<li class="nav-item">' +
+                            '<a href="#" class="me-0 btn btn-sm btn-soft-success mkt_option" asset="'+ results[i].symbol + '" day_low="'+ results[i].low_price_24h + '" price_open="'+ results[i].bid_price + '" day_high="'+ results[i].high_price_24h + '"  price="'+ results[i].last_price + '" aisa_options="buy">Buy</a>' +
+                            '</li>' +
+                            '</ul>' +
+                            '</div>';
+
+                            $(".leanders_mkt_assets").append(leanders_mkt_assets);
                         }
-                        //myChart();
                     }
                     /**var order_price = $(".order_price").val();
                     var order_quantity = localStorage.getItem("account_balance");
@@ -570,6 +600,11 @@ $(".pills-home-tab").click(function(){
     $("#main_mkt").addClass("is-visible");
     $("#leanders_mkt").addClass("d-none");
     $("#oder_book").removeClass("d-none");
+});
+$(".pills-assets-tab").click(function(){
+    $("#main_mkt").addClass("is-visible");
+    $("#leanders_mkt").removeClass("d-none");
+    $("#oder_book").addClass("d-none");
 }); 
 //myChart();
 function myChart(){

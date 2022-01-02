@@ -111,24 +111,29 @@
                         <ul class="nav nav-pills mb-3 d-flex justify-content-between align-items-center" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Order Book</button>
-                            </li>
-                            <ul class="nav nav-pills mb-3 d-flex justify-content-between align-items-center" id="pills-account-tab" role="tablist">
+                            </li>                           
+                            
+                            <!-- <ul class="nav nav-pills mb-3 d-flex justify-content-between align-items-center" id="pills-account-tab" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="pills-signin-tab" data-bs-toggle="pill" data-bs-target="signin.html" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Log In</button>
                                 </li>
                                 <li class="nav-item float-right" role="presentation" style="float: right;">
                                     <button class="nav-link" id="pills-signup-tab" data-bs-toggle="pill" data-bs-target="signup.html" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Sign Up</button>
-                                </li>
-                            </ul>
+                                </li>                                
+                            </ul> -->
                             <li class="nav-item float-right" role="presentation" style="float: right;">
                                 <a class="btn btn-sm btn-soft-primary w-100 nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Offers</a>
                                 <ul class="dropdown-menu h-3">
                                     <ul class="hide-scrollbar flex-1 list-group query_symbols" style="height: 250px;">
                                                     
                                     </ul>
-                                </ul>  
-                                                  
+                                </ul>                                                  
                             </li>
+                            <li id="pills-account-tab" class="nav-item d-flex" role="presentation">
+                                <button class="nav-link" id="pills-signin-tab" data-bs-toggle="pill" data-bs-target="signin.html" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Log In</button>
+                                <button class="nav-link" id="pills-signup-tab" data-bs-toggle="pill" data-bs-target="signup.html" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Sign Up</button>
+                            </li>
+                            
                         </ul>
                         <!-- Resources - Notices -->
                         <div class="tab-pane fade h-100 show active" id="tab-content-notifications" role="tabpanel">
@@ -2697,7 +2702,7 @@
                                             </ul>                                            
                                         </li>
                                         <li class="nav-item float-right" role="presentation" style="float: right;">
-                                            <button class="nav-link active pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Order Book</button>
+                                            <button class="nav-link active pills-assets-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Assets</button>
                                         </li>
                                     </ul>
                                 </div>
@@ -3058,8 +3063,7 @@
     
                                     </div>
                                     <div id="leanders_mkt" class="py-6 py-lg-12">
-                                         
-                                        <div class="card">
+                                         <!--<div class="card">
                                             <div class="card-header">
                                                 Featured
                                             </div>
@@ -3069,8 +3073,12 @@
                                             <div class="card-footer text-muted">
                                                 2 days ago
                                             </div>
+                                        </div> -->
+                                        
+                                        <div class="row g-0 leanders_mkt_assets">
+
                                         </div>
-                                        <div class="card border-0 mb-5 bg-light">
+                                        <!-- <div class="card border-0 mb-5 bg-light">
                                             <ul class="nav nav-pills nav-fill">
                                                 <li class="nav-item">
                                                     <a href="#" class="avatar position-relative mt-3">                                                  
@@ -3083,20 +3091,7 @@
                                                             </svg>
                                                         </div>
                                                     </a>
-                                                    <span class="bottom-0 ms-0">0 trades</span>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Bank transfer</a>
-                                                    <ul class="dropdown-menu hide-scrollbar flex-1 h-3" style="height: 250px;">
-                                                      <li><a class="dropdown-item active" href="#">Bank transfer</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Paypal</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Visa/Credit Card</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Western union</a></li>
-                                                    </ul>
-                                                </li>
+                                                </li>                                                
                                                 <li class="nav-item d-none d-lg-block d-md-block">
                                                   <a class="nav-link" href="#">100 - 1,000 USD</a>
                                                 </li>
@@ -3105,7 +3100,8 @@
                                                     <a href="#" class="me-0 btn btn-sm btn-soft-success mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="buy">Buy</a>
                                                 </li>
                                             </ul>
-                                        </div>
+                                        </div> -->
+                                        
                                     </div>
                                 </div>
                             </div>
