@@ -140,7 +140,7 @@ function login_user(login_email,login_password,login_details_username,login_deta
                     $(".user_location").html(localStorage.getItem("user_location"));
                     $(".user_email").html(localStorage.getItem("user_email"));
                     $(".user_phone").html(localStorage.getItem("user_phone"));
-
+ 
                     $("#signin_html").hide();
                     $("#index_html").show();
                     $("#pills-account-tab").addClass("d-none");

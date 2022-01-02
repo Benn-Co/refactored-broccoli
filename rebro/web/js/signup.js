@@ -108,7 +108,7 @@ function signup_user(signup_username,signup_email,signup_password) {
                     $(".user_location").html(localStorage.getItem("user_location"));
                     $(".user_email").html(localStorage.getItem("user_email"));
                     $(".user_phone").html(localStorage.getItem("user_phone"));
-
+ 
                     $("#signup_html").hide();
                     $("#index_html").show();
                     $("#pills-account-tab").addClass("d-none");

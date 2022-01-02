@@ -570,7 +570,7 @@ $(".pills-home-tab").click(function(){
     $("#main_mkt").addClass("is-visible");
     $("#leanders_mkt").addClass("d-none");
     $("#oder_book").removeClass("d-none");
-});
+}); 
 //myChart();
 function myChart(){
     // Graphs

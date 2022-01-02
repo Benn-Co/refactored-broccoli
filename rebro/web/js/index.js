@@ -53,7 +53,7 @@ function onDeviceReady() {
     if (localStorage.getItem("account_balance") == null || localStorage.getItem("bitcoin_balance") == null) {
         localStorage.setItem("account_balance",0);//BTC
         localStorage.setItem("bitcoin_balance",0);//BTC
-    }
+    } 
     //mysnackbar(localStorage.getItem("account_balance"));
     if (username == null || username == '') {
         $("#pills-account-tab").removeClass("d-none");
