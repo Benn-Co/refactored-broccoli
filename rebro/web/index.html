@@ -110,9 +110,15 @@
                     <div class="tab-content h-100" role="tablist">
                         <ul class="nav nav-pills mb-3 d-flex justify-content-between align-items-center" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Order Book</button>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button class="nav-link active pills-assets-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Assets</button>
+                                    <button class="nav-link active pills-home-tab d-none" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Order Book</button>
+                                </div>                                
                             </li>                           
-                            
+                            <li id="pills-account-tab" class="nav-item d-flex" role="presentation">                                
+                                <button class="nav-link" id="pills-signin-tab" data-bs-toggle="pill" data-bs-target="signin.html" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Log In</button>
+                                <button class="nav-link" id="pills-signup-tab" data-bs-toggle="pill" data-bs-target="signup.html" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Sign Up</button>                               
+                            </li>
                             <!-- <ul class="nav nav-pills mb-3 d-flex justify-content-between align-items-center" id="pills-account-tab" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="pills-signin-tab" data-bs-toggle="pill" data-bs-target="signin.html" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Log In</button>
@@ -128,10 +134,6 @@
                                                     
                                     </ul>
                                 </ul>                                                  
-                            </li>
-                            <li id="pills-account-tab" class="nav-item d-flex" role="presentation">
-                                <button class="nav-link" id="pills-signin-tab" data-bs-toggle="pill" data-bs-target="signin.html" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Log In</button>
-                                <button class="nav-link" id="pills-signup-tab" data-bs-toggle="pill" data-bs-target="signup.html" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Sign Up</button>
                             </li>
                             
                         </ul>
@@ -169,7 +171,7 @@
                                                     <!-- <div id="validationServer03Feedback" class="invalid-feedback">
                                                         Quantity.
                                                     </div> -->
-                                                    <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRange3">
+                                                    <input type="range" class="form-range order_quantity_range" min="0" max="5" step="0.5" id="customRange3">
                                                 </div>                                            
                                             </div>                                        
                                         </div>
@@ -2662,10 +2664,16 @@
                                             </a>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <button class="nav-link btn btn-sm btn-soft-danger d-none d-lg-block mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="sell">Sell</button>
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <button class="nav-link btn btn-sm btn-soft-danger d-none d-lg-block mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="sell">Sell</button>
+                                                <button class="nav-link btn btn-sm btn-success d-none d-lg-block mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="buy">Buy</button>
+                                            </div>                                           
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <button class="nav-link btn btn-sm btn-success d-none d-lg-block mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="buy">Buy</button>
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <button class="nav-link btn btn-sm btn-soft-danger mkt_option_action" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="send">Send</button>
+                                                <button class="nav-link btn btn-sm btn-success mkt_option_action" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="receive">Receive</button>
+                                            </div>
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <a class="nav-item dropdown-toggle refresh_" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Refresh interval</a>
@@ -2702,7 +2710,10 @@
                                             </ul>                                            
                                         </li>
                                         <li class="nav-item float-right" role="presentation" style="float: right;">
-                                            <button class="nav-link active pills-assets-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Assets</button>
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <button class="nav-link active pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Order Book</button>
+                                                <button class="nav-link active pills-assets-tab d-none" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Assets</button>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
@@ -2743,30 +2754,29 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="oder_book" class="py-6 py-lg-12 d-none">
-    
-                                        <!-- Divider -->
-                                        <div class="message-divider">
-                                            <h4 class="card-title">Buy or Sell Crypto  Everywhere</h4>
-                                            <p class="card-text">Trade crypto  person-to-person in an easy, fast, and secure way.</p>
-                                            <small class="text-muted">Where people buy and sell crypto on their own terms, using any payment method.</small>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <input type="number" class="form-control is-valid order_price" placeholder="Order Price" value="" required>
-                                                    <!-- <div class="valid-feedback">
-                                                        Looks good!
-                                                    </div> -->
-                                                </div>
-                                                <div class="col">
-                                                    <input type="number" class="form-control is-invalid order_quantity" placeholder="Quantity" required>
-                                                    <!-- <div id="validationServer03Feedback" class="invalid-feedback">
-                                                        Quantity.
-                                                    </div> -->
-                                                    <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRange3">
+                                    <!-- Divider -->
+                                    <div class="message-divider">
+                                        <h4 class="card-title">Buy or Sell Crypto  Everywhere</h4>
+                                        <p class="card-text">Trade crypto  person-to-person in an easy, fast, and secure way.</p>
+                                        <small class="text-muted">Where people buy and sell crypto on their own terms, using any payment method.</small>
+                                        <div class="row">
+                                            <div class="col">
+                                                <input type="number" class="form-control is-valid order_price" placeholder="Order Price" value="" required>
+                                                <!-- <div class="valid-feedback">
+                                                    Looks good!
+                                                </div> -->
+                                            </div>
+                                            <div class="col">
+                                                <input type="number" class="form-control is-invalid order_quantity" placeholder="Quantity" required>
+                                                <!-- <div id="validationServer03Feedback" class="invalid-feedback">
+                                                    Quantity.
+                                                </div> -->
+                                                <input type="range" class="form-range order_quantity_range" min="0" max="5" step="0.5" id="customRange3">
 
-                                                </div>                                            
                                             </div>                                            
-                                        </div>
+                                        </div>                                            
+                                    </div>
+                                    <div id="oder_book" class="py-1 d-none">                                        
     
                                         <div class="row g-0">
                                             <div class="col-lg-6 pe-lg-2 mb-3">
@@ -3062,7 +3072,7 @@
                                         
     
                                     </div>
-                                    <div id="leanders_mkt" class="py-6 py-lg-12">
+                                    <div id="leanders_mkt" class="py-1">
                                          <!--<div class="card">
                                             <div class="card-header">
                                                 Featured

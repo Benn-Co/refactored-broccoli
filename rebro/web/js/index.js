@@ -54,7 +54,7 @@ function onDeviceReady() {
         localStorage.setItem("account_balance",0);//BTC
         localStorage.setItem("bitcoin_balance",0);//BTC
     } 
-    //mysnackbar(localStorage.getItem("account_balance"));
+    $(".order_quantity_range").val(0);
     if (username == null || username == '') {
         $("#pills-account-tab").removeClass("d-none");
         localStorage.setItem("account_balance",0);//USD
