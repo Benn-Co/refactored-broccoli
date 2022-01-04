@@ -1,0 +1,15 @@
+directories:
+  output: 'C:\Users\admin\OneDrive\Documents\GitHub\refactored-broccoli\rebro_app\platforms\electron\build'
+  buildResources: 'C:\Users\admin\OneDrive\Documents\GitHub\refactored-broccoli\rebro_app\platforms\electron\build-res'
+  app: 'C:\Users\admin\OneDrive\Documents\GitHub\refactored-broccoli\rebro_app\platforms\electron\www'
+appId: com.benco.org
+productName: Rebro
+electronVersion: 4.0.1
+electronDownload:
+  version: 4.0.1
+win:
+  icon: installer.png
+  target:
+    - target: nsis
+      arch:
+        - x64
