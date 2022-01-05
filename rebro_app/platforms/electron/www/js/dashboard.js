@@ -34,7 +34,7 @@ $("body").delegate(".mkt_option","click",function(event){
     localStorage.setItem("price_open",$(this).attr('price_open'));
     localStorage.setItem("day_high",$(this).attr('day_high'));
     localStorage.setItem("day_low",$(this).attr('day_low'));
-    $("#main_mkt").addClass("is-visible");    
+    //$("#main_mkt").addClass("is-visible");    
     var order_price = $(".order_price").val();
     if (order_price !== "") {
         $(".order_price").removeClass("is-invalid");
