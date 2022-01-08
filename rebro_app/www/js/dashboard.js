@@ -11,6 +11,8 @@ $("body").delegate(".mkt_option","click",function(event){
     } 
     localStorage.setItem("asset",$(this).attr('asset'));
     localStorage.setItem("aisa_options",$(this).attr('aisa_options'));
+    $(".mkt_option").attr("asset",localStorage.getItem("asset"));
+
     //But, before I can make a trade I have to buy bitcoins from the sell side at the lowest sell_price
     // I must have minimum balance in USD to buy some bitcoins.
     // BTCUSD rate would be the lowest sell_price to get 1 bitcoin
@@ -146,7 +148,10 @@ $("body").delegate(".get_asset","click",function(event){
         $(".order_price").val(0);
         $(".order_quantity").val(0);
         $(".order_quantity_range").val(0);
-    }    
+    }   
+    mkt_option_clicked = 1;
+    $(".order_price").val(0);
+
     //$(".current_crypto_symbol").html(localStorage.getItem("asset"));  
     bybit_mkt('Order Book',localStorage.getItem("asset"),'');
 });
@@ -302,7 +307,7 @@ function bybit_mkt(crypto,asset,aisa_options) {
                                 $(".mkt_option").attr("asset",localStorage.getItem("asset"));  
                             }                            
                             var query_c_symbols = '<li id="offers_' + results[i].name + '" class="list-group-item d-flex justify-content-between align-items-center get_asset" asset="' + results[i].name + '">' +
-                            '<span class="text-primary">' + results[i].name + '</span>' +
+                            '<a class="text-primary" href="#' + results[i].name + '">' + results[i].name + '</a>' +
                             '<span class="text-info">' + results[i].status + '</span>' +
                             '<span class="text-warning">' + results[i].base_currency + '</span>' +
                             '<span class="text-success">' + results[i].quote_currency + '</span>' +
@@ -349,6 +354,7 @@ function bybit_mkt(crypto,asset,aisa_options) {
                                 '<span class="text-danger"><small>' + trade_time + '</small></span>'+
                                 '</li>';
                                 if (sell_price_i < 1) {
+                                    //mysnackbar(mkt_option_clicked);
                                     if (mkt_option_clicked == 1) {
                                         /**$(".bitcoin_balance_price").html("$" + results[i].price);
                                         localStorage.setItem("sell_price",results[i].price);
