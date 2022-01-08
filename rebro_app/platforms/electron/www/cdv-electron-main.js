@@ -30,12 +30,12 @@ let mainWindow;
 function createWindow () {
     // Create the browser window.
     let appIcon;
-    if (fs.existsSync(`${__dirname}/image/favicon-32x32.png`)) {
-        appIcon = `${__dirname}/image/favicon-32x32.png`;
-    } else if (fs.existsSync(`${__dirname}/image/favicon-32x32.png`)) {
-        appIcon = `${__dirname}/image/favicon-32x32.png`;
+    if (fs.existsSync(`${__dirname}/img/app.png`)) {
+        appIcon = `${__dirname}/img/app.png`;
+    } else if (fs.existsSync(`${__dirname}/img/icon.png`)) {
+        appIcon = `${__dirname}/img/icon.png`;
     } else {
-        appIcon = `${__dirname}/image/favicon-32x32.png`;
+        appIcon = `${__dirname}/img/logo.png`;
     }
 
     const browserWindowOpts = Object.assign({}, cdvElectronSettings.browserWindow, { icon: appIcon });
@@ -45,12 +45,12 @@ function createWindow () {
     // TODO: possibly get this data from config.xml
     mainWindow.loadURL(`file://${__dirname}/index.html`);
     mainWindow.webContents.on('did-finish-load', function () {
-        //mainWindow.webContents.send('window-id', mainWindow.id);
+        mainWindow.webContents.send('window-id', mainWindow.id);
     });
 
     // Open the DevTools.
     if (cdvElectronSettings.browserWindow.webPreferences.devTools) {
-        //mainWindow.webContents.openDevTools();
+        mainWindow.webContents.openDevTools();
     }
 
     // Emitted when the window is closed.

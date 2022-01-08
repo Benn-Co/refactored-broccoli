@@ -24,8 +24,8 @@
       "cordova-plugin-splashscreen": {}
     },
     "platforms": [
-      "electron",
-      "android"
+      "android",
+      "electron"
     ]
   }
 }

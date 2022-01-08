@@ -21,6 +21,7 @@
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
 //let hostname = '';
 $(document).ready(function(){
+
     let hostname = window.location.hostname;
     let path_protocol = location.protocol;
     if (hostname.includes("benn-co.github.io") || hostname.includes("oramla") || hostname.includes("localhost") || hostname.includes("192.")) {
@@ -34,7 +35,9 @@ $(document).ready(function(){
             onDeviceReady();
         }
     } else {
-        document.addEventListener('deviceready', onDeviceReady, false);
+        //alert(localStorage.getItem("username")); 
+        onDeviceReady();
+        //document.addEventListener('deviceready', onDeviceReady, false);
     }
 });
 
@@ -48,7 +51,7 @@ var updte_is_typing = 0;
 var IMAGE_url_path_name = 'https://'  + api_server_url + '/product_images/';
 
 function onDeviceReady() {
-    // Cordova is now initialized. Have fun!   
+    // Cordova is now initialized. Have fun!  
     username = localStorage.getItem("username");
     if (localStorage.getItem("account_balance") == null || localStorage.getItem("bitcoin_balance") == null) {
         localStorage.setItem("account_balance",0);//BTC

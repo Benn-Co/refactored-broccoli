@@ -129,7 +129,8 @@ $("body").delegate(".get_asset","click",function(event){
     event.preventDefault();
     localStorage.setItem("asset",$(this).attr('asset'));
     $("#main_mkt").addClass("is-visible");
-    $(".mkt_option").attr("asset",localStorage.getItem("asset"));  
+    $(".mkt_option").attr("asset",localStorage.getItem("asset"));
+    $(".asset_info").html('');  
     bybit_mkt('Order Book',localStorage.getItem("asset"),'');
 });
 $("body").delegate(".refresh_interval","click",function(event){
@@ -204,7 +205,7 @@ function rebro_Aisha(asset,aisa_options,price,price_open,day_high,day_low) {
             }
         },
         error: function searchError(xhr, err) {
-          mysnackbar(" Error on ajax call: " + err  + " " + JSON.stringify(xhr));
+          //mysnackbar(" Error on ajax call: " + err  + " " + JSON.stringify(xhr));
         }
     });   
 }
@@ -409,11 +410,13 @@ function bybit_mkt(crypto,asset,aisa_options) {
                             //leanders_mkt_assets
                             var leanders_mkt_assets = '<div class="card border-0 mb-5">' +
                             '<ul class="nav nav-pills nav-fill  ' + bg_ + '">' +
-                            '<li class="nav-item">' +
+                            '<li class="nav-item avatar">' +
+                            '<img class="avatar-img" src="https://dynamic-assets.coinbase.com/e785e0181f1a23a30d9476038d9be91e9f6c63959b538eabbc51a1abc8898940383291eede695c3b8dfaa1829a9b57f5a2d0a16b0523580346c6b8fab67af14b/asset_icons/b57ac673f06a4b0338a596817eb0a50ce16e2059f327dc117744449a47915cb2.png" alt="">' +
+
                             '<a class="nav-link" href="#">'+ results[i].symbol + '</a>' +
 
                             /**'<a href="#" class="avatar position-relative mt-3">' +
-                            '<img class="avatar-img" src="https://images.coinbase.com/avatar?h=615b0a8e30d43c00a2869VC0Hvux7ZlkGQKEhxD8d2SLZVdijiw176MpoXlU%0AieR9&s=128" alt="">' +
+                            '<img class="avatar-img" src="https://www.coinbase.com/price/bitcoin" alt="">' +
                             '<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99</span>' +
 
                             '<div class="badge-circle bg-transparent position-absolute bottom-0 end-0">' +
@@ -431,6 +434,7 @@ function bybit_mkt(crypto,asset,aisa_options) {
                             '</li>' +
                             '<li class="nav-item">' +
                             '<a href="#" class="me-0 btn btn-sm btn-soft-success mkt_option" asset="'+ results[i].symbol + '" day_low="'+ results[i].low_price_24h + '" price_open="'+ results[i].bid_price + '" day_high="'+ results[i].high_price_24h + '"  price="'+ results[i].last_price + '" aisa_options="buy">Buy</a>' +
+                            '<a href="#" class="me-0 btn btn-sm btn-soft-danger mkt_option" asset="'+ results[i].symbol + '" day_low="'+ results[i].low_price_24h + '" price_open="'+ results[i].bid_price + '" day_high="'+ results[i].high_price_24h + '"  price="'+ results[i].last_price + '" aisa_options="sell">Sell</a>' +
                             '</li>' +
                             '</ul>' +
                             '</div>';
@@ -474,10 +478,11 @@ function account_mkt_balance(aisa_options) {
             var order_quantity = 0;
             order_quantity = order_quantity.toFixed(8);
             $(".order_quantity").val(order_quantity);
-
+            $(".order_quantity_range").val(0);
         } else {
             $(".order_quantity").val(localStorage.getItem("account_balance"));
             mysnackbar("You do not have enough money");
+            $(".order_quantity_range").val(0);
         }
     } else if (aisa_options =="sell") {
         if ($(".order_quantity").val() != '') {
@@ -499,9 +504,11 @@ function account_mkt_balance(aisa_options) {
             var order_quantity = 0;
             order_quantity = order_quantity.toFixed(2);
             $(".order_quantity").val(order_quantity);
+            $(".order_quantity_range").val(0);
         } else{
             $(".order_quantity").val(localStorage.getItem("bitcoin_balance"));
             mysnackbar("You do not have enough crypto");
+            $(".order_quantity_range").val(0);
         }
     }//cordova create rebro_app com.benco.org Rebro
     let highest_buy_price = localStorage.getItem("buy_price");//USD
