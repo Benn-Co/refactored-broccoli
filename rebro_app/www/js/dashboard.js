@@ -1,8 +1,14 @@
-
+var mkt_option_clicked = 0;
 $("body").delegate(".mkt_option","click",function(event){
     event.preventDefault(); 
     //var order_price = $(".order_price").val();
-    //$(".account_balance").attr("account_balance",localStorage.getItem("account_balance")); 
+    //$(".account_balance").attr("account_balance",localStorage.getItem("account_balance"));
+    localStorage.setItem("price",$(this).attr('price'));
+    if (localStorage.getItem("asset") != $(this).attr('asset')) {
+        $(".order_price").val(localStorage.getItem("price"));
+        $(".order_quantity").val(0);
+        $(".order_quantity_range").val(0);
+    } 
     localStorage.setItem("asset",$(this).attr('asset'));
     localStorage.setItem("aisa_options",$(this).attr('aisa_options'));
     //But, before I can make a trade I have to buy bitcoins from the sell side at the lowest sell_price
@@ -29,6 +35,9 @@ $("body").delegate(".mkt_option","click",function(event){
     //            if (b) account_balance_stake = USD 100000   : > sell_price
     //                  (USD account_balance_stake/USD sell_price) * 1 bitcoin = BTC bitcoin_balance
 
+    $(".asset_info").html('');
+    //bybit_mkt('Order Book',localStorage.getItem("asset"),'');
+
     account_mkt_balance(localStorage.getItem("aisa_options"));    
     
     localStorage.setItem("price_open",$(this).attr('price_open'));
@@ -53,6 +62,7 @@ $("body").delegate(".mkt_option","click",function(event){
         $(".order_price").removeClass("is-valid");
         $(".order_price").addClass("is-invalid");
     }
+    mkt_option_clicked = 1;
 });
 $("body").delegate(".order_book_mkt","click",function(event){
     event.preventDefault();    
@@ -126,11 +136,18 @@ $("body").delegate(".gift_send","click",function(event){
 });
 
 $("body").delegate(".get_asset","click",function(event){
-    event.preventDefault();
+    //event.preventDefault();
     localStorage.setItem("asset",$(this).attr('asset'));
     $("#main_mkt").addClass("is-visible");
     $(".mkt_option").attr("asset",localStorage.getItem("asset"));
-    $(".asset_info").html('');  
+    $(".asset_info").html(''); 
+    if (localStorage.getItem("asset") != $(this).attr('asset')) {
+        //$(".order_price").val(localStorage.getItem("price"));
+        $(".order_price").val(0);
+        $(".order_quantity").val(0);
+        $(".order_quantity_range").val(0);
+    }    
+    //$(".current_crypto_symbol").html(localStorage.getItem("asset"));  
     bybit_mkt('Order Book',localStorage.getItem("asset"),'');
 });
 $("body").delegate(".refresh_interval","click",function(event){
@@ -144,14 +161,18 @@ var local_asset_time_min = '';
 
 function Order_Book() {
     var local_asset_time = new Date();
+    
+    $(".current_crypto_symbol").html(localStorage.getItem("asset"));
     if (local_asset != localStorage.getItem("asset") || local_asset_time.getSeconds() <= 5 ) {
         local_asset = localStorage.getItem("asset");
         bybit_mkt('Query Kline',localStorage.getItem("asset"),'');
-        bybit_mkt('Latest Information for Symbol',localStorage.getItem("asset"),'');
+        //bybit_mkt('Latest Information for Symbol',localStorage.getItem("asset"),'');
 
     } else {
        bybit_mkt('Order Book',localStorage.getItem("asset"),'');
     }
+    bybit_mkt('Latest Information for Symbol',localStorage.getItem("asset"),'');
+
     setTimeout(Order_Book, 3000);
 }
 
@@ -280,7 +301,7 @@ function bybit_mkt(crypto,asset,aisa_options) {
                                 localStorage.setItem("asset",results[i].name);
                                 $(".mkt_option").attr("asset",localStorage.getItem("asset"));  
                             }                            
-                            var query_c_symbols = '<li id="' + results[i].name + '" class="list-group-item d-flex justify-content-between align-items-center get_asset" asset="' + results[i].name + '">' +
+                            var query_c_symbols = '<li id="offers_' + results[i].name + '" class="list-group-item d-flex justify-content-between align-items-center get_asset" asset="' + results[i].name + '">' +
                             '<span class="text-primary">' + results[i].name + '</span>' +
                             '<span class="text-info">' + results[i].status + '</span>' +
                             '<span class="text-warning">' + results[i].base_currency + '</span>' +
@@ -328,10 +349,21 @@ function bybit_mkt(crypto,asset,aisa_options) {
                                 '<span class="text-danger"><small>' + trade_time + '</small></span>'+
                                 '</li>';
                                 if (sell_price_i < 1) {
-                                    $(".bitcoin_balance_price").html("$" + results[i].price);
-                                    localStorage.setItem("sell_price",results[i].price);
-                                    localStorage.setItem("price",results[i].price);
-                                    $(".order_price").val(localStorage.getItem("price"));
+                                    if (mkt_option_clicked == 1) {
+                                        /**$(".bitcoin_balance_price").html("$" + results[i].price);
+                                        localStorage.setItem("sell_price",results[i].price);
+                                        localStorage.setItem("price",results[i].price);
+                                        mysnackbar(localStorage.getItem("price"));
+                                        $(".order_price").val(localStorage.getItem("price")); */
+                                        mkt_option_clicked = 0;
+                                    } else {
+                                        $(".bitcoin_balance_price").html("$" + results[i].price);
+                                        localStorage.setItem("sell_price",results[i].price);
+                                        localStorage.setItem("price",results[i].price);
+                                        //mysnackbar(localStorage.getItem("price"));
+                                        $(".order_price").val(localStorage.getItem("price"));  
+                                    }
+                                    
                                 }
                                 sell_price_i++;
                                 $(".crypto_mkt_sell").append(order_book);
@@ -353,7 +385,7 @@ function bybit_mkt(crypto,asset,aisa_options) {
                             var open_trade_time = "" + open_t_time.getHours() + ":" + open_t_time.getMinutes() + ":" + open_t_time.getSeconds() + "";
                             var asset_info = '<ul id="" class="list-group">'+
                             '<li class="list-group-item d-flex justify-content-between align-items-center bg-soft-secondary" style="height: 10px">'+
-                            '<span class="text-primary position-relative mr-2" title="Symbol">' + results[i].symbol + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-soft-primary">Symbol</span></span>'+                            
+                            '<a class="text-primary position-relative mr-2" title="Symbol" href="#' + results[i].symbol + '">' + results[i].symbol + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-soft-primary">Symbol</span></a>'+                            
                             '<span class="text-info d-none d-xl-block position-relative" title="Interval">' + results[i].interval + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-soft-info">Interval</span></span>'+
                             '<span class="text-info d-none d-xl-block position-relative" title="Open time">' + open_trade_time + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-soft-info">Open time</span></span>'+
                             '<span class="text-primary position-relative mr-2" title="' + results[i].interval + 'Min Open">' + results[i].open + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-soft-primary">' + results[i].interval + 'Min Open</span></span>'+
@@ -384,11 +416,12 @@ function bybit_mkt(crypto,asset,aisa_options) {
                             if (symbol_pre_price != '' || symbol_pre_price != null) {
                                 let price_now = results[i].last_price;
                                 var chan_pri = 0.00;
+                                var chan_pri_chart = "";
                                 if (symbol_pre_price <= price_now) {
                                     var symbol_chan_pri = price_now - symbol_pre_price;
                                     chan_pri = (symbol_chan_pri/symbol_pre_price)*100;
                                     chan_pri = "+" + chan_pri.toFixed(4);
-
+                                    chan_pri_chart = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>';
                                     var bg_ = "bg-soft-success";
                                     var chan_pri_bg = "bg-success";
 
@@ -396,7 +429,7 @@ function bybit_mkt(crypto,asset,aisa_options) {
                                     var symbol_chan_pri = symbol_pre_price - price_now;
                                     chan_pri = (symbol_chan_pri/symbol_pre_price)*100;
                                     chan_pri = "-" + chan_pri.toFixed(4);
-
+                                    chan_pri_chart = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-down"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg>';
                                     var bg_ = "bg-soft-danger";
                                     var chan_pri_bg = "bg-danger";
                                 }
@@ -408,12 +441,12 @@ function bybit_mkt(crypto,asset,aisa_options) {
                             }
                             
                             //leanders_mkt_assets
-                            var leanders_mkt_assets = '<div class="card border-0 mb-5">' +
+                            var leanders_mkt_assets = '<div class="card border-0 mb-5" id="'+ results[i].symbol + '">' +
                             '<ul class="nav nav-pills nav-fill  ' + bg_ + '">' +
                             '<li class="nav-item avatar">' +
                             '<img class="avatar-img" src="https://dynamic-assets.coinbase.com/e785e0181f1a23a30d9476038d9be91e9f6c63959b538eabbc51a1abc8898940383291eede695c3b8dfaa1829a9b57f5a2d0a16b0523580346c6b8fab67af14b/asset_icons/b57ac673f06a4b0338a596817eb0a50ce16e2059f327dc117744449a47915cb2.png" alt="">' +
 
-                            '<a class="nav-link" href="#">'+ results[i].symbol + '</a>' +
+                            '<a class="" href="#">'+ results[i].symbol + '</a>' +
 
                             /**'<a href="#" class="avatar position-relative mt-3">' +
                             '<img class="avatar-img" src="https://www.coinbase.com/price/bitcoin" alt="">' +
@@ -426,15 +459,17 @@ function bybit_mkt(crypto,asset,aisa_options) {
                             '</div>' +
                             '</a>' + */
                             '</li>' +
-                            '<li class="nav-item d-none d-lg-block d-md-block">' +
+                            '<li class="nav-item ">' +
                             '<a class="nav-link" href="#">$'+ results[i].last_price + ' </a>' +
                             '</li>' +
                             '<li class="nav-item d-none d-lg-block d-md-block">' +
                             '<span class="badge ' + chan_pri_bg + '">'+ chan_pri + '%</span>' +
+                            '<span class="">'+ chan_pri_chart + '</span>' +
                             '</li>' +
-                            '<li class="nav-item">' +
+                            '<li class="btn-group" role="group">' +
                             '<a href="#" class="me-0 btn btn-sm btn-soft-success mkt_option" asset="'+ results[i].symbol + '" day_low="'+ results[i].low_price_24h + '" price_open="'+ results[i].bid_price + '" day_high="'+ results[i].high_price_24h + '"  price="'+ results[i].last_price + '" aisa_options="buy">Buy</a>' +
                             '<a href="#" class="me-0 btn btn-sm btn-soft-danger mkt_option" asset="'+ results[i].symbol + '" day_low="'+ results[i].low_price_24h + '" price_open="'+ results[i].bid_price + '" day_high="'+ results[i].high_price_24h + '"  price="'+ results[i].last_price + '" aisa_options="sell">Sell</a>' +
+                            '<a href="#" class="me-0 btn btn-sm btn-soft-info mkt_option" asset="'+ results[i].symbol + '" day_low="'+ results[i].low_price_24h + '" price_open="'+ results[i].bid_price + '" day_high="'+ results[i].high_price_24h + '"  price="'+ results[i].last_price + '" aisa_options="hold">Watch</a>' +
                             '</li>' +
                             '</ul>' +
                             '</div>';
@@ -471,6 +506,7 @@ function account_mkt_balance(aisa_options) {
     
             let lowest_sell_price = localStorage.getItem("sell_price"); //USD
             let btc_balance_fro_usd = (Number(order_usd_quantity)/Number(lowest_sell_price))*1; //BTC
+            //alert(localStorage.getItem("bitcoin_balance"));
             var bitcoin_balance_fro_usd = (Number(localStorage.getItem("bitcoin_balance")) + Number(btc_balance_fro_usd));
     
             bitcoin_balance_fro_usd = bitcoin_balance_fro_usd.toFixed(8);
