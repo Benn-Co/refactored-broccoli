@@ -297,6 +297,7 @@ function bybit_mkt(crypto,asset,aisa_options) {
         success: function searchSuccess(response) {
             try {
                 if (response.ret_msg == "OK") {
+                    $(".current_crypto_symbol").addClass("bg-soft-warning");
                     if (crypto == 'Query Symbol') {
                         var results = response.result;
                         for (let i = 0; i < results.length; i++) {
