@@ -8,6 +8,8 @@ $("body").delegate(".mkt_option","click",function(event){
         $(".order_price").val(localStorage.getItem("price"));
         $(".order_quantity").val(0);
         $(".order_quantity_range").val(0);
+        $(".crypto_mkt_buy").html('');
+        $(".crypto_mkt_sell").html('');
     } 
     localStorage.setItem("asset",$(this).attr('asset'));
     localStorage.setItem("aisa_options",$(this).attr('aisa_options'));
@@ -138,11 +140,16 @@ $("body").delegate(".get_asset","click",function(event){
         $(".order_price").val(0);
         $(".order_quantity").val(0);
         $(".order_quantity_range").val(0);
+        alert($(this).attr('asset'));
     }   
     mkt_option_clicked = 1;
     $(".order_price").val(0);
+    $(".order_quantity").val(0);
+    $(".order_quantity_range").val(0);
 
-    //$(".current_crypto_symbol").html(localStorage.getItem("asset"));  
+    //$(".current_crypto_symbol").html(localStorage.getItem("asset")); 
+    $(".crypto_mkt_buy").html('');
+    $(".crypto_mkt_sell").html(''); 
     bybit_mkt('Order Book',localStorage.getItem("asset"),''); 
     mysnackbar($(this).attr('asset'));
 });
