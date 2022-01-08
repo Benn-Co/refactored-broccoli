@@ -70,32 +70,22 @@ $("body").delegate(".order_book_mkt","click",function(event){
     event.preventDefault();    
        
     if ($(this).attr('order_book_side') =="Buy") {
-        localStorage.setItem("aisa_options","buy");
-        localStorage.setItem("price",$(this).attr('order_book_price'));
-
-    } else {
         localStorage.setItem("aisa_options","sell");
         localStorage.setItem("price",$(this).attr('order_book_price'));
 
-    }
-    ///////////////////////////////////////////////////
-    if (localStorage.getItem("aisa_options") =="buy") {
-        //localStorage.setItem("price",localStorage.getItem("buy_price"));
     } else {
-        //localStorage.setItem("price",localStorage.getItem("sell_price"));
-    }
-    ////////////////////////////////////////////////////
-    //$(".order_price").val(localStorage.getItem("price"));
+        localStorage.setItem("aisa_options","buy");
+        localStorage.setItem("price",$(this).attr('order_book_price'));
 
+    }
+    
     if ($(".order_price").val(localStorage.getItem("price")) == '' || $(".order_price").val(localStorage.getItem("price")) == null) {
         $(".order_price").val(localStorage.getItem("price"));  
     }
     account_mkt_balance(localStorage.getItem("aisa_options"));
-
-    /**var order_price = $(".order_price").val();
-    var order_quantity = $(".account_balance").attr('account_balance');      
-    localStorage.setItem("order_quantity",order_quantity); */
-
+    
+    var order_price = $(".order_price").val();
+    var order_quantity = $(".order_quantity").val();
     if (order_price !== "") {
         $(".order_price").removeClass("is-invalid");
         $(".order_price").addClass("is-valid");        
@@ -138,7 +128,7 @@ $("body").delegate(".gift_send","click",function(event){
 });
 
 $("body").delegate(".get_asset","click",function(event){
-    //event.preventDefault();
+    event.preventDefault();
     localStorage.setItem("asset",$(this).attr('asset'));
     $("#main_mkt").addClass("is-visible");
     $(".mkt_option").attr("asset",localStorage.getItem("asset"));
@@ -153,7 +143,8 @@ $("body").delegate(".get_asset","click",function(event){
     $(".order_price").val(0);
 
     //$(".current_crypto_symbol").html(localStorage.getItem("asset"));  
-    bybit_mkt('Order Book',localStorage.getItem("asset"),'');
+    bybit_mkt('Order Book',localStorage.getItem("asset"),''); 
+    mysnackbar($(this).attr('asset'));
 });
 $("body").delegate(".refresh_interval","click",function(event){
     event.preventDefault();
