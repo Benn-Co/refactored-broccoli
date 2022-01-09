@@ -144,7 +144,7 @@ function login_user(login_email,login_password,login_details_username,login_deta
                     $("#signin_html").hide();
                     $("#index_html").show();
                     $("#pills-account-tab").addClass("d-none");
-
+                    onDeviceReady();
                     /**let fik_path = "dashboard.html";
                     let file_name = window.location.pathname;
                     let text = file_name;
