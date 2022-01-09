@@ -107,7 +107,7 @@
     
                 <!-- Sidebar -->
                 <aside class="sidebar bg-light">
-                    <div class="tab-content h-100" role="tablist">
+                    <div class="tab-content h-100 pb-15 mb-8" role="tablist">
                         <ul class="nav nav-pills mb-3 d-flex justify-content-between align-items-center" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <div class="btn-group" role="group" aria-label="Basic example">
@@ -137,50 +137,18 @@
                             </li>
                             
                         </ul>
+                        <div class="btn-group skills query_symbols_skills">
+                        </div>
                         <!-- Resources - Notices -->
                         <div class="tab-pane fade h-100 show active" id="tab-content-notifications" role="tabpanel">
                             <div class="d-flex flex-column h-100">
                                 <div class="hide-scrollbar">
-                                    <div class="container py-8">                                        
-                                        <div class="raw">
-                                            <div class="btn-group skills query_symbols_skills">
-                                            </div>
-                                            <!-- <div class="dropdown-menu hide-scrollbar" style="height: 20rem;width: 100%;">
-                                                <ul class="list-group query_symbols">
-                                                    
-                                                </ul> 
-                                            </div>-->                                            
-                                        </div>                                    
+                                    <div class="container py-8">                                                                        
                                          
-                                        <!-- Resources -->
-                                        <div class="mb-8">
-                                            <h2 class="fw-bold m-0">Resources</h2>
-                                        </div>
-    
-                                        <!-- Order Price -->
-                                        <div class="mb-6">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <input type="number" class="form-control is-valid order_price" placeholder="Order Price" value="" required>
-                                                    <!-- <div class="valid-feedback">
-                                                        Looks good!
-                                                    </div> -->
-                                                </div>
-                                                <div class="col">
-                                                    <input type="number" class="form-control is-invalid order_quantity" placeholder="Quantity" required>
-                                                    <!-- <div id="validationServer03Feedback" class="invalid-feedback">
-                                                        Quantity.
-                                                    </div> -->
-                                                    <input type="range" class="form-range order_quantity_range" min="0" max="5" step="0.5" id="customRange3">
-                                                </div>                                            
-                                            </div>                                        
-                                        </div>
-    
-                                        <!-- Account Balance -->
+                                        <!-- Resources -->                                        
                                         <div class="card-list">
                                             <div class="card border-0 mb-5">
-                                                <div class="card-body">
-    
+                                                <div class="card-body">    
                                                     <div class="row gx-5">
                                                         <div class="col-auto">
                                                             <!-- user image -->
@@ -218,8 +186,8 @@
                                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
                                                                     </a>
                                                                     <ul class="dropdown-menu">
-                                                                        <li><a class="dropdown-item" href="#">Learn more</a></li>
-                                                                        <li><a class="dropdown-item" href="#">Hide</a></li>
+                                                                        <li><a class="dropdown-item" href="#">Deposit</a></li>
+                                                                        <li><a class="dropdown-item" href="#">Withdraw</a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -228,6 +196,24 @@
                                                 </div>
     
                                                 <div class="card-footer">
+                                                    <!-- Order Price -->
+                                                    <div class="mb-6">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <input type="number" class="form-control is-valid order_price" placeholder="Order Price" value="" required>
+                                                                <!-- <div class="valid-feedback">
+                                                                    Looks good!
+                                                                </div> -->
+                                                            </div>
+                                                            <div class="col">
+                                                                <input type="number" class="form-control is-invalid order_quantity" placeholder="Quantity" required>
+                                                                <!-- <div id="validationServer03Feedback" class="invalid-feedback">
+                                                                    Quantity.
+                                                                </div> -->
+                                                                <input type="range" class="form-range order_quantity_range" min="0" max="5" step="0.5" id="customRange3">
+                                                            </div>                                            
+                                                        </div>                                        
+                                                    </div>
                                                     <div class="row gx-4">
                                                         <div class="col">
                                                             <a href="#" class="btn btn-sm btn-soft-danger w-100 mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="sell">Sell</a>
@@ -239,20 +225,77 @@
                                                 </div>
                                             </div>
                                             <!-- Card -->
+                                            <ul class="nav nav-pills nav-justified" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" data-bs-toggle="pill" href="#create-assets" role="tab" aria-controls="create-assets" aria-selected="true">
+                                                        Cryptos you own
+                                                    </a>
+                                                </li>
     
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-bs-toggle="pill" href="#create-watchlist" role="tab" aria-controls="create-watchlist" aria-selected="true">
+                                                        Your Watchlist
+                                                    </a>
+                                                </li>
+                                            </ul>
+
                                             <!-- Card -->
                                             <div class="card border-0 mb-5">
-                                                <div class="card-body">
-                                                    <div class="col">
-                                                        <div class="d-flex align-items-center mb-2">
-                                                            <h5 class="me-auto mb-0">
-                                                                <a href="#"><span class="extra-small btn btn-sm btn-soft-primary">5,231+</span> customers traded Crypto today</a>
-                                                            </h5>
-                                                            <span class="extra-small text-muted ms-2">08:45 PM</span>
-                                                        </div>                                                        
+                                                <div class="tab-content" role="tablist">
+                                                    <!-- Your assets -->
+                                                    <div class="tab-pane fade show active" id="create-assets" role="tabpanel">
+                                                        <div class="card h-lg-100 overflow-hidden">
+                                                            <ul class="list-group crypto_you_own">
+                                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                                    <span class="text-primary">
+                                                                        <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                            <path fill="#F90" fill-rule="evenodd" d="M23.6408156,14.9046858 C22.0378949,21.3339956 15.5260763,25.2467873 9.09601649,23.6434916 C2.66858193,22.0405708 -1.24420981,15.5283772 0.359460996,9.09944253 C1.96163164,2.66938268 8.47345019,-1.24378409 14.9016348,0.359136628 C21.3313196,1.96205735 25.2437363,8.47500102 23.6408156,14.9046858 L23.6408156,14.9046858 Z M17.2913894,10.2916945 C17.5302898,8.69477443 16.3144103,7.83630799 14.6518582,7.263622 L15.1911657,5.1003916 L13.8744004,4.77223165 L13.3493445,6.87845598 C13.0031826,6.79219679 12.6476448,6.71081312 12.2943571,6.63017953 L12.8231635,4.51007873 L11.5071483,4.18191878 L10.9674658,6.3443991 C10.6809353,6.27914215 10.3996553,6.21463528 10.1266263,6.14675305 L10.1281264,6.14000233 L8.31218301,5.68657903 L7.9618957,7.09297883 C7.9618957,7.09297883 8.93887476,7.31687767 8.91824756,7.33075415 C9.45155436,7.46389333 9.54793963,7.81680592 9.53181291,8.09658572 L8.91749748,10.5609732 C8.9542514,10.5703492 9.00188147,10.5838506 9.05438706,10.6048529 C9.01050739,10.5939767 8.96362739,10.5819754 8.91524724,10.5703492 L8.05415553,14.0225919 C7.98889858,14.1846091 7.82350596,14.427635 7.45071626,14.3353752 C7.46384266,14.3545022 6.49361432,14.0964747 6.49361432,14.0964747 L5.8399197,15.6037603 L7.5534772,16.0309308 C7.87226116,16.1108143 8.18466943,16.1944482 8.49220218,16.2732066 L7.94726915,18.4611896 L9.26253423,18.7893496 L9.80221671,16.624619 C10.161505,16.7221294 10.5102921,16.812139 10.8515785,16.896898 L10.3137712,19.0515025 L11.6305364,19.3796624 L12.1754695,17.1958048 C14.4208336,17.6207251 16.1092634,17.4493318 16.8199641,15.4184905 C17.3926501,13.7833164 16.7914611,12.8400909 15.6100853,12.2250254 C16.4704269,12.0266293 17.1184959,11.460694 17.2913894,10.2916945 L17.2913894,10.2916945 Z M14.2828189,14.5105188 C13.8759006,16.145693 11.1227324,15.2617238 10.2301373,15.0400752 L10.9532143,12.1413915 C11.8458094,12.3641652 14.7081142,12.8052122 14.2828189,14.5105188 L14.2828189,14.5105188 Z M14.6901123,10.268067 C14.3188228,11.7554754 12.0273287,10.9997699 11.2839995,10.8145002 L11.9395694,8.18547018 C12.6828985,8.37073991 15.0767785,8.71652674 14.6901123,10.268067 L14.6901123,10.268067 Z"/>
+                                                                        </svg>
+                                                                        Bitcoin BTC
+                                                                    </span>
+                                                                    <span class="text-success bitcoin_balance_usd">0.00</span>
+                                                                    <span class="text-info bitcoin_balance_price"></span>
+                                                                    <span class="text-warning bitcoin_balance"></span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>                                                
+                                                    </div>
+            
+                                                    <!-- Watchlist -->
+                                                    <div class="tab-pane fade" id="create-watchlist" role="tabpanel">
+                                                        <div class="card h-lg-100 overflow-hidden">
+                                                            <ul class="list-group crypto_wacthlist">
+                                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                                    <span class="text-primary">
+                                                                        <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                            <path fill="#F90" fill-rule="evenodd" d="M23.6408156,14.9046858 C22.0378949,21.3339956 15.5260763,25.2467873 9.09601649,23.6434916 C2.66858193,22.0405708 -1.24420981,15.5283772 0.359460996,9.09944253 C1.96163164,2.66938268 8.47345019,-1.24378409 14.9016348,0.359136628 C21.3313196,1.96205735 25.2437363,8.47500102 23.6408156,14.9046858 L23.6408156,14.9046858 Z M17.2913894,10.2916945 C17.5302898,8.69477443 16.3144103,7.83630799 14.6518582,7.263622 L15.1911657,5.1003916 L13.8744004,4.77223165 L13.3493445,6.87845598 C13.0031826,6.79219679 12.6476448,6.71081312 12.2943571,6.63017953 L12.8231635,4.51007873 L11.5071483,4.18191878 L10.9674658,6.3443991 C10.6809353,6.27914215 10.3996553,6.21463528 10.1266263,6.14675305 L10.1281264,6.14000233 L8.31218301,5.68657903 L7.9618957,7.09297883 C7.9618957,7.09297883 8.93887476,7.31687767 8.91824756,7.33075415 C9.45155436,7.46389333 9.54793963,7.81680592 9.53181291,8.09658572 L8.91749748,10.5609732 C8.9542514,10.5703492 9.00188147,10.5838506 9.05438706,10.6048529 C9.01050739,10.5939767 8.96362739,10.5819754 8.91524724,10.5703492 L8.05415553,14.0225919 C7.98889858,14.1846091 7.82350596,14.427635 7.45071626,14.3353752 C7.46384266,14.3545022 6.49361432,14.0964747 6.49361432,14.0964747 L5.8399197,15.6037603 L7.5534772,16.0309308 C7.87226116,16.1108143 8.18466943,16.1944482 8.49220218,16.2732066 L7.94726915,18.4611896 L9.26253423,18.7893496 L9.80221671,16.624619 C10.161505,16.7221294 10.5102921,16.812139 10.8515785,16.896898 L10.3137712,19.0515025 L11.6305364,19.3796624 L12.1754695,17.1958048 C14.4208336,17.6207251 16.1092634,17.4493318 16.8199641,15.4184905 C17.3926501,13.7833164 16.7914611,12.8400909 15.6100853,12.2250254 C16.4704269,12.0266293 17.1184959,11.460694 17.2913894,10.2916945 L17.2913894,10.2916945 Z M14.2828189,14.5105188 C13.8759006,16.145693 11.1227324,15.2617238 10.2301373,15.0400752 L10.9532143,12.1413915 C11.8458094,12.3641652 14.7081142,12.8052122 14.2828189,14.5105188 L14.2828189,14.5105188 Z M14.6901123,10.268067 C14.3188228,11.7554754 12.0273287,10.9997699 11.2839995,10.8145002 L11.9395694,8.18547018 C12.6828985,8.37073991 15.0767785,8.71652674 14.6901123,10.268067 L14.6901123,10.268067 Z"/>
+                                                                        </svg>
+                                                                        Bitcoin BTC
+                                                                    </span>
+                                                                    <span class="text-warning">-2.48%</span>
+                                                                    <span class="text-info bitcoin_balance_price"></span>
+                                                                    <span class="dropdown ms-5">
+                                                                        <a class="icon text-muted" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                                                                        </a>
+                                                                        <ul class="dropdown-menu">
+                                                                            <li class="btn-group">
+                                                                                <a href="#" class="btn btn-sm btn-soft-success active mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="buy">Buy</a>
+                                                                                <a href="#" class="btn btn-sm btn-soft-danger mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="sell">Sell</a>
+                                                                                <a href="#" class="btn btn-sm btn-soft-primary mkt_option_unwatch" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="hold">Unwatch</a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!-- Card -->
+
+                                            <!-- Card -->
+                                            
                                             <!-- Card -->
     
                                             <!-- Card -->
@@ -519,106 +562,146 @@
                                             </div>
                                             <!-- Card -->
                                         </div>
-                                        <!-- Portfolio Balance -->
-    
-                                        <!-- Your assets -->
-                                        <div class="card-list">
-                                            <div class="card border-0 mb-5">
-                                                <div class="card-body">
-                                                    <h5 class="me-auto mb-0">
-                                                        <a href="#">Cryptos you own</a>
-                                                    </h5>
-                                                </div>
-                                                
-                                                <!-- <ul class="list-group">
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center bg-soft-info">
-                                                        <span class="text-primary">Name</span>
-                                                        <span class="text-success">Balance</span>
-                                                        <span class="text-info">Price</span>
-                                                        <span class="text-warning">Allocation</span>
-                                                    </li>
-                                                </ul> -->
-                                                <ul class="list-group crypto_you_own">
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        <span class="text-primary">
-                                                            <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill="#F90" fill-rule="evenodd" d="M23.6408156,14.9046858 C22.0378949,21.3339956 15.5260763,25.2467873 9.09601649,23.6434916 C2.66858193,22.0405708 -1.24420981,15.5283772 0.359460996,9.09944253 C1.96163164,2.66938268 8.47345019,-1.24378409 14.9016348,0.359136628 C21.3313196,1.96205735 25.2437363,8.47500102 23.6408156,14.9046858 L23.6408156,14.9046858 Z M17.2913894,10.2916945 C17.5302898,8.69477443 16.3144103,7.83630799 14.6518582,7.263622 L15.1911657,5.1003916 L13.8744004,4.77223165 L13.3493445,6.87845598 C13.0031826,6.79219679 12.6476448,6.71081312 12.2943571,6.63017953 L12.8231635,4.51007873 L11.5071483,4.18191878 L10.9674658,6.3443991 C10.6809353,6.27914215 10.3996553,6.21463528 10.1266263,6.14675305 L10.1281264,6.14000233 L8.31218301,5.68657903 L7.9618957,7.09297883 C7.9618957,7.09297883 8.93887476,7.31687767 8.91824756,7.33075415 C9.45155436,7.46389333 9.54793963,7.81680592 9.53181291,8.09658572 L8.91749748,10.5609732 C8.9542514,10.5703492 9.00188147,10.5838506 9.05438706,10.6048529 C9.01050739,10.5939767 8.96362739,10.5819754 8.91524724,10.5703492 L8.05415553,14.0225919 C7.98889858,14.1846091 7.82350596,14.427635 7.45071626,14.3353752 C7.46384266,14.3545022 6.49361432,14.0964747 6.49361432,14.0964747 L5.8399197,15.6037603 L7.5534772,16.0309308 C7.87226116,16.1108143 8.18466943,16.1944482 8.49220218,16.2732066 L7.94726915,18.4611896 L9.26253423,18.7893496 L9.80221671,16.624619 C10.161505,16.7221294 10.5102921,16.812139 10.8515785,16.896898 L10.3137712,19.0515025 L11.6305364,19.3796624 L12.1754695,17.1958048 C14.4208336,17.6207251 16.1092634,17.4493318 16.8199641,15.4184905 C17.3926501,13.7833164 16.7914611,12.8400909 15.6100853,12.2250254 C16.4704269,12.0266293 17.1184959,11.460694 17.2913894,10.2916945 L17.2913894,10.2916945 Z M14.2828189,14.5105188 C13.8759006,16.145693 11.1227324,15.2617238 10.2301373,15.0400752 L10.9532143,12.1413915 C11.8458094,12.3641652 14.7081142,12.8052122 14.2828189,14.5105188 L14.2828189,14.5105188 Z M14.6901123,10.268067 C14.3188228,11.7554754 12.0273287,10.9997699 11.2839995,10.8145002 L11.9395694,8.18547018 C12.6828985,8.37073991 15.0767785,8.71652674 14.6901123,10.268067 L14.6901123,10.268067 Z"/>
-                                                            </svg>
-                                                            Bitcoin BTC
-                                                        </span>
-                                                        <span class="text-success bitcoin_balance_usd">0.00</span>
-                                                        <span class="text-info bitcoin_balance_price"></span>
-                                                        <span class="text-warning bitcoin_balance"></span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <!-- Your assets -->
-    
-                                        <!-- Watchlist -->
-                                        <div class="card-list">
-                                            <div class="card border-0 mb-5">
-                                                <div class="card-body">
-                                                    <h5 class="me-auto mb-0">
-                                                        <a href="#">Your Watchlist</a>
-                                                    </h5>
-                                                </div>
-                                                
-                                                <!-- <ul class="list-group">
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center bg-soft-info">
-                                                        <span class="text-primary">Name</span>
-                                                        <span class="text-warning">Change</span>
-                                                        <span class="text-info">Price</span>
-                                                        <span class="text-secondary">Action</span>
-                                                    </li>
-                                                </ul> -->
-                                                <ul class="list-group crypto_wacthlist">
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        <span class="text-primary">
-                                                            <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill="#F90" fill-rule="evenodd" d="M23.6408156,14.9046858 C22.0378949,21.3339956 15.5260763,25.2467873 9.09601649,23.6434916 C2.66858193,22.0405708 -1.24420981,15.5283772 0.359460996,9.09944253 C1.96163164,2.66938268 8.47345019,-1.24378409 14.9016348,0.359136628 C21.3313196,1.96205735 25.2437363,8.47500102 23.6408156,14.9046858 L23.6408156,14.9046858 Z M17.2913894,10.2916945 C17.5302898,8.69477443 16.3144103,7.83630799 14.6518582,7.263622 L15.1911657,5.1003916 L13.8744004,4.77223165 L13.3493445,6.87845598 C13.0031826,6.79219679 12.6476448,6.71081312 12.2943571,6.63017953 L12.8231635,4.51007873 L11.5071483,4.18191878 L10.9674658,6.3443991 C10.6809353,6.27914215 10.3996553,6.21463528 10.1266263,6.14675305 L10.1281264,6.14000233 L8.31218301,5.68657903 L7.9618957,7.09297883 C7.9618957,7.09297883 8.93887476,7.31687767 8.91824756,7.33075415 C9.45155436,7.46389333 9.54793963,7.81680592 9.53181291,8.09658572 L8.91749748,10.5609732 C8.9542514,10.5703492 9.00188147,10.5838506 9.05438706,10.6048529 C9.01050739,10.5939767 8.96362739,10.5819754 8.91524724,10.5703492 L8.05415553,14.0225919 C7.98889858,14.1846091 7.82350596,14.427635 7.45071626,14.3353752 C7.46384266,14.3545022 6.49361432,14.0964747 6.49361432,14.0964747 L5.8399197,15.6037603 L7.5534772,16.0309308 C7.87226116,16.1108143 8.18466943,16.1944482 8.49220218,16.2732066 L7.94726915,18.4611896 L9.26253423,18.7893496 L9.80221671,16.624619 C10.161505,16.7221294 10.5102921,16.812139 10.8515785,16.896898 L10.3137712,19.0515025 L11.6305364,19.3796624 L12.1754695,17.1958048 C14.4208336,17.6207251 16.1092634,17.4493318 16.8199641,15.4184905 C17.3926501,13.7833164 16.7914611,12.8400909 15.6100853,12.2250254 C16.4704269,12.0266293 17.1184959,11.460694 17.2913894,10.2916945 L17.2913894,10.2916945 Z M14.2828189,14.5105188 C13.8759006,16.145693 11.1227324,15.2617238 10.2301373,15.0400752 L10.9532143,12.1413915 C11.8458094,12.3641652 14.7081142,12.8052122 14.2828189,14.5105188 L14.2828189,14.5105188 Z M14.6901123,10.268067 C14.3188228,11.7554754 12.0273287,10.9997699 11.2839995,10.8145002 L11.9395694,8.18547018 C12.6828985,8.37073991 15.0767785,8.71652674 14.6901123,10.268067 L14.6901123,10.268067 Z"/>
-                                                            </svg>
-                                                            Bitcoin BTC
-                                                        </span>
-                                                        <span class="text-warning">-2.48%</span>
-                                                        <span class="text-info bitcoin_balance_price"></span>
-                                                        <span class="dropdown ms-5">
-                                                            <a class="icon text-muted" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
-                                                            </a>
-                                                            <ul class="dropdown-menu">
-                                                                <li class="btn-group">
-                                                                    <a href="#" class="btn btn-sm btn-soft-success active mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="buy">Buy</a>
-                                                                    <a href="#" class="btn btn-sm btn-soft-danger mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="sell">Sell</a>
-                                                                    <a href="#" class="btn btn-sm btn-soft-primary mkt_option_unwatch" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="hold">Unwatch</a>
-                                                                </li>
-                                                            </ul>
-                                                        </span>
-                                                    </li>
-                                                </ul>                                                
-                                            </div>
-                                        </div>
-                                        <!-- Watchlist -->
-    
-    
+                                        
                                         <!-- gift  -->
+                                        
+                                        <!-- gift  -->
+    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>    
+    
+                        <!-- Assets -->
+                        <div class="tab-pane fade h-100" id="tab-content-create-chat" role="tabpanel">
+                            <div class="d-flex flex-column h-100">
+                                <div class="hide-scrollbar">
+    
+                                    <div class="container py-8">
+    
+                                        <!-- Title -->
+                                        <div class="card border-0 mb-5">
+                                            <div class="card-body">
+                                                <div class="col">
+                                                    <div class="d-flex align-items-center mb-2">
+                                                        <h5 class="me-auto mb-0">
+                                                            <a href="#"><span class="extra-small btn btn-sm btn-soft-primary">5,231+</span> customers traded Crypto today</a>
+                                                        </h5>
+                                                        <span class="extra-small text-muted ms-2">08:45 PM</span>
+                                                    </div>                                                        
+                                                </div>
+                                            </div>
+                                        </div>
+     
+                                        <!-- Trade -->
+                                        <div class="mb-6">
+                                            <div class="mb-5">
+                                                <span>Trade crypto person-to-person in an easy, fast, and secure way.</span>
+                                            </div>
+                                            <div class="mb-6">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <input type="number" class="form-control is-valid order_price" placeholder="Order Price" value="" required>
+                                                        <!-- <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div> -->
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="number" class="form-control is-invalid order_quantity" placeholder="Quantity" required>
+                                                        <!-- <div id="validationServer03Feedback" class="invalid-feedback">
+                                                            Quantity.
+                                                        </div> -->
+                                                        <input type="range" class="form-range order_quantity_range" min="0" max="5" step="0.5" id="customRange3">
+                                                    </div>                                            
+                                                </div>                                        
+                                            </div>
+    
+                                            <ul class="nav nav-pills nav-justified" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active btn btn-sm btn-soft-danger mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="sell" data-bs-toggle="pill" href="#create-chat-info" role="tab" aria-controls="create-chat-info" aria-selected="true">
+                                                        Sell
+                                                    </a>
+                                                </li>
+    
+                                                <li class="nav-item">
+                                                    <a class="nav-link btn btn-sm btn-soft-success mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="buy" data-bs-toggle="pill" href="#create-chat-members" role="tab" aria-controls="create-chat-members" aria-selected="true">
+                                                        Buy
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+    
+                                        <!-- Tabs content -->
+                                        <div class="tab-content" role="tablist">
+
+                                            <!--Buy Order Book-->
+                                            <div class="tab-pane fade show active" id="create-chat-info" role="tabpanel">
+                                                <div class="card h-lg-100 overflow-hidden">
+                                                    <div class="card-header bg-light">
+                                                          <div class="row align-items-center">
+                                                            <h6 class="mb-0">Buy Order Book</h6>                                                
+                                                          </div>                                                    
+                                                    </div>
+                                                    <div class="card-body p-0">
+                                                        <ul id="" class="list-group">
+                                                          <li class="list-group-item d-flex justify-content-between align-items-center bg-soft-success">
+                                                              <span class="text-primary">Symbol</span>
+                                                              <span class="text-info">Price</span>
+                                                              <span class="text-warning">Contracts</span>
+                                                              <span class="text-success">Trade Time </span>
+                                                          </li>
+                                                        </ul>
+                                                        <ul id="" class="list-group crypto_mkt_buy hide-scrollbar" style="height: 300px;">
+                                                          
+                                                        </ul>
+                                                    </div>
+                                                </div>                                                
+                                            </div>
+    
+                                            <!-- Sell Order Book -->
+                                            <div class="tab-pane fade" id="create-chat-members" role="tabpanel">
+                                                <div class="card h-lg-100 overflow-hidden">
+                                                    <div class="card-header bg-light">
+                                                      <div class="row align-items-center">
+                                                        <h6 class="mb-0">Sell Order Book</h6>                                                
+                                                      </div>                                              
+                                                    </div>
+                                                    <div class="card-body p-0">
+                                                        <ul id="" class="list-group">
+                                                            <li class="list-group-item d-flex justify-content-between align-items-center bg-soft-danger">
+                                                                <span class="text-primary">Symbol</span>
+                                                                <span class="text-info">Price</span>
+                                                                <span class="text-warning">Contracts</span>
+                                                                <span class="text-danger">Trade Time </span>
+                                                            </li>
+                                                        </ul>
+                                                        <ul id="" class="list-group crypto_mkt_sell hide-scrollbar" style="height: 300px;">
+                                                            
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Tabs content -->
+
+
                                         <div class="card-list">
                                             <div class="card border-0 mb-5">
                                                 <div class="card-body">
-    
+            
                                                     <div class="row gx-5">
                                                         <div class="col-auto">
                                                             <!-- user image -->
                                                             <a href="#" class="avatar">
                                                                 <div class="username_pic">
-
+            
                                                                 </div>    
                                                                 <div class="badge badge-circle bg-secondary border-outline position-absolute bottom-0 end-0">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                                                 </div>
                                                             </a>
                                                         </div>
-    
+            
                                                         <div class="col">
                                                             <div class="d-flex align-items-center mb-2">
                                                                 <h5 class="me-auto mb-0">
@@ -626,13 +709,13 @@
                                                                 </h5>
                                                                 
                                                             </div>
-    
+            
                                                             <span class="ms-2 text-info">Get $10 in free crypto</span>
-    
+            
                                                         </div>
                                                     </div>
                                                 </div>
-    
+            
                                                 <div class="card-footer">
                                                     <div class="me-auto mb-3">
                                                         Invite a friend to Rebro and you’ll both receive $10 in free Bitcoin when they buy or sell their first $100 on Rebro!
@@ -640,7 +723,7 @@
                                                             <path fill="#F90" fill-rule="evenodd" d="M23.6408156,14.9046858 C22.0378949,21.3339956 15.5260763,25.2467873 9.09601649,23.6434916 C2.66858193,22.0405708 -1.24420981,15.5283772 0.359460996,9.09944253 C1.96163164,2.66938268 8.47345019,-1.24378409 14.9016348,0.359136628 C21.3313196,1.96205735 25.2437363,8.47500102 23.6408156,14.9046858 L23.6408156,14.9046858 Z M17.2913894,10.2916945 C17.5302898,8.69477443 16.3144103,7.83630799 14.6518582,7.263622 L15.1911657,5.1003916 L13.8744004,4.77223165 L13.3493445,6.87845598 C13.0031826,6.79219679 12.6476448,6.71081312 12.2943571,6.63017953 L12.8231635,4.51007873 L11.5071483,4.18191878 L10.9674658,6.3443991 C10.6809353,6.27914215 10.3996553,6.21463528 10.1266263,6.14675305 L10.1281264,6.14000233 L8.31218301,5.68657903 L7.9618957,7.09297883 C7.9618957,7.09297883 8.93887476,7.31687767 8.91824756,7.33075415 C9.45155436,7.46389333 9.54793963,7.81680592 9.53181291,8.09658572 L8.91749748,10.5609732 C8.9542514,10.5703492 9.00188147,10.5838506 9.05438706,10.6048529 C9.01050739,10.5939767 8.96362739,10.5819754 8.91524724,10.5703492 L8.05415553,14.0225919 C7.98889858,14.1846091 7.82350596,14.427635 7.45071626,14.3353752 C7.46384266,14.3545022 6.49361432,14.0964747 6.49361432,14.0964747 L5.8399197,15.6037603 L7.5534772,16.0309308 C7.87226116,16.1108143 8.18466943,16.1944482 8.49220218,16.2732066 L7.94726915,18.4611896 L9.26253423,18.7893496 L9.80221671,16.624619 C10.161505,16.7221294 10.5102921,16.812139 10.8515785,16.896898 L10.3137712,19.0515025 L11.6305364,19.3796624 L12.1754695,17.1958048 C14.4208336,17.6207251 16.1092634,17.4493318 16.8199641,15.4184905 C17.3926501,13.7833164 16.7914611,12.8400909 15.6100853,12.2250254 C16.4704269,12.0266293 17.1184959,11.460694 17.2913894,10.2916945 L17.2913894,10.2916945 Z M14.2828189,14.5105188 C13.8759006,16.145693 11.1227324,15.2617238 10.2301373,15.0400752 L10.9532143,12.1413915 C11.8458094,12.3641652 14.7081142,12.8052122 14.2828189,14.5105188 L14.2828189,14.5105188 Z M14.6901123,10.268067 C14.3188228,11.7554754 12.0273287,10.9997699 11.2839995,10.8145002 L11.9395694,8.18547018 C12.6828985,8.37073991 15.0767785,8.71652674 14.6901123,10.268067 L14.6901123,10.268067 Z"/>
                                                         </svg>
                                                     </div>
-    
+            
                                                     <div class="input-group mb-3">
                                                         <div class="input-group-text">
                                                             <div class="icon icon-lg">
@@ -701,7 +784,7 @@
                                                                 </svg>
                                                             </div>
                                                         </div>
-        
+            
                                                         <input type="email" class="gift_email form-control form-control-lg ps-0" placeholder="Enter Email Address" aria-label="Email...">
                                                     </div>
                                                     <div class="me-auto mb-3">
@@ -720,147 +803,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- gift  -->
-    
-                                    </div>
-                                </div>
-                            </div>
-                        </div>    
-    
-                        <!-- Assets -->
-                        <div class="tab-pane fade h-100" id="tab-content-create-chat" role="tabpanel">
-                            <div class="d-flex flex-column h-100">
-                                <div class="hide-scrollbar">
-    
-                                    <div class="container py-8">
-    
-                                        <!-- Title -->
-                                        <div class="mb-8">
-                                            <h2 class="fw-bold m-0">Assets</h2>
-                                        </div>
-     
-                                        <!-- Trade -->
-                                        <div class="mb-6">
-                                            <div class="mb-5">
-                                                <span>Trade crypto person-to-person in an easy, fast, and secure way.</span>
-                                            </div>
-                                            <div class="btn-group skills query_symbols_skills mb-6">
-                                            </div>
-                                            <div class="mb-6">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <input type="number" class="form-control is-valid order_price" placeholder="Order Price" value="" required>
-                                                        <!-- <div class="valid-feedback">
-                                                            Looks good!
-                                                        </div> -->
-                                                    </div>
-                                                    <div class="col">
-                                                        <input type="number" class="form-control is-invalid order_quantity" placeholder="Quantity" required>
-                                                        <!-- <div id="validationServer03Feedback" class="invalid-feedback">
-                                                            Quantity.
-                                                        </div> -->
-                                                        <input type="range" class="form-range order_quantity_range" min="0" max="5" step="0.5" id="customRange3">
-                                                    </div>                                            
-                                                </div>                                        
-                                            </div>
-    
-                                            <ul class="nav nav-pills nav-justified" role="tablist">
-                                                <li class="nav-item">
-                                                    <a class="nav-link active btn btn-sm btn-soft-danger mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="sell" data-bs-toggle="pill" href="#create-chat-info" role="tab" aria-controls="create-chat-info" aria-selected="true">
-                                                        Sell
-                                                    </a>
-                                                </li>
-    
-                                                <li class="nav-item">
-                                                    <a class="nav-link btn btn-sm btn-soft-success mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="buy" data-bs-toggle="pill" href="#create-chat-members" role="tab" aria-controls="create-chat-members" aria-selected="true">
-                                                        Buy
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-    
-                                        <!-- Tabs content -->
-                                        <div class="tab-content" role="tablist">
-                                            <div class="tab-pane fade show active" id="create-chat-info" role="tabpanel">
-                                                <div class="card h-lg-100 overflow-hidden">
-                                                    <div class="card-header bg-light">
-                                                          <div class="row align-items-center">
-                                                            <div class="col">
-                                                                <h6 class="mb-0">Buy Order Book</h6>
-                                                            </div>
-                                                            <div class="col-auto text-center pe-card">
-                                                                <select class="form-select form-select-sm">
-                                                                  <option>Working Time</option>
-                                                                  <option>Estimated Time</option>
-                                                                  <option>Billable Time</option>
-                                                                </select>
-                                                            </div>                                                
-                                                          </div>                                                    
-                                                    </div>
-                                                    <div class="card-body p-0">
-                                                        <ul id="" class="list-group">
-                                                          <li class="list-group-item d-flex justify-content-between align-items-center bg-soft-success">
-                                                              <span class="text-primary">Symbol</span>
-                                                              <span class="text-info">Price</span>
-                                                              <span class="text-warning">Contracts</span>
-                                                              <span class="text-success">Trade Time </span>
-                                                          </li>
-                                                        </ul>
-                                                        <ul id="" class="list-group crypto_mkt_buy">
-                                                          
-                                                        </ul>
-                                                    </div>
-                                                </div>                                                
-                                            </div>
-    
-                                            <!-- Members -->
-                                            <div class="tab-pane fade" id="create-chat-members" role="tabpanel">
-                                                <div class="card h-lg-100 overflow-hidden">
-                                                    <div class="card-header bg-light">
-                                                      <div class="row align-items-center">
-                                                        <div class="col">
-                                                            <h6 class="mb-0">Sell Order Book</h6>
-                                                        </div>
-                                                        <div class="col-auto text-center pe-card">
-                                                            <select class="form-select form-select-sm">
-                                                              <option>Working Time</option>
-                                                              <option>Estimated Time</option>
-                                                              <option>Billable Time</option>
-                                                            </select>
-                                                        </div>                                                
-                                                      </div>                                              
-                                                    </div>
-                                                    <div class="card-body p-0">
-                                                        <ul id="" class="list-group">
-                                                            <li class="list-group-item d-flex justify-content-between align-items-center bg-soft-danger">
-                                                                <span class="text-primary">Symbol</span>
-                                                                <span class="text-info">Price</span>
-                                                                <span class="text-warning">Contracts</span>
-                                                                <span class="text-danger">Trade Time </span>
-                                                            </li>
-                                                        </ul>
-                                                        <ul id="" class="list-group crypto_mkt_sell">
-                                                            
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Tabs content -->
+
                                     </div>
     
                                 </div>
-    
-                                <!-- Button -->
-                                <div class="container mt-n4 mb-8 position-relative">
-                                    <button class="btn btn-lg btn-primary w-100 d-flex align-items-center" type="button">
-                                        Start chat
-                                        <span class="icon ms-auto">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                        </span>
-                                    </button>
-                                </div>
-                                <!-- Button -->
+                                
                             </div>
                         </div>
     
@@ -2279,6 +2226,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </aside>
                 <!-- Sidebar -->
@@ -2388,29 +2336,30 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Divider -->
-                                    <div class="message-divider">
-                                        <h4 class="card-title">Buy or Sell Crypto  Everywhere</h4>
-                                        <small class="text-muted">Where people buy and sell crypto on their own terms, using any payment method.</small>
-                                        <div class="row">
-                                            <div class="col">
-                                                <input type="number" class="form-control is-valid order_price" placeholder="Order Price" value="" required>
-                                                <!-- <div class="valid-feedback">
-                                                    Looks good!
-                                                </div> -->
-                                            </div>
-                                            <div class="col">
-                                                <input type="number" class="form-control is-invalid order_quantity" placeholder="Quantity" required>
-                                                <!-- <div id="validationServer03Feedback" class="invalid-feedback">
-                                                    Quantity.
-                                                </div> -->
-                                                <input type="range" class="form-range order_quantity_range" min="0" max="5" step="0.5" id="customRange3">
-
-                                            </div>                                            
-                                        </div>                                            
-                                    </div>
-                                    <div id="oder_book" class="py-1 d-none">                                        
+                                    
+                                    
+                                    <div id="oder_book" class="py-1 d-none"> 
+                                        <!-- Divider -->
+                                        <div class="message-divider">
+                                            <h4 class="card-title">Buy or Sell Crypto  Everywhere</h4>
+                                            <small class="text-muted">Where people buy and sell crypto on their own terms, using any payment method.</small>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <input type="number" class="form-control is-valid order_price" placeholder="Order Price" value="" required>
+                                                    <!-- <div class="valid-feedback">
+                                                        Looks good!
+                                                    </div> -->
+                                                </div>
+                                                <div class="col">
+                                                    <input type="number" class="form-control is-invalid order_quantity" placeholder="Quantity" required>
+                                                    <!-- <div id="validationServer03Feedback" class="invalid-feedback">
+                                                        Quantity.
+                                                    </div> -->
+                                                    <input type="range" class="form-range order_quantity_range" min="0" max="5" step="0.5" id="customRange3">
     
+                                                </div>                                            
+                                            </div>                                            
+                                        </div>
                                         <div class="row g-0">
                                             <div class="col-lg-6 pe-lg-2 mb-3">
                                               <div class="card h-lg-100 overflow-hidden">
@@ -2475,197 +2424,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <!-- <div class="card border-0 mb-5 bg-light">
-                                            <ul class="nav nav-pills nav-fill">
-                                                <li class="nav-item">
-                                                    <a href="#" class="avatar position-relative mt-3">                                                  
-                                                        <img class="avatar-img" src="https://images.coinbase.com/avatar?h=615b0a8e30d43c00a2869VC0Hvux7ZlkGQKEhxD8d2SLZVdijiw176MpoXlU%0AieR9&s=128" alt="">
-                                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99</span>
-    
-                                                        <div class="badge-circle bg-transparent position-absolute bottom-0 end-0">
-                                                            <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill="#F90" fill-rule="evenodd" d="M23.6408156,14.9046858 C22.0378949,21.3339956 15.5260763,25.2467873 9.09601649,23.6434916 C2.66858193,22.0405708 -1.24420981,15.5283772 0.359460996,9.09944253 C1.96163164,2.66938268 8.47345019,-1.24378409 14.9016348,0.359136628 C21.3313196,1.96205735 25.2437363,8.47500102 23.6408156,14.9046858 L23.6408156,14.9046858 Z M17.2913894,10.2916945 C17.5302898,8.69477443 16.3144103,7.83630799 14.6518582,7.263622 L15.1911657,5.1003916 L13.8744004,4.77223165 L13.3493445,6.87845598 C13.0031826,6.79219679 12.6476448,6.71081312 12.2943571,6.63017953 L12.8231635,4.51007873 L11.5071483,4.18191878 L10.9674658,6.3443991 C10.6809353,6.27914215 10.3996553,6.21463528 10.1266263,6.14675305 L10.1281264,6.14000233 L8.31218301,5.68657903 L7.9618957,7.09297883 C7.9618957,7.09297883 8.93887476,7.31687767 8.91824756,7.33075415 C9.45155436,7.46389333 9.54793963,7.81680592 9.53181291,8.09658572 L8.91749748,10.5609732 C8.9542514,10.5703492 9.00188147,10.5838506 9.05438706,10.6048529 C9.01050739,10.5939767 8.96362739,10.5819754 8.91524724,10.5703492 L8.05415553,14.0225919 C7.98889858,14.1846091 7.82350596,14.427635 7.45071626,14.3353752 C7.46384266,14.3545022 6.49361432,14.0964747 6.49361432,14.0964747 L5.8399197,15.6037603 L7.5534772,16.0309308 C7.87226116,16.1108143 8.18466943,16.1944482 8.49220218,16.2732066 L7.94726915,18.4611896 L9.26253423,18.7893496 L9.80221671,16.624619 C10.161505,16.7221294 10.5102921,16.812139 10.8515785,16.896898 L10.3137712,19.0515025 L11.6305364,19.3796624 L12.1754695,17.1958048 C14.4208336,17.6207251 16.1092634,17.4493318 16.8199641,15.4184905 C17.3926501,13.7833164 16.7914611,12.8400909 15.6100853,12.2250254 C16.4704269,12.0266293 17.1184959,11.460694 17.2913894,10.2916945 L17.2913894,10.2916945 Z M14.2828189,14.5105188 C13.8759006,16.145693 11.1227324,15.2617238 10.2301373,15.0400752 L10.9532143,12.1413915 C11.8458094,12.3641652 14.7081142,12.8052122 14.2828189,14.5105188 L14.2828189,14.5105188 Z M14.6901123,10.268067 C14.3188228,11.7554754 12.0273287,10.9997699 11.2839995,10.8145002 L11.9395694,8.18547018 C12.6828985,8.37073991 15.0767785,8.71652674 14.6901123,10.268067 L14.6901123,10.268067 Z"/>
-                                                            </svg>
-                                                        </div>
-                                                    </a>
-                                                    <span class="bottom-0 ms-0">0 trades</span>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Bank transfer</a>
-                                                    <ul class="dropdown-menu hide-scrollbar flex-1 h-3" style="height: 250px;">
-                                                      <li><a class="dropdown-item active" href="#">Bank transfer</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Paypal</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Visa/Credit Card</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Western union</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="nav-item d-none d-lg-block d-md-block">
-                                                  <a class="nav-link" href="#">100 - 1,000 USD</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <span class="nav-link me-0">$3,959.01 <span class="badge bg-soft-success">-0.1%</span></span>                                                
-                                                    <a href="#" class="me-0 btn btn-sm btn-soft-success mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="buy">Buy</a>
-                                                </li>
-                                            </ul>
-                                        </div> -->
-                                        
-    
-                                        <!-- <div class="card border-0 mb-5 bg-soft-info">
-                                            <ul class="nav nav-pills nav-fill bg-transparent">
-                                                <li class="nav-item">
-                                                    <span class="nav-link me-0">$3,959.01 <span class="badge bg-soft-success">+0.1%</span></span>                                                
-                                                    <a href="#" class="btn btn-sm btn-soft-danger mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="sell">Sell</a>
-                                                </li>                                                
-                                                <li class="nav-item">
-                                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Bank transfer</a>
-                                                    <ul class="dropdown-menu hide-scrollbar flex-1 h-3" style="height: 250px;">
-                                                      <li><a class="dropdown-item active" href="#">Bank transfer</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Paypal</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Visa/Credit Card</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Western union</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="nav-item d-none d-lg-block d-md-block">
-                                                  <a class="nav-link" href="#">100 - 1,000 USD</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a href="#" class="avatar position-relative mt-3">                                                  
-                                                        <img class="avatar-img" src="https://images.coinbase.com/avatar?h=615b0a8e30d43c00a2869VC0Hvux7ZlkGQKEhxD8d2SLZVdijiw176MpoXlU%0AieR9&s=128" alt="">
-                                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99</span>
-    
-                                                        <div class="badge-circle bg-transparent position-absolute bottom-0 end-0">
-                                                            <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill="#F90" fill-rule="evenodd" d="M23.6408156,14.9046858 C22.0378949,21.3339956 15.5260763,25.2467873 9.09601649,23.6434916 C2.66858193,22.0405708 -1.24420981,15.5283772 0.359460996,9.09944253 C1.96163164,2.66938268 8.47345019,-1.24378409 14.9016348,0.359136628 C21.3313196,1.96205735 25.2437363,8.47500102 23.6408156,14.9046858 L23.6408156,14.9046858 Z M17.2913894,10.2916945 C17.5302898,8.69477443 16.3144103,7.83630799 14.6518582,7.263622 L15.1911657,5.1003916 L13.8744004,4.77223165 L13.3493445,6.87845598 C13.0031826,6.79219679 12.6476448,6.71081312 12.2943571,6.63017953 L12.8231635,4.51007873 L11.5071483,4.18191878 L10.9674658,6.3443991 C10.6809353,6.27914215 10.3996553,6.21463528 10.1266263,6.14675305 L10.1281264,6.14000233 L8.31218301,5.68657903 L7.9618957,7.09297883 C7.9618957,7.09297883 8.93887476,7.31687767 8.91824756,7.33075415 C9.45155436,7.46389333 9.54793963,7.81680592 9.53181291,8.09658572 L8.91749748,10.5609732 C8.9542514,10.5703492 9.00188147,10.5838506 9.05438706,10.6048529 C9.01050739,10.5939767 8.96362739,10.5819754 8.91524724,10.5703492 L8.05415553,14.0225919 C7.98889858,14.1846091 7.82350596,14.427635 7.45071626,14.3353752 C7.46384266,14.3545022 6.49361432,14.0964747 6.49361432,14.0964747 L5.8399197,15.6037603 L7.5534772,16.0309308 C7.87226116,16.1108143 8.18466943,16.1944482 8.49220218,16.2732066 L7.94726915,18.4611896 L9.26253423,18.7893496 L9.80221671,16.624619 C10.161505,16.7221294 10.5102921,16.812139 10.8515785,16.896898 L10.3137712,19.0515025 L11.6305364,19.3796624 L12.1754695,17.1958048 C14.4208336,17.6207251 16.1092634,17.4493318 16.8199641,15.4184905 C17.3926501,13.7833164 16.7914611,12.8400909 15.6100853,12.2250254 C16.4704269,12.0266293 17.1184959,11.460694 17.2913894,10.2916945 L17.2913894,10.2916945 Z M14.2828189,14.5105188 C13.8759006,16.145693 11.1227324,15.2617238 10.2301373,15.0400752 L10.9532143,12.1413915 C11.8458094,12.3641652 14.7081142,12.8052122 14.2828189,14.5105188 L14.2828189,14.5105188 Z M14.6901123,10.268067 C14.3188228,11.7554754 12.0273287,10.9997699 11.2839995,10.8145002 L11.9395694,8.18547018 C12.6828985,8.37073991 15.0767785,8.71652674 14.6901123,10.268067 L14.6901123,10.268067 Z"/>
-                                                            </svg>
-                                                        </div>
-                                                    </a>
-                                                    <span class="bottom-0 ms-0">0 trades</span>
-                                                </li>
-                                            </ul>
-                                        </div> -->
-                                        
-                                        
-                                        <!-- <div class="card border-0 mb-5 bg-light">
-                                            <ul class="nav nav-pills nav-fill">
-                                                <li class="nav-item">
-                                                    <a href="#" class="avatar position-relative mt-3">                                                  
-                                                        <img class="avatar-img" src="https://images.coinbase.com/avatar?h=615b0a8e30d43c00a2869VC0Hvux7ZlkGQKEhxD8d2SLZVdijiw176MpoXlU%0AieR9&s=128" alt="">
-                                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99</span>
-    
-                                                        <div class="badge-circle bg-transparent position-absolute bottom-0 end-0">
-                                                            <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill="#F90" fill-rule="evenodd" d="M23.6408156,14.9046858 C22.0378949,21.3339956 15.5260763,25.2467873 9.09601649,23.6434916 C2.66858193,22.0405708 -1.24420981,15.5283772 0.359460996,9.09944253 C1.96163164,2.66938268 8.47345019,-1.24378409 14.9016348,0.359136628 C21.3313196,1.96205735 25.2437363,8.47500102 23.6408156,14.9046858 L23.6408156,14.9046858 Z M17.2913894,10.2916945 C17.5302898,8.69477443 16.3144103,7.83630799 14.6518582,7.263622 L15.1911657,5.1003916 L13.8744004,4.77223165 L13.3493445,6.87845598 C13.0031826,6.79219679 12.6476448,6.71081312 12.2943571,6.63017953 L12.8231635,4.51007873 L11.5071483,4.18191878 L10.9674658,6.3443991 C10.6809353,6.27914215 10.3996553,6.21463528 10.1266263,6.14675305 L10.1281264,6.14000233 L8.31218301,5.68657903 L7.9618957,7.09297883 C7.9618957,7.09297883 8.93887476,7.31687767 8.91824756,7.33075415 C9.45155436,7.46389333 9.54793963,7.81680592 9.53181291,8.09658572 L8.91749748,10.5609732 C8.9542514,10.5703492 9.00188147,10.5838506 9.05438706,10.6048529 C9.01050739,10.5939767 8.96362739,10.5819754 8.91524724,10.5703492 L8.05415553,14.0225919 C7.98889858,14.1846091 7.82350596,14.427635 7.45071626,14.3353752 C7.46384266,14.3545022 6.49361432,14.0964747 6.49361432,14.0964747 L5.8399197,15.6037603 L7.5534772,16.0309308 C7.87226116,16.1108143 8.18466943,16.1944482 8.49220218,16.2732066 L7.94726915,18.4611896 L9.26253423,18.7893496 L9.80221671,16.624619 C10.161505,16.7221294 10.5102921,16.812139 10.8515785,16.896898 L10.3137712,19.0515025 L11.6305364,19.3796624 L12.1754695,17.1958048 C14.4208336,17.6207251 16.1092634,17.4493318 16.8199641,15.4184905 C17.3926501,13.7833164 16.7914611,12.8400909 15.6100853,12.2250254 C16.4704269,12.0266293 17.1184959,11.460694 17.2913894,10.2916945 L17.2913894,10.2916945 Z M14.2828189,14.5105188 C13.8759006,16.145693 11.1227324,15.2617238 10.2301373,15.0400752 L10.9532143,12.1413915 C11.8458094,12.3641652 14.7081142,12.8052122 14.2828189,14.5105188 L14.2828189,14.5105188 Z M14.6901123,10.268067 C14.3188228,11.7554754 12.0273287,10.9997699 11.2839995,10.8145002 L11.9395694,8.18547018 C12.6828985,8.37073991 15.0767785,8.71652674 14.6901123,10.268067 L14.6901123,10.268067 Z"/>
-                                                            </svg>
-                                                        </div>
-                                                    </a>
-                                                    <span class="bottom-0 ms-0">0 trades</span>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Bank transfer</a>
-                                                    <ul class="dropdown-menu hide-scrollbar flex-1 h-3" style="height: 250px;">
-                                                      <li><a class="dropdown-item active" href="#">Bank transfer</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Paypal</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Visa/Credit Card</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Western union</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="nav-item d-none d-lg-block d-md-block">
-                                                  <a class="nav-link" href="#">100 - 1,000 USD</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <span class="nav-link me-0">$3,959.01 <span class="badge bg-soft-success">-0.1%</span></span>                                                
-                                                    <a href="#" class="me-0 btn btn-sm btn-soft-success mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="buy">Buy</a>
-                                                </li>
-                                            </ul>
-                                        </div> -->
-                                        
-    
-                                        <!-- <div class="card border-0 mb-5 bg-soft-info">
-                                            <ul class="nav nav-pills nav-fill bg-transparent">
-                                                <li class="nav-item">
-                                                    <span class="nav-link me-0">$3,959.01 <span class="badge bg-soft-success">+0.1%</span></span>                                                
-                                                    <a href="#" class="btn btn-sm btn-soft-danger mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="sell">Sell</a>
-                                                </li>                                                
-                                                <li class="nav-item">
-                                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Bank transfer</a>
-                                                    <ul class="dropdown-menu hide-scrollbar flex-1 h-3" style="height: 250px;">
-                                                      <li><a class="dropdown-item active" href="#">Bank transfer</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Paypal</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Visa/Credit Card</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Western union</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="nav-item d-none d-lg-block d-md-block">
-                                                  <a class="nav-link" href="#">100 - 1,000 USD</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a href="#" class="avatar position-relative mt-3">                                                  
-                                                        <img class="avatar-img" src="https://images.coinbase.com/avatar?h=615b0a8e30d43c00a2869VC0Hvux7ZlkGQKEhxD8d2SLZVdijiw176MpoXlU%0AieR9&s=128" alt="">
-                                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99</span>
-    
-                                                        <div class="badge-circle bg-transparent position-absolute bottom-0 end-0">
-                                                            <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill="#F90" fill-rule="evenodd" d="M23.6408156,14.9046858 C22.0378949,21.3339956 15.5260763,25.2467873 9.09601649,23.6434916 C2.66858193,22.0405708 -1.24420981,15.5283772 0.359460996,9.09944253 C1.96163164,2.66938268 8.47345019,-1.24378409 14.9016348,0.359136628 C21.3313196,1.96205735 25.2437363,8.47500102 23.6408156,14.9046858 L23.6408156,14.9046858 Z M17.2913894,10.2916945 C17.5302898,8.69477443 16.3144103,7.83630799 14.6518582,7.263622 L15.1911657,5.1003916 L13.8744004,4.77223165 L13.3493445,6.87845598 C13.0031826,6.79219679 12.6476448,6.71081312 12.2943571,6.63017953 L12.8231635,4.51007873 L11.5071483,4.18191878 L10.9674658,6.3443991 C10.6809353,6.27914215 10.3996553,6.21463528 10.1266263,6.14675305 L10.1281264,6.14000233 L8.31218301,5.68657903 L7.9618957,7.09297883 C7.9618957,7.09297883 8.93887476,7.31687767 8.91824756,7.33075415 C9.45155436,7.46389333 9.54793963,7.81680592 9.53181291,8.09658572 L8.91749748,10.5609732 C8.9542514,10.5703492 9.00188147,10.5838506 9.05438706,10.6048529 C9.01050739,10.5939767 8.96362739,10.5819754 8.91524724,10.5703492 L8.05415553,14.0225919 C7.98889858,14.1846091 7.82350596,14.427635 7.45071626,14.3353752 C7.46384266,14.3545022 6.49361432,14.0964747 6.49361432,14.0964747 L5.8399197,15.6037603 L7.5534772,16.0309308 C7.87226116,16.1108143 8.18466943,16.1944482 8.49220218,16.2732066 L7.94726915,18.4611896 L9.26253423,18.7893496 L9.80221671,16.624619 C10.161505,16.7221294 10.5102921,16.812139 10.8515785,16.896898 L10.3137712,19.0515025 L11.6305364,19.3796624 L12.1754695,17.1958048 C14.4208336,17.6207251 16.1092634,17.4493318 16.8199641,15.4184905 C17.3926501,13.7833164 16.7914611,12.8400909 15.6100853,12.2250254 C16.4704269,12.0266293 17.1184959,11.460694 17.2913894,10.2916945 L17.2913894,10.2916945 Z M14.2828189,14.5105188 C13.8759006,16.145693 11.1227324,15.2617238 10.2301373,15.0400752 L10.9532143,12.1413915 C11.8458094,12.3641652 14.7081142,12.8052122 14.2828189,14.5105188 L14.2828189,14.5105188 Z M14.6901123,10.268067 C14.3188228,11.7554754 12.0273287,10.9997699 11.2839995,10.8145002 L11.9395694,8.18547018 C12.6828985,8.37073991 15.0767785,8.71652674 14.6901123,10.268067 L14.6901123,10.268067 Z"/>
-                                                            </svg>
-                                                        </div>
-                                                    </a>
-                                                    <span class="bottom-0 ms-0">0 trades</span>
-                                                </li>
-                                            </ul>
-                                        </div> -->
-                                        
-    
-                                        <!-- <div class="card border-0 mb-5 bg-light">
-                                            <ul class="nav nav-pills nav-fill">
-                                                <li class="nav-item">
-                                                    <a href="#" class="avatar position-relative mt-3">                                                  
-                                                        <img class="avatar-img" src="https://images.coinbase.com/avatar?h=615b0a8e30d43c00a2869VC0Hvux7ZlkGQKEhxD8d2SLZVdijiw176MpoXlU%0AieR9&s=128" alt="">
-                                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99</span>
-    
-                                                        <div class="badge-circle bg-transparent position-absolute bottom-0 end-0">
-                                                            <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill="#F90" fill-rule="evenodd" d="M23.6408156,14.9046858 C22.0378949,21.3339956 15.5260763,25.2467873 9.09601649,23.6434916 C2.66858193,22.0405708 -1.24420981,15.5283772 0.359460996,9.09944253 C1.96163164,2.66938268 8.47345019,-1.24378409 14.9016348,0.359136628 C21.3313196,1.96205735 25.2437363,8.47500102 23.6408156,14.9046858 L23.6408156,14.9046858 Z M17.2913894,10.2916945 C17.5302898,8.69477443 16.3144103,7.83630799 14.6518582,7.263622 L15.1911657,5.1003916 L13.8744004,4.77223165 L13.3493445,6.87845598 C13.0031826,6.79219679 12.6476448,6.71081312 12.2943571,6.63017953 L12.8231635,4.51007873 L11.5071483,4.18191878 L10.9674658,6.3443991 C10.6809353,6.27914215 10.3996553,6.21463528 10.1266263,6.14675305 L10.1281264,6.14000233 L8.31218301,5.68657903 L7.9618957,7.09297883 C7.9618957,7.09297883 8.93887476,7.31687767 8.91824756,7.33075415 C9.45155436,7.46389333 9.54793963,7.81680592 9.53181291,8.09658572 L8.91749748,10.5609732 C8.9542514,10.5703492 9.00188147,10.5838506 9.05438706,10.6048529 C9.01050739,10.5939767 8.96362739,10.5819754 8.91524724,10.5703492 L8.05415553,14.0225919 C7.98889858,14.1846091 7.82350596,14.427635 7.45071626,14.3353752 C7.46384266,14.3545022 6.49361432,14.0964747 6.49361432,14.0964747 L5.8399197,15.6037603 L7.5534772,16.0309308 C7.87226116,16.1108143 8.18466943,16.1944482 8.49220218,16.2732066 L7.94726915,18.4611896 L9.26253423,18.7893496 L9.80221671,16.624619 C10.161505,16.7221294 10.5102921,16.812139 10.8515785,16.896898 L10.3137712,19.0515025 L11.6305364,19.3796624 L12.1754695,17.1958048 C14.4208336,17.6207251 16.1092634,17.4493318 16.8199641,15.4184905 C17.3926501,13.7833164 16.7914611,12.8400909 15.6100853,12.2250254 C16.4704269,12.0266293 17.1184959,11.460694 17.2913894,10.2916945 L17.2913894,10.2916945 Z M14.2828189,14.5105188 C13.8759006,16.145693 11.1227324,15.2617238 10.2301373,15.0400752 L10.9532143,12.1413915 C11.8458094,12.3641652 14.7081142,12.8052122 14.2828189,14.5105188 L14.2828189,14.5105188 Z M14.6901123,10.268067 C14.3188228,11.7554754 12.0273287,10.9997699 11.2839995,10.8145002 L11.9395694,8.18547018 C12.6828985,8.37073991 15.0767785,8.71652674 14.6901123,10.268067 L14.6901123,10.268067 Z"/>
-                                                            </svg>
-                                                        </div>
-                                                    </a>
-                                                    <span class="bottom-0 ms-0">0 trades</span>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Bank transfer</a>
-                                                    <ul class="dropdown-menu hide-scrollbar flex-1 h-3" style="height: 250px;">
-                                                      <li><a class="dropdown-item active" href="#">Bank transfer</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Paypal</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Visa/Credit Card</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Western union</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="nav-item d-none d-lg-block d-md-block">
-                                                  <a class="nav-link" href="#">100 - 1,000 USD</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <span class="nav-link me-0">$3,959.01 <span class="badge bg-soft-success">-0.1%</span></span>                                                
-                                                    <a href="#" class="me-0 btn btn-sm btn-soft-success mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="buy">Buy</a>
-                                                </li>
-                                            </ul>
-                                        </div> -->
-                                        
-    
                                         <!-- <div class="card border-0 mb-5 bg-soft-info">
                                             <ul class="nav nav-pills nav-fill bg-transparent">
                                                 <li class="nav-item">
@@ -2705,46 +2463,10 @@
                                         
     
                                     </div>
-                                    <div id="leanders_mkt" class="py-1">
-                                         <!--<div class="card">
-                                            <div class="card-header">
-                                                Featured
-                                            </div>
-                                            <div class="card-body">
-                                                <div id="chartContainer" style="height: 300px; width: 100%;"></div>
-                                            </div>
-                                            <div class="card-footer text-muted">
-                                                2 days ago
-                                            </div>
-                                        </div> -->
-                                        
+                                    <div id="leanders_mkt" class="py-1">                                        
                                         <div class="row g-0 leanders_mkt_assets">
 
-                                        </div>
-                                        <!-- <div class="card border-0 mb-5 bg-light">
-                                            <ul class="nav nav-pills nav-fill">
-                                                <li class="nav-item">
-                                                    <a href="#" class="avatar position-relative mt-3">                                                  
-                                                        <img class="avatar-img" src="https://images.coinbase.com/avatar?h=615b0a8e30d43c00a2869VC0Hvux7ZlkGQKEhxD8d2SLZVdijiw176MpoXlU%0AieR9&s=128" alt="">
-                                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99</span>
-    
-                                                        <div class="badge-circle bg-transparent position-absolute bottom-0 end-0">
-                                                            <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill="#F90" fill-rule="evenodd" d="M23.6408156,14.9046858 C22.0378949,21.3339956 15.5260763,25.2467873 9.09601649,23.6434916 C2.66858193,22.0405708 -1.24420981,15.5283772 0.359460996,9.09944253 C1.96163164,2.66938268 8.47345019,-1.24378409 14.9016348,0.359136628 C21.3313196,1.96205735 25.2437363,8.47500102 23.6408156,14.9046858 L23.6408156,14.9046858 Z M17.2913894,10.2916945 C17.5302898,8.69477443 16.3144103,7.83630799 14.6518582,7.263622 L15.1911657,5.1003916 L13.8744004,4.77223165 L13.3493445,6.87845598 C13.0031826,6.79219679 12.6476448,6.71081312 12.2943571,6.63017953 L12.8231635,4.51007873 L11.5071483,4.18191878 L10.9674658,6.3443991 C10.6809353,6.27914215 10.3996553,6.21463528 10.1266263,6.14675305 L10.1281264,6.14000233 L8.31218301,5.68657903 L7.9618957,7.09297883 C7.9618957,7.09297883 8.93887476,7.31687767 8.91824756,7.33075415 C9.45155436,7.46389333 9.54793963,7.81680592 9.53181291,8.09658572 L8.91749748,10.5609732 C8.9542514,10.5703492 9.00188147,10.5838506 9.05438706,10.6048529 C9.01050739,10.5939767 8.96362739,10.5819754 8.91524724,10.5703492 L8.05415553,14.0225919 C7.98889858,14.1846091 7.82350596,14.427635 7.45071626,14.3353752 C7.46384266,14.3545022 6.49361432,14.0964747 6.49361432,14.0964747 L5.8399197,15.6037603 L7.5534772,16.0309308 C7.87226116,16.1108143 8.18466943,16.1944482 8.49220218,16.2732066 L7.94726915,18.4611896 L9.26253423,18.7893496 L9.80221671,16.624619 C10.161505,16.7221294 10.5102921,16.812139 10.8515785,16.896898 L10.3137712,19.0515025 L11.6305364,19.3796624 L12.1754695,17.1958048 C14.4208336,17.6207251 16.1092634,17.4493318 16.8199641,15.4184905 C17.3926501,13.7833164 16.7914611,12.8400909 15.6100853,12.2250254 C16.4704269,12.0266293 17.1184959,11.460694 17.2913894,10.2916945 L17.2913894,10.2916945 Z M14.2828189,14.5105188 C13.8759006,16.145693 11.1227324,15.2617238 10.2301373,15.0400752 L10.9532143,12.1413915 C11.8458094,12.3641652 14.7081142,12.8052122 14.2828189,14.5105188 L14.2828189,14.5105188 Z M14.6901123,10.268067 C14.3188228,11.7554754 12.0273287,10.9997699 11.2839995,10.8145002 L11.9395694,8.18547018 C12.6828985,8.37073991 15.0767785,8.71652674 14.6901123,10.268067 L14.6901123,10.268067 Z"/>
-                                                            </svg>
-                                                        </div>
-                                                    </a>
-                                                </li>                                                
-                                                <li class="nav-item d-none d-lg-block d-md-block">
-                                                  <a class="nav-link" href="#">100 - 1,000 USD</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <span class="nav-link me-0">$3,959.01 <span class="badge bg-soft-success">-0.1%</span></span>                                                
-                                                    <a href="#" class="me-0 btn btn-sm btn-soft-success mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="buy">Buy</a>
-                                                </li>
-                                            </ul>
-                                        </div> -->
-                                        
+                                        </div>                                        
                                     </div>
                                 </div>
                             </div>
@@ -2945,8 +2667,10 @@
                             </ul>
                             <!-- List -->
     
+                            
+
                             <hr class="hr-bold modal-gx-n my-0">
-    
+
                             <!-- List -->
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
