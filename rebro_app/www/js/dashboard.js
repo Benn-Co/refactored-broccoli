@@ -220,7 +220,7 @@ function send_gift_email(gift_email,username) {
             try {
                 if (response.message == "success") {
                     mysnackbar(response.validate_message);
-
+                    $(".gift_email").val("");
                     //$("#code_email").html(forgot_login_email);
                     /**if (response.validate_message == 'Your mail has been sent successfully.') {
                         //$("#forgot").removeClass("active");
