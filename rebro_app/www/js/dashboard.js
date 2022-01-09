@@ -354,9 +354,13 @@ function bybit_mkt(crypto,asset,aisa_options) {
                             }                                                        
                         }
                         if (crypto_symbol === localStorage.getItem("asset")) {
-
+                            var crypto_asset_balance = localStorage.getItem("asset");
+                            crypto_asset_balance = "" + crypto_asset_balance + "_balance";
+                            if(localStorage.getItem(crypto_asset_balance) == null) {
+                                localStorage.setItem(crypto_asset_balance,0);//BTC
+                            }
                             let highest_buy_price = localStorage.getItem("buy_price");//USD
-                            let BTC_balance = localStorage.getItem("bitcoin_balance");//BTC
+                            let BTC_balance = localStorage.getItem(crypto_asset_balance);//BTC
                             $(".bitcoin_balance").html(BTC_balance);
                         
                             let USD_balance = (Number(BTC_balance)/1)*Number(highest_buy_price); //USD
@@ -365,7 +369,8 @@ function bybit_mkt(crypto,asset,aisa_options) {
                         
                             var usd_account_balance = (Number(localStorage.getItem("account_balance")) + Number(USD_balance));
                             usd_account_balance = usd_account_balance.toFixed(2);
-                            $(".account_balance").html("$" + usd_account_balance);                            
+                            $(".account_balance").html("$" + usd_account_balance); 
+                            mysnackbar(crypto_asset_balance);                           
                         }                        
                     } else if (crypto == 'Query Kline') {
                         var results = response.result;
@@ -489,8 +494,15 @@ function bybit_mkt(crypto,asset,aisa_options) {
 var bought_bitcoins = 0;
 var sold_bitcoins = 0;
 function account_mkt_balance(aisa_options) {
+    var crypto_asset_balance = localStorage.getItem("asset");
+    crypto_asset_balance = "" + crypto_asset_balance + "_balance";
     if (aisa_options =="buy") {
         //If it's buying I would buy from the seller on the sell side at the lowest sell_price
+        //crypto_asset_balance = localStorage.getItem(crypto_asset_balance);
+        if(localStorage.getItem(crypto_asset_balance) == null) {
+            localStorage.setItem(crypto_asset_balance,0);//BTC
+        }
+        
         if ($(".order_quantity").val() != '') {
             var order_usd_quantity = $(".order_quantity").val();//USD
         } else {
@@ -503,10 +515,10 @@ function account_mkt_balance(aisa_options) {
     
             let lowest_sell_price = localStorage.getItem("sell_price"); //USD
             let btc_balance_fro_usd = (Number(order_usd_quantity)/Number(lowest_sell_price))*1; //BTC
-            var bitcoin_balance_fro_usd = (Number(localStorage.getItem("bitcoin_balance")) + Number(btc_balance_fro_usd));
+            var bitcoin_balance_fro_usd = (Number(localStorage.getItem(crypto_asset_balance)) + Number(btc_balance_fro_usd));
     
             bitcoin_balance_fro_usd = bitcoin_balance_fro_usd.toFixed(8);
-            localStorage.setItem("bitcoin_balance",bitcoin_balance_fro_usd);//BTC
+            localStorage.setItem(crypto_asset_balance,bitcoin_balance_fro_usd);//BTC
             var order_quantity = 0;
             order_quantity = order_quantity.toFixed(8);
             $(".order_quantity").val(order_quantity);
@@ -517,15 +529,20 @@ function account_mkt_balance(aisa_options) {
             $(".order_quantity_range").val(0);
         }
     } else if (aisa_options =="sell") {
+        //crypto_asset_balance = localStorage.getItem(crypto_asset_balance);
+        if(localStorage.getItem(crypto_asset_balance) == null) {
+            localStorage.setItem(crypto_asset_balance,0);//BTC
+        }
+
         if ($(".order_quantity").val() != '') {
             var order_btc_quantity = $(".order_quantity").val();//BTC
         } else {
-            var order_btc_quantity = localStorage.getItem("bitcoin_balance");//BTC
+            var order_btc_quantity = localStorage.getItem(crypto_asset_balance);//BTC
         }
-        if (order_btc_quantity <= localStorage.getItem("bitcoin_balance")) {
-            var bitcoin_balance = localStorage.getItem("bitcoin_balance");//USD
+        if (order_btc_quantity <= localStorage.getItem(crypto_asset_balance)) {
+            var bitcoin_balance = localStorage.getItem(crypto_asset_balance);//USD
             bitcoin_balance = Number(bitcoin_balance) - Number(order_btc_quantity);
-            localStorage.setItem("bitcoin_balance",bitcoin_balance);//USD
+            localStorage.setItem(crypto_asset_balance,bitcoin_balance);//USD
     
             let highest_buy_price = localStorage.getItem("buy_price");//USD
             let usd_balance_fro_btc = (order_btc_quantity/1)*highest_buy_price; //USD
@@ -538,22 +555,12 @@ function account_mkt_balance(aisa_options) {
             $(".order_quantity").val(order_quantity);
             $(".order_quantity_range").val(0);
         } else{
-            $(".order_quantity").val(localStorage.getItem("bitcoin_balance"));
+            $(".order_quantity").val(localStorage.getItem(crypto_asset_balance));
             mysnackbar("You do not have enough crypto");
             $(".order_quantity_range").val(0);
         }
-    }//cordova create rebro_app com.benco.org Rebro
-    /**let highest_buy_price = localStorage.getItem("buy_price");//USD
-    let BTC_balance = localStorage.getItem("bitcoin_balance");//BTC
-    $(".bitcoin_balance").html(BTC_balance);
-
-    let USD_balance = (Number(BTC_balance)/1)*Number(highest_buy_price); //USD
-    USD_balance = USD_balance.toFixed(2);
-    $(".bitcoin_balance_usd").html(USD_balance);
-
-    var usd_account_balance = (Number(localStorage.getItem("account_balance")) + Number(USD_balance));
-    usd_account_balance = usd_account_balance.toFixed(2);
-    $(".account_balance").html("$" + usd_account_balance); */
+    }
+    mysnackbar(crypto_asset_balance + " " + localStorage.getItem(crypto_asset_balance));   
 }
 $("#pills-signin-tab").click(function(){
     $("#index_html").hide();
