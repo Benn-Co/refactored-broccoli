@@ -30,12 +30,12 @@ let mainWindow;
 function createWindow () {
     // Create the browser window.
     let appIcon;
-    if (fs.existsSync(`${__dirname}/img/app.png`)) {
-        appIcon = `${__dirname}/img/app.png`;
-    } else if (fs.existsSync(`${__dirname}/img/icon.png`)) {
-        appIcon = `${__dirname}/img/icon.png`;
+    if (fs.existsSync(`${__dirname}/image/android-chrome-192x192.png`)) {
+        appIcon = `${__dirname}/image/android-chrome-192x192.png`;
+    } else if (fs.existsSync(`${__dirname}/image/android-chrome-192x192.png`)) {
+        appIcon = `${__dirname}/image/android-chrome-192x192.png`;
     } else {
-        appIcon = `${__dirname}/img/logo.png`;
+        appIcon = `${__dirname}/image/android-chrome-192x192.png`;
     }
 
     const browserWindowOpts = Object.assign({}, cdvElectronSettings.browserWindow, { icon: appIcon });
@@ -50,7 +50,7 @@ function createWindow () {
 
     // Open the DevTools.
     if (cdvElectronSettings.browserWindow.webPreferences.devTools) {
-        mainWindow.webContents.openDevTools();
+       // mainWindow.webContents.openDevTools();
     }
 
     // Emitted when the window is closed.

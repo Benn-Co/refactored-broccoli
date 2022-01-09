@@ -112,7 +112,7 @@ function signup_user(signup_username,signup_email,signup_password) {
                     $("#signup_html").hide();
                     $("#index_html").show();
                     $("#pills-account-tab").addClass("d-none");
-
+                    onDeviceReady();
                     /**let fik_path = "dashboard.html";
                     let file_name = window.location.pathname;
                     let text = file_name;
