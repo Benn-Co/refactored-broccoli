@@ -49,16 +49,57 @@ localStorage.setItem("api_server_url", api_server_url);
 var updte_is_typing = 0;
 
 var IMAGE_url_path_name = 'https://'  + api_server_url + '/product_images/';
-
+var user_permited = 0;
 function onDeviceReady() {
     // Cordova is now initialized. Have fun!  
     username = localStorage.getItem("username");
-    if (localStorage.getItem("account_balance") == null || localStorage.getItem("bitcoin_balance") == null) {
+    var email = localStorage.getItem("email");
+    var user_pass = localStorage.getItem("user_pass");
+    if (email == null || email == '') {
+        $("#pills-account-tab").removeClass("d-none");
+        localStorage.clear();
+        $(".username").html(username);
+        $(".username_seen").html("last seen " + new Date());
+        $(".username_pic").html('<img class="avatar-img" src="./assets/img/favicon/favicon-256x256.png" alt="#">');
+        $(".user_location").html(localStorage.getItem("user_location"));
+        $(".user_email").html(localStorage.getItem("user_email"));
+        $(".user_phone").html(localStorage.getItem("user_phone"));
+        localStorage.setItem("account_balance",0);//BTC
+        $(".account_balance").html(localStorage.getItem("account_balance"));
+
+
+    } else if (user_pass == null || user_pass == '') {
+        $("#pills-account-tab").removeClass("d-none");
+        localStorage.clear();
+        
+        $(".username").html(username);
+        $(".username_seen").html("last seen " + new Date());
+        $(".username_pic").html('<img class="avatar-img" src="./assets/img/favicon/favicon-256x256.png" alt="#">');
+        $(".user_location").html(localStorage.getItem("user_location"));
+        $(".user_email").html(localStorage.getItem("user_email"));
+        $(".user_phone").html(localStorage.getItem("user_phone"));
+        localStorage.setItem("account_balance",0);//BTC
+        $(".account_balance").html(localStorage.getItem("account_balance"));
+
+    } else {
+        //login
+        //user_permited = 0;
+        $("#pills-account-tab").addClass("d-none");
+        if (user_permited > 0) {
+            
+        } else {
+            index_login_user(email,user_pass,username,email);
+        }
+
+    }
+
+
+    /**if (localStorage.getItem("account_balance") == null || localStorage.getItem("bitcoin_balance") == null) {
         localStorage.setItem("account_balance",0);//BTC
         localStorage.setItem("bitcoin_balance",0);//BTC
-    } 
+    } */ 
     $(".order_quantity_range").val(0);
-    if (username == null || username == '') {
+    /**if (user_permited == 0) {
         $("#pills-account-tab").removeClass("d-none");
         localStorage.setItem("account_balance",0);//USD
         localStorage.setItem("bitcoin_balance",0);//BTC
@@ -85,7 +126,7 @@ function onDeviceReady() {
         $(".user_phone").html(localStorage.getItem("user_phone"));
         //alert(username);
 
-    }
+    } */
     let file_name = window.location.pathname;
     if (file_name.includes("chat-direct")) {
         var connect_from = localStorage.getItem("connect_from");
@@ -114,6 +155,112 @@ function onDeviceReady() {
         //mysnackbar(username);
     }
     loadconnects();    
+}
+function index_login_user(login_email,login_password,login_details_username,login_details_email) {
+    //$('#app-cover-spin').show(0);
+    $.ajax({
+        type: "POST", // Type of request to be send, called as
+        dataType: 'json',
+        data: { login_user: 12, login_email: login_email, login_password:login_password, login_details_username:login_details_username, login_details_email:login_details_email },
+        processData: true,
+        url: api_server_url + '/cordova/login_user.php',
+        success: function searchSuccess(response) {
+            //$('#app-cover-spin').hide(0);
+            //$("#login_button_help").html(response.message);
+            try {
+               // response.data = JSON.parse(response.data);
+                if (response.message == "success") {
+                    mysnackbar("Welcome " + response.username);
+
+                    username = response.username;
+                    var role = response.role;
+                    var email = response.email;
+
+                    var user_pass = response.password1;
+
+                    var phone_number = response.phone_number;
+                    var username_pic = response.username_pic;
+
+                   // alert(user_pass);
+                    //var account_balance = response.account_balance;
+                    //$(".account_balance").attr("account_balance",account_balance);
+                    //$(".account_balance").html("$" + account_balance);
+                    //localStorage.setItem("account_balance", account_balance);
+
+                    //first = response.first_name;
+                    //last = response.last_name;
+                    //phone = response.phone_number;
+                    
+                    var location = JSON.parse(response.location_name);
+                        postal = location.postal;
+                        country = location.country;
+                        city = location.city;
+                        address = location.address;
+
+                    var user_location = country + ", "+ city;
+
+                    localStorage.setItem("username", username);
+                    localStorage.setItem("role", role);
+                    localStorage.setItem("email", email);
+                    localStorage.setItem("user_pass", user_pass);
+
+                    var account_balance = response.account_balance;
+                    $(".account_balance").attr("account_balance",account_balance);
+                    $(".account_balance").html("$" + account_balance);
+                    localStorage.setItem("account_balance", account_balance);
+
+                    localStorage.setItem("username_pic", username_pic);
+                    localStorage.setItem("user_location", user_location);
+                    localStorage.setItem("user_email", email);
+                    localStorage.setItem("user_phone", phone_number);
+                    $(".username").html(username);
+                    $(".username_seen").html("last seen " + new Date());
+                    $(".username_pic").html('<img class="avatar-img" src="' + localStorage.getItem("username_pic") + '" alt="#">');
+                    $(".user_location").html(localStorage.getItem("user_location"));
+                    $(".user_email").html(localStorage.getItem("user_email"));
+                    $(".user_phone").html(localStorage.getItem("user_phone"));
+ 
+                    $("#signin_html").hide();
+                    $("#index_html").show();
+                    $("#pills-account-tab").addClass("d-none");
+                    //alert();
+                    user_permited = user_permited + 1;
+                    onDeviceReady();
+                    /**let fik_path = "dashboard.html";
+                    let file_name = window.location.pathname;
+                    let text = file_name;
+                    const myArray = text.split("/");
+                    let newText = text.replace(myArray[myArray.length - 1], "");
+                    let new_window_location_pathname = newText + fik_path;
+                    let window_location_href ="" + location.protocol + "//" + window.location.hostname + "" + ":" + "" + window.location.port + new_window_location_pathname;
+                    window.location.href= window_location_href; */
+
+                    /**if (file_name.includes("light")) {
+                        window.location.href="" + location.protocol + "//" + window.location.hostname + "" + ":" + "" + window.location.port + window.location.pathname + fik_path;
+                    } else if (file_name.includes("dark")) {
+                        window.location.href="" + location.protocol + "//" + window.location.hostname + "" + ":" + "" + window.location.port + window.location.pathname + fik_path;
+                    } else {
+                        window.location.href="" + location.protocol + "//" + window.location.hostname + "" + ":" + "" + window.location.port + window.location.pathname + fik_path;
+                    } */
+
+                    //main();
+                } else {
+                   mysnackbar(response.login_email + " or " + response.login_password);
+                }
+            } catch(e) {
+                //console.error('JSON parsing error');
+                mysnackbar('JSON parsing error');
+
+            }
+          
+        },
+        error: function searchError(xhr, err) {
+          //$('#app-cover-spin').hide(0);
+          mysnackbar("Error on ajax call: " + api_server_url + '/cordova/login_user.php');
+          //main();
+
+        }
+    });
 }
 var IMAGE_pic_url = 0;
 var data_length = 0;
@@ -866,18 +1013,21 @@ $("body").delegate(".reply_ref","click",function(event){
 });
 $("body").delegate(".logout_me","click",function(event){
     event.preventDefault(); 
-    username = '';
-    localStorage.setItem("account_balance",0);//USD
-    localStorage.setItem("bitcoin_balance",0);//BTC
-    $(".bitcoin_balance").html(0);
-    $(".bitcoin_balance_usd").html(0);
+    //username = '';
+    //localStorage.setItem("account_balance",0);//USD
+    //localStorage.setItem("bitcoin_balance",0);//BTC
+    //$(".bitcoin_balance").html(0);
+    //$(".bitcoin_balance_usd").html(0);
     /**localStorage.setItem("account_balance",account_balance);//USD
                     localStorage.setItem("bitcoin_balance",bitcoin_balance);//BTC
                     $(".bitcoin_balance").html(account_balance);
                     $(".bitcoin_balance_usd").html(account_balance); */
-    localStorage.setItem("username", username);
+    //localStorage.setItem("username", username);
+    user_permited = 0;
     $("#pills-account-tab").removeClass("d-none");
     localStorage.clear();
+    //alert(user_permited);
+
     onDeviceReady()
     //loadconnects();
 });

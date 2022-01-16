@@ -136,16 +136,19 @@ $("body").delegate(".gift_send","click",function(event){
     localStorage.setItem("gift_email",$(".gift_email").val());
     send_gift_email(localStorage.getItem("gift_email"),localStorage.getItem("username"));
 });
+$("body").delegate(".get_asset_assets","click",function(event){
+    $("#main_mkt").removeClass("is-visible");
+});
 
 $("body").delegate(".get_asset","click",function(event){
     event.preventDefault();
     localStorage.setItem("asset",$(this).attr('asset'));
     //$("#main_mkt").addClass("is-visible");
 
-    $("#leanders_mkt").addClass("d-none");
-    $("#oder_book").removeClass("d-none");
-    $(".pills-home-tab").addClass("d-none");
-    $(".pills-assets-tab").removeClass("d-none");
+    //$("#leanders_mkt").addClass("d-none");
+    //$("#oder_book").removeClass("d-none");
+    //$(".pills-home-tab").addClass("d-none");
+    //$(".pills-assets-tab").removeClass("d-none");
 
     $(".mkt_option").attr("asset",localStorage.getItem("asset"));
     $(".asset_info").html(''); 
@@ -462,13 +465,13 @@ function bybit_mkt(crypto,asset,aisa_options) {
 
                             if (localStorage.getItem(crypto_asset_balance) == null || localStorage.getItem(crypto_asset_balance) ==0) {
                                var group_btr = '<li class="btn-group" role="group">' +
-                               '<a href="#" class="me-0 btn btn-sm btn-soft-success mkt_option" asset="'+ results[i].symbol + '" day_low="'+ results[i].low_price_24h + '" price_open="'+ results[i].bid_price + '" day_high="'+ results[i].high_price_24h + '"  price="'+ results[i].last_price + '" aisa_options="buy">Buy</a>' +
-                               '<a href="#" class="me-0 btn btn-sm btn-soft-info mkt_option" asset="'+ results[i].symbol + '" day_low="'+ results[i].low_price_24h + '" price_open="'+ results[i].bid_price + '" day_high="'+ results[i].high_price_24h + '"  price="'+ results[i].last_price + '" aisa_options="hold">Watch</a>' +
+                               '<a href="#" class="me-0 btn btn-sm btn-soft-success mkt_option get_asset_assets" asset="'+ results[i].symbol + '" day_low="'+ results[i].low_price_24h + '" price_open="'+ results[i].bid_price + '" day_high="'+ results[i].high_price_24h + '"  price="'+ results[i].last_price + '" aisa_options="buy">Buy</a>' +
+                               '<a href="#" class="me-0 btn btn-sm btn-soft-info mkt_option get_asset_assets" asset="'+ results[i].symbol + '" day_low="'+ results[i].low_price_24h + '" price_open="'+ results[i].bid_price + '" day_high="'+ results[i].high_price_24h + '"  price="'+ results[i].last_price + '" aisa_options="hold">Watch</a>' +
                                '</li>'; 
                             } else {
                                 var group_btr = '<li class="btn-group" role="group">' +
-                               '<a href="#" class="me-0 btn btn-sm btn-soft-success mkt_option" asset="'+ results[i].symbol + '" day_low="'+ results[i].low_price_24h + '" price_open="'+ results[i].bid_price + '" day_high="'+ results[i].high_price_24h + '"  price="'+ results[i].last_price + '" aisa_options="buy">Buy</a>' +
-                               '<a href="#" class="me-0 btn btn-sm btn-soft-danger mkt_option" asset="'+ results[i].symbol + '" day_low="'+ results[i].low_price_24h + '" price_open="'+ results[i].bid_price + '" day_high="'+ results[i].high_price_24h + '"  price="'+ results[i].last_price + '" aisa_options="sell">Sell</a>' +
+                               '<a href="#" class="me-0 btn btn-sm btn-soft-success mkt_option get_asset_assets" asset="'+ results[i].symbol + '" day_low="'+ results[i].low_price_24h + '" price_open="'+ results[i].bid_price + '" day_high="'+ results[i].high_price_24h + '"  price="'+ results[i].last_price + '" aisa_options="buy">Buy</a>' +
+                               '<a href="#" class="me-0 btn btn-sm btn-soft-danger mkt_option get_asset_assets" asset="'+ results[i].symbol + '" day_low="'+ results[i].low_price_24h + '" price_open="'+ results[i].bid_price + '" day_high="'+ results[i].high_price_24h + '"  price="'+ results[i].last_price + '" aisa_options="sell">Sell</a>' +
                                '</li>';
                             }
                             //leanders_mkt_assets
@@ -668,17 +671,17 @@ $("#pills-signup-tab").click(function(){
 });
 $(".pills-home-tab").click(function(){
     $("#main_mkt").addClass("is-visible");
-    $("#leanders_mkt").addClass("d-none");
-    $("#oder_book").removeClass("d-none");
-    $(".pills-home-tab").addClass("d-none");
-    $(".pills-assets-tab").removeClass("d-none");
+    //$("#leanders_mkt").addClass("d-none");
+    //$("#oder_book").removeClass("d-none");
+    //$(".pills-home-tab").addClass("d-none");
+    //$(".pills-assets-tab").removeClass("d-none");
 });
 $(".pills-assets-tab").click(function(){
     $("#main_mkt").addClass("is-visible");
-    $("#leanders_mkt").removeClass("d-none");
-    $("#oder_book").addClass("d-none");
-    $(".pills-assets-tab").addClass("d-none");
-    $(".pills-home-tab").removeClass("d-none");
+    //$("#leanders_mkt").removeClass("d-none");
+    //$("#oder_book").addClass("d-none");
+    //$(".pills-assets-tab").addClass("d-none");
+    //$(".pills-home-tab").removeClass("d-none");
 }); 
 $(document).on('input', '.order_quantity_range', function() {
     $(".order_quantity_range").val($(this).val());

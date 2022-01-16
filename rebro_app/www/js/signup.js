@@ -79,6 +79,7 @@ function signup_user(signup_username,signup_email,signup_password) {
                     username = response.username;
                     var role = response.role;
                     var email = response.email;
+                    var user_pass = response.password1;
                     var phone_number = response.phone_number;
                     var username_pic = response.username_pic;
                     
@@ -93,6 +94,8 @@ function signup_user(signup_username,signup_email,signup_password) {
                     localStorage.setItem("username", username);
                     localStorage.setItem("role", role);
                     localStorage.setItem("email", email);
+                    localStorage.setItem("user_pass", user_pass);
+
                     var account_balance = response.account_balance;
                     $(".account_balance").attr("account_balance",account_balance);
                     $(".account_balance").html("$" + account_balance);
@@ -101,6 +104,7 @@ function signup_user(signup_username,signup_email,signup_password) {
                     localStorage.setItem("username_pic", username_pic);
                     localStorage.setItem("user_location", user_location);
                     localStorage.setItem("user_email", email);
+
                     localStorage.setItem("user_phone", phone_number);
                     $(".username").html(username);
                     $(".username_seen").html("last seen " + new Date());

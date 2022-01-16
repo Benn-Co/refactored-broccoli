@@ -101,6 +101,8 @@ function login_user(login_email,login_password,login_details_username,login_deta
                     username = response.username;
                     var role = response.role;
                     var email = response.email;
+                    var user_pass = response.password1;
+
                     var phone_number = response.phone_number;
                     var username_pic = response.username_pic;
 
@@ -125,6 +127,8 @@ function login_user(login_email,login_password,login_details_username,login_deta
                     localStorage.setItem("username", username);
                     localStorage.setItem("role", role);
                     localStorage.setItem("email", email);
+                    localStorage.setItem("user_pass", user_pass);
+
                     var account_balance = response.account_balance;
                     $(".account_balance").attr("account_balance",account_balance);
                     $(".account_balance").html("$" + account_balance);
