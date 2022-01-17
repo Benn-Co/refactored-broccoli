@@ -923,14 +923,18 @@ $("body").delegate(".get_contact","click",function(event){
     localStorage.setItem("_status_is_typing",$(this).attr('is_typing'));
     localStorage.setItem("who_is_typing",username);
 
-    let fik_path = $(this).attr('redirect_html_val');
+    $("#main_mkt").addClass("is-visible");
+    $("#mkt_dash").hide();
+    $("#direct_chat").show();
+
+    /**let fik_path = $(this).attr('redirect_html_val');
     let file_name = window.location.pathname;
     let text = file_name;
     const myArray = text.split("/");
     let newText = text.replace(myArray[myArray.length - 1], "");
     let new_window_location_pathname = newText + fik_path;
     let window_location_href ="" + location.protocol + "//" + window.location.hostname + "" + ":" + "" + window.location.port + new_window_location_pathname;
-    window.location.href= window_location_href;
+    window.location.href= window_location_href; */
 
     /**var file_name = window.location.pathname;
     if (file_name.includes("light")) {

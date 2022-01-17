@@ -691,6 +691,8 @@ $(".pills-home-tab").click(function(){
 });
 $(".pills-assets-tab").click(function(){
     $("#main_mkt").addClass("is-visible");
+    $("#direct_chat").hide();
+    $("#mkt_dash").show();
     //$("#leanders_mkt").removeClass("d-none");
     //$("#oder_book").addClass("d-none");
     //$(".pills-assets-tab").addClass("d-none");
