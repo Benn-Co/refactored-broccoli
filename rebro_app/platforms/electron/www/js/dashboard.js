@@ -669,6 +669,19 @@ $("#pills-signup-tab").click(function(){
     $("#index_html").hide();
     $("#signup_html").show();
 });
+$(".signin_page").click(function(){
+    $("#signup_html").hide();
+    $("#signin_html").show();
+});
+$(".signup_page").click(function(){
+    $("#signin_html").hide();
+    $("#signup_html").show();
+});
+$(".forgot_password_page").click(function(){
+    $("#signin_html").hide();
+    $("#forgot_password_html").show();
+});
+
 $(".pills-home-tab").click(function(){
     $("#main_mkt").addClass("is-visible");
     //$("#leanders_mkt").addClass("d-none");

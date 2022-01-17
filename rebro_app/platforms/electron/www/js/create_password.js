@@ -78,14 +78,17 @@ function create_new_user_password(forgot_login_email,code,new_password) {
 
                     mysnackbar(response.validate_message);
                     
-                    let fik_path = "signin.html";
+                    $("#create_password_html").hide();
+                    $("#signin_html").show();
+
+                    /**let fik_path = "signin.html";
                     let file_name = window.location.pathname;
                     let text = file_name;
                     const myArray = text.split("/");
                     let newText = text.replace(myArray[myArray.length - 1], "");
                     let new_window_location_pathname = newText + fik_path;
                     let window_location_href ="" + location.protocol + "//" + window.location.hostname + "" + ":" + "" + window.location.port + new_window_location_pathname;
-                    window.location.href= window_location_href;
+                    window.location.href= window_location_href; */
 
                     /**var file_name = window.location.pathname;
                     //if (file_name.includes("pings")) {

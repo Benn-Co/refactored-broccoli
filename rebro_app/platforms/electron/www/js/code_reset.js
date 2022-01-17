@@ -56,15 +56,18 @@ function code_verification(code, email) {
                     //$("#new_password").addClass("active");
                     localStorage.setItem("code", code);
                     mysnackbar(response.validate_message);
-                    
-                    let fik_path = "create-password.html";
+                    $("#code_reset_html").hide();
+                    $("#create_password_html").show();
+
+                    /**let fik_path = "create-password.html";
                     let file_name = window.location.pathname;
                     let text = file_name;
                     const myArray = text.split("/");
                     let newText = text.replace(myArray[myArray.length - 1], "");
                     let new_window_location_pathname = newText + fik_path;
                     let window_location_href ="" + location.protocol + "//" + window.location.hostname + "" + ":" + "" + window.location.port + new_window_location_pathname;
-                    window.location.href= window_location_href;
+                    window.location.href= window_location_href; */
+
                     /**var file_name = window.location.pathname;
                     //if (file_name.includes("pings")) {
                         if (file_name.includes("light")) {

@@ -16,8 +16,8 @@ function forgot_login_button() {
             //$("#forgot_login_email_help").html(forgot_login_email);
             //$("#forgot_login_email").removeClass("is-invalid");
             //$("#forgot_login_email").addClass("is-valid");
-
-            forgot_login_password(forgot_login_email);
+            mysnackbar('Verifying');
+            forgot_lhogin_password(forgot_login_email);
         } else {
             mysnackbar("Enter a valid email address, e.g name@example.com");
             //$("#forgot_login_email").removeClass("is-valid");
@@ -32,8 +32,7 @@ function forgot_login_button() {
 $("#forgot_login_button").click(function(){
     forgot_login_button();
 });
-function forgot_login_password(forgot_login_email) {
-    //$('#app-cover-spin').show(0);
+function forgot_lhogin_password(forgot_login_email) {
     $.ajax({
         type: "POST", // Type of request to be send, called as 
         dataType: 'json',
@@ -41,45 +40,15 @@ function forgot_login_password(forgot_login_email) {
         processData: true,
         url: api_server_url + '/cordova/forgot_login_password.php',
         success: function searchSuccess(response) {
-            //$('#app-cover-spin').hide(0);
             try {
                 if (response.message == "success") {
-                    //$("#code_email").html(forgot_login_email);
-                    if (response.validate_message == 'Your mail has been sent successfully.') {
-                        //$("#forgot").removeClass("active");
-                        //$("#regis").removeClass("active");
-                        //$("#login").removeClass("active");
-                        //$("#reset_code").addClass("active");
-                        localStorage.setItem("forgot_login_email", forgot_login_email);
-                        mysnackbar(response.validate_message);
-
-                        let fik_path = "code-reset.html";
-                        let file_name = window.location.pathname;
-                        let text = file_name;
-                        const myArray = text.split("/");
-                        let newText = text.replace(myArray[myArray.length - 1], "");
-                        let new_window_location_pathname = newText + fik_path;
-                        let window_location_href ="" + location.protocol + "//" + window.location.hostname + "" + ":" + "" + window.location.port + new_window_location_pathname;
-                        window.location.href= window_location_href;
-
-                        /**var file_name = window.location.pathname;
-                        //if (file_name.includes("pings")) {
-                            if (file_name.includes("light")) {
-                                window.location.href="" + location.protocol + "//" + window.location.hostname + "" + ":" + "" + window.location.port + window.location.pathname + "code-reset.html" + "";
-                            } else if (file_name.includes("dark")) {
-                                window.location.href="" + location.protocol + "//" + window.location.hostname + "" + ":" + "" + window.location.port + window.location.pathname + "code-reset.html" + "";
-                            } else {
-                                window.location.href="" + location.protocol + "//" + window.location.hostname + "" + ":" + "" + window.location.port + window.location.pathname + "code-reset.html" + "";
-                            }
-                        //} */
-
-                    } else {
-                        mysnackbar(response.validate_message);
-                    }                    
-
+                    localStorage.setItem("forgot_login_email", forgot_login_email);
+                    mysnackbar(response.validate_message);
+                    $("#forgot_password_html").hide();
+                    $("#code_reset_html").show();
                 }
                 else if(response.message == "fail validate"){                    
-                    mysnackbar(response.validate_message);
+                    mysnackbar('response.validate_message');
                 } else {
                     mysnackbar(response.signup_email + " or " + response.signup_password);
                 }
@@ -88,10 +57,9 @@ function forgot_login_password(forgot_login_email) {
             }          
         },
         error: function searchError(xhr, err) {
-          //$('#app-cover-spin').hide(0);
           mysnackbar("Error on ajax call: " + err  + " " + JSON.stringify(xhr));
         }
-    });
+    }); 
     
 
 }

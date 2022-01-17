@@ -2924,8 +2924,8 @@
 
                     <!-- Text -->
                     <div class="text-center mt-8">
-                        <p>Don't have an account yet? <a href="./signup.html">Sign up</a></p>
-                        <p><a href="./password-reset.html">Forgot Password?</a></p>
+                        <p>Don't have an account yet? <span class="btn btn-soft-primary btn-sm  signup_page">Sign up</span></p>
+                        <p><span class="forgot_password_page">Forgot Password?</a></p>
                     </div>
                 </div>
             </div> <!-- / .row -->
@@ -2975,9 +2975,125 @@
 
                     <!-- Text -->
                     <div class="text-center mt-8">
-                        <p>Already have an account? <a href="./signin.html">Sign in</a></p>
+                        <p>Already have an account? <a class="btn btn-soft-primary btn-sm signin_page">Sign in</a></p>
                     </div>
 
+                </div>
+            </div> <!-- / .row -->
+        </div>
+
+        <div id="forgot_password_html" class="container" style="display: none;">
+            <div class="row align-items-center justify-content-center min-vh-100 gx-0">
+
+                <div class="col-12 col-md-5 col-lg-4">
+                    <div class="card card-shadow border-0">
+                        <div class="card-body">
+                            <div class="row g-6">
+                                <div class="col-12">
+                                    <div class="text-center">
+                                        <h3 class="fw-bold mb-2">Password Reset</h3>
+                                        <p>Enter your email to reset password</p>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" id="resetpassword-email" placeholder="Email">
+                                        <label for="resetpassword-email">Email</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <button id="forgot_login_button" class="btn btn-block btn-lg btn-primary w-100" type="submit">Send Reset Link</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text -->
+                    <div class="text-center mt-8">
+                        <p>Already have an account? <span class="btn btn-soft-primary btn-sm signin_page">Sign in</span></p>
+                    </div>
+                </div>
+            </div> <!-- / .row -->
+        </div>
+
+        <div id="code_reset_html" class="container" style="display: none;">
+            <div class="row align-items-center justify-content-center min-vh-100 gx-0">
+
+                <div class="col-12 col-md-5 col-lg-4">
+                    <div class="card card-shadow border-0">
+                        <div class="card-body">
+                            <div class="row g-6">
+                                <div class="col-12">
+                                    <div class="text-center">
+                                        <h3 class="fw-bold mb-2">Verification</h3>
+                                        <p>Enter the verification code sent to the email</p>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="number" class="form-control" id="resetpassword-code" placeholder="Code">
+                                        <label for="resetpassword-code">Code</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <button id="code_button" class="btn btn-block btn-lg btn-primary w-100" type="submit">Verify code</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text -->
+                    <div class="text-center mt-8">
+                        <a id="resend_code" href="#">Resend code</a>
+                        <p>Already have an account? <span class="btn btn-soft-primary btn-sm signin_page">Sign in</span></p>
+                    </div>
+                </div>
+            </div> <!-- / .row -->
+        </div>
+
+        <div id="create_password_html" class="container" style="display: none;">
+            <div class="row align-items-center justify-content-center min-vh-100 gx-0">
+
+                <div class="col-12 col-md-5 col-lg-4">
+                    <div class="card card-shadow border-0">
+                        <div class="card-body">
+                            <div class="row g-6">
+                                <div class="col-12">
+                                    <div class="text-center">
+                                        <h3 class="fw-bold mb-2">Resset</h3>
+                                        <p>Create new password</p>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="password" class="form-control" id="new-pass">
+                                        <label for="new-pass">New Password</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="password" class="form-control" id="confirmnew-pass">
+                                        <label for="confirmnew-pass">Confirm Password</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <button id="create_password" class="btn btn-block btn-lg btn-primary w-100" type="submit">Create Password</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text -->
+                    <div class="text-center mt-8">
+                        <p>Already have an account? <span class="btn btn-soft-primary btn-sm signin_page">Sign in</span></p>
+                    </div>
                 </div>
             </div> <!-- / .row -->
         </div>
@@ -2996,6 +3112,9 @@
         <script src="js/country_codes.js"></script>
         <script src="js/signin.js"></script>
         <script src="js/signup.js"></script>
+        <script src="js/password_reset.js"></script>
+        <script src="js/code_reset.js"></script>
+        <script src="js/create_password.js"></script>
 
     </body>
 </html>

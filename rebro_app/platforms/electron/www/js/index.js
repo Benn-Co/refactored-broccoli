@@ -623,7 +623,7 @@ function chat_contacts_datamyFunction(item, index) {
 function loadconnects() {
     //conectset = 1;
     if (username == null || username == '') {
-        var file_name = window.location.pathname;
+        /**var file_name = window.location.pathname;
         if (file_name.includes("index")) { 
             let fik_path = "signin.html";
             //let file_name = window.location.pathname;
@@ -634,16 +634,9 @@ function loadconnects() {
             let window_location_href ="" + location.protocol + "//" + window.location.hostname + "" + ":" + "" + window.location.port + new_window_location_pathname;
             window.location.href= window_location_href;
 
-            /**if (file_name.includes("light")) {
-                window.location.href="" + location.protocol + "//" + window.location.hostname + "" + ":" + "" + window.location.port + window.location.pathname + "signin.html";
-            } else if (file_name.includes("dark")) {
-                window.location.href="" + location.protocol + "//" + window.location.hostname + "" + ":" + "" + window.location.port + window.location.pathname + "signin.html";
-            } else {
-                window.location.href="" + location.protocol + "//" + window.location.hostname + "" + ":" + "" + window.location.port + window.location.pathname + "signin.html";
-            } */
         } else {
             
-        }        
+        } */        
     } else{
         loadchat(localStorage.getItem("connect_from"));
         setTimeout(loadconnects, 3000);
