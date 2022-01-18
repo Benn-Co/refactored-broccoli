@@ -67,7 +67,6 @@ function onDeviceReady() {
         localStorage.setItem("account_balance",0);//BTC
         $(".account_balance").html(localStorage.getItem("account_balance"));
 
-
     } else if (user_pass == null || user_pass == '') {
         $("#pills-account-tab").removeClass("d-none");
         localStorage.clear();
@@ -81,80 +80,42 @@ function onDeviceReady() {
         localStorage.setItem("account_balance",0);//BTC
         $(".account_balance").html(localStorage.getItem("account_balance"));
 
-    } else {
-        //login
-        //user_permited = 0;
+    } else {        
         $("#pills-account-tab").addClass("d-none");
         if (user_permited > 0) {
-            
+            $(".order_quantity_range").val(0);
+            /**if (get_contact_clicked > 0) {
+                alert(get_contact_clicked);
+                var connect_from = localStorage.getItem("connect_from");
+                var connect_image_url = localStorage.getItem("connect_image_url");
+                $("#connect_from_title").html(connect_from);
+                var connect_from_image = document.getElementById('connect_from_image');
+                var connect_from_image_av1 = document.getElementById('connect_from_image_av1');
+                var connect_from_image_av2 = document.getElementById('connect_from_image_av2');
+                connect_from_image.src = connect_image_url;
+                connect_from_image_av1.src = connect_image_url;
+                connect_from_image_av2.src = connect_image_url;
+                
+                update_direct_chat(localStorage.getItem("is_typing"),localStorage.getItem("is_online"),localStorage.getItem("connects_time"));
+                
+                var conn_id = '';
+                var chat_message = '';
+                var is_empty = '';
+                contact(username,connect_from,conn_id,chat_message,is_empty);
+            } else {
+                localStorage.setItem("connect_from",'');
+                localStorage.setItem("connect_image_url",'');
+                localStorage.setItem("is_typing",'');
+                localStorage.setItem("is_online",'');
+                localStorage.setItem("connects_time",'');
+                update_direct_chat(localStorage.getItem("is_typing"),localStorage.getItem("is_online"),localStorage.getItem("connects_time"));
+            } */
+            loadconnects();
         } else {
             index_login_user(email,user_pass,username,email);
         }
-
     }
-
-
-    /**if (localStorage.getItem("account_balance") == null || localStorage.getItem("bitcoin_balance") == null) {
-        localStorage.setItem("account_balance",0);//BTC
-        localStorage.setItem("bitcoin_balance",0);//BTC
-    } */ 
-    $(".order_quantity_range").val(0);
-    /**if (user_permited == 0) {
-        $("#pills-account-tab").removeClass("d-none");
-        localStorage.setItem("account_balance",0);//USD
-        localStorage.setItem("bitcoin_balance",0);//BTC
-        localStorage.setItem("username_pic","");
-        localStorage.setItem("user_location","");
-        localStorage.setItem("user_email","");
-        localStorage.setItem("user_phone","");
-        $(".username").html(username);
-        $(".username_seen").html("last seen " + new Date());
-        $(".username_pic").html('<img class="avatar-img" src="./assets/img/favicon/favicon-256x256.png" alt="#">');
-        $(".user_location").html(localStorage.getItem("user_location"));
-        $(".user_email").html(localStorage.getItem("user_email"));
-        $(".user_phone").html(localStorage.getItem("user_phone"));
-        $(".bitcoin_balance").html(0);
-        $(".bitcoin_balance_usd").html(0);
-    } else {
-        $("#pills-account-tab").addClass("d-none");
-        //alert(username);
-        $(".username").html(username);
-        $(".username_seen").html("last seen " + new Date());
-        $(".username_pic").html('<img class="avatar-img" src="' + localStorage.getItem("username_pic") + '" alt="#">');
-        $(".user_location").html(localStorage.getItem("user_location"));
-        $(".user_email").html(localStorage.getItem("user_email"));
-        $(".user_phone").html(localStorage.getItem("user_phone"));
-        //alert(username);
-
-    } */
-    let file_name = window.location.pathname;
-    if (file_name.includes("chat-direct")) {
-        var connect_from = localStorage.getItem("connect_from");
-        var connect_image_url = localStorage.getItem("connect_image_url");
-        $("#connect_from_title").html(connect_from);
-        var connect_from_image = document.getElementById('connect_from_image');
-        var connect_from_image_av1 = document.getElementById('connect_from_image_av1');
-        var connect_from_image_av2 = document.getElementById('connect_from_image_av2');
-        connect_from_image.src = connect_image_url;
-        connect_from_image_av1.src = connect_image_url;
-        connect_from_image_av2.src = connect_image_url;
         
-        update_direct_chat(localStorage.getItem("is_typing"),localStorage.getItem("is_online"),localStorage.getItem("connects_time"));
-        
-        var conn_id = '';
-        var chat_message = '';
-        var is_empty = '';
-        contact(username,connect_from,conn_id,chat_message,is_empty);
-    } else {
-        localStorage.setItem("connect_from",'');
-        localStorage.setItem("connect_image_url",'');
-        localStorage.setItem("is_typing",'');
-        localStorage.setItem("is_online",'');
-        localStorage.setItem("connects_time",'');
-        update_direct_chat(localStorage.getItem("is_typing"),localStorage.getItem("is_online"),localStorage.getItem("connects_time"));
-        //mysnackbar(username);
-    }
-    loadconnects();    
 }
 function index_login_user(login_email,login_password,login_details_username,login_details_email) {
     //$('#app-cover-spin').show(0);
@@ -526,7 +487,7 @@ function chat_contacts_datamyFunction(item, index) {
 
         var connect_messages  = '<div id="message_' + item.connect_messages_id + '" class="message message-out" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
         '<a href="#" data-bs-toggle="modal" data-bs-target="#modal-profile" class="avatar avatar-responsive">' +
-        '<img class="avatar-img" src="' + IMAGE_pic_url + '" alt="">' +
+        '<img class="avatar-img" src="' + localStorage.getItem("username_pic") + '" alt="">' +
         '</a>' +
 
         '<div class="message-inner">' +
@@ -621,29 +582,39 @@ function chat_contacts_datamyFunction(item, index) {
     
 }
 function loadconnects() {
-    //conectset = 1;
-    if (username == null || username == '') {
-        /**var file_name = window.location.pathname;
-        if (file_name.includes("index")) { 
-            let fik_path = "signin.html";
-            //let file_name = window.location.pathname;
-            let text = file_name;
-            const myArray = text.split("/");
-            let newText = text.replace(myArray[myArray.length - 1], "");
-            let new_window_location_pathname = newText + fik_path;
-            let window_location_href ="" + location.protocol + "//" + window.location.hostname + "" + ":" + "" + window.location.port + new_window_location_pathname;
-            window.location.href= window_location_href;
+    if (get_contact_clicked > 0) {
+        //mysnackbar(get_contact_clicked);
+        var connect_from = localStorage.getItem("connect_from");
+        var connect_image_url = localStorage.getItem("connect_image_url");
+        $("#connect_from_title").html(connect_from);
+        var connect_from_image = document.getElementById('connect_from_image');
+        var connect_from_image_av1 = document.getElementById('connect_from_image_av1');
+        var connect_from_image_av2 = document.getElementById('connect_from_image_av2');
+        connect_from_image.src = connect_image_url;
+        connect_from_image_av1.src = connect_image_url;
+        connect_from_image_av2.src = localStorage.getItem("username_pic");
+        
+        update_direct_chat(localStorage.getItem("is_typing"),localStorage.getItem("is_online"),localStorage.getItem("connects_time"));
+        
+        var conn_id = '';
+        var chat_message = '';
+        var is_empty = '';
+        contact(username,connect_from,conn_id,chat_message,is_empty);
+    } else {
+       // mysnackbar(get_contact_clicked);
 
-        } else {
-            
-        } */        
-    } else{
-        loadchat(localStorage.getItem("connect_from"));
-        setTimeout(loadconnects, 3000);
-    }    
+        localStorage.setItem("connect_from",'');
+        localStorage.setItem("connect_image_url",'');
+        localStorage.setItem("is_typing",'');
+        localStorage.setItem("is_online",'');
+        localStorage.setItem("connects_time",'');
+        update_direct_chat(localStorage.getItem("is_typing"),localStorage.getItem("is_online"),localStorage.getItem("connects_time"));
+    }
+    loadchat(localStorage.getItem("connect_from"));
+    setTimeout(loadconnects, 3000);    
 }
 var is_true = 0;
-function  loadchat(item_connect_from) { 
+function loadchat(item_connect_from) { 
     //alert(api_server_url + '/cordova/loli/chat_main_container.php');
     $.ajax({
         type: "POST", // Type of request to be send, called as
@@ -910,7 +881,7 @@ function connects_datamyFunction(item, index) {
     '</a>';
     $("#connects_chat").append(typing_chat); */ 
 }
-
+var get_contact_clicked = 0;
 $("body").delegate(".get_contact","click",function(event){
     event.preventDefault();    
     localStorage.setItem("connect_from",$(this).attr('connect_from'));
@@ -926,7 +897,7 @@ $("body").delegate(".get_contact","click",function(event){
     $("#main_mkt").addClass("is-visible");
     $("#mkt_dash").hide();
     $("#direct_chat").show();
-
+    get_contact_clicked = 1;
     /**let fik_path = $(this).attr('redirect_html_val');
     let file_name = window.location.pathname;
     let text = file_name;
