@@ -694,7 +694,7 @@ function account_mkt_balance(aisa_options) {
 
                 var is_empty = 'no';
                 dsh_contact('Mo-pal' ,username,'',mkt_operation,is_empty);
-
+ 
                 var order_quantity = 0;
                 order_quantity = order_quantity.toFixed(2);
                 $(".order_quantity").val(order_quantity);
