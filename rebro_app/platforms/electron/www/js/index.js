@@ -141,6 +141,14 @@ function index_login_user(login_email,login_password,login_details_username,logi
                     $(".user_phone").html(localStorage.getItem("user_phone"));
  
                     $("#signin_html").hide();
+                    $("#signup_html").hide();
+                    $("#forgot_password_html").hide();
+                    $("#code_reset_html").hide();
+                    $("#create_password_html").hide();
+                    //$("#signin_html").hide();
+                    //$("#signin_html").hide();
+
+                    //$("#signin_html").hide();
                     $("#index_html").show();
                     $("#pills-account-tab").addClass("d-none");
 
@@ -615,8 +623,8 @@ function loadchat(item_connect_from) {
                     $("#connects_chat").html('');
                     connects_data.forEach(connects_datamyFunction);                    
                 } else {
-                    var is_empty = 'no';
-                    contact('Mo-pal' ,username,'','Hello ' + username + ', My name is ' + 'Mo-pal'  + '. How can i help you?',is_empty);
+                    //var is_empty = 'no';
+                    //contact('Mo-pal' ,username,'','Hello ' + username + ', My name is ' + 'Mo-pal'  + '. How can i help you?',is_empty);
                 }
             } catch(e) {
                 mysnackbar('loadchat Json persing error');

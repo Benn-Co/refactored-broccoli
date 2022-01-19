@@ -623,8 +623,8 @@ function loadchat(item_connect_from) {
                     $("#connects_chat").html('');
                     connects_data.forEach(connects_datamyFunction);                    
                 } else {
-                    var is_empty = 'no';
-                    contact('Mo-pal' ,username,'','Hello ' + username + ', My name is ' + 'Mo-pal'  + '. How can i help you?',is_empty);
+                    //var is_empty = 'no';
+                    //contact('Mo-pal' ,username,'','Hello ' + username + ', My name is ' + 'Mo-pal'  + '. How can i help you?',is_empty);
                 }
             } catch(e) {
                 mysnackbar('loadchat Json persing error');

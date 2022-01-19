@@ -1,7 +1,7 @@
 var mkt_option_clicked = 0;
 $("body").delegate(".mkt_option","click",function(event){
     event.preventDefault();
-    
+    //alert("https://8080-f0ab28f8-b99f-4f67-a63a-122172b1b1a4.cs-europe-west1-onse.cloudshell.dev/?authuser=0");
     if (localStorage.getItem("username") == null || localStorage.getItem("username") == "") {
         mysnackbar("Please sign in to proceed");
     } else {
@@ -62,7 +62,7 @@ $("body").delegate(".mkt_option","click",function(event){
         localStorage.setItem("price_open",$(this).attr('price_open'));
         localStorage.setItem("day_high",$(this).attr('day_high'));
         localStorage.setItem("day_low",$(this).attr('day_low'));
-        //$("#main_mkt").addClass("is-visible");    
+
         var order_price = $(".order_price").val();
         if (order_price !== "") {
             $(".order_price").removeClass("is-invalid");
@@ -73,7 +73,7 @@ $("body").delegate(".mkt_option","click",function(event){
                 $(".order_quantity").addClass("is-valid");
     
                 //rebro_Aisha(localStorage.getItem("asset"),localStorage.getItem("aisa_options"),localStorage.getItem("price"),localStorage.getItem("price_open"),localStorage.getItem("day_high"),localStorage.getItem("day_low"));
-                //alert(localStorage.getItem("price"));
+                mysnackbar(localStorage.getItem("aisa_options") + "  " + $(this).attr('asset') + " at " + localStorage.getItem("price"));
                 account_mkt_balance(localStorage.getItem("aisa_options"));    
     
             } else {
@@ -894,9 +894,11 @@ $(document).on('input', '.order_quantity_range', function() {
     var bitcoin_balance = localStorage.getItem(crypto_asset_balance);//BTC
     var pct_bitcoin_balance = (Number(bitcoin_balance) *Number(order_quantity_pct))/100;
     pct_bitcoin_balance = pct_bitcoin_balance.toFixed(8);
-    if (localStorage.getItem(crypto_asset_balance) <= 0 && localStorage.getItem("account_balance") > 0) {
-        mysnackbar("Deficient crypto, try buying some");
-    } else if (localStorage.getItem("account_balance") <= 0) {
+    // && localStorage.getItem("account_balance") > 0
+    //if (localStorage.getItem(crypto_asset_balance) <= 0) {
+    //    mysnackbar("Deficient " + crypto_asset_balance + ", try buying some");
+    //} else 
+    if (localStorage.getItem("account_balance") <= 0) {
         mysnackbar("Insufficient balance, load your account.");
         display_account_action("show");
     } else {
