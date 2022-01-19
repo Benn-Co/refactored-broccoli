@@ -220,10 +220,23 @@ $(".complete_trasaction").click(function(){
 
         if (selected_payment_option == "M-Pesa") {
             $(".entrer_phoner").show();
+            var phone_num = $(".user_phone_number").val();
+            if ($(".user_phone_number").val() == '' || phone_num.length < 9) {
+                $(".user_phone_number").removeClass("is-valid");
+                $(".user_phone_numberfeedback").removeClass("valid-feedback");
+                $(".user_phone_number").addClass("is-invalid");
+                $(".user_phone_numberfeedback").addClass("invalid-feedback");
+                $(".user_phone_numberfeedback").html("Please provide a valid phone number.");
+            } else {
+                $(".user_phone_number").removeClass("is-invalid");
+                $(".user_phone_numberfeedback").removeClass("invalid-feedback");
+                $(".user_phone_numberfeedback").addClass("valid-feedback");
+                $(".user_phone_number").addClass("is-valid");
+                $(".user_phone_numberfeedback").html("Looks good!");                
+            }
         } else {
             $(".entrer_phoner").hide();
         }
-        //entrer_phoner
     }
 });
 
@@ -608,8 +621,30 @@ function bybit_mkt(crypto,asset,aisa_options) {
                                 let coin_value = Number(USD_balance) - Number(coin_value_);
                                 coin_value = coin_value.toFixed(2);
 
-                                var mysnaccountackbar = " BTC " + BTC_balance + " " + results[i].symbol + " balance " + USD_balance + "  " + coin_value;
+                                var the_diff = coin_value;
+                                var initial_val = coin_value_;
+                                var pert_chang = (the_diff/initial_val)*100;
+                                pert_chang = pert_chang.toFixed(2);
+                                if (pert_chang >= 0) {
+                                    var pr_bg = "bg-success";
+                                } else {
+                                    var pr_bg = "bg-danger"; 
+                                }
 
+                                var aria_valuenow = Math.abs(pert_chang);
+
+                                var mysnaccountackbar = " BTC " + BTC_balance + " " + results[i].symbol + " balance " + USD_balance + "  value added " + coin_value + " change " + pert_chang + "%";
+                                
+
+                                
+
+                                var progres_dash = '<div class="progress">' +
+                                //'<div class="progress-bar ' + pr_bg + '" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="25">25%</div>' + 
+                                '<div class="progress-bar ' + pr_bg + '" role="progressbar" style="width: ' + aria_valuenow + '%;" aria-valuenow="' + aria_valuenow + '" aria-valuemin="0" aria-valuemax="100">' + aria_valuenow + '%</div>' + 
+                                '</div>';
+
+                                mysnaccountackbar = progres_dash;
+                                
                                 let letpotential_usd_account_balance = Number(potential_account_balance) + Number(USD_balance);
 
                                 potential_usd_account_balance = letpotential_usd_account_balance.toFixed(2);
@@ -645,7 +680,7 @@ function bybit_mkt(crypto,asset,aisa_options) {
                                 '</ul>' +
                                 '</span>' +
                                 '</li>' + 
-                                '<li class="list-group-item d-flex justify-content-between align-items-center"> ' + mysnaccountackbar + '</li>';
+                                '<li class="list-group-item"> ' + mysnaccountackbar + '</li>';
                                 $(".crypto_you_own").append(crypto_you_own);
                             }                            
 

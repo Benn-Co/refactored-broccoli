@@ -130,12 +130,17 @@ $("body").delegate(".order_book_mkt","click",function(event){
 $("body").delegate(".currency_option","click",function(event){
     event.preventDefault();
     $(".select_currency").html($(this).attr('currency_name'));
-    $(".select_country").html($(this).attr('country_name'));  
+    $(".select_country").html($(this).attr('country_name')); 
+    $(".mcode").html($(this).attr('mcode'));
+    //alert($(this).attr('mcode'));
 });
 $("body").delegate(".country_option","click",function(event){
     event.preventDefault();
     $(".select_country").html($(this).attr('country_name')); 
     $(".select_currency").html($(this).attr('ccode'));
+    $(".mcode").html($(this).attr('mcode'));
+    //alert($(this).attr('mcode'));
+
 });
 $(".query_symbols").hover(function(){
     $(".skillsleft").show();
@@ -178,10 +183,19 @@ $("body").delegate(".refresh_interval","click",function(event){
 });
 $("body").delegate(".selected_payment_option","click",function(event){
     event.preventDefault();
-    $(".payment_option").html("Pay with " + $(this).html()); 
-    localStorage.setItem("selected_payment_option",$(this).html()); 
+    $(".payment_option").html("" + $(this).html()); 
+    localStorage.setItem("selected_payment_option",$(this).html());
+    if ($(this).html() == "M-Pesa") {
+        $(".entrer_phoner").show();
+    } else {
+        $(".entrer_phoner").hide();
+    } 
 });
 $(".complete_trasaction").click(function(){
+    var typofe = Number($(".amount_to_deposit").val());
+
+    //alert(typofe == 'NaN');
+
     if ($(".amount_to_deposit").val() == '') {
         $(".amount_to_deposit").removeClass("is-valid");
         $(".amount_to_deposit_feedback").removeClass("valid-feedback");
@@ -191,10 +205,10 @@ $(".complete_trasaction").click(function(){
     } else if ( localStorage.getItem("selected_payment_option") == null) {
         $(".payment_option").removeClass("btn-primary");
         $(".payment_option").addClass("btn-danger");
-
     } else {
         $(".payment_option").removeClass("btn-danger");
         $(".payment_option").addClass("btn-success");
+        $(".payment_option").html(localStorage.getItem("selected_payment_option")); 
 
         $(".amount_to_deposit").removeClass("is-invalid");
         $(".amount_to_deposit_feedback").removeClass("invalid-feedback");
@@ -203,6 +217,23 @@ $(".complete_trasaction").click(function(){
         $(".amount_to_deposit_feedback").html("Looks good!");
         var amount_to_deposit = Number($(".amount_to_deposit").val());
         var selected_payment_option  = localStorage.getItem("selected_payment_option");
+
+        if (selected_payment_option == "M-Pesa") {
+            $(".entrer_phoner").show();
+            var phone_num = $(".user_phone_number").val();
+            if ($(".user_phone_number").val() == '' ||  phone_num.length < 9) {
+                $(".user_phone_numberfeedback").removeClass("valid-feedback");
+                $(".user_phone_numberfeedback").addClass("invalid-feedback");
+                $(".user_phone_numberfeedback").html("Please provide a valid phone number.");
+            } else {
+                $(".user_phone_numberfeedback").removeClass("invalid-feedback");
+                $(".user_phone_numberfeedback").addClass("valid-feedback");
+                $(".user_phone_numberfeedback").html("Looks good!");
+                
+            }
+        } else {
+            $(".entrer_phoner").hide();
+        }
     }
 });
 

@@ -2650,16 +2650,18 @@
                         <div class="modal-body">
 
                             <div class="container">                                
-                                <div class="row justify-content-md-center">
+                                <div class="row gx-4 justify-content-md-center">
                                   <div class="col">
-                                    <input type="text" class="form-control is-valid amount_to_deposit" value="" required>
+                                    <label for="validationServer01" class="form-label">Amount in <span class="select_currency"></span></label>
+                                    <input type="number" class="form-control is-valid amount_to_deposit" id="validationServer01" value="" required>
                                     <div class="valid-feedback amount_to_deposit_feedback">
                                         
                                     </div>
                                   </div>
-                                  <div class="col-md-auto">
+                                  <div class="col">
+                                    <label for="validationServer02" class="form-label">Payment Method</label>
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-primary payment_option">Pay with?</button>
+                                        <button type="button" class="btn btn-primary payment_option" id="validationServer02">Pay with?</button>
                                         <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                                           <span class="visually-hidden">Toggle Dropdown</span>
                                         </button>
@@ -2673,6 +2675,23 @@
                                         </ul>
                                     </div>        
                                   </div>
+                                </div>
+
+                                <div class="row justify-content-md-cente entrer_phoner mt-3" style="display: none;">
+                                    
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-text">
+                                            <span class="mcode dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"> </span>
+                                            <ul class="dropdown-menu mcode_list hide-scrollbar" style="height: 200px;">
+                                            
+                                            </ul>
+                                        </div>
+                                        <input type="number" class=" form-control form-control-lg ps-0 user_phone_number" value="" required> 
+                                        <div class="valid-feedback user_phone_numberfeedback">
+                                        
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                             
