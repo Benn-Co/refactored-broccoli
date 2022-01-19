@@ -194,8 +194,6 @@ $("body").delegate(".selected_payment_option","click",function(event){
 $(".complete_trasaction").click(function(){
     var typofe = Number($(".amount_to_deposit").val());
 
-    //alert(typofe == 'NaN');
-
     if ($(".amount_to_deposit").val() == '') {
         $(".amount_to_deposit").removeClass("is-valid");
         $(".amount_to_deposit_feedback").removeClass("valid-feedback");
@@ -232,7 +230,13 @@ $(".complete_trasaction").click(function(){
                 $(".user_phone_numberfeedback").removeClass("invalid-feedback");
                 $(".user_phone_numberfeedback").addClass("valid-feedback");
                 $(".user_phone_number").addClass("is-valid");
-                $(".user_phone_numberfeedback").html("Looks good!");                
+                $(".user_phone_numberfeedback").html("Looks good!"); 
+
+                $(".complete_trasaction").removeClass("btn-primary");
+                $(".complete_trasaction").addClass("btn-warning");
+                $(".complete_trasaction").html("Proccessing..."); 
+
+                proccess_transaction(amount_to_deposit,selected_payment_option,phone_num);               
             }
         } else {
             $(".entrer_phoner").hide();
@@ -698,6 +702,33 @@ function bybit_mkt(crypto,asset,aisa_options) {
         }
     });
 }
+
+function proccess_transaction(amount_to_deposit,selected_payment_option,phone_num){
+    $.ajax({
+        type: "POST", // Type of request to be send, called as 
+        dataType: 'json',
+        data: { amount_to_deposit:amount_to_deposit, selected_payment_option: selected_payment_option, phone_num: phone_num, username: localStorage.getItem("username"), email:localStorage.getItem("email"), user_pass:localStorage.getItem("user_pass")},
+        processData: true,
+        url: api_server_url + '/cordova/proccess_transaction.php',
+        success: function searchSuccess(response) {
+            try {
+                //alert(response);
+
+                $(".complete_trasaction").removeClass("btn-warning");
+                $(".complete_trasaction").addClass("btn-success");
+                $(".complete_trasaction").html(response.message); 
+
+                mysnackbar(response.account_balance);
+            } catch(e) {
+                mysnackbar('JSON parsing error');
+            }          
+        },
+        error: function searchError(xhr, err) {
+         mysnackbar("Error on ajax call: " + err  + " " + JSON.stringify(xhr));
+        }
+    });
+}               
+
 var bought_bitcoins = 0;
 var sold_bitcoins = 0;
 function account_mkt_balance(aisa_options) {
