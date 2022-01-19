@@ -322,6 +322,8 @@ function bybit_mkt(crypto,asset,aisa_options) {
                                     '<span class="text-success"><small>' + trade_time + '</small></span>'+
                                     '</li>';
                                     if (buy_price_i < 1) {
+                                        $(".mkt_option").attr("price",results[i].price);
+
                                         localStorage.setItem("buy_price",results[i].price);
                                     }
                                     buy_price_i++;
@@ -641,7 +643,7 @@ function account_mkt_balance(aisa_options) {
                 /////////////////////////////////////////////
                 localStorage.setItem(crypto_asset_balance,bitcoin_balance_fro_usd);//BTC
 
-                mkt_operation = mkt_operation +'. You bought ' + bitcoin_balance_fro_usd + ' ' + localStorage.getItem("asset") + ' worth $' + localStorage.getItem(crypto_asset_value) + ' at ' + localStorage.getItem("sell_price");
+                mkt_operation = mkt_operation +'You bought ' + bitcoin_balance_fro_usd + ' ' + localStorage.getItem("asset") + ' worth $' + localStorage.getItem(crypto_asset_value) + ' at ' + localStorage.getItem("sell_price");
                 //mkt_operation = mkt_operation + '' ;
 
                 var is_empty = 'no';
@@ -684,10 +686,14 @@ function account_mkt_balance(aisa_options) {
                 usd_account_balance_fro_btc = usd_account_balance_fro_btc.toFixed(2);
                 //localStorage.setItem("account_balance",usd_account_balance_fro_btc);//USD
                 
-                mkt_operation = mkt_operation +'. You sold ' + usd_account_balance_fro_btc + ' ' + localStorage.getItem("asset") + ' worth $' + usd_balance_fro_btc + ' at ' + localStorage.getItem("buy_price");
+                var initial_value = localStorage.getItem(crypto_asset_value);
+                var remaining_value = Number(initial_value) - Number(usd_balance_fro_btc);
+                localStorage.setItem(crypto_asset_value,remaining_value);//USD
+
+                mkt_operation = mkt_operation +'You sold ' + order_btc_quantity + ' ' + localStorage.getItem("asset") + ' worth $' + usd_balance_fro_btc + ' at ' + localStorage.getItem("buy_price");
 
                 var is_empty = 'no';
-                dsh_contact('Mo-pal' ,username,'',crypto_asset_balance + " " + localStorage.getItem(crypto_asset_balance),is_empty);
+                dsh_contact('Mo-pal' ,username,'',mkt_operation,is_empty);
 
                 var order_quantity = 0;
                 order_quantity = order_quantity.toFixed(2);

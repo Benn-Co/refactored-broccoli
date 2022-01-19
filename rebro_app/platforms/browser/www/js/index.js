@@ -83,33 +83,7 @@ function onDeviceReady() {
     } else {        
         $("#pills-account-tab").addClass("d-none");
         if (user_permited > 0) {
-            $(".order_quantity_range").val(0);
-            /**if (get_contact_clicked > 0) {
-                alert(get_contact_clicked);
-                var connect_from = localStorage.getItem("connect_from");
-                var connect_image_url = localStorage.getItem("connect_image_url");
-                $("#connect_from_title").html(connect_from);
-                var connect_from_image = document.getElementById('connect_from_image');
-                var connect_from_image_av1 = document.getElementById('connect_from_image_av1');
-                var connect_from_image_av2 = document.getElementById('connect_from_image_av2');
-                connect_from_image.src = connect_image_url;
-                connect_from_image_av1.src = connect_image_url;
-                connect_from_image_av2.src = connect_image_url;
-                
-                update_direct_chat(localStorage.getItem("is_typing"),localStorage.getItem("is_online"),localStorage.getItem("connects_time"));
-                
-                var conn_id = '';
-                var chat_message = '';
-                var is_empty = '';
-                contact(username,connect_from,conn_id,chat_message,is_empty);
-            } else {
-                localStorage.setItem("connect_from",'');
-                localStorage.setItem("connect_image_url",'');
-                localStorage.setItem("is_typing",'');
-                localStorage.setItem("is_online",'');
-                localStorage.setItem("connects_time",'');
-                update_direct_chat(localStorage.getItem("is_typing"),localStorage.getItem("is_online"),localStorage.getItem("connects_time"));
-            } */
+            $(".order_quantity_range").val(0);            
             loadconnects();
         } else {
             index_login_user(email,user_pass,username,email);
@@ -118,7 +92,6 @@ function onDeviceReady() {
         
 }
 function index_login_user(login_email,login_password,login_details_username,login_details_email) {
-    //$('#app-cover-spin').show(0);
     $.ajax({
         type: "POST", // Type of request to be send, called as
         dataType: 'json',
@@ -126,13 +99,10 @@ function index_login_user(login_email,login_password,login_details_username,logi
         processData: true,
         url: api_server_url + '/cordova/login_user.php',
         success: function searchSuccess(response) {
-            //$('#app-cover-spin').hide(0);
-            //$("#login_button_help").html(response.message);
+            //alert(response.message);
             try {
-               // response.data = JSON.parse(response.data);
                 if (response.message == "success") {
                     mysnackbar("Welcome " + response.username);
-
                     username = response.username;
                     var role = response.role;
                     var email = response.email;
@@ -141,17 +111,6 @@ function index_login_user(login_email,login_password,login_details_username,logi
 
                     var phone_number = response.phone_number;
                     var username_pic = response.username_pic;
-
-                   // alert(user_pass);
-                    //var account_balance = response.account_balance;
-                    //$(".account_balance").attr("account_balance",account_balance);
-                    //$(".account_balance").html("$" + account_balance);
-                    //localStorage.setItem("account_balance", account_balance);
-
-                    //first = response.first_name;
-                    //last = response.last_name;
-                    //phone = response.phone_number;
-                    
                     var location = JSON.parse(response.location_name);
                         postal = location.postal;
                         country = location.country;
@@ -159,13 +118,13 @@ function index_login_user(login_email,login_password,login_details_username,logi
                         address = location.address;
 
                     var user_location = country + ", "+ city;
-
                     localStorage.setItem("username", username);
                     localStorage.setItem("role", role);
                     localStorage.setItem("email", email);
                     localStorage.setItem("user_pass", user_pass);
 
                     var account_balance = response.account_balance;
+                    //var account_balance = localStorage.getItem("account_balance");
                     $(".account_balance").attr("account_balance",account_balance);
                     $(".account_balance").html("$" + account_balance);
                     localStorage.setItem("account_balance", account_balance);
@@ -184,42 +143,75 @@ function index_login_user(login_email,login_password,login_details_username,logi
                     $("#signin_html").hide();
                     $("#index_html").show();
                     $("#pills-account-tab").addClass("d-none");
-                    //alert();
+
                     user_permited = user_permited + 1;
                     onDeviceReady();
-                    /**let fik_path = "dashboard.html";
-                    let file_name = window.location.pathname;
-                    let text = file_name;
-                    const myArray = text.split("/");
-                    let newText = text.replace(myArray[myArray.length - 1], "");
-                    let new_window_location_pathname = newText + fik_path;
-                    let window_location_href ="" + location.protocol + "//" + window.location.hostname + "" + ":" + "" + window.location.port + new_window_location_pathname;
-                    window.location.href= window_location_href; */
 
-                    /**if (file_name.includes("light")) {
-                        window.location.href="" + location.protocol + "//" + window.location.hostname + "" + ":" + "" + window.location.port + window.location.pathname + fik_path;
-                    } else if (file_name.includes("dark")) {
-                        window.location.href="" + location.protocol + "//" + window.location.hostname + "" + ":" + "" + window.location.port + window.location.pathname + fik_path;
-                    } else {
-                        window.location.href="" + location.protocol + "//" + window.location.hostname + "" + ":" + "" + window.location.port + window.location.pathname + fik_path;
-                    } */
+                } else {
 
-                    //main();
+                }
+            } catch(e) {
+                mysnackbar('JSON parsing error');
+            }
+            /**try {
+                if (response.message == "success") {
+                    mysnackbar("Welcome " + response.username);
+
+                    username = response.username;
+                    var role = response.role;
+                    var email = response.email;
+
+                    var user_pass = response.password1;
+
+                    var phone_number = response.phone_number;
+                    var username_pic = response.username_pic;
+                    
+                    var location = JSON.parse(response.location_name);
+                        postal = location.postal;
+                        country = location.country;
+                        city = location.city;
+                        address = location.address;
+
+                    var user_location = country + ", "+ city;
+
+                    localStorage.setItem("username", username);
+                    localStorage.setItem("role", role);
+                    localStorage.setItem("email", email);
+                    localStorage.setItem("user_pass", user_pass);
+
+                    //var account_balance = response.account_balance;
+                    var account_balance = localStorage.getItem("account_balance");
+                    $(".account_balance").attr("account_balance",account_balance);
+                    $(".account_balance").html("$" + account_balance);
+                    //localStorage.setItem("account_balance", account_balance);
+                    alert("account_balance " + account_balance);
+
+                    localStorage.setItem("username_pic", username_pic);
+                    localStorage.setItem("user_location", user_location);
+                    localStorage.setItem("user_email", email);
+                    localStorage.setItem("user_phone", phone_number);
+                    $(".username").html(username);
+                    $(".username_seen").html("last seen " + new Date());
+                    $(".username_pic").html('<img class="avatar-img" src="' + localStorage.getItem("username_pic") + '" alt="#">');
+                    $(".user_location").html(localStorage.getItem("user_location"));
+                    $(".user_email").html(localStorage.getItem("user_email"));
+                    $(".user_phone").html(localStorage.getItem("user_phone"));
+ 
+                    $("#signin_html").hide();
+                    $("#index_html").show();
+                    $("#pills-account-tab").addClass("d-none");
+
+                    user_permited = user_permited + 1;
+                    onDeviceReady();                    
                 } else {
                    mysnackbar(response.login_email + " or " + response.login_password);
                 }
             } catch(e) {
-                //console.error('JSON parsing error');
                 mysnackbar('JSON parsing error');
-
-            }
-          
+            } */          
         },
         error: function searchError(xhr, err) {
-          //$('#app-cover-spin').hide(0);
           mysnackbar("Error on ajax call: " + api_server_url + '/cordova/login_user.php');
-          //main();
-
         }
     });
 }
@@ -279,20 +271,7 @@ function contact(user_name,con_from,conn_id,chat_message,is_empty) {
 }
 function chat_contacts_datamyFunction(item, index) {
     var data_i = data_length-1;
-    var connect_status = item.connect_status;
-    //alert(item.connect_message);
-    //alert(connect_status);
-    //var _status = JSON.parse(item.connect_status);
-    //var item_connect_status = _status.connect_status;
-    //const _status_is_typing_array = connect_status.split(',');
-    //var who_is_typing = _status_is_typing_array[0];
-    //var _status_is_typing = _status_is_typing_array[1];
-    //var who_is_typing_to = _status_is_typing_array[2];
-    //localStorage.setItem("who_is_typing_to",who_is_typing_to);
-    //localStorage.setItem("_status_is_typing",_status_is_typing);
-    //localStorage.setItem("who_is_typing",who_is_typing);
-
-    //mysnackbar(connect_status);
+    var connect_status = item.connect_status;    
 
     if (connect_status == "unread") {
         var check_status = '<span>✓</span>';
@@ -302,7 +281,6 @@ function chat_contacts_datamyFunction(item, index) {
     if (username != item.connect_from) {
         if (Number.isNaN(Date.parse(item.connects_time))) {
             var connect_date = item.connects_time;
-            //var connect_date = new Date(item.connects_time);
         } else {
             var msec = Date.parse(item.connects_time);
             var d = new Date(msec);
@@ -356,12 +334,10 @@ function chat_contacts_datamyFunction(item, index) {
             var message_is_type  = message_gallary;
 
         } else {
-            //IMAGE_pic_url = IMAGE_url_path_name + connects_name_image + '';
             var message_text = '<div class="message-text">' + reply_message + 
             '<p>' + is_message + '</p>' +
             '</div>';
             var message_is_type  = message_text;
-
         }
         var connect_messages = '<div id="message_' + item.connect_messages_id + '" class="message" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
         '<a href="#" data-bs-toggle="modal" data-bs-target="#modal-user-profile" class="avatar avatar-responsive">' +
@@ -422,7 +398,6 @@ function chat_contacts_datamyFunction(item, index) {
     } else {
         if (Number.isNaN(Date.parse(item.connects_time))) {
             var connect_date = item.connects_time;
-            //var connect_date = new Date(item.connects_time);
         } else {
             var msec = Date.parse(item.connects_time);
             var d = new Date(msec);
@@ -477,7 +452,6 @@ function chat_contacts_datamyFunction(item, index) {
             var message_is_type  = message_gallary;
 
         } else {
-            //IMAGE_pic_url = IMAGE_url_path_name + connects_name_image + '';
             var message_text = '<div class="message-text">' + reply_message + 
             '<p>' + is_message + '</p>' +
             '</div>';
@@ -551,10 +525,7 @@ function chat_contacts_datamyFunction(item, index) {
 
     if (data_i == index) {
         var is_typing = localStorage.getItem("is_typing");
-        //alert(localStorage.getItem("is_typing"));
-        //localStorage.getItem("who_is_typing")
-        //localStorage.getItem("who_is_typing_to")
-        //localStorage.getItem("_status_is_typing")
+        
         if (is_typing == 'is typing') {
             var typing = '<div class="message">' +
             '<a href="#" data-bs-toggle="modal" data-bs-target="#modal-user-profile" class="avatar avatar-responsive">' +
