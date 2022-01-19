@@ -1,86 +1,94 @@
 var mkt_option_clicked = 0;
 $("body").delegate(".mkt_option","click",function(event){
-    event.preventDefault(); 
-    //var order_price = $(".order_price").val();
-    $(".mkt_option").attr("price",$(this).attr('price'));
-    localStorage.setItem("price",$(this).attr('price'));
-    localStorage.setItem("price",$(this).attr('price'));
-
-    if (localStorage.getItem("asset") !== $(this).attr('asset')) {
-        $(".order_price").val(localStorage.getItem("price"));
-        $(".order_quantity").val(0);
-        $(".order_quantity_range").val(0);
-        $(".crypto_mkt_buy").html('');
-        $(".crypto_mkt_sell").html('');
+    event.preventDefault();
+    
+    if (localStorage.getItem("username") == null || localStorage.getItem("username") == "") {
+        mysnackbar("Please sign in to proceed");
     } else {
-        if ($(this).attr('aisa_options') == 'buy') {
-            localStorage.setItem("sell_price",$(this).attr('price'));
-            $(".order_price").val(localStorage.getItem("sell_price"));
-        } else if ($(this).attr('aisa_options') == 'sell'){
-            localStorage.setItem("buy_price",$(this).attr('price'));
-            $(".order_price").val(localStorage.getItem("buy_price"));
-        }
-    }
+        $(".mkt_option").attr("price",$(this).attr('price'));
+        localStorage.setItem("price",$(this).attr('price'));
+        localStorage.setItem("price",$(this).attr('price'));
     
-
-    localStorage.setItem("asset",$(this).attr('asset'));
-    localStorage.setItem("aisa_options",$(this).attr('aisa_options'));
-    $(".mkt_option").attr("asset",localStorage.getItem("asset"));
-
-    //But, before I can make a trade I have to buy bitcoins from the sell side at the lowest sell_price
-    // I must have minimum balance in USD to buy some bitcoins.
-    // BTCUSD rate would be the lowest sell_price to get 1 bitcoin
-    // thus, 1 bitcoin = USD sell_price
-    // if 1 bitcoin = USD sell_price, what about 0.0001 bitcoins
-    // (0.0001/1)*sell_price = USD account balance
-    // (bitcoin_amount * sell_price)/1 = account bitcoin balance
-    // therefore, 
-    //           let sell_price = 47403.5;
-    //           let bitcoin_amount = 0.0001;
-    //           let account_balance = USD 1000
-    //           let account_balance_stake = USD 100
-    //     if USD sell_price = 1 bitcoin,
-    //       how many USD account_balance = ?, well it depends with the account_balance at stake,
-    //                                         if (a) account_balance_stake is < than sell_price, 
-    //                                                                       it will give you less bitcoins
-    //                                         if (b) account_balance_stake is > than sell_price,
-    //                                                                       it will give you less bitcoins
-    //            if (a) account_balance_stake = USD 100   : < sell_price
-    //                   (USD account_balance_stake/USD sell_price) * 1 bitcoin = BTC bitcoin_balance
-    //
-    //            if (b) account_balance_stake = USD 100000   : > sell_price
-    //                  (USD account_balance_stake/USD sell_price) * 1 bitcoin = BTC bitcoin_balance
-
-    $(".asset_info").html('');
-    //bybit_mkt('Order Book',localStorage.getItem("asset"),'');
-
-    
-    localStorage.setItem("price_open",$(this).attr('price_open'));
-    localStorage.setItem("day_high",$(this).attr('day_high'));
-    localStorage.setItem("day_low",$(this).attr('day_low'));
-    //$("#main_mkt").addClass("is-visible");    
-    var order_price = $(".order_price").val();
-    if (order_price !== "") {
-        $(".order_price").removeClass("is-invalid");
-        $(".order_price").addClass("is-valid");
-        var order_quantity = $(".order_quantity").val();
-        if (order_quantity !== "") {
-            $(".order_quantity").removeClass("is-invalid");
-            $(".order_quantity").addClass("is-valid");
-
-            //rebro_Aisha(localStorage.getItem("asset"),localStorage.getItem("aisa_options"),localStorage.getItem("price"),localStorage.getItem("price_open"),localStorage.getItem("day_high"),localStorage.getItem("day_low"));
-            //alert(localStorage.getItem("price"));
-            account_mkt_balance(localStorage.getItem("aisa_options"));    
-
+        if (localStorage.getItem("asset") !== $(this).attr('asset')) {
+            $(".order_price").val(localStorage.getItem("price"));
+            $(".order_quantity").val(0);
+            $(".order_quantity_range").val(0);
+            $(".crypto_mkt_buy").html('');
+            $(".crypto_mkt_sell").html('');
         } else {
-            $(".order_quantity").removeClass("is-valid");
-            $(".order_quantity").addClass("is-invalid");
+            //moniter this
+            localStorage.setItem("sell_price",$(this).attr('price'));
+
+            if ($(this).attr('aisa_options') == 'buy') {
+                localStorage.setItem("sell_price",$(this).attr('price'));
+                $(".order_price").val(localStorage.getItem("sell_price"));
+            } else if ($(this).attr('aisa_options') == 'sell'){
+                localStorage.setItem("buy_price",$(this).attr('price'));
+                $(".order_price").val(localStorage.getItem("buy_price"));
+            }
         }
-    } else {
-        $(".order_price").removeClass("is-valid");
-        $(".order_price").addClass("is-invalid");
+        
+    
+        localStorage.setItem("asset",$(this).attr('asset'));
+        localStorage.setItem("aisa_options",$(this).attr('aisa_options'));
+        $(".mkt_option").attr("asset",localStorage.getItem("asset"));
+    
+        //But, before I can make a trade I have to buy bitcoins from the sell side at the lowest sell_price
+        // I must have minimum balance in USD to buy some bitcoins.
+        // BTCUSD rate would be the lowest sell_price to get 1 bitcoin
+        // thus, 1 bitcoin = USD sell_price
+        // if 1 bitcoin = USD sell_price, what about 0.0001 bitcoins
+        // (0.0001/1)*sell_price = USD account balance
+        // (bitcoin_amount * sell_price)/1 = account bitcoin balance
+        // therefore, 
+        //           let sell_price = 47403.5;
+        //           let bitcoin_amount = 0.0001;
+        //           let account_balance = USD 1000
+        //           let account_balance_stake = USD 100
+        //     if USD sell_price = 1 bitcoin,
+        //       how many USD account_balance = ?, well it depends with the account_balance at stake,
+        //                                         if (a) account_balance_stake is < than sell_price, 
+        //                                                                       it will give you less bitcoins
+        //                                         if (b) account_balance_stake is > than sell_price,
+        //                                                                       it will give you less bitcoins
+        //            if (a) account_balance_stake = USD 100   : < sell_price
+        //                   (USD account_balance_stake/USD sell_price) * 1 bitcoin = BTC bitcoin_balance
+        //
+        //            if (b) account_balance_stake = USD 100000   : > sell_price
+        //                  (USD account_balance_stake/USD sell_price) * 1 bitcoin = BTC bitcoin_balance
+    
+        $(".asset_info").html('');
+        
+        localStorage.setItem("price_open",$(this).attr('price_open'));
+        localStorage.setItem("day_high",$(this).attr('day_high'));
+        localStorage.setItem("day_low",$(this).attr('day_low'));
+        //$("#main_mkt").addClass("is-visible");    
+        var order_price = $(".order_price").val();
+        if (order_price !== "") {
+            $(".order_price").removeClass("is-invalid");
+            $(".order_price").addClass("is-valid");
+            var order_quantity = $(".order_quantity").val();
+            if (order_quantity !== "") {
+                $(".order_quantity").removeClass("is-invalid");
+                $(".order_quantity").addClass("is-valid");
+    
+                //rebro_Aisha(localStorage.getItem("asset"),localStorage.getItem("aisa_options"),localStorage.getItem("price"),localStorage.getItem("price_open"),localStorage.getItem("day_high"),localStorage.getItem("day_low"));
+                //alert(localStorage.getItem("price"));
+                account_mkt_balance(localStorage.getItem("aisa_options"));    
+    
+            } else {
+                $(".order_quantity").removeClass("is-valid");
+                $(".order_quantity").addClass("is-invalid");
+                mysnackbar("Enter Quantity");
+
+            }
+        } else {
+            $(".order_price").removeClass("is-valid");
+            $(".order_price").addClass("is-invalid");
+        }
+        mkt_option_clicked = 1;
     }
-    mkt_option_clicked = 1;
+    //var order_price = $(".order_price").val();
 });
 $("body").delegate(".order_book_mkt","click",function(event){
     event.preventDefault();    
@@ -168,6 +176,36 @@ $("body").delegate(".refresh_interval","click",function(event){
     localStorage.setItem("interval",$(this).attr('interval'));
  
 });
+$("body").delegate(".selected_payment_option","click",function(event){
+    event.preventDefault();
+    $(".payment_option").html("Pay with " + $(this).html()); 
+    localStorage.setItem("selected_payment_option",$(this).html()); 
+});
+$(".complete_trasaction").click(function(){
+    if ($(".amount_to_deposit").val() == '') {
+        $(".amount_to_deposit").removeClass("is-valid");
+        $(".amount_to_deposit_feedback").removeClass("valid-feedback");
+        $(".amount_to_deposit").addClass("is-invalid");
+        $(".amount_to_deposit_feedback").addClass("invalid-feedback");
+        $(".amount_to_deposit_feedback").html("Please provide a valid amount.");
+    } else if ( localStorage.getItem("selected_payment_option") == null) {
+        $(".payment_option").removeClass("btn-primary");
+        $(".payment_option").addClass("btn-danger");
+
+    } else {
+        $(".payment_option").removeClass("btn-danger");
+        $(".payment_option").addClass("btn-success");
+
+        $(".amount_to_deposit").removeClass("is-invalid");
+        $(".amount_to_deposit_feedback").removeClass("invalid-feedback");
+        $(".amount_to_deposit").addClass("is-valid");
+        $(".amount_to_deposit_feedback").addClass("valid-feedback");
+        $(".amount_to_deposit_feedback").html("Looks good!");
+        var amount_to_deposit = Number($(".amount_to_deposit").val());
+        var selected_payment_option  = localStorage.getItem("selected_payment_option");
+    }
+});
+
 var local_asset = "";
 var local_asset_time_min = '';
 
@@ -612,52 +650,58 @@ function account_mkt_balance(aisa_options) {
     var crypto_asset_value = localStorage.getItem("asset");
     crypto_asset_value = "" + crypto_asset_value + "_value";
 
-    //mysnackbar("account_balance " + localStorage.getItem("account_balance"));
+    //mysnackbar("aisa_options " + aisa_options);
     if (aisa_options =="buy") {
         if(localStorage.getItem(crypto_asset_balance) == null) {
             localStorage.setItem(crypto_asset_balance,0);//BTC
         }
-        
+        //mysnackbar($(".order_quantity").val());
         if ($(".order_quantity").val() != '' && $(".order_quantity").val() > 0) {
             $(".order_quantity").removeClass("is-invalid");
             $(".order_quantity").addClass("is-valid");
             var order_usd_quantity = $(".order_quantity").val();//USD
-            if (order_usd_quantity <= localStorage.getItem("account_balance")) {
-                var account_balance = localStorage.getItem("account_balance");//USD
-                //account_balance = Number(account_balance) - Number(order_usd_quantity);
-                //localStorage.setItem("account_balance",account_balance);//USD
-                var mkt_operation = '';
-                localStorage.setItem(crypto_asset_value,order_usd_quantity);//USD
+            if (localStorage.getItem("account_balance") <= 0) {
+                mysnackbar("Insufficient balance, load your account.");
+                display_account_action("show");
 
-                //alert(localStorage.getItem(crypto_asset_value));
-
-                let lowest_sell_price = localStorage.getItem("sell_price"); //USD
-                //////////////////////////////////////////
-
-                let btc_balance_fro_usd = (Number(order_usd_quantity)/Number(lowest_sell_price))*1; //BTC
-                var bitcoin_balance_fro_usd = (Number(localStorage.getItem(crypto_asset_balance)) + Number(btc_balance_fro_usd));
-                
-                //mkt_operation = mkt_operation + " bitcoin_balance_fro_usd " + bitcoin_balance_fro_usd;
-
-                bitcoin_balance_fro_usd = bitcoin_balance_fro_usd.toFixed(8);
-                /////////////////////////////////////////////
-                localStorage.setItem(crypto_asset_balance,bitcoin_balance_fro_usd);//BTC
-
-                mkt_operation = mkt_operation +'You bought ' + bitcoin_balance_fro_usd + ' ' + localStorage.getItem("asset") + ' worth $' + localStorage.getItem(crypto_asset_value) + ' at ' + localStorage.getItem("sell_price");
-                //mkt_operation = mkt_operation + '' ;
-
-                var is_empty = 'no';
-                dsh_contact('Mo-pal' ,username,'',mkt_operation,is_empty);
-
-                var order_quantity = 0;
-                order_quantity = order_quantity.toFixed(8);
-                $(".order_quantity").val(order_quantity);
-                $(".order_quantity_range").val(0);
-            } else {//localStorage.setItem("account_balance"
-                $(".order_quantity").val(localStorage.getItem("account_balance"));
-                mysnackbar("You do not have enough money");
-                $(".order_quantity_range").val(0);
-            }
+            } else {
+                if (order_usd_quantity <= localStorage.getItem("account_balance")) {
+                    var account_balance = localStorage.getItem("account_balance");//USD
+                    //account_balance = Number(account_balance) - Number(order_usd_quantity);
+                    //localStorage.setItem("account_balance",account_balance);//USD
+                    var mkt_operation = '';
+                    localStorage.setItem(crypto_asset_value,order_usd_quantity);//USD
+    
+                    //alert(localStorage.getItem(crypto_asset_value));
+    
+                    let lowest_sell_price = localStorage.getItem("sell_price"); //USD
+                    //////////////////////////////////////////
+    
+                    let btc_balance_fro_usd = (Number(order_usd_quantity)/Number(lowest_sell_price))*1; //BTC
+                    var bitcoin_balance_fro_usd = (Number(localStorage.getItem(crypto_asset_balance)) + Number(btc_balance_fro_usd));
+                    
+                    //mkt_operation = mkt_operation + " bitcoin_balance_fro_usd " + bitcoin_balance_fro_usd;
+    
+                    bitcoin_balance_fro_usd = bitcoin_balance_fro_usd.toFixed(8);
+                    /////////////////////////////////////////////
+                    localStorage.setItem(crypto_asset_balance,bitcoin_balance_fro_usd);//BTC
+    
+                    mkt_operation = mkt_operation +'You bought ' + bitcoin_balance_fro_usd + ' ' + localStorage.getItem("asset") + ' worth $' + localStorage.getItem(crypto_asset_value) + ' at ' + localStorage.getItem("sell_price");
+                    //mkt_operation = mkt_operation + '' ;
+    
+                    var is_empty = 'no';
+                    dsh_contact('Mo-pal' ,username,'',mkt_operation,is_empty);
+    
+                    var order_quantity = 0;
+                    order_quantity = order_quantity.toFixed(8);
+                    $(".order_quantity").val(order_quantity);
+                    $(".order_quantity_range").val(0);
+                } else {//localStorage.setItem("account_balance"
+                    $(".order_quantity").val(localStorage.getItem("account_balance"));
+                    mysnackbar("You do not have enough money");
+                    $(".order_quantity_range").val(0);
+                } 
+            }            
         } else {
             $(".order_quantity").addClass("is-invalid");
             $(".order_quantity").removeClass("is-valid");
@@ -673,37 +717,45 @@ function account_mkt_balance(aisa_options) {
             $(".order_quantity").removeClass("is-invalid");
             $(".order_quantity").addClass("is-valid");
             var order_btc_quantity = $(".order_quantity").val();//BTC
-            if (order_btc_quantity <= localStorage.getItem(crypto_asset_balance)) {
-                var bitcoin_balance = localStorage.getItem(crypto_asset_balance);//USD
-                bitcoin_balance = Number(bitcoin_balance) - Number(order_btc_quantity);
-                localStorage.setItem(crypto_asset_balance,bitcoin_balance);//USD
-                var mkt_operation = '';
 
-                let highest_buy_price = localStorage.getItem("buy_price");//USD
-                let usd_balance_fro_btc = (order_btc_quantity/1)*highest_buy_price; //USD
-                var usd_account_balance_fro_btc = (Number(localStorage.getItem("account_balance")) + Number(usd_balance_fro_btc));
-                
-                usd_account_balance_fro_btc = usd_account_balance_fro_btc.toFixed(2);
-                //localStorage.setItem("account_balance",usd_account_balance_fro_btc);//USD
-                
-                var initial_value = localStorage.getItem(crypto_asset_value);
-                var remaining_value = Number(initial_value) - Number(usd_balance_fro_btc);
-                localStorage.setItem(crypto_asset_value,remaining_value);//USD
-
-                mkt_operation = mkt_operation +'. You sold ' + order_btc_quantity + ' ' + localStorage.getItem("asset") + ' worth $' + usd_balance_fro_btc + ' at ' + localStorage.getItem("buy_price");
-
-                var is_empty = 'no';
-                dsh_contact('Mo-pal' ,username,'',mkt_operation,is_empty);
-
-                var order_quantity = 0;
-                order_quantity = order_quantity.toFixed(2);
-                $(".order_quantity").val(order_quantity);
-                $(".order_quantity_range").val(0);
-            } else{
-                $(".order_quantity").val(localStorage.getItem(crypto_asset_balance));
-                mysnackbar("You do not have enough crypto");
-                $(".order_quantity_range").val(0);
+            //alert(localStorage.getItem(crypto_asset_balance));
+            if (localStorage.getItem(crypto_asset_balance) <= 0) {
+                mysnackbar("Deficient crypto, try buying some");
+            } else {
+                if (order_btc_quantity <= localStorage.getItem(crypto_asset_balance)) {
+                    var bitcoin_balance = localStorage.getItem(crypto_asset_balance);//USD
+                    bitcoin_balance = Number(bitcoin_balance) - Number(order_btc_quantity);
+                    localStorage.setItem(crypto_asset_balance,bitcoin_balance);//USD
+                    var mkt_operation = '';
+    
+                    let highest_buy_price = localStorage.getItem("buy_price");//USD
+                    let usd_balance_fro_btc = (order_btc_quantity/1)*highest_buy_price; //USD
+                    var usd_account_balance_fro_btc = (Number(localStorage.getItem("account_balance")) + Number(usd_balance_fro_btc));
+                    
+                    usd_account_balance_fro_btc = usd_account_balance_fro_btc.toFixed(2);
+                    //localStorage.setItem("account_balance",usd_account_balance_fro_btc);//USD
+                    
+                    var initial_value = localStorage.getItem(crypto_asset_value);
+                    var remaining_value = Number(initial_value) - Number(usd_balance_fro_btc);
+                    localStorage.setItem(crypto_asset_value,remaining_value);//USD
+    
+                    mkt_operation = mkt_operation +'You sold ' + order_btc_quantity + ' ' + localStorage.getItem("asset") + ' worth $' + usd_balance_fro_btc + ' at ' + localStorage.getItem("buy_price");
+    
+                    var is_empty = 'no';
+                    dsh_contact('Mo-pal' ,username,'',mkt_operation,is_empty);
+     
+                    var order_quantity = 0;
+                    order_quantity = order_quantity.toFixed(2);
+                    $(".order_quantity").val(order_quantity);
+                    $(".order_quantity_range").val(0);
+                } else{
+                    $(".order_quantity").val(localStorage.getItem(crypto_asset_balance));
+                    mysnackbar("You do not have enough crypto");
+                    $(".order_quantity_range").val(0);
+                }
             }
+            
+
         } else {
             $(".order_quantity").addClass("is-invalid");
             $(".order_quantity").removeClass("is-valid");
@@ -786,14 +838,21 @@ $(document).on('input', '.order_quantity_range', function() {
     var bitcoin_balance = localStorage.getItem(crypto_asset_balance);//BTC
     var pct_bitcoin_balance = (Number(bitcoin_balance) *Number(order_quantity_pct))/100;
     pct_bitcoin_balance = pct_bitcoin_balance.toFixed(8);
-
-    if (localStorage.getItem("aisa_options") == "sell") {
-        $(".order_quantity").val(pct_bitcoin_balance);
-        mysnackbar(pct_bitcoin_balance);
+    if (localStorage.getItem(crypto_asset_balance) <= 0 && localStorage.getItem("account_balance") > 0) {
+        mysnackbar("Deficient crypto, try buying some");
+    } else if (localStorage.getItem("account_balance") <= 0) {
+        mysnackbar("Insufficient balance, load your account.");
+        display_account_action("show");
     } else {
-        $(".order_quantity").val(pct_account_balance);
-        mysnackbar(pct_account_balance);
+        if (localStorage.getItem("aisa_options") == "sell") {
+            $(".order_quantity").val(pct_bitcoin_balance);
+            mysnackbar(pct_bitcoin_balance);
+        } else {
+            $(".order_quantity").val(pct_account_balance);
+            mysnackbar(pct_account_balance);
+        }
     }
+    
 });
 //myChart();
 /**function myChart(){
@@ -855,7 +914,13 @@ $(document).on('input', '.order_quantity_range', function() {
         chart.render();
     }
 } */
-
+function display_account_action(action) {
+    if (action == "hide") {
+        $("#account_action").hide();
+    } else {
+        $("#account_action").show();
+    }
+}
 
 function mysnackbar(text) {
     // Get the snackbar DIV

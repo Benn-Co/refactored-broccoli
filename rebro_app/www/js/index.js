@@ -141,6 +141,14 @@ function index_login_user(login_email,login_password,login_details_username,logi
                     $(".user_phone").html(localStorage.getItem("user_phone"));
  
                     $("#signin_html").hide();
+                    $("#signup_html").hide();
+                    $("#forgot_password_html").hide();
+                    $("#code_reset_html").hide();
+                    $("#create_password_html").hide();
+                    //$("#signin_html").hide();
+                    //$("#signin_html").hide();
+
+                    //$("#signin_html").hide();
                     $("#index_html").show();
                     $("#pills-account-tab").addClass("d-none");
 
