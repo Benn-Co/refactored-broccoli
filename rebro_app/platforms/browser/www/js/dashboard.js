@@ -132,6 +132,9 @@ $("body").delegate(".currency_option","click",function(event){
     $(".select_currency").html($(this).attr('currency_name'));
     $(".select_country").html($(this).attr('country_name')); 
     $(".mcode").html($(this).attr('mcode'));
+    localStorage.setItem("mcode", $(this).attr('mcode'));
+    localStorage.setItem("ccode", $(this).attr('ccode'));
+
     //alert($(this).attr('mcode'));
 });
 $("body").delegate(".country_option","click",function(event){
@@ -139,6 +142,9 @@ $("body").delegate(".country_option","click",function(event){
     $(".select_country").html($(this).attr('country_name')); 
     $(".select_currency").html($(this).attr('ccode'));
     $(".mcode").html($(this).attr('mcode'));
+    localStorage.setItem("mcode", $(this).attr('mcode'));
+    localStorage.setItem("ccode", $(this).attr('ccode'));
+
     //alert($(this).attr('mcode'));
 
 });
@@ -219,28 +225,44 @@ $(".complete_trasaction").click(function(){
         if (selected_payment_option == "M-Pesa") {
             $(".entrer_phoner").show();
             var phone_num = $(".user_phone_number").val();
-            if ($(".user_phone_number").val() == '' || phone_num.length < 9) {
+            phone_num = "" + phone_num + "";
+            if(phone_num.charAt(0) == "0"){
+                phone_num = phone_num.replace(0, "");
+            }
+            if ($(".user_phone_number").val() == '' || phone_num.length < 9 || phone_num.length > 9) {
                 $(".user_phone_number").removeClass("is-valid");
                 $(".user_phone_numberfeedback").removeClass("valid-feedback");
                 $(".user_phone_number").addClass("is-invalid");
                 $(".user_phone_numberfeedback").addClass("invalid-feedback");
-                $(".user_phone_numberfeedback").html("Please provide a valid phone number.");
+                $(".user_phone_numberfeedback").html("Please provide a valid 10 digits phone number.");
             } else {
                 $(".user_phone_number").removeClass("is-invalid");
                 $(".user_phone_numberfeedback").removeClass("invalid-feedback");
                 $(".user_phone_numberfeedback").addClass("valid-feedback");
                 $(".user_phone_number").addClass("is-valid");
-                $(".user_phone_numberfeedback").html("Looks good!"); 
 
                 $(".complete_trasaction").removeClass("btn-primary");
                 $(".complete_trasaction").addClass("btn-warning");
                 $(".complete_trasaction").html("Proccessing..."); 
 
-                proccess_transaction(amount_to_deposit,selected_payment_option,phone_num);               
+                var mcode = localStorage.getItem("mcode");
+                phone_num = mcode + "" + phone_num;
+                $(".user_phone_numberfeedback").html(phone_num + " good!"); 
+                localStorage.setItem("user_phone", phone_num);
+
+                var proccessing_number = "" + localStorage.getItem("user_phone") + "";
+                proccessing_number = "" + proccessing_number + "";
+                if(proccessing_number.charAt(0) == "+"){
+                    proccessing_number = proccessing_number.replace("+", "");
+                }
+
+                proccess_transaction(localStorage.getItem("ccode"),amount_to_deposit,selected_payment_option,proccessing_number);               
             }
         } else {
             $(".entrer_phoner").hide();
         }
+
+        
     }
 });
 
@@ -703,11 +725,11 @@ function bybit_mkt(crypto,asset,aisa_options) {
     });
 }
 
-function proccess_transaction(amount_to_deposit,selected_payment_option,phone_num){
+function proccess_transaction(ccode,amount_to_deposit,selected_payment_option,phone_num){
     $.ajax({
         type: "POST", // Type of request to be send, called as 
         dataType: 'json',
-        data: { amount_to_deposit:amount_to_deposit, selected_payment_option: selected_payment_option, phone_num: phone_num, username: localStorage.getItem("username"), email:localStorage.getItem("email"), user_pass:localStorage.getItem("user_pass")},
+        data: { ccode:ccode, amount_to_deposit:amount_to_deposit, selected_payment_option: selected_payment_option, phone_num: phone_num, username: localStorage.getItem("username"), email:localStorage.getItem("email"), user_pass:localStorage.getItem("user_pass")},
         processData: true,
         url: api_server_url + '/cordova/proccess_transaction.php',
         success: function searchSuccess(response) {

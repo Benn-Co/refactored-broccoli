@@ -222,6 +222,8 @@ let countries =[
      if (i < 1) {
        $(".select_currency").html(countries[i].ccode);
        $(".mcode").html(countries[i].mcode);
+       localStorage.setItem("mcode", countries[i].mcode);
+       localStorage.setItem("ccode", countries[i].ccode);
 
        var curre = '<li><a class="dropdown-item active currency_option" mcode="' + countries[i].mcode + '" exchange_rate="' + countries[i].exrate + '" ccode="' + countries[i].ccode + '" currency_name="' + countries[i].ccode + '" country_name="' + countries[i].name + '" href="#">' + countries[i].ccode + '</a></li>' +
                    '<li><hr class="dropdown-divider"></li>';
