@@ -719,11 +719,11 @@ function bybit_mkt(crypto,asset,aisa_options) {
                     $(".asset_info").html('');
                 }
             } catch(e) {
-                mysnackbar('JSON parsing error');
+                //mysnackbar('JSON parsing error');
             }          
         },
         error: function searchError(xhr, err) {
-         mysnackbar("Error on ajax call: " + err  + " " + JSON.stringify(xhr));
+         //mysnackbar("Error on ajax call: " + err  + " " + JSON.stringify(xhr));
         }
     });
 }
@@ -745,11 +745,11 @@ function proccess_transaction(ccode,amount_to_deposit,selected_payment_option,ph
 
                 mysnackbar(response.account_balance);
             } catch(e) {
-                mysnackbar('JSON parsing error');
+                //mysnackbar('JSON parsing error');
             }          
         },
         error: function searchError(xhr, err) {
-         mysnackbar("Error on ajax call: " + err  + " " + JSON.stringify(xhr));
+         //mysnackbar("Error on ajax call: " + err  + " " + JSON.stringify(xhr));
         }
     });
 }               
