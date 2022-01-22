@@ -113,7 +113,12 @@ function signup_user(signup_username,signup_email,signup_password) {
                     $(".user_email").html(localStorage.getItem("user_email"));
                     $(".user_phone").html(localStorage.getItem("user_phone"));
  
+                    $("#signin_html").hide();
                     $("#signup_html").hide();
+                    $("#forgot_password_html").hide();
+                    $("#code_reset_html").hide();
+                    $("#create_password_html").hide();
+
                     $("#index_html").show();
                     $("#pills-account-tab").addClass("d-none");
                     onDeviceReady();
