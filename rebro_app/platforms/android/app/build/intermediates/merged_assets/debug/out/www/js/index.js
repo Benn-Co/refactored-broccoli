@@ -261,11 +261,11 @@ function contact(user_name,con_from,conn_id,chat_message,is_empty) {
                         }                    
                     }           
                 } catch(e) {
-                    mysnackbar('contact Json persing error');
+                   // mysnackbar('contact Json persing error');
                 }
             },
             error: function searchError(xhr, err) {
-                mysnackbar('Error on ajax call: ' + err  + ' ' + JSON.stringify(xhr) + '');
+               // mysnackbar('Error on ajax call: ' + err  + ' ' + JSON.stringify(xhr) + '');
             }
         });         
     } else {        
@@ -631,7 +631,7 @@ function loadchat(item_connect_from) {
             }          
         },
         error: function searchError(xhr, err) {
-            mysnackbar('Error on ajax call: ' + err  + ' ' + JSON.stringify(xhr));
+           // mysnackbar('Error on ajax call: ' + err  + ' ' + JSON.stringify(xhr));
         }
     });    
 }
