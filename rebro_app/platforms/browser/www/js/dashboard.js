@@ -198,56 +198,113 @@ $("body").delegate(".selected_payment_option","click",function(event){
     } 
 });
 $(".complete_trasaction").click(function(){
-    var typofe = Number($(".amount_to_deposit").val());
-
-    if ($(".amount_to_deposit").val() == '') {
-        $(".amount_to_deposit").removeClass("is-valid");
-        $(".amount_to_deposit_feedback").removeClass("valid-feedback");
-        $(".amount_to_deposit").addClass("is-invalid");
-        $(".amount_to_deposit_feedback").addClass("invalid-feedback");
-        $(".amount_to_deposit_feedback").html("Please provide a valid amount.");
-    } else if ( localStorage.getItem("selected_payment_option") == null) {
+    var deposit = $(this).attr("intenti");
+    if ($(this).attr("intenti") == "withdraw") {
+        if ($(".amount_to_withdraw").val() == '') {
+            $(".amount_to_withdraw").removeClass("is-valid");
+            $(".amount_to_withdraw_feedback").removeClass("valid-feedback");
+            $(".amount_to_withdraw").addClass("is-invalid");
+            $(".amount_to_withdraw_feedback").addClass("invalid-feedback");
+            $(".amount_to_withdraw_feedback").html("Please provide a valid amount.");
+        }
+    } else {
+        if ($(".amount_to_deposit").val() == '') {
+            $(".amount_to_deposit").removeClass("is-valid");
+            $(".amount_to_deposit_feedback").removeClass("valid-feedback");
+            $(".amount_to_deposit").addClass("is-invalid");
+            $(".amount_to_deposit_feedback").addClass("invalid-feedback");
+            $(".amount_to_deposit_feedback").html("Please provide a valid amount.");
+        }
+    }
+    
+    if ( localStorage.getItem("selected_payment_option") == null) {
         $(".payment_option").removeClass("btn-primary");
         $(".payment_option").addClass("btn-danger");
+        mysnackbar("select payment option");
     } else {
         $(".payment_option").removeClass("btn-danger");
         $(".payment_option").addClass("btn-success");
         $(".payment_option").html(localStorage.getItem("selected_payment_option")); 
 
-        $(".amount_to_deposit").removeClass("is-invalid");
-        $(".amount_to_deposit_feedback").removeClass("invalid-feedback");
-        $(".amount_to_deposit").addClass("is-valid");
-        $(".amount_to_deposit_feedback").addClass("valid-feedback");
-        $(".amount_to_deposit_feedback").html("Looks good!");
-        var amount_to_deposit = Number($(".amount_to_deposit").val());
+        if ($(this).attr("intenti") == "withdraw") {
+            if ($(".amount_to_withdraw").val() == '') {
+                $(".amount_to_withdraw").removeClass("is-valid");
+                $(".amount_to_withdraw_feedback").removeClass("valid-feedback");
+                $(".amount_to_withdraw").addClass("is-invalid");
+                $(".amount_to_withdraw_feedback").addClass("invalid-feedback");
+                $(".amount_to_withdraw_feedback").html("Please provide a valid amount.");
+            } else {
+                $(".amount_to_withdraw").removeClass("is-invalid");
+                $(".amount_to_withdraw_feedback").removeClass("invalid-feedback");
+                $(".amount_to_withdraw").addClass("is-valid");
+                $(".amount_to_withdraw_feedback").addClass("valid-feedback");
+                $(".amount_to_withdraw_feedback").html("Looks good!");
+                var amount_to_deposit = Number($(".amount_to_withdraw").val());
+            }            
+        } else {
+            if ($(".amount_to_deposit").val() == '') {
+                $(".amount_to_deposit").removeClass("is-valid");
+                $(".amount_to_deposit_feedback").removeClass("valid-feedback");
+                $(".amount_to_deposit").addClass("is-invalid");
+                $(".amount_to_deposit_feedback").addClass("invalid-feedback");
+                $(".amount_to_deposit_feedback").html("Please provide a valid amount.");
+            } else {
+                $(".amount_to_deposit").removeClass("is-invalid");
+                $(".amount_to_deposit_feedback").removeClass("invalid-feedback");
+                $(".amount_to_deposit").addClass("is-valid");
+                $(".amount_to_deposit_feedback").addClass("valid-feedback");
+                $(".amount_to_deposit_feedback").html("Looks good!");
+                var amount_to_deposit = Number($(".amount_to_deposit").val());
+            }            
+        }        
+
         var selected_payment_option  = localStorage.getItem("selected_payment_option");
 
         if (selected_payment_option == "M-Pesa") {
             $(".entrer_phoner").show();
-            var phone_num = $(".user_phone_number").val();
+            if ($(this).attr("intenti") == "withdraw") {
+                var user_phone_ = $(".user_withdraw_phone_number").val();
+            } else {
+                var user_phone_ = $(".user_phone_number").val();
+            }
+            var phone_num = user_phone_;
             phone_num = "" + phone_num + "";
             if(phone_num.charAt(0) == "0"){
                 phone_num = phone_num.replace(0, "");
             }
-            if ($(".user_phone_number").val() == '' || phone_num.length < 9 || phone_num.length > 9) {
-                $(".user_phone_number").removeClass("is-valid");
-                $(".user_phone_numberfeedback").removeClass("valid-feedback");
-                $(".user_phone_number").addClass("is-invalid");
-                $(".user_phone_numberfeedback").addClass("invalid-feedback");
-                $(".user_phone_numberfeedback").html("Please provide a valid 10 digits phone number.");
+            if (user_phone_ == '' || phone_num.length < 9 || phone_num.length > 9) {
+                if ($(this).attr("intenti") == "withdraw") {
+                    $(".user_withdraw_phone_number").removeClass("is-valid");
+                    $(".user_withdraw_phone_numberfeedback").removeClass("valid-feedback");
+                    $(".user_withdraw_phone_number").addClass("is-invalid");
+                    $(".user_withdraw_phone_numberfeedback").addClass("invalid-feedback");
+                    $(".user_withdraw_phone_numberfeedback").html("Please provide a valid 10 digits phone number.");
+                } else {
+                    $(".user_phone_number").removeClass("is-valid");
+                    $(".user_phone_numberfeedback").removeClass("valid-feedback");
+                    $(".user_phone_number").addClass("is-invalid");
+                    $(".user_phone_numberfeedback").addClass("invalid-feedback");
+                    $(".user_phone_numberfeedback").html("Please provide a valid 10 digits phone number.");
+                }                
             } else {
-                $(".user_phone_number").removeClass("is-invalid");
-                $(".user_phone_numberfeedback").removeClass("invalid-feedback");
-                $(".user_phone_numberfeedback").addClass("valid-feedback");
-                $(".user_phone_number").addClass("is-valid");
-
-                $(".complete_trasaction").removeClass("btn-primary");
-                $(".complete_trasaction").addClass("btn-warning");
-                $(".complete_trasaction").html("Proccessing..."); 
-
-                var mcode = localStorage.getItem("mcode");
-                phone_num = mcode + "" + phone_num;
-                $(".user_phone_numberfeedback").html(phone_num + " good!"); 
+                if ($(this).attr("intenti") == "withdraw") {
+                    $(".user_withdraw_phone_number").removeClass("is-invalid");
+                    $(".user_withdraw_phone_numberfeedback").removeClass("invalid-feedback");
+                    $(".user_withdraw_phone_numberfeedback").addClass("valid-feedback");
+                    $(".user_withdraw_phone_number").addClass("is-valid");
+                    var mcode = localStorage.getItem("mcode");
+                    phone_num = mcode + "" + phone_num;
+                    $(".user_withdraw_phone_numberfeedback").html(phone_num + " good!"); 
+                } else {
+                    $(".user_phone_number").removeClass("is-invalid");
+                    $(".user_phone_numberfeedback").removeClass("invalid-feedback");
+                    $(".user_phone_numberfeedback").addClass("valid-feedback");
+                    $(".user_phone_number").addClass("is-valid");
+                    var mcode = localStorage.getItem("mcode");
+                    phone_num = mcode + "" + phone_num;
+                    $(".user_phone_numberfeedback").html(phone_num + " good!"); 
+                }
+                
                 localStorage.setItem("user_phone", phone_num);
 
                 var proccessing_number = "" + localStorage.getItem("user_phone") + "";
@@ -256,7 +313,12 @@ $(".complete_trasaction").click(function(){
                     proccessing_number = proccessing_number.replace("+", "");
                 }
 
-                proccess_transaction(localStorage.getItem("ccode"),amount_to_deposit,selected_payment_option,proccessing_number);               
+                $(".complete_trasaction").removeClass("btn-primary");
+                $(".complete_trasaction").addClass("btn-warning");
+                $(".complete_trasaction").html("Proccessing..."); 
+
+                var intent = $(this).attr("intenti");
+                proccess_transaction(localStorage.getItem("ccode"),amount_to_deposit,selected_payment_option,proccessing_number,intent);               
             }
         } else {
             $(".entrer_phoner").hide();
@@ -728,11 +790,11 @@ function bybit_mkt(crypto,asset,aisa_options) {
     });
 }
 
-function proccess_transaction(ccode,amount_to_deposit,selected_payment_option,phone_num){
+function proccess_transaction(ccode,amount_to_deposit,selected_payment_option,phone_num,intent){
     $.ajax({
         type: "POST", // Type of request to be send, called as 
         dataType: 'json',
-        data: { ccode:ccode, amount_to_deposit:amount_to_deposit, selected_payment_option: selected_payment_option, phone_num: phone_num, username: localStorage.getItem("username"), email:localStorage.getItem("email"), user_pass:localStorage.getItem("user_pass")},
+        data: { ccode:ccode, amount_to_deposit:amount_to_deposit, selected_payment_option: selected_payment_option, phone_num: phone_num, username: localStorage.getItem("username"), email:localStorage.getItem("email"), user_pass:localStorage.getItem("user_pass"), intent:intent},
         processData: true,
         url: api_server_url + '/cordova/proccess_transaction.php',
         success: function searchSuccess(response) {
