@@ -123,7 +123,7 @@ function onDeviceReady() {
         }
     }
     //get_country_codes('','');
-    bybit_mkt('Query Symbol','','');        
+    //bybit_mkt('Query Symbol','','');        
 }
 function index_login_user(login_email,login_password,login_details_username,login_details_email) {
     $.ajax({
