@@ -49,7 +49,11 @@ function get_country_codes(lo,la) {
              var country = '<li><a class="dropdown-item active country_option" cname="' + countries[i].cname + '" mcode="' + countries[i].mcode + '" exchange_rate="' + countries[i].exrate + '" ccode="' + countries[i].ccode + '" currency_name="' + countries[i].ccode + '" country_name="' + countries[i].name + '" href="#">' + countries[i].name + '</a></li>' +
                            '<li><hr class="dropdown-divider"></li>';
                            $(".country_list").append(country);
-             bybit_mkt('Query Symbol','','');           
+             //bybit_mkt('Query Symbol','',''); 
+             //Query_Symbol_Book();
+             //arybit('Query Kline',localStorage.getItem("asset"),'');
+             Query_Symbol('Query Symbol','','');
+             Query_Kline_Book();
            }else{
              var curre = '<li><a class="dropdown-item currency_option" cname="' + countries[i].cname + '" mcode="' + countries[i].mcode + '" exchange_rate="' + countries[i].exrate + '" ccode="' + countries[i].ccode + '" currency_name="' + countries[i].ccode + '" country_name="' + countries[i].name + '" href="#">' + countries[i].cname + '</a></li>' +
                          '<li><hr class="dropdown-divider"></li>';
