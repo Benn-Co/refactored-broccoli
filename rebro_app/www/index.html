@@ -2400,10 +2400,34 @@
                                     
 
                                     <div id="leanders_mkt_c"  class="card mb-3">
-                                        <div class="asset_info">
+                                        <span class="asset_info_candlestick mt-3 d-flex justify-content-between align-items-center">
                                     
+                                        </span>
+                                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                            <div class="btn-group me-2 btn-group-sm" role="group" aria-label="First group">
+                                              <button type="button" class="btn btn-outline-secondary btn-sm active refresh_interval" int_val="1" interval="1">1 m</button>
+                                              <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="3" interval="3">3 m</button>
+                                              <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="5" interval="5">5 m</button>
+                                              <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="15" interval="15">15 m</button>
+                                              <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="30" interval="30">30 m</button>
+                                            </div>
+                                            <div class="btn-group me-2 btn-group-sm" role="group btn-sm" aria-label="Second group">
+                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="60" interval="60">1 hr</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="120" interval="120">2 hrs</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="240" interval="240">4 hrs</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="360" interval="360">6 hrs</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="720" interval="720">12 hrs</button>
+
+                                            </div>
+                                            <div class="btn-group btn-group-sm" role="group" aria-label="Third group">
+                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="1440" interval="D">1 D</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="10080" interval="W">W</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="40320" interval="M">M</button>
+                                            </div>
                                         </div>
-                                        <div class="card-body">                                            
+                                        
+                                        <div class="card-body"> 
+                                                                                       
                                             <div dir="ltr">
                                                 <div id="simple-candlestick" class="apex-charts" data-colors="#42d29d,#fa6767"></div>
                                             </div>

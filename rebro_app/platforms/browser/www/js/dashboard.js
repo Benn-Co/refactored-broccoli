@@ -118,7 +118,7 @@ $("body").delegate(".currency_option","click",function(event){
     //mysnackbar(localStorage.getItem("asset"));
     //new_seriesData = [];
     //Query_Kline('Query Kline',localStorage.getItem("asset"),'');
-    //$(".asset_info").html('');
+    //$(".asset_info_candlestick").html('');
     //$("#simple-candlestick").html('');
     //new_seriesData = [];
     //mysnackbar(localStorage.getItem("asset"));
@@ -146,7 +146,7 @@ $("body").delegate(".country_option","click",function(event){
     //mysnackbar(localStorage.getItem("asset"));
     //new_seriesData = [];
     //Query_Kline('Query Kline',localStorage.getItem("asset"),'');
-    //$(".asset_info").html('');
+    //$(".asset_info_candlestick").html('');
     //$("#simple-candlestick").html('');
     //new_seriesData = [];
     //mysnackbar(localStorage.getItem("asset"));
@@ -179,13 +179,13 @@ $("body").delegate(".get_asset","click",function(event){
     //new_seriesData = [];
     //Query_Kline_Book();
     //Query_Kline('Query Kline',localStorage.getItem("asset"),'');
-    //$(".asset_info").html(''); 
+    //$(".asset_info_candlestick").html(''); 
     //$("#simple-candlestick").html('');
     //Order_Book();
     //Query_Kline_Book();  
     //Query_Kline('Query Kline',localStorage.getItem("asset"),'');
     /**$(".mkt_option").attr("asset",localStorage.getItem("asset"));
-    $(".asset_info").html(''); 
+    $(".asset_info_candlestick").html(''); 
     $("#simple-candlestick").html('');
     new_seriesData = [];
     //Query_Kline('Query Kline',localStorage.getItem("asset"),'');
@@ -199,9 +199,16 @@ $("body").delegate(".get_asset","click",function(event){
     $(".crypto_mkt_sell").html(''); 
     bybit_mkt('Order Book',localStorage.getItem("asset"),''); */ 
 });
+var de_time = 5000;
+localStorage.setItem("de_time",de_time);
 $("body").delegate(".refresh_interval","click",function(event){
     event.preventDefault();
-    $(".refresh_").html($(this).html()); 
+    $(".refresh_interval").removeClass("active");
+    $(this).addClass("active");
+
+    var u_de_time = de_time*Number($(this).attr('int_val'));
+    localStorage.setItem("de_time",u_de_time);
+
     localStorage.setItem("interval",$(this).attr('interval'));
  
 });
@@ -443,11 +450,14 @@ function Query_Kline_Book() {
     setTimeout(Query_Kline_Book, 3000);
 }
 var time_cuddle = 0;
+var base_lengt = 0;
+
 function arybit(crypto,asset,aisa_options) {
+    //alert(localStorage.getItem("limit"));
     $.ajax({
         type: "POST", // Type of request to be send, called as 
         dataType: 'json',
-        data: { crypto:crypto, asset: asset, limit: localStorage.getItem("limit"), interval: localStorage.getItem("interval"), aisa_options: aisa_options},
+        data: { crypto:crypto, asset: asset, limit: localStorage.getItem("limit"), de_time: localStorage.getItem("de_time"), interval: localStorage.getItem("interval"), aisa_options: aisa_options},
         processData: true,
         url: 'https://arybit.com/cordova/',
         success: function searchSuccess(response) {
@@ -463,13 +473,18 @@ function arybit(crypto,asset,aisa_options) {
                         var t_time = new Date(Number(response_time_now));
                         var trade_time = "" + t_time.getHours() + ":" + t_time.getMinutes() + ":" + t_time.getSeconds() + "";
                         var cusymbal = '';
+                        new_leads_chart_params=0;
+                        params=[];
+                        base_lengt = results.length;
+                        var trade_time_cu = '';
                         for (let i = 0; i < results.length; i++) {                            
                             let text1 = "" + results[i].open_time + "";
                             let text2 = "000";
                             let open_response_time_now = text1.concat("",text2);
                             var open_t_time = new Date(Number(open_response_time_now));
                             var open_trade_time = "" + open_t_time.getHours() + ":" + open_t_time.getMinutes() + ":" + open_t_time.getSeconds() + "";
-                            
+                            trade_time_cu = open_trade_time;
+
                             var results_open = Number(results[i].open)*Number(localStorage.getItem("exrate"));
                             if (results_open.toFixed(2) < 1) {
                                 results_open = results_open.toFixed(4);
@@ -502,10 +517,10 @@ function arybit(crypto,asset,aisa_options) {
                                 x: new Date(Number(open_response_time_now)),
                                 y: [results_open, results_high, results_low, results_close]
                             };
+                            params[i] = results_open;
+
                             if (i >= results.length-1) {
-                                var asset_info = '<ul id="" class="list-group">'+
-                                '<li class="list-group-item d-flex justify-content-between align-items-center" style="height: 10px">'+
-                                '<a class="text-primary position-relative mr-2" title="Symbol" href="#' + results[i].symbol + '">' + results[i].symbol + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill">Symbol</span></a>'+                            
+                                var asset_info = '<a class="text-primary position-relative mr-2" title="Symbol" href="#' + results[i].symbol + '">' + results[i].symbol + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill">Symbol</span></a>'+                            
                                 '<span class="text-info d-none d-xl-block position-relative" title="Interval">' + results[i].interval + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill">Interval</span></span>'+
                                 '<span class="text-info d-none d-xl-block position-relative" title="Open time">' + open_trade_time + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill">Open time</span></span>'+
                                 '<span class="text-primary position-relative mr-2" title="' + results[i].interval + 'Min Open">' + results_open + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill">' + results[i].interval + 'Min Open</span></span>'+
@@ -515,8 +530,7 @@ function arybit(crypto,asset,aisa_options) {
                                 '<span class="text-info d-none d-xl-block position-relative" title="Volume">' + results[i].volume + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill">Volume</span></span>'+
                                 '<span class="text-info d-none d-xl-block position-relative" title="Turnover">' + results[i].turnover + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill">Turnover</span></span>'+
                                 '<span class="text-info d-none d-xl-block position-relative" title="Time">' + trade_time + '<span class="position-absolute top-0 start-50 translate-middle badge rounded-pill">Time</span></span>'+
-                                '</li>'+
-                                '</ul>';
+                                '';
                                 localStorage.setItem("price_open",results_open);
                                 $(".mkt_option").attr("price_open",localStorage.getItem("price_open"));
                                 localStorage.setItem("day_high",results_high);
@@ -524,8 +538,8 @@ function arybit(crypto,asset,aisa_options) {
                                 localStorage.setItem("day_low",results_low);
                                 $(".mkt_option").attr("day_low",localStorage.getItem("day_low"));
                                 localStorage.setItem("day_close",results_close);
-                                $(".asset_info").html('');
-                                $(".asset_info").append(asset_info);
+                                $(".asset_info_candlestick").html('');
+                                $(".asset_info_candlestick").append(asset_info);
                                 time_cuddle = open_response_time_now;
                                 cusymbal = results[i].symbol 
                             }                            
@@ -533,12 +547,22 @@ function arybit(crypto,asset,aisa_options) {
                         if (cusymbal == localStorage.getItem("asset")) {
                             $("#leanders_mkt").addClass("d-none");
                             $("#leanders_mkt_c").removeClass("d-none");
+                            condition_params = 0;
                             simple_candlestick(new_seriesData);    
                         } else {
+                            new_leads_chart_params=0;
+                            params=[];
+                            condition_params = 1;
                             $("#leanders_mkt_c").addClass("d-none");
                             $("#leanders_mkt").removeClass("d-none");
                         }                                   
                     } else{
+                        if (cusymbal_condition_params != localStorage.getItem("asset")) {
+                            cusymbal_condition_params = localStorage.getItem("asset");
+                            new_leads_chart_params=0;
+                            params=[];
+                        }
+                        condition_params = 1;
                         $(".current_crypto_symbol").removeClass("bg-soft-warning");
                         $(".current_crypto_symbol").addClass("bg-soft-danger");
                     }
@@ -725,12 +749,14 @@ function arybit(crypto,asset,aisa_options) {
                                 $(".cur_crypto_symbol_price").html(localStorage.getItem("ccode") + ' ' + results_last_price);
                                 $(".cur_crypto_symbol_change").html('<span class="text-' + wacthlist_prct_bg + ' me-2"><i class="mdi mdi-arrow-down-bold"></i> '+ chan_pri + '%</span>');
                                 
-                                if (params.length > 20) {
-                                    params.shift();
-                                    new_leads_chart_params = params.length;
-                                }                             
-                                params[new_leads_chart_params] = results_last_price;
-
+                                if (condition_params == 1) {
+                                    if (params.length > base_lengt) {
+                                        params.shift();
+                                        new_leads_chart_params = params.length;
+                                    }                             
+                                    params[new_leads_chart_params] = results_last_price;
+    
+                                }
                                 new_leads_chart(params,'update');
 
                                 dash_revenue_chart(params,results[i].symbol);
@@ -882,6 +908,7 @@ function arybit(crypto,asset,aisa_options) {
         }
     });
 }
+var cusymbal_condition_params ="";
 
 function Query_Symbol(crypto,asset,aisa_options) {
     $.ajax({
@@ -922,7 +949,7 @@ function Query_Symbol(crypto,asset,aisa_options) {
                         }
                     }                    
                 } else{
-                    $(".asset_info").html('');
+                    $(".asset_info_candlestick").html('');
                     $("#simple-candlestick").html('');
                     $("#leanders_mkt_c").addClass("d-none");
                     $("#leanders_mkt").removeClass("d-none");
@@ -990,7 +1017,7 @@ function account_mkt_balance(aisa_options) {
             $(".order_quantity").removeClass("is-invalid");
             $(".order_quantity").addClass("is-valid");
             var order_usd_quantity = $(".order_quantity").val();//USD
-            if (localStorage.getItem("account_balance") <= 0) {
+            if (localStorage.getItem("account_balance") <= 0 || $(".order_quantity").val() > localStorage.getItem("account_balance")) {
                 mysnackbar("Insufficient balance, load your account.");
                 display_account_action("show");
 
@@ -1111,7 +1138,7 @@ var new_simple_candlestick_params = 0;
 
 var params = [];
 var new_seriesData = [];
-
+var condition_params = 0;
 var seriesData = [{
     x: new Date(2016, 01, 01),
     y: [51.98, 56.29, 51.59, 53.85]
