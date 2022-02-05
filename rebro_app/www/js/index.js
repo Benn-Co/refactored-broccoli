@@ -58,6 +58,7 @@ function onDeviceReady() {
     username = localStorage.getItem("username");
     var email = localStorage.getItem("email");
     var user_pass = localStorage.getItem("user_pass");
+    //get_country_codes('','');
     if (email == null || email == '') {
         $("#pills-account-tab").removeClass("d-none");
         //localStorage.clear();
@@ -1025,7 +1026,7 @@ $("body").delegate(".logout_me","click",function(event){
     user_permited = 0;
     $("#pills-account-tab").removeClass("d-none");
     localStorage.clear();
-    onDeviceReady()
+    onDeviceReady();
 });
 $("#ttab-support").click(function(){ 
     //pings.html
