@@ -1,12 +1,10 @@
 var mkt_option_clicked = 0;
 var api_server_url = localStorage.getItem("api_server_url");
-
+//https://silicon.createx.studio/assets/img/landing/conference/hero-video.mp4
 $("body").delegate(".mkt_option","click",function(event){
     event.preventDefault();
-    if (localStorage.getItem("username") == null || localStorage.getItem("username") == "") {
-        mysnackbar("Please sign in to proceed");
-    } else {
-        $(".mkt_option").attr("price",$(this).attr('price'));
+    
+    $(".mkt_option").attr("price",$(this).attr('price'));
         localStorage.setItem("price",$(this).attr('price'));
         localStorage.setItem("price",$(this).attr('price'));
     
@@ -39,28 +37,31 @@ $("body").delegate(".mkt_option","click",function(event){
         localStorage.setItem("day_low",$(this).attr('day_low'));
 
         var order_price = $(".order_price").val();
-        if (order_price !== "") {
-            $(".order_price").removeClass("is-invalid");
-            $(".order_price").addClass("is-valid");
-            var order_quantity = $(".order_quantity").val();
-            if (order_quantity !== "") {
-                $(".order_quantity").removeClass("is-invalid");
-                $(".order_quantity").addClass("is-valid");
-                
-                account_mkt_balance(localStorage.getItem("aisa_options"));  
-    
-            } else {
-                $(".order_quantity").removeClass("is-valid");
-                $(".order_quantity").addClass("is-invalid");
-                mysnackbar("Enter Quantity");
-
-            }
+        if (localStorage.getItem("username") == null || localStorage.getItem("username") == "") {
+            mysnackbar("Please sign in to proceed");
         } else {
-            $(".order_price").removeClass("is-valid");
-            $(".order_price").addClass("is-invalid");
-        }
+            if (order_price !== "") {
+                $(".order_price").removeClass("is-invalid");
+                $(".order_price").addClass("is-valid");
+                var order_quantity = $(".order_quantity").val();
+                if (order_quantity !== "") {
+                    $(".order_quantity").removeClass("is-invalid");
+                    $(".order_quantity").addClass("is-valid");
+                    
+                    account_mkt_balance(localStorage.getItem("aisa_options"));  
+        
+                } else {
+                    $(".order_quantity").removeClass("is-valid");
+                    $(".order_quantity").addClass("is-invalid");
+                    mysnackbar("Enter Quantity");
+    
+                }
+            } else {
+                $(".order_price").removeClass("is-valid");
+                $(".order_price").addClass("is-invalid");
+            }
+        }        
         mkt_option_clicked = 1;
-    }
 });
 $("body").delegate(".order_book_mkt","click",function(event){
     event.preventDefault();    
@@ -224,33 +225,10 @@ $("body").delegate(".selected_payment_option","click",function(event){
 });
 $(".complete_trasaction").click(function(){
     var deposit = $(this).attr("intenti");
-    if ($(this).attr("intenti") == "withdraw") {
-        if ($(".amount_to_withdraw").val() == '') {
-            $(".amount_to_withdraw").removeClass("is-valid");
-            $(".amount_to_withdraw_feedback").removeClass("valid-feedback");
-            $(".amount_to_withdraw").addClass("is-invalid");
-            $(".amount_to_withdraw_feedback").addClass("invalid-feedback");
-            $(".amount_to_withdraw_feedback").html("Please provide a valid amount.");
-        }
+    //alert(username);
+    if (username==null) {
+        mysnackbar("Please login...");
     } else {
-        if ($(".amount_to_deposit").val() == '') {
-            $(".amount_to_deposit").removeClass("is-valid");
-            $(".amount_to_deposit_feedback").removeClass("valid-feedback");
-            $(".amount_to_deposit").addClass("is-invalid");
-            $(".amount_to_deposit_feedback").addClass("invalid-feedback");
-            $(".amount_to_deposit_feedback").html("Please provide a valid amount.");
-        }
-    }
-    
-    if ( localStorage.getItem("selected_payment_option") == null) {
-        $(".payment_option").removeClass("btn-primary");
-        $(".payment_option").addClass("btn-danger");
-        mysnackbar("select payment option");
-    } else {
-        $(".payment_option").removeClass("btn-danger");
-        $(".payment_option").addClass("btn-success");
-        $(".payment_option").html(localStorage.getItem("selected_payment_option")); 
-
         if ($(this).attr("intenti") == "withdraw") {
             if ($(".amount_to_withdraw").val() == '') {
                 $(".amount_to_withdraw").removeClass("is-valid");
@@ -258,16 +236,7 @@ $(".complete_trasaction").click(function(){
                 $(".amount_to_withdraw").addClass("is-invalid");
                 $(".amount_to_withdraw_feedback").addClass("invalid-feedback");
                 $(".amount_to_withdraw_feedback").html("Please provide a valid amount.");
-                var amount_to_deposit =0;
-
-            } else {
-                $(".amount_to_withdraw").removeClass("is-invalid");
-                $(".amount_to_withdraw_feedback").removeClass("invalid-feedback");
-                $(".amount_to_withdraw").addClass("is-valid");
-                $(".amount_to_withdraw_feedback").addClass("valid-feedback");
-                $(".amount_to_withdraw_feedback").html("Looks good!");
-                var amount_to_deposit = Number($(".amount_to_withdraw").val());
-            }            
+            }
         } else {
             if ($(".amount_to_deposit").val() == '') {
                 $(".amount_to_deposit").removeClass("is-valid");
@@ -275,89 +244,127 @@ $(".complete_trasaction").click(function(){
                 $(".amount_to_deposit").addClass("is-invalid");
                 $(".amount_to_deposit_feedback").addClass("invalid-feedback");
                 $(".amount_to_deposit_feedback").html("Please provide a valid amount.");
-                var amount_to_deposit =0;
-
-            } else {
-                $(".amount_to_deposit").removeClass("is-invalid");
-                $(".amount_to_deposit_feedback").removeClass("invalid-feedback");
-                $(".amount_to_deposit").addClass("is-valid");
-                $(".amount_to_deposit_feedback").addClass("valid-feedback");
-                $(".amount_to_deposit_feedback").html("Looks good!");
-                var amount_to_deposit = Number($(".amount_to_deposit").val());
-            }            
-        }        
-
-        var selected_payment_option  = localStorage.getItem("selected_payment_option");
-
-        if (selected_payment_option == "M-Pesa") {
-            $(".entrer_phoner").show();
-            if ($(this).attr("intenti") == "withdraw") {
-                var user_phone_ = $(".user_withdraw_phone_number").val();
-            } else {
-                var user_phone_ = $(".user_phone_number").val();
             }
-            var phone_num = user_phone_;
-            phone_num = "" + phone_num + "";
-            if(phone_num.charAt(0) == "0"){
-                phone_num = phone_num.replace(0, "");
-            }
-            if (user_phone_ == '' || phone_num.length < 9 || phone_num.length > 9) {
-                if ($(this).attr("intenti") == "withdraw") {
-                    $(".user_withdraw_phone_number").removeClass("is-valid");
-                    $(".user_withdraw_phone_numberfeedback").removeClass("valid-feedback");
-                    $(".user_withdraw_phone_number").addClass("is-invalid");
-                    $(".user_withdraw_phone_numberfeedback").addClass("invalid-feedback");
-                    $(".user_withdraw_phone_numberfeedback").html("Please provide a valid 10 digits phone number.");
-                } else {
-                    $(".user_phone_number").removeClass("is-valid");
-                    $(".user_phone_numberfeedback").removeClass("valid-feedback");
-                    $(".user_phone_number").addClass("is-invalid");
-                    $(".user_phone_numberfeedback").addClass("invalid-feedback");
-                    $(".user_phone_numberfeedback").html("Please provide a valid 10 digits phone number.");
-                }                
-            } else {
-                if ($(this).attr("intenti") == "withdraw") {
-                    $(".user_withdraw_phone_number").removeClass("is-invalid");
-                    $(".user_withdraw_phone_numberfeedback").removeClass("invalid-feedback");
-                    $(".user_withdraw_phone_numberfeedback").addClass("valid-feedback");
-                    $(".user_withdraw_phone_number").addClass("is-valid");
-                    var mcode = localStorage.getItem("mcode");
-                    phone_num = mcode + "" + phone_num;
-                    $(".user_withdraw_phone_numberfeedback").html(phone_num + " good!"); 
-                } else {
-                    $(".user_phone_number").removeClass("is-invalid");
-                    $(".user_phone_numberfeedback").removeClass("invalid-feedback");
-                    $(".user_phone_numberfeedback").addClass("valid-feedback");
-                    $(".user_phone_number").addClass("is-valid");
-                    var mcode = localStorage.getItem("mcode");
-                    phone_num = mcode + "" + phone_num;
-                    $(".user_phone_numberfeedback").html(phone_num + " good!"); 
-                }
-                
-                localStorage.setItem("user_phone", phone_num);
-
-                var proccessing_number = "" + localStorage.getItem("user_phone") + "";
-                proccessing_number = "" + proccessing_number + "";
-                if(proccessing_number.charAt(0) == "+"){
-                    proccessing_number = proccessing_number.replace("+", "");
-                }
-
-                if (amount_to_deposit == "" || amount_to_deposit < 1) {
-                    mysnackbar("Enter valid amount");
-                } else {
-                    $(".complete_trasaction").removeClass("btn-primary");
-                    $(".complete_trasaction").addClass("btn-warning");
-                    $(".complete_trasaction").html("Proccessing...");
-                    var intent = $(this).attr("intenti");
-                    proccess_transaction(localStorage.getItem("cname"),amount_to_deposit,selected_payment_option,proccessing_number,intent);               
-                }
-            }
-        } else {
-            $(".entrer_phoner").hide();
         }
-
         
+        if ( localStorage.getItem("selected_payment_option") == null) {
+            $(".payment_option").removeClass("btn-primary");
+            $(".payment_option").addClass("btn-danger");
+            mysnackbar("select payment option");
+        } else {
+            $(".payment_option").removeClass("btn-danger");
+            $(".payment_option").addClass("btn-success");
+            $(".payment_option").html(localStorage.getItem("selected_payment_option")); 
+    
+            if ($(this).attr("intenti") == "withdraw") {
+                if ($(".amount_to_withdraw").val() == '') {
+                    $(".amount_to_withdraw").removeClass("is-valid");
+                    $(".amount_to_withdraw_feedback").removeClass("valid-feedback");
+                    $(".amount_to_withdraw").addClass("is-invalid");
+                    $(".amount_to_withdraw_feedback").addClass("invalid-feedback");
+                    $(".amount_to_withdraw_feedback").html("Please provide a valid amount.");
+                    var amount_to_deposit =0;
+    
+                } else {
+                    $(".amount_to_withdraw").removeClass("is-invalid");
+                    $(".amount_to_withdraw_feedback").removeClass("invalid-feedback");
+                    $(".amount_to_withdraw").addClass("is-valid");
+                    $(".amount_to_withdraw_feedback").addClass("valid-feedback");
+                    $(".amount_to_withdraw_feedback").html("Looks good!");
+                    var amount_to_deposit = Number($(".amount_to_withdraw").val());
+                }            
+            } else {
+                if ($(".amount_to_deposit").val() == '') {
+                    $(".amount_to_deposit").removeClass("is-valid");
+                    $(".amount_to_deposit_feedback").removeClass("valid-feedback");
+                    $(".amount_to_deposit").addClass("is-invalid");
+                    $(".amount_to_deposit_feedback").addClass("invalid-feedback");
+                    $(".amount_to_deposit_feedback").html("Please provide a valid amount.");
+                    var amount_to_deposit =0;
+    
+                } else {
+                    $(".amount_to_deposit").removeClass("is-invalid");
+                    $(".amount_to_deposit_feedback").removeClass("invalid-feedback");
+                    $(".amount_to_deposit").addClass("is-valid");
+                    $(".amount_to_deposit_feedback").addClass("valid-feedback");
+                    $(".amount_to_deposit_feedback").html("Looks good!");
+                    var amount_to_deposit = Number($(".amount_to_deposit").val());
+                }            
+            }        
+    
+            var selected_payment_option  = localStorage.getItem("selected_payment_option");
+    
+            if (selected_payment_option == "M-Pesa") {
+                $(".entrer_phoner").show();
+                if ($(this).attr("intenti") == "withdraw") {
+                    var user_phone_ = $(".user_withdraw_phone_number").val();
+                } else {
+                    var user_phone_ = $(".user_phone_number").val();
+                }
+                var phone_num = user_phone_;
+                phone_num = "" + phone_num + "";
+                if(phone_num.charAt(0) == "0"){
+                    phone_num = phone_num.replace(0, "");
+                }
+                if (user_phone_ == '' || phone_num.length < 9 || phone_num.length > 9) {
+                    if ($(this).attr("intenti") == "withdraw") {
+                        $(".user_withdraw_phone_number").removeClass("is-valid");
+                        $(".user_withdraw_phone_numberfeedback").removeClass("valid-feedback");
+                        $(".user_withdraw_phone_number").addClass("is-invalid");
+                        $(".user_withdraw_phone_numberfeedback").addClass("invalid-feedback");
+                        $(".user_withdraw_phone_numberfeedback").html("Please provide a valid 10 digits phone number.");
+                    } else {
+                        $(".user_phone_number").removeClass("is-valid");
+                        $(".user_phone_numberfeedback").removeClass("valid-feedback");
+                        $(".user_phone_number").addClass("is-invalid");
+                        $(".user_phone_numberfeedback").addClass("invalid-feedback");
+                        $(".user_phone_numberfeedback").html("Please provide a valid 10 digits phone number.");
+                    }                
+                } else {
+                    if ($(this).attr("intenti") == "withdraw") {
+                        $(".user_withdraw_phone_number").removeClass("is-invalid");
+                        $(".user_withdraw_phone_numberfeedback").removeClass("invalid-feedback");
+                        $(".user_withdraw_phone_numberfeedback").addClass("valid-feedback");
+                        $(".user_withdraw_phone_number").addClass("is-valid");
+                        var mcode = localStorage.getItem("mcode");
+                        phone_num = mcode + "" + phone_num;
+                        $(".user_withdraw_phone_numberfeedback").html(phone_num + " good!"); 
+                    } else {
+                        $(".user_phone_number").removeClass("is-invalid");
+                        $(".user_phone_numberfeedback").removeClass("invalid-feedback");
+                        $(".user_phone_numberfeedback").addClass("valid-feedback");
+                        $(".user_phone_number").addClass("is-valid");
+                        var mcode = localStorage.getItem("mcode");
+                        phone_num = mcode + "" + phone_num;
+                        $(".user_phone_numberfeedback").html(phone_num + " good!"); 
+                    }
+                    
+                    localStorage.setItem("user_phone", phone_num);
+    
+                    var proccessing_number = "" + localStorage.getItem("user_phone") + "";
+                    proccessing_number = "" + proccessing_number + "";
+                    if(proccessing_number.charAt(0) == "+"){
+                        proccessing_number = proccessing_number.replace("+", "");
+                    }
+    
+                    if (amount_to_deposit == "" || amount_to_deposit < 1) {
+                        mysnackbar("Enter valid amount");
+                    } else {
+                        $(".complete_trasaction").removeClass("btn-primary");
+                        $(".complete_trasaction").addClass("btn-warning");
+                        $(".complete_trasaction").html("Proccessing...");
+                        var intent = $(this).attr("intenti");
+                        proccess_transaction(localStorage.getItem("cname"),amount_to_deposit,selected_payment_option,proccessing_number,intent);               
+                    }
+                }
+            } else {
+                $(".entrer_phoner").hide();
+            }
+    
+            
+        }
     }
+    
 });
 
 var local_asset = "";
@@ -757,6 +764,8 @@ function arybit(crypto,asset,aisa_options) {
                                     params[new_leads_chart_params] = results_last_price;
     
                                 }
+                                //localStorage.setItem("" + results[i].symbol + "",results_last_price);// Set Symbol its price
+
                                 new_leads_chart(params,'update');
 
                                 dash_revenue_chart(params,results[i].symbol);
@@ -783,6 +792,10 @@ function arybit(crypto,asset,aisa_options) {
                             '</li>' + group_btr +
                             '</ul>' +
                             '</div>';
+
+                            $(".id_" + results[i].symbol + "").html(localStorage.getItem("ccode") + ' '+ results_last_price + ' <i class="text-' + wacthlist_prct_bg + '">' + wacthlist_prct + '%</i>' );
+                            $(".pri_id_" + results[i].symbol + "").html(localStorage.getItem("ccode") + ' '+ results_last_price);
+                            $(".get_asset_id_" + results[i].symbol + "").html(group_btr);
 
                             $(".leanders_mkt_assets").append(leanders_mkt_assets);
 
@@ -929,14 +942,13 @@ function Query_Symbol(crypto,asset,aisa_options) {
                                 localStorage.setItem("asset",results[i].name);
                                 $(".mkt_option").attr("asset",localStorage.getItem("asset"));  
                             }                            
-                            var query_c_symbols = '<li id="offers_' + results[i].name + '" class="list-group-item d-flex justify-content-between align-items-center get_asset" asset="' + results[i].name + '">' +
+                            var query_c_symbols = '<li id="offers_' + results[i].name + '" class="list-group-item d-flex justify-content-between align-items-center" asset="' + results[i].name + '">' +
                             '<a class="text-primary" href="#' + results[i].name + '">' + results[i].name + '</a>' +
-                            '<span class="text-info">' + results[i].status + '</span>' +
+                            '<span class="id_' + results[i].name + '"></span>' +
                             '<span class="text-warning">' + results[i].base_currency + '</span>' +
                             '<span class="text-success">' + results[i].quote_currency + '</span>' +
-                            '<span class="badge bg-primary rounded-pill">' + results[i].price_scale + '</span>' +
-                            '<span class="badge bg-soft-primary rounded-pill">' + results[i].taker_fee + '</span>' +
-                            '<span class="badge bg-soft-danger rounded-pill">' + results[i].maker_fee + '</span>' +
+                            '<span class="pri_id_' + results[i].name + '"></span>' +
+                            '<span class="get_asset_id_' + results[i].name + '"></span>' +
                             '</li>';
                             $(".query_symbols").append(query_c_symbols);
 
@@ -944,7 +956,7 @@ function Query_Symbol(crypto,asset,aisa_options) {
                             '<li><hr class="dropdown-divider"></li>';
                             $(".crypto_offers_drop").append(crypto_offers_drop);
 
-                            var query_symbols_skills = '<a href="#' + results[i].name + '" class="btn btn-soft-warning get_asset" asset="' + results[i].name + '">' + results[i].name + '</a>';
+                            var query_symbols_skills = '<a href="#' + results[i].name + '" class="btn btn-sm get_asset" asset="' + results[i].name + '">' + results[i].name + '<br><span class="id_' + results[i].name + '"></span></a>';
                             $(".query_symbols_skills").append(query_symbols_skills);
                         }
                     }                    
@@ -1017,7 +1029,10 @@ function account_mkt_balance(aisa_options) {
             $(".order_quantity").removeClass("is-invalid");
             $(".order_quantity").addClass("is-valid");
             var order_usd_quantity = $(".order_quantity").val();//USD
-            if (localStorage.getItem("account_balance") <= 0 || $(".order_quantity").val() > localStorage.getItem("account_balance")) {
+            //alert(localStorage.getItem("account_balance"));
+            //alert($(".order_quantity").val());
+
+            if (Number(localStorage.getItem("account_balance")) <= 0 || Number(localStorage.getItem("account_balance")) < Number($(".order_quantity").val())) {
                 mysnackbar("Insufficient balance, load your account.");
                 display_account_action("show");
 
