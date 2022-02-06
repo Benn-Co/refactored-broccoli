@@ -20,6 +20,13 @@
 // Wait for the deviceready event before using any of Cordova's device APIs.
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
 //let hostname = '';
+if (localStorage.getItem("username") == null) {
+    $("#index_html").hide();
+    $("#signin_html").show();
+} else {
+    $("#signin_html").hide();
+    $("#index_html").show();
+}
 $(document).ready(function(){
 
     let hostname = window.location.hostname;
@@ -27,16 +34,19 @@ $(document).ready(function(){
     if (hostname.includes("benn-co.github.io") || hostname.includes("oramla") || hostname.includes("localhost") || hostname.includes("192.")) {
         if (hostname.includes("localhost") || hostname.includes("192.")) {            
             onDeviceReady();
+            //get_country_codes('lo','la');
         } else {
             if (location.protocol !== 'https:') {
                 path_protocol = "https:";
                 window.location.href="" + path_protocol + "//" + window.location.hostnam + "";
             }
+            //get_country_codes('lo','la');
             onDeviceReady();
         }
     } else {
         //alert(localStorage.getItem("username")); 
         onDeviceReady();
+        //get_country_codes('lo','la');
         //document.addEventListener('deviceready', onDeviceReady, false);
     }
 });
@@ -52,8 +62,8 @@ var IMAGE_url_path_name = 'https://'  + api_server_url + '/product_images/';
 var user_permited = 0;
 function onDeviceReady() {
     // Cordova is now initialized. Have fun!  
-    localStorage.setItem("ccode", '$');
-    localStorage.setItem("exrate", 1);
+    //localStorage.setItem("ccode", '$');
+    //localStorage.setItem("exrate", 1);
     //get_country_codes('','');  
     username = localStorage.getItem("username");
     var email = localStorage.getItem("email");
@@ -62,6 +72,9 @@ function onDeviceReady() {
     if (email == null || email == '') {
         $("#pills-account-tab").removeClass("d-none");
         //localStorage.clear();
+        $("#index_html").hide();
+        $("#signin_html").show();
+
         $(".username").html(username);
         $(".username_seen").html("last seen " + new Date());
         $(".username_pic").html('<img class="avatar-img" src="./assets/img/favicon/favicon-256x256.png" alt="#">');
@@ -90,6 +103,9 @@ function onDeviceReady() {
         $("#pills-account-tab").removeClass("d-none");
         //localStorage.clear();
         
+        $("#index_html").hide();
+        $("#signin_html").show();
+
         $(".username").html(username);
         $(".username_seen").html("last seen " + new Date());
         $(".username_pic").html('<img class="avatar-img" src="./assets/img/favicon/favicon-256x256.png" alt="#">');
@@ -114,7 +130,9 @@ function onDeviceReady() {
 
         //$(".account_balance").html(localStorage.getItem("ccode") + " " + localStorage.getItem("account_balance"));
 
-    } else {      
+    } else { 
+        $("#signin_html").hide();
+        $("#index_html").show();     
         $("#pills-account-tab").addClass("d-none");
         if (user_permited > 0) {
             $(".order_quantity_range").val(0);            
