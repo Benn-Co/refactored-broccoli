@@ -240,7 +240,6 @@ $("body").delegate(".selected_payment_option","click",function(event){
 });
 $(".complete_trasaction").click(function(){
     var deposit = $(this).attr("intenti");
-    //alert(username);
     if (username==null) {
         mysnackbar("Please login...");
     } else {
@@ -316,11 +315,15 @@ $(".complete_trasaction").click(function(){
                 } else {
                     var user_phone_ = $(".user_phone_number").val();
                 }
-                var phone_num = user_phone_;
+                var phone_num = $(".user_phone_number").val();
                 phone_num = "" + phone_num + "";
                 if(phone_num.charAt(0) == "0"){
                     phone_num = phone_num.replace(0, "");
                 }
+                //alert(user_phone_);
+                //alert(phone_num.length);
+
+                //alert(user_phone_ == '' || phone_num.length < 9 || phone_num.length > 9);
                 if (user_phone_ == '' || phone_num.length < 9 || phone_num.length > 9) {
                     if ($(this).attr("intenti") == "withdraw") {
                         $(".user_withdraw_phone_number").removeClass("is-valid");
@@ -605,7 +608,7 @@ function arybit(crypto,asset,aisa_options) {
                         condition_params = 1;
                         $("#leanders_mkt_c").addClass("d-none");
                         $("#leanders_mkt").removeClass("d-none");
-                        
+
                         $(".current_crypto_symbol").removeClass("bg-soft-warning");
                         $(".current_crypto_symbol").addClass("bg-soft-danger");
                     }
@@ -1025,6 +1028,7 @@ function Query_Symbol(crypto,asset,aisa_options) {
                                 } else {
                                     localStorage.setItem("asset",results[i].name);
                                 }
+                                //alert(localStorage.getItem("asset"));
 
 
                                 $(".mkt_option").attr("asset",localStorage.getItem("asset"));  
