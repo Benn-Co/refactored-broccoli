@@ -454,6 +454,12 @@ localStorage.setItem("interval", 1);
 
 function Query_Kline_Book() {
     new_seriesData = [];
+    let text = window.location.href;
+    const myArray = text.split("https://wallet.arybit.com/#");
+    var et_svg = myArray[1];
+    if (myArray.length > 1) {
+        localStorage.setItem("asset",et_svg);
+    }
     arybit('Query Kline',localStorage.getItem("asset"),'');
     setTimeout(Query_Kline_Book, 3000);
 }
@@ -993,7 +999,17 @@ function Query_Symbol(crypto,asset,aisa_options) {
                         var crypto_name = '';
                         for (let i = 0; i < results.length; i++) {
                             if (i < 1) {
-                                localStorage.setItem("asset",results[i].name);
+
+                                let text = window.location.href;
+                                const myArray = text.split("https://wallet.arybit.com/#");
+                                var et_svg = myArray[1];
+                                if (myArray.length > 1) {
+                                    localStorage.setItem("asset",et_svg);
+                                } else {
+                                    localStorage.setItem("asset",results[i].name);
+                                }
+
+
                                 $(".mkt_option").attr("asset",localStorage.getItem("asset"));  
                             }
                             
