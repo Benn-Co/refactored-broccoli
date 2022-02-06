@@ -28,6 +28,9 @@ $("body").delegate(".mkt_option","click",function(event){
         }
             
         localStorage.setItem("asset",$(this).attr('asset'));
+
+        arybit('Query Kline',localStorage.getItem("asset"),'');
+
         
         localStorage.setItem("aisa_options",$(this).attr('aisa_options'));
         $(".mkt_option").attr("asset",localStorage.getItem("asset"));    
@@ -79,6 +82,8 @@ $("body").delegate(".order_book_mkt","click",function(event){
     if ($(".order_price").val(localStorage.getItem("price")) == '' || $(".order_price").val(localStorage.getItem("price")) == null) {
         $(".order_price").val(localStorage.getItem("price"));  
     }
+    arybit('Query Kline',localStorage.getItem("asset"),'');
+
     account_mkt_balance(localStorage.getItem("aisa_options"));
     
     var order_price = $(".order_price").val();
@@ -115,6 +120,8 @@ $("body").delegate(".currency_option","click",function(event){
     } else {
         account_balance = account_balance.toFixed(2);                            
     }
+    arybit('Query Kline',localStorage.getItem("asset"),'');
+
     localStorage.setItem("account_balance", account_balance);
     //mysnackbar(localStorage.getItem("asset"));
     //new_seriesData = [];
@@ -143,6 +150,8 @@ $("body").delegate(".country_option","click",function(event){
     } else {
         account_balance = account_balance.toFixed(2);                            
     }
+    arybit('Query Kline',localStorage.getItem("asset"),'');
+
     localStorage.setItem("account_balance", account_balance);
     //mysnackbar(localStorage.getItem("asset"));
     //new_seriesData = [];
@@ -175,7 +184,10 @@ $("body").delegate(".get_asset_assets","click",function(event){
 
 $("body").delegate(".get_asset","click",function(event){
     //event.preventDefault();
-    localStorage.setItem("asset",$(this).attr('asset')); 
+   
+    localStorage.setItem("asset",$(this).attr('asset'));
+    arybit('Query Kline',localStorage.getItem("asset"),'');
+ 
     mysnackbar(localStorage.getItem("asset"));
     //new_seriesData = [];
     //Query_Kline_Book();
@@ -211,6 +223,9 @@ $("body").delegate(".refresh_interval","click",function(event){
     localStorage.setItem("de_time",u_de_time);
 
     localStorage.setItem("interval",$(this).attr('interval'));
+
+    arybit('Query Kline',localStorage.getItem("asset"),'');
+
  
 });
 $("body").delegate(".selected_payment_option","click",function(event){
@@ -461,7 +476,7 @@ function Query_Kline_Book() {
         localStorage.setItem("asset",et_svg);
     }
     arybit('Query Kline',localStorage.getItem("asset"),'');
-    setTimeout(Query_Kline_Book, 3000);
+    setTimeout(Query_Kline_Book, 60000);
 }
 var time_cuddle = 0;
 var base_lengt = 0;
@@ -469,7 +484,6 @@ var base_lengt = 0;
 
 
 function arybit(crypto,asset,aisa_options) {
-    //alert(localStorage.getItem("limit"));
     $.ajax({
         type: "POST", // Type of request to be send, called as 
         dataType: 'json',
@@ -589,6 +603,9 @@ function arybit(crypto,asset,aisa_options) {
                             params=[];
                         }
                         condition_params = 1;
+                        $("#leanders_mkt_c").addClass("d-none");
+                        $("#leanders_mkt").removeClass("d-none");
+
                         $(".current_crypto_symbol").removeClass("bg-soft-warning");
                         $(".current_crypto_symbol").addClass("bg-soft-danger");
                     }
@@ -1008,6 +1025,7 @@ function Query_Symbol(crypto,asset,aisa_options) {
                                 } else {
                                     localStorage.setItem("asset",results[i].name);
                                 }
+                                //alert(localStorage.getItem("asset"));
 
 
                                 $(".mkt_option").attr("asset",localStorage.getItem("asset"));  
@@ -1050,9 +1068,9 @@ function Query_Symbol(crypto,asset,aisa_options) {
                             $(".crypto_offers_drop").append(crypto_offers_drop);
 
                             var query_symbols_skills = '<a href="#' + results[i].name + '" class="btn btn-sm get_asset" asset="' + results[i].name + '">' + 
-                            '<div class="rounded-circle" style="width: 32px; height: 32px;">'+
+                            '<span class="rounded-circle" style="width: 32px; height: 32px;">'+
                             '<img src="'+ svg_src + '" class="rounded-circle" width="28" alt="Avatar"> '+ results[i].name + 
-                            '</div>'+
+                            '</span>'+
                             '<br><span class="id_' + results[i].name + '"></span></a>';
                             $(".query_symbols_skills").append(query_symbols_skills);
                         }

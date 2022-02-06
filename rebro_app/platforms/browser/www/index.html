@@ -137,14 +137,15 @@
                             <a class="" href="#" data-bs-toggle="modal" data-bs-target="#verify_phone_number">Varify your phone number.</a>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-                        <div class="btn-group skills query_symbols_skills">
-                        </div>
                         <!-- Resources - Notices -->
                         <div class="tab-pane fade h-100 show active" id="tab-content-notifications" role="tabpanel">
                             <div class="d-flex flex-column h-100">
                                 <div class="hide-scrollbar">
                                     <div class="container py-8">                                                                        
-                                         
+                                        
+                                        <div class="btn-group skills query_symbols_skills">
+                                        </div>
+
                                         <!-- Resources -->                                        
                                         <div class="card-list">
                                             <div class="card border-0 mb-5">
@@ -2366,23 +2367,23 @@
                                         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                                             <div class="btn-group me-2 btn-group-sm" role="group" aria-label="First group">
                                               <button type="button" class="btn btn-outline-secondary btn-sm active refresh_interval" int_val="1" interval="1">1 m</button>
-                                              <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="3" interval="3">3 m</button>
-                                              <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="5" interval="5">5 m</button>
-                                              <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="15" interval="15">15 m</button>
-                                              <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="30" interval="30">30 m</button>
+                                              <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval d-none d-lg-block" int_val="3" interval="3">3 m</button>
+                                              <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval d-none d-lg-block" int_val="5" interval="5">5 m</button>
+                                              <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval d-none d-lg-block " int_val="15" interval="15">15 m</button>
+                                              <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval d-none d-lg-block" int_val="30" interval="30">30 m</button>
                                             </div>
                                             <div class="btn-group me-2 btn-group-sm" role="group btn-sm" aria-label="Second group">
                                                 <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="60" interval="60">1 hr</button>
-                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="120" interval="120">2 hrs</button>
-                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="240" interval="240">4 hrs</button>
-                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="360" interval="360">6 hrs</button>
-                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="720" interval="720">12 hrs</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval d-none d-lg-block" int_val="120" interval="120">2 hrs</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval d-none d-lg-block" int_val="240" interval="240">4 hrs</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval d-none d-lg-block" int_val="360" interval="360">6 hrs</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval d-none d-lg-block" int_val="720" interval="720">12 hrs</button>
 
                                             </div>
                                             <div class="btn-group btn-group-sm" role="group" aria-label="Third group">
                                                 <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="1440" interval="D">1 D</button>
-                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="10080" interval="W">W</button>
-                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="40320" interval="M">M</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval d-none d-lg-block" int_val="10080" interval="W">W</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="40320" interval="M">All</button>
                                             </div>
                                         </div>
                                         
@@ -2532,22 +2533,25 @@
                             
                             <footer class="footer">
                                 <div class="container d-flex justify-content-between align-items-center mb-3">
-                                  <span class="me-auto">
-                                    © 2022 Rebro
-                                  </span>
-
-                                  <span class="text-muted me-auto">
-                                    <a class="me-auto" href="#Legal_Privacy" title="Legal & Privacy">
-                                        Legal & Privacy                            
-                                    </a>                                    
-                                  </span>
-
                                   <span class="dropdown-toggle select_currency me-auto" data-bs-toggle="dropdown" role="button" aria-expanded="false"></span>
                                   <ul class="dropdown-menu hide-scrollbar flex-1 h-3 currency_list" style="height: 250px;">
                                   </ul> 
                                   <span class="dropdown-toggle select_country me-auto" data-bs-toggle="dropdown" role="button" aria-expanded="false"></span>
                                   <ul class="dropdown-menu hide-scrollbar flex-1 h-3 country_list" style="height: 250px;">
                                   </ul>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="text-muted me-auto">
+                                        <span class="me-auto">
+                                            © 2022 Rebro
+                                        </span>
+                                    </span>
+            
+                                    <span class="text-muted me-auto">
+                                      <a class="me-auto" href="#Legal_Privacy" title="Legal & Privacy">
+                                          Legal & Privacy                            
+                                      </a>                                    
+                                    </span>
                                 </div>
                             </footer>
                         </div>                        
