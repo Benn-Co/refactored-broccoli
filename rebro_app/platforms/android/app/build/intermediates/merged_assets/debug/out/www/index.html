@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, shrink-to-fit=no, viewport-fit=cover">
-        <title>Rebro</title>
+        <title>AryBit</title>
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="./assets/img/favicon/favicon-256x256.png" type="image/x-icon">
@@ -12,7 +12,7 @@
         <!-- Font -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
     	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700" rel="stylesheet">
-
+       
         <!-- Template CSS -->
         <link rel="stylesheet" href="./assets/css/template.dark.bundle.css">
         <link rel="stylesheet" href="css/index.css">
@@ -26,7 +26,7 @@
                 <!-- Navigation -->
                 <nav class="navigation d-flex flex-column text-center navbar navbar-light hide-scrollbar">
                     <!-- Brand -->
-                    <a id="title" href="#" title="Loliping" class="d-none d-xl-block mb-6">
+                    <a id="title" href="#" title="AryBit" class="d-none d-xl-block mb-6">
                         <div class="avatar">
                             <img src="./assets/img/favicon/favicon-256x256.png" alt="#" class="avatar-img">
                         </div>                   
@@ -50,11 +50,11 @@
 
                         <!-- Notifications -->
                         <li class="nav-item">
-                            <a class="nav-link py-0 py-lg-8" id="tab-chats" href="#tab-content-chats" title="Chats" data-bs-toggle="tab" role="tab">
+                            <a class="nav-link py-0 py-lg-8" id="tab-chats" href="#tab-content-chats" title="Notifications" data-bs-toggle="tab" role="tab">
                                 <div class="icon icon-xl icon-badged">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
                                     <div class="badge badge-circle bg-primary">
-                                        <span id="tab_count_chats">4</span>
+                                        <span id="tab_count_chats">0</span>
                                     </div>
                                 </div>
                                 <span class="me-auto d-none d-xl-block">
@@ -65,9 +65,12 @@
     
                         <!-- Assets -->
                         <li class="nav-item">
-                            <a class="nav-link active py-0 py-lg-8" id="tab-notifications" href="#tab-content-notifications" title="Notifications" data-bs-toggle="tab" role="tab">
-                                <div class="icon icon-xl">
+                            <a class="nav-link active py-0 py-lg-8" id="tab-notifications" href="#tab-content-notifications" title="Assets" data-bs-toggle="tab" role="tab">
+                                <div class="icon icon-xl icon-badged">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle"><circle cx="12" cy="12" r="10"></circle></svg>    
+                                    <div class="badge badge-circle bg-soft-success">
+                                        <span class="tab_count_assets">0</span>
+                                    </div>
                                 </div>
                                 <span class="me-auto d-none d-xl-block">
                                     Assets
@@ -119,14 +122,7 @@
                                 <button class="nav-link" id="pills-signin-tab" data-bs-toggle="pill" data-bs-target="signin.html" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Log In</button>
                                 <button class="nav-link" id="pills-signup-tab" data-bs-toggle="pill" data-bs-target="signup.html" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Sign Up</button>                               
                             </li>
-                            <!-- <ul class="nav nav-pills mb-3 d-flex justify-content-between align-items-center" id="pills-account-tab" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="pills-signin-tab" data-bs-toggle="pill" data-bs-target="signin.html" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Log In</button>
-                                </li>
-                                <li class="nav-item float-right" role="presentation" style="float: right;">
-                                    <button class="nav-link" id="pills-signup-tab" data-bs-toggle="pill" data-bs-target="signup.html" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Sign Up</button>
-                                </li>                                
-                            </ul> -->
+                            
                             <li class="nav-item float-right" role="presentation" style="float: right;">
                                 <a class="btn btn-sm btn-soft-primary w-100 nav-link dropdown-toggle current_crypto_symbol" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Offers</a>
                                 <ul class="dropdown-menu h-3">
@@ -137,6 +133,10 @@
                             </li>
                             
                         </ul>
+                        <div class="alert bg-soft-danger alert-dismissible fade show" role="alert">
+                            <a class="" href="#" data-bs-toggle="modal" data-bs-target="#verify_phone_number">Varify your phone number.</a>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
                         <div class="btn-group skills query_symbols_skills">
                         </div>
                         <!-- Resources - Notices -->
@@ -174,12 +174,8 @@
     
                                                             <div class="d-flex">
                                                                 <div class="me-auto">
-                                                                    Get started with Bitcoin
-                                                                    <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path fill="#F90" fill-rule="evenodd" d="M23.6408156,14.9046858 C22.0378949,21.3339956 15.5260763,25.2467873 9.09601649,23.6434916 C2.66858193,22.0405708 -1.24420981,15.5283772 0.359460996,9.09944253 C1.96163164,2.66938268 8.47345019,-1.24378409 14.9016348,0.359136628 C21.3313196,1.96205735 25.2437363,8.47500102 23.6408156,14.9046858 L23.6408156,14.9046858 Z M17.2913894,10.2916945 C17.5302898,8.69477443 16.3144103,7.83630799 14.6518582,7.263622 L15.1911657,5.1003916 L13.8744004,4.77223165 L13.3493445,6.87845598 C13.0031826,6.79219679 12.6476448,6.71081312 12.2943571,6.63017953 L12.8231635,4.51007873 L11.5071483,4.18191878 L10.9674658,6.3443991 C10.6809353,6.27914215 10.3996553,6.21463528 10.1266263,6.14675305 L10.1281264,6.14000233 L8.31218301,5.68657903 L7.9618957,7.09297883 C7.9618957,7.09297883 8.93887476,7.31687767 8.91824756,7.33075415 C9.45155436,7.46389333 9.54793963,7.81680592 9.53181291,8.09658572 L8.91749748,10.5609732 C8.9542514,10.5703492 9.00188147,10.5838506 9.05438706,10.6048529 C9.01050739,10.5939767 8.96362739,10.5819754 8.91524724,10.5703492 L8.05415553,14.0225919 C7.98889858,14.1846091 7.82350596,14.427635 7.45071626,14.3353752 C7.46384266,14.3545022 6.49361432,14.0964747 6.49361432,14.0964747 L5.8399197,15.6037603 L7.5534772,16.0309308 C7.87226116,16.1108143 8.18466943,16.1944482 8.49220218,16.2732066 L7.94726915,18.4611896 L9.26253423,18.7893496 L9.80221671,16.624619 C10.161505,16.7221294 10.5102921,16.812139 10.8515785,16.896898 L10.3137712,19.0515025 L11.6305364,19.3796624 L12.1754695,17.1958048 C14.4208336,17.6207251 16.1092634,17.4493318 16.8199641,15.4184905 C17.3926501,13.7833164 16.7914611,12.8400909 15.6100853,12.2250254 C16.4704269,12.0266293 17.1184959,11.460694 17.2913894,10.2916945 L17.2913894,10.2916945 Z M14.2828189,14.5105188 C13.8759006,16.145693 11.1227324,15.2617238 10.2301373,15.0400752 L10.9532143,12.1413915 C11.8458094,12.3641652 14.7081142,12.8052122 14.2828189,14.5105188 L14.2828189,14.5105188 Z M14.6901123,10.268067 C14.3188228,11.7554754 12.0273287,10.9997699 11.2839995,10.8145002 L11.9395694,8.18547018 C12.6828985,8.37073991 15.0767785,8.71652674 14.6901123,10.268067 L14.6901123,10.268067 Z"/>
-                                                                    </svg>
-                                                                </div>
-                                                                
+                                                                    Get started with <span class="acc_crypto_symbol"></span>
+                                                                </div>                                                                
                                                                 
                                                                 <div class="dropdown ms-5">
                                                                     <a class="icon text-muted" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -235,16 +231,56 @@
                                                 </div>
                                             </div>
                                             <!-- Card -->
+
+                                            <!--chart-->
+                                            <div class="card mb-3">
+                                                <div class="card-body">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <div class="row align-items-center">
+                                                                <div class="col-6">
+                                                                    <h5 class="text-muted fw-normal mt-0 text-truncate cur_crypto_symbol" title=""></h5>
+                                                                    <h3 class="my-2 py-1 cur_crypto_symbol_price">3,254</h3>
+                                                                    <p class="mb-0 text-muted cur_crypto_symbol_change">
+                                                                        
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="text-end">
+                                                                        <div id="new-leads-chart" data-colors="#42d29d"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div> <!-- end row-->
+                                                        </div> <!-- end card-body -->
+                                                    </div>
+                                                    
+            
+                                                    <div dir="ltr">
+                                                        <div id="dash-revenue-chart" class="apex-charts" data-colors="#42d29d,#44badc"></div>
+                                                    </div>
+                                                    
+                                                </div> <!-- end card-body-->
+                                            </div>
+
+
+
+
                                             <ul class="nav nav-pills nav-justified" role="tablist">
                                                 <li class="nav-item">
                                                     <a class="nav-link active" data-bs-toggle="pill" href="#create-assets" role="tab" aria-controls="create-assets" aria-selected="true">
                                                         Cryptos you own
+                                                        <div class="badge badge-circle bg-soft-success">
+                                                            <span class="tab_count_assets">0</span>
+                                                        </div>
                                                     </a>
                                                 </li>
     
                                                 <li class="nav-item">
                                                     <a class="nav-link" data-bs-toggle="pill" href="#create-watchlist" role="tab" aria-controls="create-watchlist" aria-selected="true">
                                                         Your Watchlist
+                                                        <div class="badge badge-circle bg-soft-warning">
+                                                            <span class="tab_count_wacthlist">0</span>
+                                                        </div>
                                                     </a>
                                                 </li>
                                             </ul>
@@ -302,11 +338,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- Card -->
-
-                                            <!-- Card -->
-                                            
-                                            <!-- Card -->
+                                            <!-- Card -->                                            
     
                                             <!-- Card -->
                                             <div class="card border-0 mb-5">
@@ -571,11 +603,7 @@
                                                 </div>
                                             </div>
                                             <!-- Card -->
-                                        </div>
-                                        
-                                        <!-- gift  -->
-                                        
-                                        <!-- gift  -->
+                                        </div>                                        
     
                                     </div>
                                 </div>
@@ -588,26 +616,50 @@
                                 <div class="hide-scrollbar">
     
                                     <div class="container py-8">
-    
-                                        <!-- Title -->
-                                        <div class="card border-0 mb-5">
-                                            <div class="card-body">
+                                        <div class="card-body">    
+                                            <div class="row gx-5">
+                                                <div class="col-auto">
+                                                    <!-- user image -->
+                                                    <a href="#" class="avatar">
+                                                        <div class="username_pic">
+
+                                                        </div>
+
+                                                        <div class="badge badge-circle bg-secondary border-outline position-absolute bottom-0 end-0">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                                        </div>
+                                                    </a>
+                                                </div>
+
                                                 <div class="col">
                                                     <div class="d-flex align-items-center mb-2">
                                                         <h5 class="me-auto mb-0">
-                                                            <a href="#"><span class="extra-small btn btn-sm btn-soft-primary">5,231+</span> customers traded Crypto today</a>
+                                                            <a href="#">Account Balance</a>
                                                         </h5>
-                                                        <span class="extra-small text-muted ms-2">08:45 PM</span>
-                                                    </div>                                                        
+                                                        <span class="ms-2 text-white account_balance" account_balance="0.00">$0.00</span>
+                                                        
+                                                    </div>
+
+                                                    <div class="d-flex">
+                                                        <div id="account_action" class="row mt-3" style="display: none;">
+                                                            <div class="col">
+                                                                <button type="button" class="btn btn-sm btn-secondary w-100 account_action_options" data-bs-toggle="modal" data-bs-target="#account_withdraw">Withdraw</button>
+                                                            </div>
+                                                            <div class="col">
+                                                                <button type="button" class="btn btn-sm btn-primary w-100 account_action_options" data-bs-toggle="modal" data-bs-target="#account_deposit">Deposit</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
                                                 </div>
+                                                
                                             </div>
+                                            
                                         </div>
+                                        
      
                                         <!-- Trade -->
-                                        <div class="mb-6">
-                                            <div class="mb-5">
-                                                <span>Trade crypto person-to-person in an easy, fast, and secure way.</span>
-                                            </div>
+                                        <div class="mb-6">                                            
                                             <div class="mb-6">
                                                 <div class="row">
                                                     <div class="col">
@@ -639,9 +691,8 @@
                                                     </a>
                                                 </li>
                                             </ul>
-                                        </div>
-    
-                                        <!-- Tabs content -->
+                                        </div>    
+                                        <!-- Order Book -->
                                         <div class="tab-content mb-3" role="tablist">
 
                                             <!--Buy Order Book-->
@@ -692,9 +743,28 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- Tabs content -->
+                                        <!-- Order Book -->
 
+                                        <!-- customers traded -->
+                                        <div class="card border-0 mb-5">
+                                            <div class="card-body">
+                                                <div class="col">
+                                                    <div class="d-flex align-items-center mb-2">
+                                                        <h5 class="me-auto mb-0">
+                                                            <a href="#"><span class="extra-small btn btn-sm btn-soft-primary cunstomers_trading_crypto">5,231+</span> trading <span class="crypto_being_traded">Crypto</span> today</a>
+                                                        </h5>
+                                                        <span class="extra-small text-muted ms-2 time_of_trade">08:45 PM</span>
+                                                    </div>                                                        
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- customers traded -->
 
+                                        <div class="mb-5">
+                                            <span>Trade crypto person-to-person in an easy, fast, and secure way.</span>
+                                        </div>
+
+                                        <!-- gift -->
                                         <div class="card-list">
                                             <div class="card border-0 mb-5">
                                                 <div class="card-body">
@@ -813,6 +883,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- gift -->
 
                                     </div>
     
@@ -2246,6 +2317,7 @@
                     <div id="mkt_dash" class="container h-100">    
                         <div class="d-flex flex-column h-100 position-relative">
                             <!-- Chat: Header -->
+                            
                             <div class="chat-header border-bottom py-0 py-lg-1">
                                 <div class="row align-items-center">
                                     <ul class="nav nav-pills nav-fill d-flex justify-content-between align-items-center" role="tablist">
@@ -2266,84 +2338,61 @@
                                                 <button class="nav-link btn btn-sm btn-success mkt_option_action" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="receive">Receive</button>
                                             </div>
                                         </li>
-                                        <li class="nav-item d-none d-lg-block" role="presentation">
-                                            <a class="nav-item dropdown-toggle refresh_" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Refresh interval</a>
-                                            <ul class="dropdown-menu hide-scrollbar flex-1 h-3" style="height: 250px;">
-                                                <li><a class="dropdown-item active refresh_interval" interval="1">1 Minute</a></li>
-                                                <li><hr class="dropdown-divider d-lg-none"></li>
-                                                <li><a class="dropdown-item active refresh_interval" interval="3">3 Minutes</a></li>
-                                                <li><hr class="dropdown-divider d-lg-none"></li>
-                                                <li><a class="dropdown-item active refresh_interval" interval="5">5 Minutes</a></li>
-                                                <li><hr class="dropdown-divider d-lg-none"></li>
-                                                <li><a class="dropdown-item active refresh_interval" interval="15">15 Minutes</a></li>
-                                                <li><hr class="dropdown-divider d-lg-none"></li>
-                                                <li><a class="dropdown-item active refresh_interval" interval="30">30 Minutes</a></li>
-                                                <li><hr class="dropdown-divider d-lg-none"></li>
-                                                <li><a class="dropdown-item active refresh_interval" interval="60">60 Minutes</a></li>
-                                                <li><hr class="dropdown-divider d-lg-none"></li>
-                                                <li><a class="dropdown-item active refresh_interval" interval="120">120 Minutes</a></li>
-                                                <li><hr class="dropdown-divider d-lg-none"></li>
-                                                <li><a class="dropdown-item active refresh_interval" interval="240">240 Minutes</a></li>
-                                                <li><hr class="dropdown-divider d-lg-none"></li>
-                                                <li><a class="dropdown-item active refresh_interval" interval="360">360 Minutes</a></li>
-                                                <li><hr class="dropdown-divider d-lg-none"></li>
-                                                <li><a class="dropdown-item active refresh_interval" interval="720">720 Minutes</a></li>
-                                                <li><hr class="dropdown-divider d-lg-none"></li>
-                                                <li><a class="dropdown-item active refresh_interval" interval="D">Day</a></li>
-                                                <li><hr class="dropdown-divider d-lg-none"></li>
-                                                <li><a class="dropdown-item active refresh_interval" interval="W">Week</a></li>
-                                                <li><hr class="dropdown-divider d-lg-none"></li>
-                                                <li><a class="dropdown-item active refresh_interval" interval="M">Month</a></li>
-                                                <li><hr class="dropdown-divider d-lg-none"></li>
-                                                <li><a href="#" class="nav-link btn btn-sm btn-soft-danger d-lg-none mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="sell">Sell</a></li>
-                                                <li><hr class="dropdown-divider d-lg-none"></li>
-                                                <li><a href="#" class="nav-link btn btn-sm btn-success d-lg-none mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="buy">Buy</a></li>
-                                            </ul>                                            
-                                        </li>
                                         <li class="nav-item float-right" role="presentation" style="float: right;">
-                                            <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button class="nav-link active pills-home-tab current_crypto_symbol" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Order Book</button>
-                                                <button class="nav-link active pills-assets-tab d-none" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Assets</button>
-                                            </div>
+                                            <button class="nav-link active pills-home-tab current_crypto_symbol dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Offers</button>
+                                            <ul class="dropdown-menu hide-scrollbar flex-1 h-3 query_symbols" style="height: 500px; width: 100%;">
+                                                      
+                                            </ul>
+                                            
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="row align-items-center asset_info">
-                                    
-                                </div>                          
+                                
+                                
+
+
                             </div>                            
                             <!--  -->                        
     
                             <!-- Chat: Content -->
                             <div class="chat-body hide-scrollbar flex-1 h-100">
                                 <div class="chat-body-inner">
-                                    <div class="me-auto mb-3">
-                                        <div class="row gx-3">                                                        
-                                            <div class="col">
-                                                <a class="btn btn-sm btn-soft-primary w-100 nav-link dropdown-toggle select_currency" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">USD</a>
-                                                    <ul class="dropdown-menu hide-scrollbar flex-1 h-3 currency_list" style="height: 250px;">
-                                                    </ul>
+                                    
+
+                                    <div id="leanders_mkt_c"  class="card mb-3">
+                                        <span class="asset_info_candlestick mt-3 d-flex justify-content-between align-items-center">
+                                    
+                                        </span>
+                                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                            <div class="btn-group me-2 btn-group-sm" role="group" aria-label="First group">
+                                              <button type="button" class="btn btn-outline-secondary btn-sm active refresh_interval" int_val="1" interval="1">1 m</button>
+                                              <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="3" interval="3">3 m</button>
+                                              <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="5" interval="5">5 m</button>
+                                              <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="15" interval="15">15 m</button>
+                                              <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="30" interval="30">30 m</button>
                                             </div>
-                                            <div class="col">
-                                                <a class="btn btn-sm btn-soft-primary w-100 nav-link dropdown-toggle select_country" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">United States</a>
-                                                    <ul class="dropdown-menu hide-scrollbar flex-1 h-3 country_list" style="height: 250px;">
-                                                    </ul>
+                                            <div class="btn-group me-2 btn-group-sm" role="group btn-sm" aria-label="Second group">
+                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="60" interval="60">1 hr</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="120" interval="120">2 hrs</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="240" interval="240">4 hrs</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="360" interval="360">6 hrs</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="720" interval="720">12 hrs</button>
+
                                             </div>
-                                            <div class="col">
-                                                <a class="btn btn-sm btn-primary w-100 nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Online offers</a>
-                                                    <ul class="dropdown-menu hide-scrollbar flex-1 h-3" style="height: 250px;">
-                                                      <li><a class="dropdown-item active" href="#">Online offers</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item active" href="#">Bank transfer</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Paypal</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Visa/Credit Card</a></li>
-                                                      <li><hr class="dropdown-divider"></li>
-                                                      <li><a class="dropdown-item" href="#">Western union</a></li>
-                                                    </ul>
+                                            <div class="btn-group btn-group-sm" role="group" aria-label="Third group">
+                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="1440" interval="D">1 D</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="10080" interval="W">W</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm refresh_interval" int_val="40320" interval="M">M</button>
                                             </div>
                                         </div>
+                                        
+                                        <div class="card-body"> 
+                                                                                       
+                                            <div dir="ltr">
+                                                <div id="simple-candlestick" class="apex-charts" data-colors="#42d29d,#fa6767"></div>
+                                            </div>
+                                        </div>
+                                        <!-- end card body-->
                                     </div>
                                     
                                     
@@ -2472,7 +2521,7 @@
                                         
     
                                     </div>
-                                    <div id="leanders_mkt" class="py-1">                                        
+                                    <div id="leanders_mkt" class="py-1 d-none">                                        
                                         <div class="row g-0 leanders_mkt_assets">
 
                                         </div>                                        
@@ -2481,18 +2530,24 @@
                             </div>
                             <!-- Chat: Content -->
                             
-                            <footer class="footer mt-auto py-2 bg-light">
-                                <div class="container">
-                                  <span class="text-muted">                                    
-                                    <a class="py-0 py-lg-8 px-6" href="#Legal_Privacy" title="Legal & Privacy">
-                                        <span class="me-auto">
-                                            Legal & Privacy
-                                        </span>                            
-                                    </a>
-                                    <span class="me-auto">
-                                        © 2022 Rebro
-                                    </span> 
+                            <footer class="footer">
+                                <div class="container d-flex justify-content-between align-items-center mb-3">
+                                  <span class="me-auto">
+                                    © 2022 Rebro
                                   </span>
+
+                                  <span class="text-muted me-auto">
+                                    <a class="me-auto" href="#Legal_Privacy" title="Legal & Privacy">
+                                        Legal & Privacy                            
+                                    </a>                                    
+                                  </span>
+
+                                  <span class="dropdown-toggle select_currency me-auto" data-bs-toggle="dropdown" role="button" aria-expanded="false"></span>
+                                  <ul class="dropdown-menu hide-scrollbar flex-1 h-3 currency_list" style="height: 250px;">
+                                  </ul> 
+                                  <span class="dropdown-toggle select_country me-auto" data-bs-toggle="dropdown" role="button" aria-expanded="false"></span>
+                                  <ul class="dropdown-menu hide-scrollbar flex-1 h-3 country_list" style="height: 250px;">
+                                  </ul>
                                 </div>
                             </footer>
                         </div>                        
@@ -2638,6 +2693,48 @@
             </div>
             <!-- Layout -->
 
+            <div class="modal fade" id="verify_phone_number" tabindex="-1" aria-labelledby="verify_phone_numberModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="verify_phone_numberModalLabel">Phone number verification</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="container">
+                                
+                                <div class="row justify-content-md-cente entrer_phoner mt-3">
+                                    <div class="col">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-text">
+                                                <span class="mcode dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"> </span>
+                                                <ul class="dropdown-menu mcode_list hide-scrollbar" style="height: 200px;">
+                                                
+                                                </ul>
+                                            </div>
+                                            <input type="number" class="form-control is-valid user_phone_number" value="" required>
+                                            <div class="valid-feedback user_phone_numberfeedback">
+                                                Enter phone number
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+
+                            </div>
+                            
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary ms-2" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary complete_verify_phone_number" intenti="deposit">Verify</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- account_deposit -->
             <div class="modal fade" id="account_deposit" tabindex="-1" aria-labelledby="account_depositModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -2651,16 +2748,16 @@
                             <div class="container">                                
                                 <div class="row gx-4 justify-content-md-center">
                                   <div class="col">
-                                    <label for="validationServer01" class="form-label">Amount in <span class="select_currency"></span></label>
-                                    <input type="number" class="form-control is-valid amount_to_deposit" id="validationServer01" value="" required>
+                                    <label for="validationdepositServer01" class="form-label">Amount in <span class="select_currency"></span></label>
+                                    <input type="number" class="form-control is-valid amount_to_deposit" id="validationdepositServer01" value="" required>
                                     <div class="valid-feedback amount_to_deposit_feedback">
                                         
                                     </div>
                                   </div>
                                   <div class="col">
-                                    <label for="validationServer02" class="form-label">Payment Method</label>
+                                    <label for="validationServer02deposit" class="form-label">Payment Method</label>
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-primary payment_option" id="validationServer02">Pay with?</button>
+                                        <button type="button" class="btn btn-primary payment_option" id="validationServer02deposit">Pay with?</button>
                                         <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                                           <span class="visually-hidden">Toggle Dropdown</span>
                                         </button>
@@ -2701,7 +2798,7 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary ms-2" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary complete_trasaction">Complete</button>
+                            <button type="button" class="btn btn-primary complete_trasaction" intenti="deposit">Deposit</button>
                         </div>
                     </div>
                 </div>
@@ -2712,15 +2809,65 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="account_withdrawModalLabel">Modal title</h5>
+                            <h5 class="modal-title" id="account_depositModalLabel">Account withdraw</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            ...
+
+                            <div class="container">                                
+                                <div class="row gx-4 justify-content-md-center">
+                                  <div class="col">
+                                    <label for="validationwithdrawServer04" class="form-label">Amount in <span class="select_currency"></span></label>
+                                    <input type="number" class="form-control is-valid amount_to_withdraw" id="validationwithdrawServer04" value="" required>
+                                    <div class="valid-feedback amount_to_withdraw_feedback">
+                                        
+                                    </div>
+                                  </div>
+                                  <div class="col">
+                                    <label for="validationServer03withdraw" class="form-label">Payment Method</label>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary payment_option" id="validationServer03withdraw">Pay with?</button>
+                                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                          <span class="visually-hidden">Toggle Dropdown</span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item selected_payment_option" href="#" >M-Pesa</a></li>
+                                            <!--<li><a class="dropdown-item selected_payment_option" href="#">Paypal</a></li>
+                                            <li><a class="dropdown-item selected_payment_option" href="#">Google Pay</a></li>
+                                            <li><a class="dropdown-item selected_payment_option" href="#">Amazon Pay</a></li>
+                                            <li><a class="dropdown-item selected_payment_option" href="#">Ali Pay</a></li>
+                                            <li><a class="dropdown-item selected_payment_option" href="#">Debit/Visa card</a></li>-->
+                                        </ul>
+                                    </div>        
+                                  </div>
+                                </div>
+
+                                <div class="row justify-content-md-cente entrer_phoner mt-3" style="display: none;">
+                                    <div class="col">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-text">
+                                                <span class="mcode dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"> </span>
+                                                <ul class="dropdown-menu mcode_list hide-scrollbar" style="height: 200px;">
+                                                
+                                                </ul>
+                                            </div>
+                                            <input type="number" class="form-control is-valid user_withdraw_phone_number" value="" required>
+                                            <div class="valid-feedback user_withdraw_phone_numberfeedback">
+                                                Enter phone number
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+
+                            </div>
+                            
                         </div>
+
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-secondary ms-2" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary complete_trasaction" intenti="withdraw">Withdraw</button>
                         </div>
                     </div>
                 </div>
@@ -3330,6 +3477,10 @@
         <script src="js/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="./assets/js/vendor.js"></script>
         <script src="./assets/js/template.js"></script>
+        <!-- JS Implementing Plugins <script src="assets/js/app.min.js"></script>
+        <script src="assets/js/vendor/apexcharts.min.js"></script>-->
+        
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
         <script src="js/index.js"></script>
         <script src="js/dashboard.js"></script>
@@ -3340,5 +3491,14 @@
         <script src="js/code_reset.js"></script>
         <script src="js/create_password.js"></script>
 
+
+        <!-- third party js -->
+
+        <!-- demo app -->
+        <script src="assets/js/pages/demo.dashboard.js"></script>
+
+        <script src="assets/js/pages/demo.apex-candlestick.js"></script>
+
+        <!-- end demo js-->
     </body>
 </html>
