@@ -105,8 +105,10 @@ $("body").delegate(".order_book_mkt","click",function(event){
         $(".order_price").addClass("is-invalid");
     }
 });
+
 $("body").delegate(".currency_option","click",function(event){
     event.preventDefault();
+    localStorage.setItem("pr_exrate", localStorage.getItem("exrate"));
     $(".select_currency").html($(this).attr('cname'));
     $(".select_country").html($(this).attr('country_name')); 
     $(".mcode").html($(this).attr('mcode'));
@@ -137,6 +139,8 @@ $("body").delegate(".currency_option","click",function(event){
 });
 $("body").delegate(".country_option","click",function(event){
     event.preventDefault();
+    localStorage.setItem("pr_exrate", localStorage.getItem("exrate"));
+
     $(".select_country").html($(this).attr('country_name')); 
     $(".select_currency").html($(this).attr('cname'));
     $(".mcode").html($(this).attr('mcode'));
@@ -232,14 +236,55 @@ $("body").delegate(".selected_payment_option","click",function(event){
     event.preventDefault();
     $(".payment_option").html("" + $(this).html()); 
     localStorage.setItem("selected_payment_option",$(this).html());
-    if ($(this).html() == "M-Pesa") {
+    $(".complete_trasaction").show();
+    $(".complete_card_trasaction").hide();
+    $(".complete_trasaction").html("Complete");
+
+    if ($(this).html() == "Paying with M-Pesa") {
         $(".entrer_phoner").show();
-    } else {
+        $(".entrer_email").hide();
+        $(".entrer_cards").hide();
+        $(".deposit_footer").show();
+        $(".payment_option").removeClass("btn-secondary");
+        $(".payment_option").removeClass("btn-danger");
+        $(".payment_option").removeClass("btn-info");
+        $(".payment_option").addClass("btn-success");
+    } else if ($(this).html() == "Paying with Paypal"){
         $(".entrer_phoner").hide();
+        $(".entrer_cards").hide();
+        $(".deposit_footer").show();
+        $(".entrer_email").show();
+        $("#paypal-button-container").html('');
+
+        $(".user_deposit_email").val(localStorage.getItem("user_email"));
+        $(".user_withdraw_email").val(localStorage.getItem("user_email"));
+        $(".payment_option").removeClass("btn-secondary");
+        $(".payment_option").removeClass("btn-danger");
+        $(".payment_option").removeClass("btn-success");
+        $(".payment_option").addClass("btn-info");
+    }  else if($(this).html() == "Paying with Card"){
+        //entrer_cards
+        $(".entrer_phoner").hide();
+        $(".entrer_email").hide();
+        $(".entrer_cards").show();
+        $(".deposit_footer").show();
+        $(".payment_option").removeClass("btn-info");
+        $(".payment_option").removeClass("btn-danger");
+        $(".payment_option").removeClass("btn-success");
+        $(".payment_option").addClass("btn-secondary");
+
+        $("#dropin-container").html("");
+
+        //braintree_gettoken();
     } 
 });
+//var clientToken = '';
+
 $(".complete_trasaction").click(function(){
-    var deposit = $(this).attr("intenti");
+    var intenti = $(this).attr("intenti");
+    var intent = $(this).attr("intenti");
+    $(".complete_trasaction").html(intent);
+
     if (username==null) {
         mysnackbar("Please login...");
     } else {
@@ -266,8 +311,8 @@ $(".complete_trasaction").click(function(){
             $(".payment_option").addClass("btn-danger");
             mysnackbar("select payment option");
         } else {
-            $(".payment_option").removeClass("btn-danger");
-            $(".payment_option").addClass("btn-success");
+            //$(".payment_option").removeClass("btn-danger");
+            //$(".payment_option").addClass("btn-success");
             $(".payment_option").html(localStorage.getItem("selected_payment_option")); 
     
             if ($(this).attr("intenti") == "withdraw") {
@@ -286,6 +331,11 @@ $(".complete_trasaction").click(function(){
                     $(".amount_to_withdraw_feedback").addClass("valid-feedback");
                     $(".amount_to_withdraw_feedback").html("Looks good!");
                     var amount_to_deposit = Number($(".amount_to_withdraw").val());
+                    //var amount_to_deposit = Number($(".amount_to_deposit").val());
+                    var amount_in_usd = amount_to_deposit/Number(localStorage.getItem("exrate"));
+                    amount_in_usd = amount_in_usd.toFixed(2);
+                    $(".amount_to_withdraw_feedback").html("$" + amount_in_usd + " will be withdrew.");
+
                 }            
             } else {
                 if ($(".amount_to_deposit").val() == '') {
@@ -303,27 +353,35 @@ $(".complete_trasaction").click(function(){
                     $(".amount_to_deposit_feedback").addClass("valid-feedback");
                     $(".amount_to_deposit_feedback").html("Looks good!");
                     var amount_to_deposit = Number($(".amount_to_deposit").val());
+                    var amount_in_usd = amount_to_deposit/Number(localStorage.getItem("exrate"));
+                    amount_in_usd = amount_in_usd.toFixed(2);
+                    $(".amount_to_deposit_feedback").html("$" + amount_in_usd + " will be deposited.");
                 }            
             }        
     
             var selected_payment_option  = localStorage.getItem("selected_payment_option");
     
-            if (selected_payment_option == "M-Pesa") {
-                $(".entrer_phoner").show();
+            if (selected_payment_option == "Paying with M-Pesa") {
+                $(".payment_option").removeClass("btn-danger");
+                $(".payment_option").removeClass("btn-info");
+                $(".payment_option").addClass("btn-success");
+                $(".entrer_cards").hide();
+                $(".entrer_email").hide();
+                $(".entrer_phoner").show();                
                 if ($(this).attr("intenti") == "withdraw") {
                     var user_phone_ = $(".user_withdraw_phone_number").val();
                 } else {
                     var user_phone_ = $(".user_phone_number").val();
                 }
-                var phone_num = $(".user_phone_number").val();
-                phone_num = "" + phone_num + "";
+                //var phone_num = $(".user_phone_number").val();
+                var phone_num = "" + user_phone_ + "";
                 if(phone_num.charAt(0) == "0"){
                     phone_num = phone_num.replace(0, "");
                 }
-                //alert(user_phone_);
-                //alert(phone_num.length);
 
                 //alert(user_phone_ == '' || phone_num.length < 9 || phone_num.length > 9);
+                //alert(phone_num);
+
                 if (user_phone_ == '' || phone_num.length < 9 || phone_num.length > 9) {
                     if ($(this).attr("intenti") == "withdraw") {
                         $(".user_withdraw_phone_number").removeClass("is-valid");
@@ -365,25 +423,193 @@ $(".complete_trasaction").click(function(){
                         proccessing_number = proccessing_number.replace("+", "");
                     }
     
-                    if (amount_to_deposit == "" || amount_to_deposit < 1) {
-                        mysnackbar("Enter valid amount");
+                    complete_trasaction(amount_to_deposit,selected_payment_option,"useremail_",proccessing_number,intent);
+                    
+                }
+            } else if (selected_payment_option == "Paying with Paypal") {
+                $(".payment_option").removeClass("btn-danger");
+                $(".payment_option").removeClass("btn-success");
+                $(".payment_option").addClass("btn-info");
+                $(".entrer_cards").hide();
+                $(".entrer_phoner").hide();
+                $(".entrer_email").show();
+                if (amount_to_deposit == "" || amount_to_deposit < 1) {
+                    mysnackbar("Enter valid amount");
+                } else {
+                    $(".deposit_footer").hide();
+
+                    var element = document.getElementById('paypal-button-container');
+                    element.innerHTML = '';
+
+                    paypal.Buttons({
+                        // Sets up the transaction when a payment button is clicked
+                        createOrder: function(data, actions) {
+                          return actions.order.create({
+                            purchase_units: [{
+                              amount: {
+                                value: '' + amount_in_usd + '' // Can reference variables or functions. Example: `value: document.getElementById('...').value`
+                              }
+                            }]
+                          });
+                        },
+                        // Finalize the transaction after payer approval
+                        onApprove: function(data, actions) {
+                            return actions.order.capture().then(function(orderData) {
+                              // Successful capture! For dev/demo purposes:
+                                  //var element = document.getElementById('paypal-button-container');
+                                  //element.innerHTML = JSON.stringify(orderData, null, 2);
+
+                                  var elementjson = { 
+                                      "id": "2LD38181TF5660020", 
+                                      "intent": "CAPTURE", 
+                                      "status": "COMPLETED", 
+                                      "purchase_units": [ 
+                                          { 
+                                              "reference_id": "default", 
+                                              "amount": { "currency_code": "USD", "value": "0.01" },
+                                              "payee": { "email_address": "sb-bhmmj13327590@business.example.com", "merchant_id": "5CK94BM6JJ6Q2" },
+                                              "soft_descriptor": "PAYPAL *TEST STORE TES", 
+                                              "shipping": { 
+                                                  "name": { "full_name": "Stephen Wambui" }, 
+                                                  "address": { "address_line_1": "60 st", "admin_area_2": "Ngewa", "admin_area_1": "DE", "postal_code": "00901", "country_code": "KE" } 
+                                              }, 
+                                              "payments": { 
+                                                  "captures": [ 
+                                                      { 
+                                                          "id": "14V8317388532025B", 
+                                                          "status": "COMPLETED", 
+                                                          "amount": { "currency_code": "USD", "value": "0.01" }, 
+                                                          "final_capture": true, 
+                                                          "disbursement_mode": "INSTANT", 
+                                                          "seller_protection": { "status": "ELIGIBLE", "dispute_categories": [ "ITEM_NOT_RECEIVED", "UNAUTHORIZED_TRANSACTION" ] }, 
+                                                          "create_time": "2022-02-11T11:19:25Z", 
+                                                          "update_time": "2022-02-11T11:19:25Z" 
+                                                      } 
+                                                  ] 
+                                              } 
+                                          } 
+                                      ], 
+                                      "payer": { 
+                                          "name": { "given_name": "Stephen", "surname": "Wambui" }, 
+                                          "email_address": "loliping21@gmail.com", 
+                                          "payer_id": "32URW6PHSXGW2", 
+                                          "address": { "country_code": "KE" } 
+                                      }, 
+                                      "create_time": "2022-02-11T11:10:09Z", 
+                                      "update_time": "2022-02-11T11:19:25Z", 
+                                      "links": [ { "href": "https://api.sandbox.paypal.com/v2/checkout/orders/2LD38181TF5660020", "rel": "self", "method": "GET" } ] 
+                                  };
+                                  
+                                  var id = orderData.id;
+                                  var inteent = orderData.intent;
+                                  var status = orderData.status;
+                                  var email_address = orderData.purchase_units[0].payee.email_address;
+                                  var merchant_id = orderData.purchase_units[0].payee.merchant_id;
+                                  var full_name = orderData.purchase_units[0].shipping.name.full_name;
+
+                                  var transaction = orderData.purchase_units[0].payments.captures[0];
+
+                                  var transaction_id = transaction.id;
+                                  var transaction_status = transaction.status;
+
+                                  var payer = orderData.payer;
+
+                                  //alert(full_name);
+
+                                  //alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+                                  complete_trasaction(amount_to_deposit,selected_payment_option,'useremail_',transaction.id,intent);
+    
+                              // When ready to go live, remove the alert and show a success message within this page. For example:
+                              // var element = document.getElementById('paypal-button-container');
+                              // element.innerHTML = '';
+                              // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                              // Or go to another URL:  actions.redirect('thank_you.html');
+                            });
+                        }
+                    }).render('#paypal-button-container');
+                }
+                
+
+                /**var email_format =/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                var valid = 1;
+
+                if ($(this).attr("intenti") == "withdraw") {
+                    if (email_format.test($(".user_withdraw_email").val())) {
+                        //$(".user_withdraw_email").val(localStorage.getItem("user_email"));
+                        var useremail_ = $(".user_withdraw_email").val();
+                        $(".user_withdraw_email").removeClass("is-invalid");
+                        $(".user_withdraw_emailfeedback").removeClass("invalid-feedback");
+                        $(".user_withdraw_emailfeedback").addClass("valid-feedback");
+                        $(".user_withdraw_email").addClass("is-valid");                       
+                        valid = 1;
                     } else {
-                        $(".complete_trasaction").removeClass("btn-primary");
-                        $(".complete_trasaction").addClass("btn-warning");
-                        $(".complete_trasaction").html("Proccessing...");
-                        var intent = $(this).attr("intenti");
-                        proccess_transaction(localStorage.getItem("cname"),amount_to_deposit,selected_payment_option,proccessing_number,intent);               
+                        $(".user_withdraw_email").removeClass("is-valid");
+                        $(".user_withdraw_emailfeedback").removeClass("valid-feedback");
+                        $(".user_withdraw_email").addClass("is-invalid");
+                        $(".user_withdraw_emailfeedback").addClass("invalid-feedback");
+                        $(".user_withdraw_emailfeedback").html("Please provide a valid email.");
+                        valid = 0;
+                    }
+                } else {
+                    if (email_format.test($(".user_deposit_email").val())) {
+                        //$(".user_deposit_email").val(localStorage.getItem("user_email"));
+                        var useremail_ = $(".user_deposit_email").val(); 
+                        $(".user_deposit_email").removeClass("is-invalid");
+                        $(".user_deposit_emailfeedback").removeClass("invalid-feedback");
+                        $(".user_deposit_emailfeedback").addClass("valid-feedback");
+                        $(".user_deposit_email").addClass("is-valid");
+                        valid = 1;                   
+                    } else {
+                        $(".user_deposit_email").removeClass("is-valid");
+                        $(".user_deposit_emailfeedback").removeClass("valid-feedback");
+                        $(".user_deposit_email").addClass("is-invalid");
+                        $(".user_deposit_emailfeedback").addClass("invalid-feedback");
+                        $(".user_deposit_emailfeedback").html("Please provide a valid email.");
+                        valid = 0;
                     }
                 }
-            } else {
+                if (valid == 1) {
+                    complete_trasaction(amount_to_deposit,selected_payment_option,useremail_,"proccessing_number",intent);
+                } */
+
+            } else if(selected_payment_option == "Paying with Card"){
                 $(".entrer_phoner").hide();
-            }
-    
+                $(".entrer_email").hide();
+                $(".entrer_cards").show();
+                if (amount_to_deposit == "" || amount_to_deposit < 1) {
+                    mysnackbar("Enter valid amount");
+                } else {
+                    $("#dropin-container").html("Loading Cards...");
+                    $(".complete_trasaction").html("please wait...");
+                    braintree_gettoken(amount_in_usd,selected_payment_option,'','',intent);
+                }
+                
+            }   
             
         }
     }
     
 });
+
+function complete_trasaction(amount_to_deposit,selected_payment_option,useremail_,proccessing_number,intent) {
+    if (amount_to_deposit == "" || amount_to_deposit < 1) {
+        mysnackbar("Enter valid amount");
+    } else {
+        if (selected_payment_option == "Paying with Card") {
+            $(".complete_card_trasaction").removeClass("btn-primary");
+            $(".complete_card_trasaction").addClass("btn-warning");
+            $(".complete_card_trasaction").html("Proccessing...");
+        } else {
+            $(".complete_trasaction").removeClass("btn-primary");
+            $(".complete_trasaction").addClass("btn-warning");
+            $(".complete_trasaction").html("Proccessing...");
+        }
+        
+        //$(".complete_trasaction").show();
+        //$(".complete_card_trasaction").hide();
+        proccess_transaction(localStorage.getItem("cname"),localStorage.getItem("exrate"), amount_to_deposit,selected_payment_option,useremail_,proccessing_number,intent);               
+    }
+}
 
 var local_asset = "";
 var local_asset_time_min = '';
@@ -476,7 +702,7 @@ function Query_Kline_Book() {
     const myArray = text.split("https://wallet.arybit.com/#");
     var et_svg = myArray[1];
     if (myArray.length > 1) {
-        localStorage.setItem("asset",et_svg);
+        //localStorage.setItem("asset",et_svg);
     }
     arybit('Query Kline',localStorage.getItem("asset"),'');
     setTimeout(Query_Kline_Book, 60000);
@@ -731,8 +957,11 @@ function arybit(crypto,asset,aisa_options) {
 
                         var tab_count_assets = 0;
                         var tab_count_wacthlist = 0;
+
+                        var caller = 0;
                         
 
+                        //alert(localStorage.getItem("ccode"));
 
                         for (let i = 0; i < results.length; i++) {
                             var results_last_price = Number(results[i].last_price)*Number(localStorage.getItem("exrate"));
@@ -770,6 +999,38 @@ function arybit(crypto,asset,aisa_options) {
                             var svg_src = "https://s1.bycsi.com/assets/image/coins/light/" + et_svg + ".svg";
 
                             let symbol_pre_price = localStorage.getItem("" + results[i].symbol + "");// Get Symbol preveous price
+                            if (symbol_pre_price == null) {
+                                symbol_pre_price = 0;
+                                caller = 0;
+                            } else{
+                                if (caller == 0) {
+                                    alert(localStorage.getItem("exrate") + " " +  localStorage.getItem("pr_exrate"));
+                                }
+                                if (localStorage.getItem("exrate") != localStorage.getItem("pr_exrate")){
+                                    //chan_pri = 0.00;
+                                    symbol_pre_price = symbol_pre_price/Number(localStorage.getItem("pr_exrate"));
+                                    symbol_pre_price = symbol_pre_price*Number(localStorage.getItem("exrate"));    
+                                }
+                                caller = 1;
+                            }
+                            /**if (symbol_pre_price == null) {
+                                symbol_pre_price = results_last_price;
+                                if (localStorage.getItem("exrate") != localStorage.getItem("pr_exrate")){
+                                    //localStorage.setItem("pr_exrate", localStorage.getItem("exrate"));
+                                    //chan_pri = 0.00;
+                                    symbol_pre_price = symbol_pre_price/Number(localStorage.getItem("pr_exrate"));
+                                    symbol_pre_price = symbol_pre_price*Number(localStorage.getItem("exrate"));    
+                                }
+                            } else {
+                                if (localStorage.getItem("exrate") != localStorage.getItem("pr_exrate")){
+                                    //localStorage.setItem("pr_exrate", localStorage.getItem("exrate"));
+                                    //chan_pri = 0.00;
+                                    symbol_pre_price = symbol_pre_price/Number(localStorage.getItem("pr_exrate"));
+                                    symbol_pre_price = symbol_pre_price*Number(localStorage.getItem("exrate"));    
+                                }
+                            } */
+                            
+
                             if (symbol_pre_price != '' || symbol_pre_price != null) {
                                 let price_now = results_last_price;
                                 var chan_pri = 0.00;
@@ -779,12 +1040,23 @@ function arybit(crypto,asset,aisa_options) {
 
                                 if (symbol_pre_price < price_now) {
                                     var symbol_chan_pri = price_now - symbol_pre_price;
-                                    chan_pri = (symbol_chan_pri/symbol_pre_price)*100;
+
+                                    //alert(localStorage.getItem("exrate") != localStorage.getItem("pr_exrate"));
+
+                                    if (symbol_pre_price == 0 ) {
+                                        chan_pri = 0.00;
+
+                                    } else {
+                                        chan_pri = (symbol_chan_pri/symbol_pre_price)*100; 
+                                    }
+                                    //Infinity
+                                    //alert(chan_pri);
                                     chan_pri = "+" + chan_pri.toFixed(4);
                                     chan_pri_chart = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>';
                                     var bg_ = "bg-soft-success";
                                     var chan_pri_bg = "bg-success";
                                     wacthlist_prct_bg = "success";
+                                    //alert("success " + chan_pri);
 
                                 } else if (symbol_pre_price == price_now){
                                     var symbol_chan_pri = symbol_pre_price - price_now;
@@ -804,6 +1076,8 @@ function arybit(crypto,asset,aisa_options) {
                                     var chan_pri_bg = "bg-danger";
                                     wacthlist_prct_bg = "danger";
 
+                                   // alert("danger " + chan_pri);
+
                                 }
                                 wacthlist_prct = chan_pri;
 
@@ -819,7 +1093,6 @@ function arybit(crypto,asset,aisa_options) {
                             if (localStorage.getItem(crypto_asset_balance) == null) {
                                var group_btr = '<li class="btn-group" role="group">' +
                                '<a href="#" class="me-0 btn btn-sm btn-soft-success mkt_option get_asset_assets" asset="'+ results[i].symbol + '" day_low="'+ results_low_price_24h + '" price_open="'+ results_bid_price + '" day_high="'+ results_high_price_24h + '"  price="'+ results_last_price + '" aisa_options="buy">Buy</a>' +
-                               '<a href="#" class="me-0 btn btn-sm btn-soft-info mkt_option get_asset_assets" asset="'+ results[i].symbol + '" day_low="'+ results_low_price_24h + '" price_open="'+ results_bid_price + '" day_high="'+ results_high_price_24h + '"  price="'+ results_last_price + '" aisa_options="hold">Watch</a>' +
                                '</li>'; 
                             } else if (localStorage.getItem(crypto_asset_balance) ==0){
                                 var group_btr = '<li class="btn-group" role="group">' +
@@ -827,7 +1100,7 @@ function arybit(crypto,asset,aisa_options) {
                                 '</li>';
                             } else {
                                 var group_btr = '<li class="btn-group" role="group">' +
-                               '<a href="#" class="me-0 btn btn-sm btn-soft-success mkt_option get_asset_assets" asset="'+ results[i].symbol + '" day_low="'+ results_low_price_24h + '" price_open="'+ results_bid_price + '" day_high="'+ results_high_price_24h + '"  price="'+ results_last_price + '" aisa_options="buy">Buy</a>' +
+                               '<a href="#" class="d-none d-lg-block me-0 btn btn-sm btn-soft-success mkt_option get_asset_assets" asset="'+ results[i].symbol + '" day_low="'+ results_low_price_24h + '" price_open="'+ results_bid_price + '" day_high="'+ results_high_price_24h + '"  price="'+ results_last_price + '" aisa_options="buy">Buy</a>' +
                                '<a href="#" class="me-0 btn btn-sm btn-soft-danger mkt_option get_asset_assets" asset="'+ results[i].symbol + '" day_low="'+ results_low_price_24h + '" price_open="'+ results_bid_price + '" day_high="'+ results_high_price_24h + '"  price="'+ results_last_price + '" aisa_options="sell">Sell</a>' +
                                '</li>';
                             }                            
@@ -872,7 +1145,6 @@ function arybit(crypto,asset,aisa_options) {
                             '</div>';
 
                             $(".id_" + results[i].symbol + "").html(localStorage.getItem("ccode") + ' '+ results_last_price + ' <i class="text-' + wacthlist_prct_bg + '">' + wacthlist_prct + '%</i>' );
-                            $(".pri_id_" + results[i].symbol + "").html(localStorage.getItem("ccode") + ' '+ results_last_price);
                             $(".get_asset_id_" + results[i].symbol + "").html(group_btr);
 
                             $(".leanders_mkt_assets").append(leanders_mkt_assets);
@@ -894,17 +1166,11 @@ function arybit(crypto,asset,aisa_options) {
                                 '</span>' +
                                 '<span class="text-' + wacthlist_prct_bg + '">' + wacthlist_prct + '%</span>' +
                                 '<span class="text-info">' + localStorage.getItem("ccode") + ' ' + results_last_price + '</span>' +
-                                '<span class="dropdown ms-5">' +
-                                '<a class="icon text-muted" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">' +
-                                '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>' +
-                                '</a>' +
-                                '<ul class="dropdown-menu">' +
-                                '<li class="btn-group">' +
+                                
+                                '<span class="">' +
                                 '<a href="#" class="btn btn-sm btn-soft-success mkt_option" asset="'+ results[i].symbol + '" day_low="'+ results_low_price_24h + '" price_open="'+ results_bid_price + '" day_high="'+ results_high_price_24h + '"  price="'+ results_last_price + '" aisa_options="buy">Buy</a>' +
-                                '<a href="#" class="btn btn-sm btn-soft-primary mkt_option_unwatch" asset="'+ results[i].symbol + '" day_low="'+ results_low_price_24h + '" price_open="'+ results_bid_price + '" day_high="'+ results_high_price_24h + '"  price="'+ results_last_price + '" aisa_options="hold">Unwatch</a>' +
-                                '</li>' +
-                                '</ul>' +
                                 '</span>' +
+                                
                                 '</li>';
                                 $(".crypto_wacthlist").append(crypto_wacthlist);
 
@@ -986,6 +1252,11 @@ function arybit(crypto,asset,aisa_options) {
                                 $(".crypto_you_own").append(crypto_you_own);
                             }
                         }
+                        if (caller== 0) {
+                            Query_Kline_Book();   
+                        }
+                        localStorage.setItem("pr_exrate", localStorage.getItem("exrate"));
+
                     }                   
                 } else {
                     
@@ -1028,9 +1299,7 @@ function Query_Symbol(crypto,asset,aisa_options) {
                                 } else {
                                     localStorage.setItem("asset",results[i].name);
                                 }
-                                //alert(localStorage.getItem("asset"));
-
-
+                                Query_Kline_Book();
                                 $(".mkt_option").attr("asset",localStorage.getItem("asset"));  
                             }
                             
@@ -1053,18 +1322,28 @@ function Query_Symbol(crypto,asset,aisa_options) {
 
 
 
+                            var query_c_symbols_asset = '<li id="offers_' + results[i].name + '" class="list-group-item d-flex justify-content-between align-items-center" asset="' + results[i].name + '">' +
+                            '<div class="rounded-circle" style="width: 32px; height: 32px;">'+
+                            '<img src="'+ svg_src + '" class="rounded-circle" width="28" alt="Avatar">'+
+                            '</div>'+
+                            '<a class="text-primary" href="#' + results[i].name + '">' + results[i].name + '</a>' +
+                            '<span class="id_' + results[i].name + '"></span>' +
+                            '<span class="d-none d-lg-block text-warning">' + results[i].base_currency + '</span>' +
+                            '<span class="d-none d-lg-block text-success">' + results[i].quote_currency + '</span>' +
+                            '<span class="get_asset_id_' + results[i].name + '"></span>' +
+                            '</li>';
+                            $(".query_c_symbols_asset").append(query_c_symbols_asset);
+
                             var query_c_symbols = '<li id="offers_' + results[i].name + '" class="list-group-item d-flex justify-content-between align-items-center" asset="' + results[i].name + '">' +
                             '<div class="rounded-circle" style="width: 32px; height: 32px;">'+
                             '<img src="'+ svg_src + '" class="rounded-circle" width="28" alt="Avatar">'+
                             '</div>'+
                             '<a class="text-primary" href="#' + results[i].name + '">' + results[i].name + '</a>' +
                             '<span class="id_' + results[i].name + '"></span>' +
-                            '<span class="text-warning">' + results[i].base_currency + '</span>' +
-                            '<span class="text-success">' + results[i].quote_currency + '</span>' +
-                            '<span class="pri_id_' + results[i].name + '"></span>' +
                             '<span class="get_asset_id_' + results[i].name + '"></span>' +
                             '</li>';
                             $(".query_symbols").append(query_c_symbols);
+
 
                             var crypto_offers_drop = '<li><a class="dropdown-item active get_asset" href="#' + results[i].name + '" asset="' + results[i].name + '">' + results[i].name + '</a></li>' +
                             '<li><hr class="dropdown-divider"></li>';
@@ -1103,22 +1382,198 @@ function Query_Symbol(crypto,asset,aisa_options) {
 
 
 
-
-
-function proccess_transaction(ccode,amount_to_deposit,selected_payment_option,phone_num,intent){
+var cout_token = 0;
+function braintree_gettoken(amount_in_usd,selected_payment_option,useremail_,info,intent) {
     $.ajax({
         type: "POST", // Type of request to be send, called as 
         dataType: 'json',
-        data: { ccode:ccode, amount_to_deposit:amount_to_deposit, selected_payment_option: selected_payment_option, phone_num: phone_num, username: localStorage.getItem("username"), email:localStorage.getItem("email"), user_pass:localStorage.getItem("user_pass"), intent:intent},
+        data: { token:'get'},
+        processData: true,
+        url: api_server_url + '/cordova/braintree.php',
+        success: function searchSuccess(response) {
+            try {
+                $("#dropin-container").html("");
+                var deviceData = '';
+                var clientToken = response.clientToken;
+                
+                braintree.client.create({
+                    authorization: clientToken
+                }, function (err, clientInstance) {
+                    // Creation of any other components...
+                    braintree.dataCollector.create({
+                        client: clientInstance
+                    }, function (err, dataCollectorInstance) {
+                        if (err) {
+                            // Handle error in creation of data collector
+                            return;
+                        }
+                        // At this point, you should access the dataCollectorInstance.deviceData value and provide it
+                        // to your server, e.g. by injecting it into your form as a hidden input.
+                        deviceData = dataCollectorInstance.deviceData;
+                    });
+                });
+
+                //alert(clientToken);
+
+                braintree.dropin.create({
+                  authorization: clientToken,
+                  selector: '#dropin-container'
+                }, function (err, instance) {
+                    $(".complete_card_trasaction").html("Complete trasaction");
+                    $(".complete_trasaction").hide();
+                    $(".complete_card_trasaction").show();
+
+                    
+                    instance.on('card:focus', function (event) {
+                        //alert('a card field was focussed'); // a card field was focussed
+                    });
+                    instance.on('card:blur', function (event) {
+                       // alert('a card field was blurred'); // a card field was blurred
+                    });
+                    instance.on('card:validityChange', function (event) {
+                        //alert("validityChange"); // the card form went from invalid to valid or valid to invalid
+                    });
+                    instance.on('card:binAvailable', function (event) {
+                        //alert('card:binAvailable'); // a card field was binAvailable
+                    });
+                    instance.on('card:empty', function (event) {
+                        //alert('card:empty'); // a card field was empty
+                    });
+                    instance.on('card:notEmpty', function (event) {
+                        //alert('card:notEmpty'); // a card field was notEmpty
+                    });
+
+                    var do_so = '';
+                    //This event is emitted when the payment method available in Drop-in changes. This includes when the state of Drop-in transitions from having no payment method available to having a payment method available and when the kind of payment method available changes. This event is not fired if there is no payment method available on initialization. To check if there is a payment method requestable on initialization, use {@link Dropin#isPaymentMethodRequestable|`isPaymentMethodRequestable`}.
+                    do_so = 'paymentMethodRequestable on';
+                    instance.on('paymentMethodRequestable', callback);
+
+                    if (instance.isPaymentMethodRequestable()) {
+                             // This will be true if you generated the client token
+                             // with a customer ID and there is a saved payment method
+                             // available to tokenize with that customer.
+                             //submitButton.removeAttribute('disabled');
+                             //alert("payment method available");
+                    }                    
+                    instance.on('paymentMethodRequestable', function (event) {
+                        // if the nonce is already available (via PayPal authentication
+                        // or by using a stored payment method), we can request the
+                        // nonce right away. Otherwise, we wait for the customer to
+                        // request the nonce by pressing the submit button once they
+                        // are finished entering their credit card details. This is
+                        // particularly important if your credit card form includes a
+                        // postal code input. The `paymentMethodRequestable` event
+                        // could fire before the customer has finished entering their
+                        // postal code. (International postal codes can be as few as 3
+                        // characters in length)
+                        //alert("type " + event.type); // The type of Payment Method, e.g 'CreditCard', 'PayPalAccount'.
+                        //alert("paymentMethodIsSelected " + event.paymentMethodIsSelected); // true if a customer has selected a payment method when paymentMethodRequestable fires
+                   
+                        //submitButton.removeAttribute('disabled');
+                        //alert("paymentMethodRequestable");
+                        if (event.paymentMethodIsSelected) {
+                          sendNonceToServer();
+                        }
+                    });
+                    instance.on('noPaymentMethodRequestable', function () {
+                             //submitButton.setAttribute('disabled', true);
+                             //alert("noPaymentMethodRequestable");
+                    });
+                    
+                    //Listen for when the customer navigates to different views in Drop-in
+                    var changeActiveView = 0;
+                    instance.on('changeActiveView', function (event) {
+                        // fires when the view changes, such as going from the
+                        // credit card view to the saved payment methods view
+                        changeActiveView = 1;
+                        sendNonceToServer();
+
+                        //alert("oldActivePaymentViewId " + event.oldActivePaymentViewId); // card
+                        //alert("newActivePaymentViewId " + event.newActivePaymentViewId); // methods
+                    });
+
+
+                    var callback = function (event) {
+                        //alert("callback " + do_so); // do something
+                    };
+
+                    function sendNonceToServer(){                        
+                        instance.requestPaymentMethod(function (err, payload) {
+                            // Submit payload.nonce to your server
+                            if (changeActiveView == 1) {
+                                //alert("err " + err  + " " + payload.nonce);
+                                changeActiveView = 0;
+                                complete_trasaction(amount_in_usd,selected_payment_option,deviceData,payload.nonce,intent);
+                            }
+                        });
+                    }
+
+                    // allows us to still request the payment method manually, such as
+                    // when filling out a credit card form
+                    var complete_card_trasaction_button = document.querySelector('.complete_card_trasaction');
+                    complete_card_trasaction_button.addEventListener('click', function () {   
+                        
+                        
+                        sendNonceToServer();                    
+                    });
+
+                    
+                    // later on
+                    //do_so = 'paymentMethodRequestable off';
+                    //instance.off('paymentMethodRequestable', callback);
+                    
+
+                    
+
+                    /**alert("click " + err  + " " + instance.requestPaymentMethod());
+
+                    complete_card_trasaction_button.addEventListener('click', function () {   
+                        instance.requestPaymentMethod(function (err, payload) {
+                            // Submit payload.nonce to your server
+                            //cout_token = 0;
+                            alert("err " + err  + " " + payload.nonce);
+                            complete_trasaction(amount_in_usd,selected_payment_option,deviceData,payload.nonce,intent);
+                        });                    
+                    }); */                     
+                });
+            } catch(e) {
+                //alert('JSON parsing error');
+            }          
+        },
+        error: function searchError(xhr, err) {
+         //alert("Error on ajax call: " + err  + " " + JSON.stringify(xhr));
+        }
+    });
+}
+
+function proccess_transaction(ccode,exrate,amount_to_deposit,selected_payment_option,useremail_,phone_num,intent){
+    $.ajax({
+        type: "POST", // Type of request to be send, called as 
+        dataType: 'json',
+        data: { ccode:ccode, exrate:exrate, amount_to_deposit:amount_to_deposit, selected_payment_option: selected_payment_option, useremail_:useremail_, phone_num: phone_num, username: localStorage.getItem("username"), email:localStorage.getItem("email"), user_pass:localStorage.getItem("user_pass"), intent:intent},
         processData: true,
         url: api_server_url + '/cordova/proccess_transaction.php',
         success: function searchSuccess(response) {
             try {
                 //alert(response);
 
+                if (selected_payment_option == "Paying with Card") {
+                    $(".complete_card_trasaction").removeClass("btn-warning");
+                    $(".complete_card_trasaction").addClass("btn-success");
+                    $(".complete_card_trasaction").html(response.message);
+                    $(".complete_trasaction").show();
+                    $(".complete_card_trasaction").hide();
+                    //$("#dropin-container").html("");
+
+                } else {
+                    //$(".complete_trasaction").removeClass("btn-warning");
+                    //$(".complete_trasaction").addClass("btn-success");
+                    //$(".complete_trasaction").html(response.message);
+                }
                 $(".complete_trasaction").removeClass("btn-warning");
                 $(".complete_trasaction").addClass("btn-success");
-                $(".complete_trasaction").html(response.message); 
+                $(".complete_trasaction").html(response.message);
+                 
 
                 mysnackbar(response.account_balance);
             } catch(e) {
@@ -1519,66 +1974,7 @@ $(document).on('input', '.order_quantity_range', function() {
     }
     
 });
-//myChart();
-/**function myChart(){
-    // Graphs
-    
-    var dataPoints = [];
 
-    var chart = new CanvasJS.Chart("myChart", {
-        animationEnabled: true,
-        theme: "light2", // "light1", "light2", "dark1", "dark2"
-        exportEnabled: true,
-        title: {
-            text: "Netflix Stock Price in 2016"
-        },
-        subtitles: [{
-            text: "Weekly Averages"
-        }],
-        axisX: {
-            interval: 1,
-            valueFormatString: "MMM"
-        },
-        axisY: {
-            prefix: "$",
-            title: "Price"
-        },
-        toolTip: {
-            content: "Date: {x}<br /><strong>Price:</strong><br />Open: {y[0]}, Close: {y[3]}<br />High: {y[1]}, Low: {y[2]}"
-        },
-        data: [{
-            type: "candlestick",
-            yValueFormatString: "$##0.00",
-            dataPoints: dataPoints
-        }]
-    });
-    
-    $.get("https://canvasjs.com/data/gallery/javascript/netflix-stock-price.csv", getDataPointsFromCSV);
-    
-    function getDataPointsFromCSV(csv) {
-        var csvLines = points = [];
-        csvLines = csv.split(/[\r?\n|\r|\n]+/);
-        for (var i = 0; i < csvLines.length; i++) {
-            if (csvLines[i].length > 0) {
-                points = csvLines[i].split(",");
-                dataPoints.push({
-                    x: new Date(
-                        parseInt(points[0].split("-")[0]),
-                        parseInt(points[0].split("-")[1]),
-                        parseInt(points[0].split("-")[2])
-                    ),
-                    y: [
-                        parseFloat(points[1]),
-                        parseFloat(points[2]),
-                        parseFloat(points[3]),
-                        parseFloat(points[4])
-                    ]
-                });
-            }
-        }
-        chart.render();
-    }
-} */
 function display_account_action(action) {
     if (action == "hide") {
         $("#account_action").hide();
@@ -1599,54 +1995,3 @@ function mysnackbar(text) {
 
 
 
-
-
-
-
-function update_new_leads_chart(params) {
-    var colors=["#727cf5","#0acf97","#fa5c7c","#ffbc00"];
-    (dataColors=$("#new-leads-chart").data("colors"))&&(colors=dataColors.split(","));
-    
-    var options2={
-        chart:{
-            type:"line",
-            height:60,
-            sparkline:{
-                enabled:!0
-            }
-        },
-        series:[
-            {
-                data:params
-            }
-        ],
-        stroke:{
-            width:2,curve:"smooth"
-        },
-        markers:{
-            size:0
-        },
-        colors:colors,
-        tooltip:{
-            fixed:{
-                enabled:!1
-            },
-            x:{
-                show:!1
-            },
-            y:{
-                title:{
-                    formatter:function(o){return""}
-                }
-            },
-            marker:{
-                show:!1
-            }
-        }
-    };
-    /**new ApexCharts(document.querySelector("#new-leads-chart"),options2).updateSeries([{
-        data: params
-    }],true); */
-    //new ApexCharts(document.querySelector("#new-leads-chart"),options2).hideSeries('Cricket');
-
-}
