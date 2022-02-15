@@ -100,7 +100,31 @@ function signup_user(signup_username,signup_email,signup_password) {
                     //localStorage.setItem("exrate", 1);
 
                     var usd_account_balance = response.account_balance;
-                    localStorage.setItem("usd_account_balance", usd_account_balance);
+                    var char = '"';
+                    let balanceData = usd_account_balance.replace(/&quot;/g,char);
+                    var balanceDataObj  = JSON.parse(balanceData);
+                    var initial_balance = balanceDataObj[0].initial_balance;
+                    var account_balance_Data = balanceDataObj[0].account_balance;
+                    var account_balance_symbol = balanceDataObj[0].account_balance_symbol;
+                    var price = balanceDataObj[0].price;
+
+                    localStorage.setItem("usd_account_balance", account_balance_Data);
+
+                    for (let index = 0; index < balanceDataObj.length; index++) {
+                        var asset_balance_Data = balanceDataObj[index].account_balance;
+                        var asset_balance_symbol = balanceDataObj[index].account_balance_symbol;
+                        var coin_usd_value = balanceDataObj[index].coin_usd_value;
+                        var crypto_asset_balance = "" + asset_balance_symbol + "_balance";
+                        localStorage.setItem("" + crypto_asset_balance + "", asset_balance_Data);
+                        localStorage.setItem("" + asset_balance_symbol + "_usd_value",coin_usd_value);//USD
+                    }
+
+                    if (balanceDataObj.length > 1) {
+                        localStorage.setItem("initial_balance", initial_balance);
+                    } else {
+                        localStorage.setItem("initial_balance", localStorage.getItem("usd_account_balance"));
+                    }
+                    //localStorage.setItem("usd_account_balance", usd_account_balance);
  
                     var account_balance = Number(localStorage.getItem("usd_account_balance"))*Number(localStorage.getItem("exrate"));
                     if (account_balance.toFixed(2) < 1) {
@@ -110,8 +134,12 @@ function signup_user(signup_username,signup_email,signup_password) {
                     }
                      
                     $(".account_balance").attr("account_balance",account_balance);
+                    localStorage.setItem("account_balance_potential_usd_account_balance",account_balance);// Set account_balance_potential_usd_account_balance
+
                     $(".account_balance").html(localStorage.getItem("ccode") + " " + account_balance);
                     localStorage.setItem("account_balance", account_balance);
+                    localStorage.setItem("account_balance_potential_usd_account_balance",account_balance);// Set account_balance_potential_usd_account_balance
+                    localStorage.setItem("actual_account_balance", account_balance);
 
                     localStorage.setItem("username_pic", username_pic);
                     localStorage.setItem("user_location", user_location);
