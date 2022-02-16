@@ -617,6 +617,7 @@ var local_asset_time_min = '';
 var seriesData = [];
 var crypto_svgData = [];
 
+
 var rebro_Aisha_url = window.location.hostname;//api_server_url;
 var Aisha_url = 'http://' + rebro_Aisha_url + ':8080/rebro/Aisha';
 function rebro_Aisha(asset,aisa_options,price,price_open,day_high,day_low) {
@@ -1302,10 +1303,12 @@ function arybit(crypto,asset,aisa_options) {
                             }
                             if (i == results.length-1) {
                                 if (account_balance_called == 1) {
-                                    account_balanceData(new_account_balanceData_asset);
+                                    //account_balanceData(new_account_balanceData_asset);
                                 }
                             }
                         }
+                        crypto_account_data = new_account_balanceData_asset;
+
                         if (caller== 0) {
                             Query_Kline_Book();   
                         }
@@ -1739,7 +1742,8 @@ function account_mkt_balance(aisa_options) {
     
                     mkt_operation = mkt_operation +'You bought ' + btc_balance_fro_usd + ' ' + localStorage.getItem("asset") + ' worth ' + localStorage.getItem("ccode") + ' ' + localStorage.getItem(crypto_asset_value) + ' at ' + localStorage.getItem("ccode") + ' ' + localStorage.getItem("sell_price");
                     //mkt_operation = mkt_operation + '' ;
-    
+                    mysnackbar(mkt_operation);
+
                     var actual_account_balance = Number(Number(localStorage.getItem("usd_account_balance"))*Number(localStorage.getItem("exrate"))) - Number(Number(localStorage.getItem("" + localStorage.getItem("asset") + "_usd_value"))*Number(localStorage.getItem("exrate")));
                     actual_account_balance = actual_account_balance.toFixed(2);
                     localStorage.setItem("usd_account_balance", Number(actual_account_balance/Number(localStorage.getItem("exrate"))));
@@ -1804,6 +1808,7 @@ function account_mkt_balance(aisa_options) {
     
                     mkt_operation = mkt_operation +'You sold ' + order_btc_quantity + ' ' + localStorage.getItem("asset") + ' worth ' + localStorage.getItem("ccode") + ' ' + usd_balance_fro_btc + ' at ' + localStorage.getItem("ccode") + ' ' + localStorage.getItem("buy_price");
     
+                    mysnackbar(mkt_operation);
                     var is_empty = 'no';
                     dsh_contact(localStorage.getItem("asset") ,username,'',mkt_operation,is_empty);
      

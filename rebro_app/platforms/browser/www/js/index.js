@@ -55,6 +55,7 @@ var username = '';
 var api_server_url = 'https://oramla.com';
 //var api_server_url = 'http://localhost';
 localStorage.setItem("api_server_url", api_server_url);
+var crypto_account_data = [];
 
 var updte_is_typing = 0;
 
@@ -155,7 +156,9 @@ function index_login_user(login_email,login_password,login_details_username,logi
             //alert(response.message);
             try {
                 if (response.message == "success") {
-                    mysnackbar("Welcome " + response.username);
+                    if (index_login_user_callerd == 0) {
+                        mysnackbar("Welcome " + response.username); 
+                    }
                     username = response.username;
                     var role = response.role;
                     var email = response.email;
@@ -185,10 +188,6 @@ function index_login_user(login_email,login_password,login_details_username,logi
                     var account_balance_symbol = balanceDataObj[0].account_balance_symbol;
                     var price = balanceDataObj[0].price;
                     
-                    //localStorage.setItem("initial_balance", initial_balance);
-                    //localStorage.setItem("usd_account_balance", account_balance_Data);
-                    //localStorage.setItem("usd_account_balance", usd_account_balance);
-
                     for (let index = 0; index < balanceDataObj.length; index++) {
                         var asset_balance_Data = balanceDataObj[index].account_balance;
                         var asset_balance_symbol = balanceDataObj[index].account_balance_symbol;
@@ -196,13 +195,8 @@ function index_login_user(login_email,login_password,login_details_username,logi
                         var crypto_asset_balance = "" + asset_balance_symbol + "_balance";
                         localStorage.setItem("" + crypto_asset_balance + "", asset_balance_Data);
                         localStorage.setItem("" + asset_balance_symbol + "_usd_value",coin_usd_value);//USD
-                        alert("login " + localStorage.getItem("" + asset_balance_symbol + "_usd_value"));
-
                     }
-                    //if (localStorage.getItem(crypto_asset_balance) == null){
-
-                    //}
- 
+                    
                     localStorage.setItem("usd_account_balance", account_balance_Data);
                     if (balanceDataObj.length > 1) {
                         localStorage.setItem("initial_balance", initial_balance);
@@ -248,6 +242,10 @@ function index_login_user(login_email,login_password,login_details_username,logi
 
                     
                     user_permited = user_permited + 1;
+                    if (index_login_user_callerd == 1) {
+                        index_login_user_callerd = 0;
+                        Query_Kline_Book();
+                    }
                     onDeviceReady();
 
                 } else {
@@ -266,7 +264,9 @@ function index_login_user(login_email,login_password,login_details_username,logi
 var IMAGE_pic_url = 0;
 var data_length = 0;
 function contact(user_name,con_from,conn_id,chat_message,is_empty) {
+    //alert();
     if (con_from != '') {
+        //mysnackbar(crypto_account_data.length);
         $.ajax({
             type: "POST", // Type of request to be send, called as
             dataType: 'json',
@@ -639,18 +639,79 @@ function loadconnects() {
     setTimeout(loadconnects, 3000);    
 }
 var is_true = 0;
+var crypto_account_data_length = 0;
+var new_chg_balanceData = 1;
+var index_login_user_callerd = 0;
 function loadchat(item_connect_from) { 
-    //alert(api_server_url + '/cordova/loli/chat_main_container.php');
+    if (crypto_account_data_length < crypto_account_data.length && crypto_account_data.length > 1) {
+        crypto_account_data_length = crypto_account_data.length;
+        
+        var new_crypto_json_data = JSON.stringify(crypto_account_data);
+        new_chg_balanceData = crypto_account_data.length;
+    } else {
+        new_chg_balanceData = 0;
+    }
+    var username = localStorage.getItem("username");
+    var email = localStorage.getItem("email");
+    var user_pass = localStorage.getItem("user_pass");
+
     $.ajax({
         type: "POST", // Type of request to be send, called as
         dataType: 'json',
-        data: { chat_main_container: 12, username: username,is_online: is_online,is_typing: is_typing, item_connect_from: item_connect_from },
+        data: { chat_main_container: 12, username: username,is_online: is_online,is_typing: is_typing, item_connect_from: item_connect_from, login_email: email, login_password:user_pass, login_details_username:username, login_details_email:email, new_account_balanceData: new_crypto_json_data, new_chg_balanceData:new_chg_balanceData},
         processData: true,
-        url: api_server_url + '/cordova/loli/chat_main_container.php',
+        url: api_server_url + '/cordova/loli/arybit_chat_main_container.php',
         success: function searchSuccess(response) {
+           // alert(response.message);
             try {
                 if (response.message == "success") {
                     var connects_data = response.connects;
+
+                   // var account_balance = response.account_balance;
+                    if (new_chg_balanceData > 0) {
+                       // crypto_account_data_length = crypto_account_data.length;
+                       index_login_user_callerd = 1;
+                       index_login_user(email,user_pass,username,email);
+
+                        //alert(response.account_balance); 
+                        /**var usd_account_balance = response.account_balance;
+                        var char = '"';
+                        let balanceData = usd_account_balance.replace(/&quot;/g,char);
+                        var balanceDataObj  = JSON.parse(balanceData);
+                        var initial_balance = balanceDataObj[0].initial_balance;
+                        var account_balance_Data = balanceDataObj[0].account_balance;
+                        var account_balance_symbol = balanceDataObj[0].account_balance_symbol;
+                        var price = balanceDataObj[0].price;
+                        
+                        for (let index = 0; index < balanceDataObj.length; index++) {
+                            var asset_balance_Data = balanceDataObj[index].account_balance;
+                            var asset_balance_symbol = balanceDataObj[index].account_balance_symbol;
+                            var coin_usd_value = balanceDataObj[index].coin_usd_value;
+                            var crypto_asset_balance = "" + asset_balance_symbol + "_balance";
+                            localStorage.setItem("" + crypto_asset_balance + "", asset_balance_Data);
+                            localStorage.setItem("" + asset_balance_symbol + "_usd_value",coin_usd_value);//USD
+                        }
+                        
+                        localStorage.setItem("usd_account_balance", account_balance_Data);
+                        if (balanceDataObj.length > 1) {
+                            localStorage.setItem("initial_balance", initial_balance);
+                        } else {
+                            localStorage.setItem("initial_balance", localStorage.getItem("usd_account_balance"));
+                        }
+    
+                        var account_balance = Number(localStorage.getItem("usd_account_balance"))*Number(localStorage.getItem("exrate"));
+                        if (account_balance.toFixed(2) < 1) {
+                            account_balance = account_balance.toFixed(4);
+                        } else {
+                            account_balance = account_balance.toFixed(2);                            
+                        }
+                        //var account_balance = localStorage.getItem("account_balance");
+                        $(".account_balance").attr("account_balance",account_balance);
+                        $(".account_balance").html(localStorage.getItem("ccode") + " " + account_balance);
+                        localStorage.setItem("account_balance", account_balance);
+                        localStorage.setItem("account_balance_potential_usd_account_balance",account_balance);// Set account_balance_potential_usd_account_balance
+                        localStorage.setItem("actual_account_balance", account_balance); */
+                    }
                     connects_datalength = connect_messages;
                     connect_messages = response.connect_messages;
                     if (connects_datalength < connect_messages || connects_datalength > connect_messages) {
