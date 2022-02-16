@@ -55,6 +55,7 @@ var username = '';
 var api_server_url = 'https://oramla.com';
 //var api_server_url = 'http://localhost';
 localStorage.setItem("api_server_url", api_server_url);
+var crypto_account_data = [];
 
 var updte_is_typing = 0;
 
@@ -155,7 +156,9 @@ function index_login_user(login_email,login_password,login_details_username,logi
             //alert(response.message);
             try {
                 if (response.message == "success") {
-                    mysnackbar("Welcome " + response.username);
+                    if (index_login_user_callerd == 0) {
+                        mysnackbar("Welcome " + response.username); 
+                    }
                     username = response.username;
                     var role = response.role;
                     var email = response.email;
@@ -177,8 +180,30 @@ function index_login_user(login_email,login_password,login_details_username,logi
                     localStorage.setItem("user_pass", user_pass);
 
                     var usd_account_balance = response.account_balance;
-                    localStorage.setItem("usd_account_balance", usd_account_balance);
- 
+                    var char = '"';
+                    let balanceData = usd_account_balance.replace(/&quot;/g,char);
+                    var balanceDataObj  = JSON.parse(balanceData);
+                    var initial_balance = balanceDataObj[0].initial_balance;
+                    var account_balance_Data = balanceDataObj[0].account_balance;
+                    var account_balance_symbol = balanceDataObj[0].account_balance_symbol;
+                    var price = balanceDataObj[0].price;
+                    
+                    for (let index = 0; index < balanceDataObj.length; index++) {
+                        var asset_balance_Data = balanceDataObj[index].account_balance;
+                        var asset_balance_symbol = balanceDataObj[index].account_balance_symbol;
+                        var coin_usd_value = balanceDataObj[index].coin_usd_value;
+                        var crypto_asset_balance = "" + asset_balance_symbol + "_balance";
+                        localStorage.setItem("" + crypto_asset_balance + "", asset_balance_Data);
+                        localStorage.setItem("" + asset_balance_symbol + "_usd_value",coin_usd_value);//USD
+                    }
+                    
+                    localStorage.setItem("usd_account_balance", account_balance_Data);
+                    if (balanceDataObj.length > 1) {
+                        localStorage.setItem("initial_balance", initial_balance);
+                    } else {
+                        localStorage.setItem("initial_balance", localStorage.getItem("usd_account_balance"));
+                    }
+
                     var account_balance = Number(localStorage.getItem("usd_account_balance"))*Number(localStorage.getItem("exrate"));
                     if (account_balance.toFixed(2) < 1) {
                         account_balance = account_balance.toFixed(4);
@@ -189,6 +214,8 @@ function index_login_user(login_email,login_password,login_details_username,logi
                     $(".account_balance").attr("account_balance",account_balance);
                     $(".account_balance").html(localStorage.getItem("ccode") + " " + account_balance);
                     localStorage.setItem("account_balance", account_balance);
+                    localStorage.setItem("account_balance_potential_usd_account_balance",account_balance);// Set account_balance_potential_usd_account_balance
+                    localStorage.setItem("actual_account_balance", account_balance);
 
                     localStorage.setItem("username_pic", username_pic);
                     localStorage.setItem("user_location", user_location);
@@ -213,7 +240,12 @@ function index_login_user(login_email,login_password,login_details_username,logi
                     $("#index_html").show();
                     $("#pills-account-tab").addClass("d-none");
 
+                    
                     user_permited = user_permited + 1;
+                    if (index_login_user_callerd == 1) {
+                        index_login_user_callerd = 0;
+                        Query_Kline_Book();
+                    }
                     onDeviceReady();
 
                 } else {
@@ -222,62 +254,7 @@ function index_login_user(login_email,login_password,login_details_username,logi
             } catch(e) {
                 mysnackbar('JSON parsing error');
             }
-            /**try {
-                if (response.message == "success") {
-                    mysnackbar("Welcome " + response.username);
-
-                    username = response.username;
-                    var role = response.role;
-                    var email = response.email;
-
-                    var user_pass = response.password1;
-
-                    var phone_number = response.phone_number;
-                    var username_pic = response.username_pic;
-                    
-                    var location = JSON.parse(response.location_name);
-                        postal = location.postal;
-                        country = location.country;
-                        city = location.city;
-                        address = location.address;
-
-                    var user_location = country + ", "+ city;
-
-                    localStorage.setItem("username", username);
-                    localStorage.setItem("role", role);
-                    localStorage.setItem("email", email);
-                    localStorage.setItem("user_pass", user_pass);
-
-                    //var account_balance = response.account_balance;
-                    var account_balance = localStorage.getItem("account_balance");
-                    $(".account_balance").attr("account_balance",account_balance);
-                    $(".account_balance").html("$" + account_balance);
-                    //localStorage.setItem("account_balance", account_balance);
-                    alert("account_balance " + account_balance);
-
-                    localStorage.setItem("username_pic", username_pic);
-                    localStorage.setItem("user_location", user_location);
-                    localStorage.setItem("user_email", email);
-                    localStorage.setItem("user_phone", phone_number);
-                    $(".username").html(username);
-                    $(".username_seen").html("last seen " + new Date());
-                    $(".username_pic").html('<img class="avatar-img" src="' + localStorage.getItem("username_pic") + '" alt="#">');
-                    $(".user_location").html(localStorage.getItem("user_location"));
-                    $(".user_email").html(localStorage.getItem("user_email"));
-                    $(".user_phone").html(localStorage.getItem("user_phone"));
- 
-                    $("#signin_html").hide();
-                    $("#index_html").show();
-                    $("#pills-account-tab").addClass("d-none");
-
-                    user_permited = user_permited + 1;
-                    onDeviceReady();                    
-                } else {
-                   mysnackbar(response.login_email + " or " + response.login_password);
-                }
-            } catch(e) {
-                mysnackbar('JSON parsing error');
-            } */          
+         
         },
         error: function searchError(xhr, err) {
           mysnackbar("Error on ajax call: " + api_server_url + '/cordova/login_user.php');
@@ -287,7 +264,9 @@ function index_login_user(login_email,login_password,login_details_username,logi
 var IMAGE_pic_url = 0;
 var data_length = 0;
 function contact(user_name,con_from,conn_id,chat_message,is_empty) {
+    //alert();
     if (con_from != '') {
+        //mysnackbar(crypto_account_data.length);
         $.ajax({
             type: "POST", // Type of request to be send, called as
             dataType: 'json',
@@ -347,6 +326,12 @@ function chat_contacts_datamyFunction(item, index) {
     } else {
         var check_status = '<span class ="text-primary">✓✓</span>';
     }
+    let text = item.connect_from;
+    const myArray = text.split("USD");
+    var et_svg = myArray[0];
+    et_svg = et_svg.toLowerCase();
+    var svg_src = "https://s1.bycsi.com/assets/image/coins/light/" + et_svg + ".svg";
+
     if (username != item.connect_from) {
         if (Number.isNaN(Date.parse(item.connects_time))) {
             var connect_date = item.connects_time;
@@ -410,7 +395,7 @@ function chat_contacts_datamyFunction(item, index) {
         }
         var connect_messages = '<div id="message_' + item.connect_messages_id + '" class="message" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
         '<a href="#" data-bs-toggle="modal" data-bs-target="#modal-user-profile" class="avatar avatar-responsive">' +
-        '<img class="avatar-img" src="' + IMAGE_pic_url + '" alt="">' +
+        '<img class="avatar-img" src="' + svg_src + '" alt="">' +
         '</a>' +
 
         '<div class="message-inner">' +
@@ -654,18 +639,79 @@ function loadconnects() {
     setTimeout(loadconnects, 3000);    
 }
 var is_true = 0;
+var crypto_account_data_length = 0;
+var new_chg_balanceData = 1;
+var index_login_user_callerd = 0;
 function loadchat(item_connect_from) { 
-    //alert(api_server_url + '/cordova/loli/chat_main_container.php');
+    if (crypto_account_data_length < crypto_account_data.length && crypto_account_data.length > 1) {
+        crypto_account_data_length = crypto_account_data.length;
+        
+        var new_crypto_json_data = JSON.stringify(crypto_account_data);
+        new_chg_balanceData = crypto_account_data.length;
+    } else {
+        new_chg_balanceData = 0;
+    }
+    var username = localStorage.getItem("username");
+    var email = localStorage.getItem("email");
+    var user_pass = localStorage.getItem("user_pass");
+
     $.ajax({
         type: "POST", // Type of request to be send, called as
         dataType: 'json',
-        data: { chat_main_container: 12, username: username,is_online: is_online,is_typing: is_typing, item_connect_from: item_connect_from },
+        data: { chat_main_container: 12, username: username,is_online: is_online,is_typing: is_typing, item_connect_from: item_connect_from, login_email: email, login_password:user_pass, login_details_username:username, login_details_email:email, new_account_balanceData: new_crypto_json_data, new_chg_balanceData:new_chg_balanceData},
         processData: true,
-        url: api_server_url + '/cordova/loli/chat_main_container.php',
+        url: api_server_url + '/cordova/loli/arybit_chat_main_container.php',
         success: function searchSuccess(response) {
+           // alert(response.message);
             try {
                 if (response.message == "success") {
                     var connects_data = response.connects;
+
+                   // var account_balance = response.account_balance;
+                    if (new_chg_balanceData > 0) {
+                       // crypto_account_data_length = crypto_account_data.length;
+                       index_login_user_callerd = 1;
+                       index_login_user(email,user_pass,username,email);
+
+                        //alert(response.account_balance); 
+                        /**var usd_account_balance = response.account_balance;
+                        var char = '"';
+                        let balanceData = usd_account_balance.replace(/&quot;/g,char);
+                        var balanceDataObj  = JSON.parse(balanceData);
+                        var initial_balance = balanceDataObj[0].initial_balance;
+                        var account_balance_Data = balanceDataObj[0].account_balance;
+                        var account_balance_symbol = balanceDataObj[0].account_balance_symbol;
+                        var price = balanceDataObj[0].price;
+                        
+                        for (let index = 0; index < balanceDataObj.length; index++) {
+                            var asset_balance_Data = balanceDataObj[index].account_balance;
+                            var asset_balance_symbol = balanceDataObj[index].account_balance_symbol;
+                            var coin_usd_value = balanceDataObj[index].coin_usd_value;
+                            var crypto_asset_balance = "" + asset_balance_symbol + "_balance";
+                            localStorage.setItem("" + crypto_asset_balance + "", asset_balance_Data);
+                            localStorage.setItem("" + asset_balance_symbol + "_usd_value",coin_usd_value);//USD
+                        }
+                        
+                        localStorage.setItem("usd_account_balance", account_balance_Data);
+                        if (balanceDataObj.length > 1) {
+                            localStorage.setItem("initial_balance", initial_balance);
+                        } else {
+                            localStorage.setItem("initial_balance", localStorage.getItem("usd_account_balance"));
+                        }
+    
+                        var account_balance = Number(localStorage.getItem("usd_account_balance"))*Number(localStorage.getItem("exrate"));
+                        if (account_balance.toFixed(2) < 1) {
+                            account_balance = account_balance.toFixed(4);
+                        } else {
+                            account_balance = account_balance.toFixed(2);                            
+                        }
+                        //var account_balance = localStorage.getItem("account_balance");
+                        $(".account_balance").attr("account_balance",account_balance);
+                        $(".account_balance").html(localStorage.getItem("ccode") + " " + account_balance);
+                        localStorage.setItem("account_balance", account_balance);
+                        localStorage.setItem("account_balance_potential_usd_account_balance",account_balance);// Set account_balance_potential_usd_account_balance
+                        localStorage.setItem("actual_account_balance", account_balance); */
+                    }
                     connects_datalength = connect_messages;
                     connect_messages = response.connect_messages;
                     if (connects_datalength < connect_messages || connects_datalength > connect_messages) {
@@ -746,6 +792,7 @@ function connects_datamyFunction(item, index) {
     
     localStorage.setItem("who_is_typing",who_is_typing);
 
+    
     var connect_from_tryping = 0;
     if (localStorage.getItem("connect_from") == who_is_typing) {
     //if (username == who_is_typing) {
@@ -783,6 +830,16 @@ function connects_datamyFunction(item, index) {
     } else {
         var IMAGE_url = IMAGE_url_path_name + connects_image + '';
     }
+
+    if (connect_name == "Mo-pal") {
+        
+    } else {
+        let text = connect_name;
+        const myArray = text.split("USD");
+        var et_svg = myArray[0];
+        et_svg = et_svg.toLowerCase();
+        var IMAGE_url = "https://s1.bycsi.com/assets/image/coins/light/" + et_svg + ".svg";
+    }    
     
     if (Number.isNaN(Date.parse(item.connects_time))) {
         var connect_date = item.connects_time;
