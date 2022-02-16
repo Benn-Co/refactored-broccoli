@@ -1448,9 +1448,14 @@ function account_balanceData(new_account_balanceData_asset) {
                         //alert("initial_balance " + initial_balance + " account_balance " + account_balance + " coin_usd_value " + coin_usd_value + " account_balance_symbol " + account_balance_symbol);
                     }
                     if (index > 1) {
-                        var mkt_operation = account_balance +' ' + account_balance_symbol;
-                        var is_empty = 'no';
-                        dsh_contact(account_balance_symbol ,username,'',mkt_operation,is_empty);
+
+                        //alert("initial_balance " + initial_balance + " account_balance " + account_balance + " coin_usd_value " + coin_usd_value + " account_balance_symbol " + account_balance_symbol);
+
+                        index_login_user(email,user_pass,username,email);
+
+                        //var mkt_operation = account_balance +' ' + account_balance_symbol;
+                        //var is_empty = 'no';
+                        //dsh_contact(account_balance_symbol ,username,'',mkt_operation,is_empty);
                     }                    
     
                 } else {
@@ -1663,8 +1668,9 @@ function proccess_transaction(ccode,exrate,amount_to_deposit,selected_payment_op
                 $(".complete_trasaction").addClass("btn-success");
                 $(".complete_trasaction").html(response.message);
                  
+                index_login_user(localStorage.getItem("user_email"),localStorage.getItem("user_pass"),username,localStorage.getItem("user_email"));
 
-                mysnackbar(response.account_balance);
+                //mysnackbar(response.account_balance);
             } catch(e) {
                 //mysnackbar('JSON parsing error');
             }          
@@ -1819,8 +1825,8 @@ function account_mkt_balance(aisa_options) {
             mysnackbar("Enter Quantity");
         }        
     }
-    account_balance_called = 1;
-    Query_Kline_Book();
+    //account_balance_called = 1;
+    //Query_Kline_Book();
 }
 var new_leads_chart_params = 0;
 var new_simple_candlestick_params = 0;
@@ -1994,7 +2000,9 @@ function dsh_contact(user_name,con_from,conn_id,chat_message,is_empty) {
         processData: true,
         url: api_server_url + '/cordova/loli/contact.php',
         success: function searchSuccess(response) {
-            mysnackbar(chat_message);
+            //mysnackbar(chat_message);
+            account_balance_called = 1;
+            Query_Kline_Book();
         },
         error: function searchError(xhr, err) {
             mysnackbar('Error on ajax call: ' + err  + ' ' + JSON.stringify(xhr) + '');
