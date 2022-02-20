@@ -65,7 +65,13 @@ function onDeviceReady() {
     // Cordova is now initialized. Have fun!  
     //localStorage.setItem("ccode", '$');
     //localStorage.setItem("exrate", 1);
-    //get_country_codes('','');  
+    //get_country_codes('','');
+    let hostname = window.location.hostname;
+    let path_protocol = location.protocol;  
+    //$(".app_name").attr("href",window.location.hostname);
+    //alert(hostname);
+    //$(".app_name").attr("href",hostname);
+
     username = localStorage.getItem("username");
     var email = localStorage.getItem("email");
     var user_pass = localStorage.getItem("user_pass");
@@ -145,6 +151,9 @@ function onDeviceReady() {
     //get_country_codes('','');
     //bybit_mkt('Query Symbol','','');        
 }
+var caller_inf = 0;
+var mysnackbar_mkt_operation = "";
+var acc_balanc = 0;
 function index_login_user(login_email,login_password,login_details_username,login_details_email) {
     $.ajax({
         type: "POST", // Type of request to be send, called as
@@ -158,7 +167,11 @@ function index_login_user(login_email,login_password,login_details_username,logi
                 if (response.message == "success") {
                     if (index_login_user_callerd == 0) {
                         mysnackbar("Welcome " + response.username); 
+                    } else {
+                        //alert(mysnackbar_mkt_operation);
                     }
+                    //alert(mysnackbar_mkt_operation);
+                    
                     username = response.username;
                     var role = response.role;
                     var email = response.email;
@@ -183,11 +196,16 @@ function index_login_user(login_email,login_password,login_details_username,logi
                     var char = '"';
                     let balanceData = usd_account_balance.replace(/&quot;/g,char);
                     var balanceDataObj  = JSON.parse(balanceData);
+                    length_of_asset = balanceDataObj.length;
+
                     var initial_balance = balanceDataObj[0].initial_balance;
                     var account_balance_Data = balanceDataObj[0].account_balance;
+                    var coin_fird_value = balanceDataObj[0].coin_usd_value;
+                    acc_balanc = account_balance_Data;
                     var account_balance_symbol = balanceDataObj[0].account_balance_symbol;
                     var price = balanceDataObj[0].price;
                     
+                    var acc_cry_ba = 0;
                     for (let index = 0; index < balanceDataObj.length; index++) {
                         var asset_balance_Data = balanceDataObj[index].account_balance;
                         var asset_balance_symbol = balanceDataObj[index].account_balance_symbol;
@@ -195,10 +213,14 @@ function index_login_user(login_email,login_password,login_details_username,logi
                         var crypto_asset_balance = "" + asset_balance_symbol + "_balance";
                         localStorage.setItem("" + crypto_asset_balance + "", asset_balance_Data);
                         localStorage.setItem("" + asset_balance_symbol + "_usd_value",coin_usd_value);//USD
+                       // acc_cry_ba = Number(acc_cry_ba) + Number(coin_usd_value);//USD
+                       // acc_cry_ba = Number(acc_cry_ba)/Number(coin_fird_value);//USD
+
                     }
                     
                     localStorage.setItem("usd_account_balance", account_balance_Data);
                     if (balanceDataObj.length > 1) {
+                        //alert("initial_balance " + initial_balance + " acc_cry_ba " + acc_cry_ba);
                         localStorage.setItem("initial_balance", initial_balance);
                     } else {
                         localStorage.setItem("initial_balance", localStorage.getItem("usd_account_balance"));
@@ -212,7 +234,11 @@ function index_login_user(login_email,login_password,login_details_username,logi
                     }
                     //var account_balance = localStorage.getItem("account_balance");
                     $(".account_balance").attr("account_balance",account_balance);
-                    $(".account_balance").html(localStorage.getItem("ccode") + " " + account_balance);
+                    //alert(caller_inf);
+                    if (caller_inf == 0) {
+                        $(".account_balance").html(localStorage.getItem("ccode") + " " + account_balance);
+                    }
+                    
                     localStorage.setItem("account_balance", account_balance);
                     localStorage.setItem("account_balance_potential_usd_account_balance",account_balance);// Set account_balance_potential_usd_account_balance
                     localStorage.setItem("actual_account_balance", account_balance);
@@ -243,9 +269,13 @@ function index_login_user(login_email,login_password,login_details_username,logi
                     
                     user_permited = user_permited + 1;
                     if (index_login_user_callerd == 1) {
-                        index_login_user_callerd = 0;
+                        //index_login_user_callerd = 0;
+                        //alert(index_login_user_callerd);
                         Query_Kline_Book();
+                        
+
                     }
+                    
                     onDeviceReady();
 
                 } else {
@@ -636,18 +666,27 @@ function loadconnects() {
         update_direct_chat(localStorage.getItem("is_typing"),localStorage.getItem("is_online"),localStorage.getItem("connects_time"));
     }
     loadchat(localStorage.getItem("connect_from"));
-    setTimeout(loadconnects, 3000);    
+    setTimeout(loadconnects, 10000);    
 }
 var is_true = 0;
 var crypto_account_data_length = 0;
 var new_chg_balanceData = 1;
 var index_login_user_callerd = 0;
+var buy_cliwecked_do = 0;
+var length_of_asset = 0;
 function loadchat(item_connect_from) { 
-    if (crypto_account_data_length < crypto_account_data.length && crypto_account_data.length > 1) {
+    //mysnackbar('buy_cliwecked ' + buy_cliwecked);
+    /**if (crypto_account_data_length < crypto_account_data.length && crypto_account_data.length > 1) {
         crypto_account_data_length = crypto_account_data.length;
         
         var new_crypto_json_data = JSON.stringify(crypto_account_data);
         new_chg_balanceData = crypto_account_data.length;
+    } else */
+    if(buy_cliwecked_do ==1){
+        var new_crypto_json_data = JSON.stringify(crypto_account_data);
+        new_chg_balanceData = crypto_account_data.length;
+        //alert(new_chg_balanceData);
+
     } else {
         new_chg_balanceData = 0;
     }
@@ -667,51 +706,29 @@ function loadchat(item_connect_from) {
                 if (response.message == "success") {
                     var connects_data = response.connects;
 
-                   // var account_balance = response.account_balance;
-                    if (new_chg_balanceData > 0) {
-                       // crypto_account_data_length = crypto_account_data.length;
-                       index_login_user_callerd = 1;
-                       index_login_user(email,user_pass,username,email);
+                    var usd_account_balance = response.account_balance;
+                    var char = '"';
+                    let balanceData = usd_account_balance.replace(/&quot;/g,char);
+                    var balanceDataObj  = JSON.parse(balanceData);
+                    length_of_asset = balanceDataObj.length;
 
-                        //alert(response.account_balance); 
-                        /**var usd_account_balance = response.account_balance;
-                        var char = '"';
-                        let balanceData = usd_account_balance.replace(/&quot;/g,char);
-                        var balanceDataObj  = JSON.parse(balanceData);
-                        var initial_balance = balanceDataObj[0].initial_balance;
-                        var account_balance_Data = balanceDataObj[0].account_balance;
-                        var account_balance_symbol = balanceDataObj[0].account_balance_symbol;
-                        var price = balanceDataObj[0].price;
+                    var initial_balance = balanceDataObj[0].initial_balance;
+                    var account_balance_Data = balanceDataObj[0].account_balance;
+                    var coin_fird_value = balanceDataObj[0].coin_usd_value;
+                    acc_balanc = account_balance_Data;
+                    var account_balance_symbol = balanceDataObj[0].account_balance_symbol;
+                    var price = balanceDataObj[0].price;
+                    
+                    var acc_cry_ba = 0;
+                    
+
+                    if (buy_cliwecked_do == 1) {                        
+                        buy_cliwecked_do = 0;
+                        mysnackbar(mysnackbar_mkt_operation);
+                    } else{
                         
-                        for (let index = 0; index < balanceDataObj.length; index++) {
-                            var asset_balance_Data = balanceDataObj[index].account_balance;
-                            var asset_balance_symbol = balanceDataObj[index].account_balance_symbol;
-                            var coin_usd_value = balanceDataObj[index].coin_usd_value;
-                            var crypto_asset_balance = "" + asset_balance_symbol + "_balance";
-                            localStorage.setItem("" + crypto_asset_balance + "", asset_balance_Data);
-                            localStorage.setItem("" + asset_balance_symbol + "_usd_value",coin_usd_value);//USD
-                        }
-                        
-                        localStorage.setItem("usd_account_balance", account_balance_Data);
-                        if (balanceDataObj.length > 1) {
-                            localStorage.setItem("initial_balance", initial_balance);
-                        } else {
-                            localStorage.setItem("initial_balance", localStorage.getItem("usd_account_balance"));
-                        }
-    
-                        var account_balance = Number(localStorage.getItem("usd_account_balance"))*Number(localStorage.getItem("exrate"));
-                        if (account_balance.toFixed(2) < 1) {
-                            account_balance = account_balance.toFixed(4);
-                        } else {
-                            account_balance = account_balance.toFixed(2);                            
-                        }
-                        //var account_balance = localStorage.getItem("account_balance");
-                        $(".account_balance").attr("account_balance",account_balance);
-                        $(".account_balance").html(localStorage.getItem("ccode") + " " + account_balance);
-                        localStorage.setItem("account_balance", account_balance);
-                        localStorage.setItem("account_balance_potential_usd_account_balance",account_balance);// Set account_balance_potential_usd_account_balance
-                        localStorage.setItem("actual_account_balance", account_balance); */
                     }
+                   
                     connects_datalength = connect_messages;
                     connect_messages = response.connect_messages;
                     if (connects_datalength < connect_messages || connects_datalength > connect_messages) {
