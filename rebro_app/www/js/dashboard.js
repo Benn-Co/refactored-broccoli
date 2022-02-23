@@ -1187,6 +1187,15 @@ function arybit(crypto,asset,aisa_options) {
                                 '</li>';
                                 //localStorage.setItem("" + results[i].symbol + "_usd_value",Number(results_last_price)/Number(localStorage.getItem("exrate"))); //USD
                                 localStorage.removeItem("" + results[i].symbol + "_usd_value");
+                                let BTC_balance = localStorage.getItem(crypto_asset_balance);//BTC
+
+                                new_account_balanceData_asset[tab_count_wacthlist] = {
+                                    "initial_balance": BTC_balance,
+                                    "account_balance": BTC_balance,
+                                    "coin_usd_value": results_last_price,
+                                    "account_balance_symbol" : results[i].symbol,
+                                    "price": [results_bid_price, results_high_price_24h, results_low_price_24h, results_last_price]
+                                };
 
                                 $(".crypto_wacthlist").append(crypto_wacthlist);
 

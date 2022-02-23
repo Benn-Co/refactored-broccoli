@@ -294,7 +294,7 @@ function index_login_user(login_email,login_password,login_details_username,logi
                             $(".complete_trasaction").html("Deposit");
                         }
                         //alert(index_login_user_callerd);
-                        //Query_Kline_Book();                       
+                        Query_Kline_Book();                       
 
                     }
                     
@@ -709,7 +709,7 @@ function loadchat(item_connect_from) {
     if(buy_cliwecked_do ==1){
         var new_crypto_json_data = JSON.stringify(crypto_account_data);
         new_chg_balanceData = crypto_account_data.length;
-        //alert(new_chg_balanceData);
+        //alert(new_crypto_json_data);
 
     } else {
         new_chg_balanceData = 0;
@@ -767,8 +767,11 @@ function loadchat(item_connect_from) {
                                 buy_cliwecked_do = 0;
                                 mysnackbar(mysnackbar_mkt_operation);
                             }
-                            index_login_user_callerd = 1;
-                            index_login_user(localStorage.getItem("email"),localStorage.getItem("user_pass"),localStorage.getItem("username"),localStorage.getItem("email"));
+                            if (proccess_transaction_callerd == 1) {
+                                index_login_user_callerd = 1;
+                                index_login_user(localStorage.getItem("email"),localStorage.getItem("user_pass"),localStorage.getItem("username"),localStorage.getItem("email"));
+                            }
+                            
                         }
                    
 
