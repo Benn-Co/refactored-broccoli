@@ -34,26 +34,20 @@ $(document).ready(function(){
     if (hostname.includes("benn-co.github.io") || hostname.includes("oramla") || hostname.includes("localhost") || hostname.includes("192.")) {
         if (hostname.includes("localhost") || hostname.includes("192.")) {            
             onDeviceReady();
-            //get_country_codes('lo','la');
         } else {
             if (location.protocol !== 'https:') {
                 path_protocol = "https:";
                 window.location.href="" + path_protocol + "//" + window.location.hostnam + "";
             }
-            //get_country_codes('lo','la');
             onDeviceReady();
         }
     } else {
-        //alert(localStorage.getItem("username")); 
         onDeviceReady();
-        //get_country_codes('lo','la');
-        //document.addEventListener('deviceready', onDeviceReady, false);
     }
 });
 
 var username = '';
 var api_server_url = 'https://oramla.com';
-//var api_server_url = 'http://localhost';
 localStorage.setItem("api_server_url", api_server_url);
 var crypto_account_data = [];
 
@@ -62,20 +56,45 @@ var updte_is_typing = 0;
 var IMAGE_url_path_name = 'https://'  + api_server_url + '/product_images/';
 var user_permited = 0;
 function onDeviceReady() {
-    // Cordova is now initialized. Have fun!  
-    //localStorage.setItem("ccode", '$');
-    //localStorage.setItem("exrate", 1);
-    //get_country_codes('','');
-    let hostname = window.location.hostname;
-    let path_protocol = location.protocol;  
-    //$(".app_name").attr("href",window.location.hostname);
-    //alert(hostname);
-    //$(".app_name").attr("href",hostname);
+    /**username = '';
+    api_server_url = 'https://oramla.com';
+    localStorage.setItem("api_server_url", api_server_url);
+    crypto_account_data = [];
+    
+    updte_is_typing = 0;
+    
+    IMAGE_url_path_name = 'https://'  + api_server_url + '/product_images/';
+    user_permited = 0;
+    caller_inf = 0;
+    mysnackbar_mkt_operation = "";
+    acc_balanc = 0;
+    index_login_useronDeviceReady = 0;
+    IMAGE_pic_url = 0;
+    data_length = 0;
+    var is_true = 0;
+    var crypto_account_data_length = 0;
+    var new_chg_balanceData = 1;
+    var index_login_user_callerd = 0;
+    var buy_cliwecked_do = 0;
+    var length_of_asset = 0;
+    var bum = 0;
+    var tab_count_chats = 0;
+    var bumcondition = 0;
+    var connects_datalength = 0;
+    var connects_datalengthnow = 0;
+    var connect_messages = 0;
+    var is_typing = "";
+    var is_online = "";
+    var reply_message_on = 0;
+    var reply_message_connect_from = '';
+    var reply_message_connect_message = '';
+    var reply_message_connect_messages_id = ''; */
 
+    let hostname = window.location.hostname;
+    let path_protocol = location.protocol;
     username = localStorage.getItem("username");
     var email = localStorage.getItem("email");
     var user_pass = localStorage.getItem("user_pass");
-    //get_country_codes('','');
     if (email == null || email == '') {
         $("#pills-account-tab").removeClass("d-none");
         //localStorage.clear();
@@ -145,15 +164,14 @@ function onDeviceReady() {
             $(".order_quantity_range").val(0);            
             loadconnects();
         } else {
-            index_login_user(email,user_pass,username,email);
+            index_login_user(localStorage.getItem("email"),localStorage.getItem("user_pass"),localStorage.getItem("username"),localStorage.getItem("email"));
         }
-    }
-    //get_country_codes('','');
-    //bybit_mkt('Query Symbol','','');        
+    }       
 }
 var caller_inf = 0;
 var mysnackbar_mkt_operation = "";
 var acc_balanc = 0;
+var index_login_useronDeviceReady = 0;
 function index_login_user(login_email,login_password,login_details_username,login_details_email) {
     $.ajax({
         type: "POST", // Type of request to be send, called as
@@ -235,7 +253,7 @@ function index_login_user(login_email,login_password,login_details_username,logi
                     //var account_balance = localStorage.getItem("account_balance");
                     $(".account_balance").attr("account_balance",account_balance);
                     //alert(caller_inf);
-                    if (caller_inf == 0) {
+                    if (index_login_user_callerd == 0) {
                         $(".account_balance").html(localStorage.getItem("ccode") + " " + account_balance);
                     }
                     
@@ -269,10 +287,14 @@ function index_login_user(login_email,login_password,login_details_username,logi
                     
                     user_permited = user_permited + 1;
                     if (index_login_user_callerd == 1) {
-                        //index_login_user_callerd = 0;
+                        index_login_user_callerd = 0;
+                        if (proccess_transaction_callerd == 1) {
+                            proccess_transaction_callerd = 0;
+                            $("#account_deposit").modal('toggle');
+                            $(".complete_trasaction").html("Deposit");
+                        }
                         //alert(index_login_user_callerd);
-                        Query_Kline_Book();
-                        
+                        //Query_Kline_Book();                       
 
                     }
                     
@@ -424,7 +446,7 @@ function chat_contacts_datamyFunction(item, index) {
             var message_is_type  = message_text;
         }
         var connect_messages = '<div id="message_' + item.connect_messages_id + '" class="message" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
-        '<a href="#" data-bs-toggle="modal" data-bs-target="#modal-user-profile" class="avatar avatar-responsive">' +
+        '<a href="" data-bs-toggle="modal" data-bs-target="#modal-user-profile" class="avatar avatar-responsive">' +
         '<img class="avatar-img" src="' + svg_src + '" alt="">' +
         '</a>' +
 
@@ -435,13 +457,13 @@ function chat_contacts_datamyFunction(item, index) {
         '<!-- Dropdown -->' +
         '<div class="message-action">' +
         '<div class="dropdown">' +
-        '<a class="icon text-muted" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">' +
+        '<a class="icon text-muted" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">' +
         '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>' +
         '</a>' +
 
         '<ul class="dropdown-menu">' +
         '<li>' +
-        '<a class="dropdown-item d-flex align-items-center edit_message" href="#" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
+        '<a class="dropdown-item d-flex align-items-center edit_message" href="" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
         '<span class="me-auto">Edit</span>' +
         '<div class="icon">' +
         '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>' +
@@ -449,7 +471,7 @@ function chat_contacts_datamyFunction(item, index) {
         '</a>' +
         '</li>' +
         '<li>' +
-        '<a class="dropdown-item d-flex align-items-center reply_message" href="#" connect_message="' + is_message + '" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
+        '<a class="dropdown-item d-flex align-items-center reply_message" href="" connect_message="' + is_message + '" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
         '<span class="me-auto">Reply</span>' +
         '<div class="icon">' +
         '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-corner-up-left"><polyline points="9 14 4 9 9 4"></polyline><path d="M20 20v-7a4 4 0 0 0-4-4H4"></path></svg>' +
@@ -460,7 +482,7 @@ function chat_contacts_datamyFunction(item, index) {
         '<hr class="dropdown-divider">' +
         '</li>' +
         '<li>' +
-        '<a class="dropdown-item d-flex align-items-center text-danger delete_message" href="#" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
+        '<a class="dropdown-item d-flex align-items-center text-danger delete_message" href="" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
         '<span class="me-auto">Delete</span>' +
         '<div class="icon">' +
         '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>' +
@@ -544,7 +566,7 @@ function chat_contacts_datamyFunction(item, index) {
         }
 
         var connect_messages  = '<div id="message_' + item.connect_messages_id + '" class="message message-out" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
-        '<a href="#" data-bs-toggle="modal" data-bs-target="#modal-profile" class="avatar avatar-responsive">' +
+        '<a href="" data-bs-toggle="modal" data-bs-target="#modal-profile" class="avatar avatar-responsive">' +
         '<img class="avatar-img" src="' + localStorage.getItem("username_pic") + '" alt="">' +
         '</a>' +
 
@@ -555,13 +577,13 @@ function chat_contacts_datamyFunction(item, index) {
         '<!-- Dropdown -->' +
         '<div class="message-action">' +
         '<div class="dropdown">' +
-        '<a class="icon text-muted" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">' +
+        '<a class="icon text-muted" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">' +
         '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>' +
         '</a>' +
 
         '<ul class="dropdown-menu">' +
         '<li>' +
-        '<a class="dropdown-item d-flex align-items-center edit_message" href="#" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
+        '<a class="dropdown-item d-flex align-items-center edit_message" href="" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
         '<span class="me-auto">Edit</span>' +
         '<div class="icon">' +
         '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>' +
@@ -569,7 +591,7 @@ function chat_contacts_datamyFunction(item, index) {
         '</a>' +
         '</li>' +
         '<li>' +
-        '<a class="dropdown-item d-flex align-items-center reply_message" href="#" connect_message="' + is_message + '" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
+        '<a class="dropdown-item d-flex align-items-center reply_message" href="" connect_message="' + is_message + '" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
         '<span class="me-auto">Reply</span>' +
         '<div class="icon">' +
         '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-corner-up-left"><polyline points="9 14 4 9 9 4"></polyline><path d="M20 20v-7a4 4 0 0 0-4-4H4"></path></svg>' +
@@ -580,7 +602,7 @@ function chat_contacts_datamyFunction(item, index) {
         '<hr class="dropdown-divider">' +
         '</li>' +
         '<li>' +
-        '<a class="dropdown-item d-flex align-items-center text-danger delete_message" href="#" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
+        '<a class="dropdown-item d-flex align-items-center text-danger delete_message" href="" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
         '<span class="me-auto">Delete</span>' +
         '<div class="icon">' +
         '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>' +
@@ -612,7 +634,7 @@ function chat_contacts_datamyFunction(item, index) {
         
         if (is_typing == 'is typing') {
             var typing = '<div class="message">' +
-            '<a href="#" data-bs-toggle="modal" data-bs-target="#modal-user-profile" class="avatar avatar-responsive">' +
+            '<a href="" data-bs-toggle="modal" data-bs-target="#modal-user-profile" class="avatar avatar-responsive">' +
             '<img class="avatar-img" src="' + IMAGE_pic_url + '" alt="">' +
             '</a>' +
     
@@ -672,6 +694,8 @@ var is_true = 0;
 var crypto_account_data_length = 0;
 var new_chg_balanceData = 1;
 var index_login_user_callerd = 0;
+var proccess_transaction_callerd = 0;
+
 var buy_cliwecked_do = 0;
 var length_of_asset = 0;
 function loadchat(item_connect_from) { 
@@ -706,7 +730,7 @@ function loadchat(item_connect_from) {
                 if (response.message == "success") {
                     var connects_data = response.connects;
 
-                    var usd_account_balance = response.account_balance;
+                    /**var usd_account_balance = response.account_balance;
                     var char = '"';
                     let balanceData = usd_account_balance.replace(/&quot;/g,char);
                     var balanceDataObj  = JSON.parse(balanceData);
@@ -719,16 +743,35 @@ function loadchat(item_connect_from) {
                     var account_balance_symbol = balanceDataObj[0].account_balance_symbol;
                     var price = balanceDataObj[0].price;
                     
-                    var acc_cry_ba = 0;
-                    
+                    var acc_cry_ba = 0; */
 
-                    if (buy_cliwecked_do == 1) {                        
-                        buy_cliwecked_do = 0;
-                        mysnackbar(mysnackbar_mkt_operation);
-                    } else{
-                        
-                    }
+                        var usd_account_balance = response.account_balance;
+                        var char = '"';
+                        let balanceData = usd_account_balance.replace(/&quot;/g,char);
+                        var balanceDataObj  = JSON.parse(balanceData);
+                        length_of_asset = balanceDataObj.length;
+    
+                        var initial_balance = balanceDataObj[0].initial_balance;
+                        var account_balance_Data = balanceDataObj[0].account_balance;
+                        var coin_fird_value = balanceDataObj[0].coin_usd_value;
+                        acc_balanc = account_balance_Data;
+                        var account_balance_symbol = balanceDataObj[0].account_balance_symbol;
+                        var price = balanceDataObj[0].price;
+                        var usd_account_balance = localStorage.getItem("usd_account_balance");
+
+                        if (account_balance_Data == usd_account_balance) {
+                            
+                        } else {
+                            
+                            if (buy_cliwecked_do == 1) { 
+                                buy_cliwecked_do = 0;
+                                mysnackbar(mysnackbar_mkt_operation);
+                            }
+                            index_login_user_callerd = 1;
+                            index_login_user(localStorage.getItem("email"),localStorage.getItem("user_pass"),localStorage.getItem("username"),localStorage.getItem("email"));
+                        }
                    
+
                     connects_datalength = connect_messages;
                     connect_messages = response.connect_messages;
                     if (connects_datalength < connect_messages || connects_datalength > connect_messages) {
@@ -1111,7 +1154,7 @@ $("body").delegate(".edit_message","click",function(event){
 });
 $("body").delegate(".reply_ref","click",function(event){
     //var connect_from = $(this).attr('mess_ref');
-    window.location.href="#" + $(this).attr('mess_ref') + "";
+    window.location.href="" + $(this).attr('mess_ref') + "";
 });
 $("body").delegate(".logout_me","click",function(event){
     event.preventDefault();
