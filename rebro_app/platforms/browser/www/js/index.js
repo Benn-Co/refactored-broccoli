@@ -292,9 +292,10 @@ function index_login_user(login_email,login_password,login_details_username,logi
                             proccess_transaction_callerd = 0;
                             $("#account_deposit").modal('toggle');
                             $(".complete_trasaction").html("Deposit");
+                            Query_Kline_Book();
                         }
                         //alert(index_login_user_callerd);
-                        Query_Kline_Book();                       
+                        //Query_Kline_Book();                       
 
                     }
                     
