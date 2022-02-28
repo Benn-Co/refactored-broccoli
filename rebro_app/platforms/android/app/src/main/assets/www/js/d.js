@@ -4,7 +4,7 @@ var api_server_url = localStorage.getItem("api_server_url");
 $("body").delegate(".mkt_option","click",function(event){
     event.preventDefault();
     
-    $(".mkt_option").attr("price",$(this).attr('price'));
+        $(".mkt_option").attr("price",$(this).attr('price'));
         localStorage.setItem("price",$(this).attr('price'));
         localStorage.setItem("price",$(this).attr('price'));
     
@@ -56,7 +56,7 @@ $("body").delegate(".mkt_option","click",function(event){
                 } else {
                     $(".order_quantity").removeClass("is-valid");
                     $(".order_quantity").addClass("is-invalid");
-                    mysnackbar("Enter Quantity");
+                    //mysnackbar("Enter Quantity");
     
                 }
             } else {
@@ -190,6 +190,7 @@ $("body").delegate(".get_asset","click",function(event){
     //event.preventDefault();
    
     localStorage.setItem("asset",$(this).attr('asset'));
+    $(".mkt_option").attr("asset",localStorage.getItem("asset"));
     arybit('Query Kline',localStorage.getItem("asset"),'');
  
     mysnackbar(localStorage.getItem("asset"));
@@ -616,6 +617,7 @@ var local_asset_time_min = '';
 var seriesData = [];
 var crypto_svgData = [];
 
+
 var rebro_Aisha_url = window.location.hostname;//api_server_url;
 var Aisha_url = 'http://' + rebro_Aisha_url + ':8080/rebro/Aisha';
 function rebro_Aisha(asset,aisa_options,price,price_open,day_high,day_low) {
@@ -709,9 +711,10 @@ function Query_Kline_Book() {
 }
 var time_cuddle = 0;
 var base_lengt = 0;
+var caller = 0;
 
 
-
+//var buy_cliwecked_do=0;
 function arybit(crypto,asset,aisa_options) {
     $.ajax({
         type: "POST", // Type of request to be send, called as 
@@ -819,7 +822,9 @@ function arybit(crypto,asset,aisa_options) {
                             condition_params = 0;
                             $("#leanders_mkt_c").addClass("d-none");
                             $("#leanders_mkt").removeClass("d-none");
-                            //simple_candlestick(new_seriesData);    
+                            //simple_candlestick(new_seriesData); 
+                            //show_charts_cry('','','',new_seriesData);
+
                         } else {
                             new_leads_chart_params=0;
                             params=[];
@@ -955,21 +960,36 @@ function arybit(crypto,asset,aisa_options) {
                         $(".crypto_wacthlist").html('');
 
                         var results = latest_info;
-                        var potential_usd_account_balance = localStorage.getItem("account_balance");
+                        var potential_usd_account_balance = localStorage.getItem("usd_account_balance");
 
                         var tab_count_assets = 0;
                         var tab_count_wacthlist = 0;
+                        var new_account_balanceData_asset=[];
+                        //account_balance_potential_usd_account_balance
+                        //localStorage.setItem("usd_account_balance", Number(localStorage.getItem("account_balance"))/Number(localStorage.getItem("exrate")));
 
-                        var caller = 0;
-                        
-
-                        //alert(localStorage.getItem("ccode"));
-                        new_account_balanceData[tab_count_assets] = {
-                            "account_balance": Number(localStorage.getItem("account_balance_potential_usd_account_balance"))/Number(localStorage.getItem("exrate")),
+                        new_account_balanceData_asset[tab_count_assets] = {
+                            //"account_balance": Number(localStorage.getItem("account_balance"))/Number(localStorage.getItem("exrate")),
+                            "initial_balance": localStorage.getItem("initial_balance"),
+                            "account_balance": localStorage.getItem("usd_account_balance"),
                             "coin_usd_value": localStorage.getItem("exrate"),
                             "account_balance_symbol" : localStorage.getItem("ccode"),
                             "price": ["results_bid_price", "results_high_price_24h", "results_low_price_24h", "results_last_price"]
-                        };
+                        };                        
+                        $(".tab_count_assets").html(tab_count_assets);
+                        $(".tab_count_wacthlist").html(tab_count_wacthlist);
+                        var now_aac =Number(localStorage.getItem("usd_account_balance"))*Number(localStorage.getItem("exrate"));
+                        now_aac = now_aac.toFixed(2);
+
+                        $(".account_balance").html(localStorage.getItem("ccode") + " " + now_aac + '');
+
+                        //localStorage.setItem("usd_account_balance", Number(localStorage.getItem("account_balance"))/Number(localStorage.getItem("exrate")));
+
+                        var ta_asset_value = 0;
+                        //var ta_asset_cage_pct = 0;
+
+                        var total_asset_acc_balance = 0;
+                        //alert("crypto_account_data " + new_account_balanceData_asset);
 
                         for (let i = 0; i < results.length; i++) {
                             var results_last_price = Number(results[i].last_price)*Number(localStorage.getItem("exrate"));
@@ -1018,22 +1038,6 @@ function arybit(crypto,asset,aisa_options) {
                                 }
                                 caller = 1;
                             }
-                            /**if (symbol_pre_price == null) {
-                                symbol_pre_price = results_last_price;
-                                if (localStorage.getItem("exrate") != localStorage.getItem("pr_exrate")){
-                                    //localStorage.setItem("pr_exrate", localStorage.getItem("exrate"));
-                                    //chan_pri = 0.00;
-                                    symbol_pre_price = symbol_pre_price/Number(localStorage.getItem("pr_exrate"));
-                                    symbol_pre_price = symbol_pre_price*Number(localStorage.getItem("exrate"));    
-                                }
-                            } else {
-                                if (localStorage.getItem("exrate") != localStorage.getItem("pr_exrate")){
-                                    //localStorage.setItem("pr_exrate", localStorage.getItem("exrate"));
-                                    //chan_pri = 0.00;
-                                    symbol_pre_price = symbol_pre_price/Number(localStorage.getItem("pr_exrate"));
-                                    symbol_pre_price = symbol_pre_price*Number(localStorage.getItem("exrate"));    
-                                }
-                            } */
                             
 
                             if (symbol_pre_price != '' || symbol_pre_price != null) {
@@ -1097,16 +1101,16 @@ function arybit(crypto,asset,aisa_options) {
 
                             if (localStorage.getItem(crypto_asset_balance) == null) {
                                var group_btr = '<li class="btn-group" role="group">' +
-                               '<a href="#" class="me-0 btn btn-sm btn-soft-success mkt_option get_asset_assets" asset="'+ results[i].symbol + '" day_low="'+ results_low_price_24h + '" price_open="'+ results_bid_price + '" day_high="'+ results_high_price_24h + '"  price="'+ results_last_price + '" aisa_options="buy">Buy</a>' +
+                               '<a href="" class="me-0 btn btn-sm btn-soft-success mkt_option get_asset_assets" asset="'+ results[i].symbol + '" day_low="'+ results_low_price_24h + '" price_open="'+ results_bid_price + '" day_high="'+ results_high_price_24h + '"  price="'+ results_last_price + '" aisa_options="buy">Buy</a>' +
                                '</li>'; 
                             } else if (localStorage.getItem(crypto_asset_balance) ==0){
                                 var group_btr = '<li class="btn-group" role="group">' +
-                                '<a href="#" class="me-0 btn btn-sm btn-soft-success mkt_option get_asset_assets" asset="'+ results[i].symbol + '" day_low="'+ results_low_price_24h + '" price_open="'+ results_bid_price + '" day_high="'+ results_high_price_24h + '"  price="'+ results_last_price + '" aisa_options="buy">Buy</a>' +
+                                '<a href="" class="me-0 btn btn-sm btn-soft-success mkt_option get_asset_assets" asset="'+ results[i].symbol + '" day_low="'+ results_low_price_24h + '" price_open="'+ results_bid_price + '" day_high="'+ results_high_price_24h + '"  price="'+ results_last_price + '" aisa_options="buy">Buy</a>' +
                                 '</li>';
                             } else {
                                 var group_btr = '<li class="btn-group" role="group">' +
-                               '<a href="#" class="d-none d-lg-block me-0 btn btn-sm btn-soft-success mkt_option get_asset_assets" asset="'+ results[i].symbol + '" day_low="'+ results_low_price_24h + '" price_open="'+ results_bid_price + '" day_high="'+ results_high_price_24h + '"  price="'+ results_last_price + '" aisa_options="buy">Buy</a>' +
-                               '<a href="#" class="me-0 btn btn-sm btn-soft-danger mkt_option get_asset_assets" asset="'+ results[i].symbol + '" day_low="'+ results_low_price_24h + '" price_open="'+ results_bid_price + '" day_high="'+ results_high_price_24h + '"  price="'+ results_last_price + '" aisa_options="sell">Sell</a>' +
+                               '<a href="" class="d-none d-lg-block me-0 btn btn-sm btn-soft-success mkt_option get_asset_assets" asset="'+ results[i].symbol + '" day_low="'+ results_low_price_24h + '" price_open="'+ results_bid_price + '" day_high="'+ results_high_price_24h + '"  price="'+ results_last_price + '" aisa_options="buy">Buy</a>' +
+                               '<a href="" class="me-0 btn btn-sm btn-soft-danger mkt_option get_asset_assets" asset="'+ results[i].symbol + '" day_low="'+ results_low_price_24h + '" price_open="'+ results_bid_price + '" day_high="'+ results_high_price_24h + '"  price="'+ results_last_price + '" aisa_options="sell">Sell</a>' +
                                '</li>';
                             }                            
                             
@@ -1124,11 +1128,12 @@ function arybit(crypto,asset,aisa_options) {
                                 }
                                 //localStorage.setItem("" + results[i].symbol + "",results_last_price);// Set Symbol its price
 
+                                //show_charts_cry(params,'update',results[i].symbol,new_seriesData);
                                 //new_leads_chart(params,'update');
 
                                 //dash_revenue_chart(params,results[i].symbol);
 
-                               // simple_candlestick(new_seriesData);
+                                //simple_candlestick(new_seriesData);
                                 
                             }
 
@@ -1140,7 +1145,7 @@ function arybit(crypto,asset,aisa_options) {
                             '</div> ' + results[i].symbol +                            
                             '</li>' +
                             '<li class="nav-item ">' +
-                            '<a class="nav-link" href="#">' + localStorage.getItem("ccode") + ' '+ results_last_price + ' </a>' +
+                            '<a class="nav-link" href="">' + localStorage.getItem("ccode") + ' '+ results_last_price + ' </a>' +
                             '</li>' +
                             '<li class="nav-item d-none d-lg-block d-md-block">' +
                             '<span class="badge ' + chan_pri_bg + '">'+ chan_pri + '%</span>' +
@@ -1154,15 +1159,16 @@ function arybit(crypto,asset,aisa_options) {
 
                             $(".leanders_mkt_assets").append(leanders_mkt_assets);
 
-                            $(".account_balance").html(localStorage.getItem("ccode") + " " + potential_usd_account_balance);
+                            //$(".account_balance").html(localStorage.getItem("ccode") + " " + potential_usd_account_balance);
 
                             if(localStorage.getItem(crypto_asset_balance) == null) {
 
-                            } else if(localStorage.getItem(crypto_asset_balance) == 0 || localStorage.getItem(crypto_asset_balance) == "null" ) {
+                            } else if(localStorage.getItem(crypto_asset_balance) < 0 || localStorage.getItem(crypto_asset_balance) == 0 || localStorage.getItem(crypto_asset_balance) == "null" ) {
                                 tab_count_wacthlist++;
                                 $(".tab_count_wacthlist").html(tab_count_wacthlist);
 
-                                
+                                localStorage.setItem(crypto_asset_balance,0);
+
 
                                 var crypto_wacthlist = '<li class="list-group-item d-flex justify-content-between align-items-center">' +
                                 '<span class="text-primary">' +
@@ -1175,10 +1181,13 @@ function arybit(crypto,asset,aisa_options) {
                                 '<span class="text-info">' + localStorage.getItem("ccode") + ' ' + results_last_price + '</span>' +
                                 
                                 '<span class="">' +
-                                '<a href="#" class="btn btn-sm btn-soft-success mkt_option" asset="'+ results[i].symbol + '" day_low="'+ results_low_price_24h + '" price_open="'+ results_bid_price + '" day_high="'+ results_high_price_24h + '"  price="'+ results_last_price + '" aisa_options="buy">Buy</a>' +
+                                '<a href="" class="btn btn-sm btn-soft-success mkt_option" asset="'+ results[i].symbol + '" day_low="'+ results_low_price_24h + '" price_open="'+ results_bid_price + '" day_high="'+ results_high_price_24h + '"  price="'+ results_last_price + '" aisa_options="buy">Buy</a>' +
                                 '</span>' +
                                 
                                 '</li>';
+                                //localStorage.setItem("" + results[i].symbol + "_usd_value",Number(results_last_price)/Number(localStorage.getItem("exrate"))); //USD
+                                localStorage.removeItem("" + results[i].symbol + "_usd_value");
+
                                 $(".crypto_wacthlist").append(crypto_wacthlist);
 
                             } else {
@@ -1195,9 +1204,20 @@ function arybit(crypto,asset,aisa_options) {
                                 
                                 let coin_usd_value = localStorage.getItem("" + results[i].symbol + "_usd_value"); //USD
 
-                                var coin_value_ = Number(coin_usd_value)*Number(localStorage.getItem("exrate"));
+                                //alert("_usd_value " + localStorage.getItem("" + results[i].symbol + "_usd_value"));
                                 
-                                var potential_account_balance = Number(potential_usd_account_balance) - Number(coin_value_);
+                                var coin_value_ = Number(coin_usd_value)*Number(localStorage.getItem("exrate"));
+                                coin_value_ = coin_value_.toFixed(2);
+
+                                
+                                //var coin_value_ = Number(localStorage.getItem("" + results[i].symbol + "_usd_value"))*Number(localStorage.getItem("exrate"));
+
+                                //var price_of_the_coin_in_ccode = coin_value_;
+                                //potential_usd_account_balance
+                                //var potential_account_balance = Number(potential_usd_account_balance) - Number(coin_value_);
+                                //var potential_account_balance = Number(localStorage.getItem("account_balance")) - Number(coin_value_);
+
+                                
                                 let coin_value = Number(USD_balance) - Number(coin_value_);
                                 coin_value = coin_value.toFixed(2);
 
@@ -1208,12 +1228,22 @@ function arybit(crypto,asset,aisa_options) {
                                 pert_chang = pert_chang.toFixed(2);
                                 if (pert_chang >= 0) {
                                     var pr_bg = "bg-success";
+                                    var pr_bg_text = "success"; 
+
                                 } else {
                                     var pr_bg = "bg-danger"; 
+                                    var pr_bg_text = "danger"; 
+
+                                }
+                                if (i< 1) {
+                                    //alert("BTC_balance " + Number(BTC_balance)  + " USD_balance " + Number(USD_balance)  + " coin_value_ " + Number(coin_value_) + " the_diff " + the_diff + " pert_chang " + pert_chang);
+    
                                 }
 
-                                var aria_valuenow = Math.abs(pert_chang);
+                                //ta_asset_cage_pct = Number(ta_asset_cage_pct) + Number(pert_chang);
 
+                                var aria_valuenow = Math.abs(pert_chang);
+                                
                                 var mysnaccount_ackbar = " BTC " + BTC_balance + " " + results[i].symbol + " balance " + USD_balance + "  value added " + coin_value + " change " + pert_chang + "%";
 
 
@@ -1223,10 +1253,18 @@ function arybit(crypto,asset,aisa_options) {
 
                                 var mysnaccountackbar = progres_dash;
                                 
-                                let letpotential_usd_account_balance = Number(potential_account_balance) + Number(USD_balance);
+                                //let letpotential_usd_account_balance = Number(potential_account_balance) + Number(USD_balance);
+                                //let letpotential_usd_account_balance = Number(Number(localStorage.getItem("account_balance")) - Number(Number(localStorage.getItem("" + results[i].symbol + "_usd_value"))*Number(localStorage.getItem("exrate")))) + Number(USD_balance);
 
-                                potential_usd_account_balance = letpotential_usd_account_balance.toFixed(2);
-                                $(".account_balance").html(localStorage.getItem("ccode") + " " + potential_usd_account_balance);
+                                //var actual_account_balance = Number(localStorage.getItem("usd_account_balance")*Number(localStorage.getItem("exrate"))) - Number(Number(localStorage.getItem("" + results[i].symbol + "_usd_value"))*Number(localStorage.getItem("exrate")));
+                                //localStorage.setItem("usd_account_balance", Number(actual_account_balance/Number(localStorage.getItem("exrate"))));
+                                //localStorage.getItem("actual_account_balance");
+                                //var actual_account_balance = Number(localStorage.getItem("actual_account_balance"));
+                                //let letpotential_usd_account_balance = Number(actual_account_balance) + Number(USD_balance);
+                                //let letpotential_usd_account_balance = actual_account_balance;
+                                //localStorage.getItem("usd_account_balance");
+                                //let letpotential_usd_account_balance = Number(localStorage.getItem("actual_account_balance")) + Number(USD_balance);
+
                                 
                                 //localStorage.setItem("account_balance_potential_usd_account_balance",potential_usd_account_balance);// Set account_balance_potential_usd_account_balance
                                 
@@ -1235,56 +1273,80 @@ function arybit(crypto,asset,aisa_options) {
                                 } else {
                                     var aria_expanded = 'false';
                                 }
-                                var crypto_you_own = '<li class="list-group-item d-flex justify-content-between align-items-center">' +
-                                '<span class="text-primary">' +
-                                '<div class="rounded-circle" style="width: 32px; height: 32px;">'+
-                                '<img src="'+ svg_src + '" class="rounded-circle" width="28" alt="Avatar">' +
-                                '</div>' + 
-                                '<a href="#' + results[i].symbol + '">' + results[i].symbol + '</a>' +
-                                '</span>' +
+                                var crypto_you_own = '<li id="asset_' + results[i].symbol + '" class="list-group-item get_asset" asset="' + results[i].symbol + '">' + 
+                                
+                                '<span class="d-flex justify-content-between align-items-center" style="height: 10px;">' +
+                                '<span class="rounded-circle" style="width: 32px; height: 32px;">'+
+                                '<img src="'+ svg_src + '" class="rounded-circle" width="28" alt="'+ results[i].symbol + '"> '+ 
+                                '</span>'+ results[i].symbol + 
                                 '<span class="text-success">' + localStorage.getItem("ccode") + ' ' + USD_balance + '</span>' +
+                                '<span class="text-warning">' + BTC_balance + '</span>' +  
+                                '</span>'+                              
+                                '<br>'+ 
+                                '<span class="d-flex justify-content-between align-items-center" style="height: 10px;">' +
                                 '<span class="text-info">' + localStorage.getItem("ccode") + ' '+ results_last_price + '</span>' +
-                                '<span class="dropdown ms-5">' +
-                                '<a class="icon text-muted" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="' + aria_expanded + '">' +
-                                '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>' +
-                                '</a>' +
-                                '<ul class="dropdown-menu">' +
-                                '<li>' +
-                                '<span class="text-warning">' + BTC_balance + '</span>' +
-                                '</li>' +
-                                '<li class="btn-group">' +
-                                '<a href="#" class="btn btn-sm btn-soft-success mkt_option" asset="'+ results[i].symbol + '" day_low="'+ results_low_price_24h + '" price_open="'+ results_bid_price + '" day_high="'+ results_high_price_24h + '"  price="'+ results_last_price + '" aisa_options="buy">Buy</a>' +
-                                '<a href="#" class="btn btn-sm btn-soft-danger mkt_option" asset="'+ results[i].symbol + '" day_low="'+ results_low_price_24h + '" price_open="'+ results_bid_price + '" day_high="'+ results_high_price_24h + '"  price="'+ results_last_price + '" aisa_options="sell">Sell</a>' +
-                                '</li>' +
-                                '</ul>' +
+                                '<span class="text-' + pr_bg_text + '">' + pert_chang + '%</span>' +
+                                '<span class="text-success btn-group">' + 
+                                '<a href="" class="btn btn-sm btn-soft-success mkt_option" asset="'+ results[i].symbol + '" day_low="'+ results_low_price_24h + '" price_open="'+ results_bid_price + '" day_high="'+ results_high_price_24h + '"  price="'+ results_last_price + '" aisa_options="buy">Buy</a>' +
+                                '<a href="" class="btn btn-sm btn-soft-danger mkt_option" asset="'+ results[i].symbol + '" day_low="'+ results_low_price_24h + '" price_open="'+ results_bid_price + '" day_high="'+ results_high_price_24h + '"  price="'+ results_last_price + '" aisa_options="sell">Sell</a>' +
                                 '</span>' +
+                                '</span>'+
+                                
                                 '</li>' + 
                                 '<li class="list-group-item"> ' + mysnaccountackbar + '</li>';
 
-                                new_account_balanceData[tab_count_assets] = {
+                                
+                                //total_asset_acc_balance = Number(total_asset_acc_balance) + Number(USD_balance);
+
+                                new_account_balanceData_asset[tab_count_assets] = {
+                                    "initial_balance": BTC_balance,
                                     "account_balance": BTC_balance,
                                     "coin_usd_value": coin_usd_value,
                                     "account_balance_symbol" : results[i].symbol,
                                     "price": [results_bid_price, results_high_price_24h, results_low_price_24h, results_last_price]
                                 };
 
-                               // alert(USD_balance);
-
+                                ta_asset_value = Number(ta_asset_value) + Number(USD_balance);
                                 
+                                var viable_balance = Number(Number(localStorage.getItem("usd_account_balance"))*Number(localStorage.getItem("exrate"))) + Number(ta_asset_value);
+                                viable_balance = viable_balance.toFixed(2);
+                                
+                                var ta_asset_cage_pct = Number(viable_balance) - Number(Number(localStorage.getItem("initial_balance"))*Number(localStorage.getItem("exrate")));
+                                ta_asset_cage_pct = ta_asset_cage_pct/Number(Number(localStorage.getItem("initial_balance"))*Number(localStorage.getItem("exrate")));
+                                ta_asset_cage_pct= ta_asset_cage_pct*100;
 
+                                if (ta_asset_cage_pct >= 0) {
+                                    var pr_bg_prt_ba = "success";
+                                } else {
+                                    var pr_bg_prt_ba = "danger"; 
+                                }
+                                ta_asset_cage_pct = ta_asset_cage_pct.toFixed(2);
+
+                                $(".account_balance").html(localStorage.getItem("ccode") + " " + viable_balance + ' <span class="text-' + pr_bg_prt_ba + '">' + ta_asset_cage_pct + '%</span>');
+                                
                                 $(".crypto_you_own").append(crypto_you_own);
+
                             }
                             if (i == results.length-1) {
-                                //alert();
-                                if (account_balance_called == 1) {
-                                    account_balanceData(new_account_balanceData);
+                                if (buy_cliwecked == 1) {
+                                    buy_cliwecked = 0;
+                                    //alert("crypto_account_data " + new_account_balanceData_asset);
+
+                                    buy_cliwecked_do = 1;
+                                    //proccess_transaction_callerd = 1;
+                                    //account_balanceData(new_account_balanceData_asset);
                                 }
                             }
                         }
+                        //alert("crypto_account_data " + new_account_balanceData_asset);
+
+                        crypto_account_data = new_account_balanceData_asset;
+
+                       // alert("crypto_account_data " + new_account_balanceData_asset);
+
                         if (caller== 0) {
                             Query_Kline_Book();   
                         }
-                        
                         localStorage.setItem("pr_exrate", localStorage.getItem("exrate"));
 
                     }                   
@@ -1339,22 +1401,9 @@ function Query_Symbol(crypto,asset,aisa_options) {
                             et_svg = et_svg.toLowerCase();
                             var svg_src = "https://s1.bycsi.com/assets/image/coins/light/" + et_svg + ".svg";
 
-                            //var et_svg = results[i].base_currency;
-                            //et_svg = et_svg.toLowerCase();  // text2 is text1 converted to lower
-
-                             /**crypto_svgData[i] = {
-                                 crypto_svg:"https://s1.bycsi.com/assets/image/coins/light/" + et_svg + ".svg",
-                                 crypto_name: results[i].name
-                             };
-                             svg_src = crypto_svgData[i].crypto_svg; */
-
-                            //svg_src = "https://s1.bycsi.com/assets/image/coins/light/" + et_svg + ".svg";
-
-
-
                             var query_c_symbols_asset = '<li id="offers_' + results[i].name + '" class="list-group-item d-flex justify-content-between align-items-center" asset="' + results[i].name + '">' +
                             '<div class="rounded-circle" style="width: 32px; height: 32px;">'+
-                            '<img src="'+ svg_src + '" class="rounded-circle" width="28" alt="Avatar">'+
+                            '<img src="'+ svg_src + '" class="rounded-circle" width="28" alt="' + results[i].name + '">'+
                             '</div>'+
                             '<a class="text-primary" href="#' + results[i].name + '">' + results[i].name + '</a>' +
                             '<span class="id_' + results[i].name + '"></span>' +
@@ -1406,67 +1455,47 @@ function Query_Symbol(crypto,asset,aisa_options) {
         }
     });
 }
-function account_balanceData(new_account_balanceData) {
+/**function account_balanceData(new_account_balanceData_asset) {
     account_balance_called = 0;
-    new_account_balanceData = JSON.stringify(new_account_balanceData);
-    
+    new_account_balanceData_asset = JSON.stringify(new_account_balanceData_asset);
+    //alert(new_account_balanceData_asset);
     var username = localStorage.getItem("username");
     var email = localStorage.getItem("email");
     var user_pass = localStorage.getItem("user_pass");
     $.ajax({
         type: "POST", // Type of request to be send, called as
         dataType: 'json',
-        data: { login_user: 12, login_email: email, login_password:user_pass, login_details_username:username, login_details_email:email, new_account_balanceData:new_account_balanceData },
+        data: { login_user: 12, login_email: email, login_password:user_pass, login_details_username:username, login_details_email:email, new_account_balanceData:new_account_balanceData_asset },
         processData: true,
         url: api_server_url + '/cordova/new_account_balanceData.php',
         success: function searchSuccess(response) {
             try {
-                //alert(response);
-                if (response.message == "success") {
-                    
-                    
+                if (response.message == "success") {                    
                     var usd_account_balance = response.account_balance;                    
                     var char = '"';
                     let balanceData = usd_account_balance.replace(/&quot;/g,char);
                     var balanceDataObj  = JSON.parse(balanceData);
-                    if (balanceDataObj.length > 1) {
-                        for (let index = 0; index < balanceDataObj.length; index++) {
-                            var account_balance = balanceDataObj[index].account_balance;
-                            var coin_usd_value = balanceDataObj[index].coin_usd_value;
-                            var account_balance_symbol = balanceDataObj[index].account_balance_symbol;
-                            var price = balanceDataObj[index].price;
-                            alert(account_balance);
-                        }
-                    }
-                    /**if (balanceDataObj.length > 1) {
-                        for (let index = 0; index < balanceDataObj.length; index++) {
-                           // const element = array[index];
-                           var account_balance = balanceDataObj[index+1].account_balance;
-                           var coin_usd_value = balanceDataObj[index+1].coin_usd_value;
-                           var account_balance_symbol = balanceDataObj[index+1].account_balance_symbol;
-                           var price = balanceDataObj[index+1].price;
-                        }
-                         
-                        alert(account_balance);
-                    } else {
+                    let index = 0;
+                    for (index = 0; index < balanceDataObj.length; index++) {
+                        var initial_balance = balanceDataObj[index].initial_balance;
+                        var account_balance = balanceDataObj[index].account_balance;
+                        var coin_usd_value = balanceDataObj[index].coin_usd_value;
+                        var account_balance_symbol = balanceDataObj[index].account_balance_symbol;
+                        var price = balanceDataObj[index].price;
                         
-                    } */                    
-                    
-
-                    
-                    /**localStorage.setItem("usd_account_balance", usd_account_balance);
-                    
-                    var account_balance = Number(localStorage.getItem("usd_account_balance"))*Number(localStorage.getItem("exrate"));
-                    if (account_balance.toFixed(2) < 1) {
-                        account_balance = account_balance.toFixed(4);
-                    } else {
-                        account_balance = account_balance.toFixed(2);                            
+                        //alert("initial_balance " + initial_balance + " account_balance " + account_balance + " coin_usd_value " + coin_usd_value + " account_balance_symbol " + account_balance_symbol);
                     }
-                    //var account_balance = localStorage.getItem("account_balance");
-                    $(".account_balance").attr("account_balance",account_balance);
-                    $(".account_balance").html(localStorage.getItem("ccode") + " " + account_balance);
-                    localStorage.setItem("account_balance", account_balance); */
+                    if (index > 1) {
 
+                        //alert("initial_balance " + initial_balance + " account_balance " + account_balance + " coin_usd_value " + coin_usd_value + " account_balance_symbol " + account_balance_symbol);
+
+                        index_login_user(email,user_pass,username,email);
+
+                        //var mkt_operation = account_balance +' ' + account_balance_symbol;
+                        //var is_empty = 'no';
+                        //dsh_contact(account_balance_symbol ,username,'',mkt_operation,is_empty);
+                    }                    
+    
                 } else {
 
                 }
@@ -1479,7 +1508,7 @@ function account_balanceData(new_account_balanceData) {
           mysnackbar("Error on ajax call: " + api_server_url + '/cordova/login_user.php');
         }
     });
-}
+} */
 
 
 
@@ -1677,8 +1706,11 @@ function proccess_transaction(ccode,exrate,amount_to_deposit,selected_payment_op
                 $(".complete_trasaction").addClass("btn-success");
                 $(".complete_trasaction").html(response.message);
                  
+                proccess_transaction_callerd = 1;
+                //onDeviceReady();
+                //index_login_user(localStorage.getItem("user_email"),localStorage.getItem("user_pass"),username,localStorage.getItem("user_email"));
 
-                mysnackbar(response.account_balance);
+                //mysnackbar(response.account_balance);
             } catch(e) {
                 //mysnackbar('JSON parsing error');
             }          
@@ -1695,6 +1727,8 @@ var sold_bitcoins = 0;
 let new_account_balanceData=[];
 
 var account_balance_called = 0;
+var mkt_operation = '';
+var buy_cliwecked = 0;
 function account_mkt_balance(aisa_options) {
     var crypto_asset_balance = localStorage.getItem("asset");
     crypto_asset_balance = "" + crypto_asset_balance + "_balance";
@@ -1704,59 +1738,57 @@ function account_mkt_balance(aisa_options) {
         if(localStorage.getItem(crypto_asset_balance) == null) {
             localStorage.setItem(crypto_asset_balance,0);//BTC
         }
-        //mysnackbar($(".order_quantity").val());
         if ($(".order_quantity").val() != '' && $(".order_quantity").val() > 0) {
             $(".order_quantity").removeClass("is-invalid");
             $(".order_quantity").addClass("is-valid");
             var order_usd_quantity = $(".order_quantity").val();//USD
-            //alert(localStorage.getItem("account_balance"));
-            //alert($(".order_quantity").val());
+            var actual_aqunt_balance = Number(localStorage.getItem("usd_account_balance"))*Number(localStorage.getItem("exrate"));
 
-            if (Number(localStorage.getItem("account_balance")) <= 0 || Number(localStorage.getItem("account_balance")) < Number($(".order_quantity").val())) {
+            if (actual_aqunt_balance <= 0) {
                 mysnackbar("Insufficient balance, load your account.");
                 display_account_action("show");
 
             } else {
-                if (order_usd_quantity <= localStorage.getItem("account_balance")) {
-                    var account_balance = localStorage.getItem("account_balance");//USD
-                   // account_balance = Number(account_balance) - Number(order_usd_quantity);
-                    //localStorage.setItem("account_balance",account_balance);//USD
-                    var mkt_operation = '';
-
+                if (order_usd_quantity <= actual_aqunt_balance) {
                     if (localStorage.getItem("" + localStorage.getItem("asset") + "_usd_value") == null || localStorage.getItem("" + localStorage.getItem("asset") + "_usd_value") == 0) {
-                        localStorage.setItem("" + localStorage.getItem("asset") + "_usd_value",order_usd_quantity/Number(localStorage.getItem("exrate")));//USD
+                        localStorage.setItem("" + localStorage.getItem("asset") + "_usd_value",Number(order_usd_quantity)/Number(localStorage.getItem("exrate")));//USD
                     } else {
-                        localStorage.setItem("" + localStorage.getItem("asset") + "_usd_value",Number(localStorage.getItem("" + localStorage.getItem("asset") + "_usd_value")) + order_usd_quantity/Number(localStorage.getItem("exrate")));//USD
+                        localStorage.setItem("" + localStorage.getItem("asset") + "_usd_value",Number(localStorage.getItem("" + localStorage.getItem("asset") + "_usd_value")) + Number(Number(order_usd_quantity)/Number(localStorage.getItem("exrate"))));//USD
                     }
  
                     localStorage.setItem(crypto_asset_value,order_usd_quantity);//USD
-    
-                    //alert(localStorage.getItem(crypto_asset_value));
-    
+  
                     let lowest_sell_price = localStorage.getItem("sell_price"); //USD
                     //////////////////////////////////////////
     
                     let btc_balance_fro_usd = (Number(order_usd_quantity)/Number(lowest_sell_price))*1; //BTC
+                    btc_balance_fro_usd = btc_balance_fro_usd.toFixed(8);
                     var bitcoin_balance_fro_usd = (Number(localStorage.getItem(crypto_asset_balance)) + Number(btc_balance_fro_usd));
-                    
-                    //mkt_operation = mkt_operation + " bitcoin_balance_fro_usd " + bitcoin_balance_fro_usd;
     
                     bitcoin_balance_fro_usd = bitcoin_balance_fro_usd.toFixed(8);
                     /////////////////////////////////////////////
                     localStorage.setItem(crypto_asset_balance,bitcoin_balance_fro_usd);//BTC
     
-                    mkt_operation = mkt_operation +'You bought ' + btc_balance_fro_usd + ' ' + localStorage.getItem("asset") + ' worth ' + localStorage.getItem("ccode") + ' ' + localStorage.getItem(crypto_asset_value) + ' at ' + localStorage.getItem("ccode") + ' ' + localStorage.getItem("sell_price");
-                    //mkt_operation = mkt_operation + '' ;
-    
+                    mysnackbar_mkt_operation = 'You bought ' + btc_balance_fro_usd + ' ' + localStorage.getItem("asset") + ' worth ' + localStorage.getItem("ccode") + ' ' + localStorage.getItem(crypto_asset_value) + ' at ' + localStorage.getItem("ccode") + ' ' + localStorage.getItem("sell_price");
+                    
+                    var actual_account_balance = Number(Number(localStorage.getItem("usd_account_balance"))*Number(localStorage.getItem("exrate"))) - Number(Number(order_usd_quantity));//Number(Number(localStorage.getItem("" + localStorage.getItem("asset") + "_usd_value"))*Number(localStorage.getItem("exrate")));
+                    actual_account_balance = actual_account_balance.toFixed(2);
+
+                    localStorage.setItem("usd_account_balance", Number(Number(actual_account_balance)/Number(localStorage.getItem("exrate"))));
+                    localStorage.setItem("actual_account_balance", actual_account_balance);
+
                     var is_empty = 'no';
-                    dsh_contact('Mo-pal' ,username,'',mkt_operation,is_empty);
+                    buy_cliwecked = 1;
+                    Query_Kline_Book();   
+
+                    dsh_contact(localStorage.getItem("asset") ,username,'',mysnackbar_mkt_operation,is_empty);
     
                     var order_quantity = 0;
                     order_quantity = order_quantity.toFixed(8);
                     $(".order_quantity").val(order_quantity);
                     $(".order_quantity_range").val(0);
-                } else {//localStorage.setItem("account_balance"
-                    $(".order_quantity").val(localStorage.getItem("account_balance"));
+                } else {
+                    $(".order_quantity").val(localStorage.getItem("actual_account_balance"));
                     mysnackbar("You do not have enough money");
                     $(".order_quantity_range").val(0);
                 } 
@@ -1776,38 +1808,68 @@ function account_mkt_balance(aisa_options) {
             $(".order_quantity").removeClass("is-invalid");
             $(".order_quantity").addClass("is-valid");
             var order_btc_quantity = $(".order_quantity").val();//BTC
+            var assetbalanc = localStorage.getItem(crypto_asset_balance);
 
-            //alert(localStorage.getItem(crypto_asset_balance));
-            if (localStorage.getItem(crypto_asset_balance) <= 0) {
+            if (assetbalanc < order_btc_quantity) {
+                mysnackbar("You do not have enough crypto!");
+                //var bitcoin_balance = localStorage.getItem(crypto_asset_balance);//USD
+                $(".order_quantity").val(localStorage.getItem(crypto_asset_balance))
+
+            } else if (localStorage.getItem(crypto_asset_balance) <= 0) {
                 mysnackbar("Deficient crypto, try buying some");
             } else {
                 if (localStorage.getItem(crypto_asset_balance) > 0) {
                     var bitcoin_balance = localStorage.getItem(crypto_asset_balance);//USD
+                    var Ibitcoin_balance = bitcoin_balance;
                     bitcoin_balance = Number(bitcoin_balance) - Number(order_btc_quantity);
+                    bitcoin_balance = bitcoin_balance.toFixed(8);
                     localStorage.setItem(crypto_asset_balance,bitcoin_balance);//USD
-                    var mkt_operation = '';                    
     
                     let highest_buy_price = localStorage.getItem("buy_price");//USD
                     let usd_balance_fro_btc = (order_btc_quantity/1)*highest_buy_price; //USD
-                    var usd_account_balance_fro_btc = (Number(localStorage.getItem("account_balance")) + Number(usd_balance_fro_btc));
-                    
+                    usd_balance_fro_btc = usd_balance_fro_btc.toFixed(2);
+
+                    var usd_account_balance_fro_btc = (Number(Number(localStorage.getItem("usd_account_balance"))*Number(localStorage.getItem("exrate"))) + Number(usd_balance_fro_btc));
+
                     usd_account_balance_fro_btc = usd_account_balance_fro_btc.toFixed(2);
-                    //localStorage.setItem("account_balance",usd_account_balance_fro_btc);//USD
-                    
-                    if (localStorage.getItem("" + localStorage.getItem("asset") + "_usd_value") == null || localStorage.getItem("" + localStorage.getItem("asset") + "_usd_value") == 0) {
-                        localStorage.setItem("" + localStorage.getItem("asset") + "_usd_value",usd_balance_fro_btc/Number(localStorage.getItem("exrate")));//USD
+                    localStorage.setItem("usd_account_balance",Number(usd_account_balance_fro_btc)/Number(localStorage.getItem("exrate")));//USD
+
+                    //ratio = Q/I -> Number(order_btc_quantity)/Number(bitcoin_balance)
+                    //usd_value = ratio*usd_value
+                    //alert(localStorage.getItem("" + localStorage.getItem("asset") + "_usd_value"));
+
+                    var ratio_usd_value = Number(order_btc_quantity)/Number(Ibitcoin_balance);
+                    var asset_usd_value = Number(localStorage.getItem("" + localStorage.getItem("asset") + "_usd_value"))*ratio_usd_value;
+                    var remaining_usd_bal = Number(localStorage.getItem("" + localStorage.getItem("asset") + "_usd_value"))-Number(asset_usd_value);
+
+                    //alert(asset_usd_value);
+                    localStorage.setItem("" + localStorage.getItem("asset") + "_usd_value",remaining_usd_bal);//USD
+                    //alert(localStorage.getItem("" + localStorage.getItem("asset") + "_usd_value"));
+
+
+                    /**if (localStorage.getItem("" + localStorage.getItem("asset") + "_usd_value") == null || localStorage.getItem("" + localStorage.getItem("asset") + "_usd_value") == 0) {
+                        localStorage.setItem("" + localStorage.getItem("asset") + "_usd_value",Number(usd_balance_fro_btc)/Number(localStorage.getItem("exrate")));//USD
                     } else {
-                        localStorage.setItem("" + localStorage.getItem("asset") + "_usd_value",Number(localStorage.getItem("" + localStorage.getItem("asset") + "_usd_value")) - usd_balance_fro_btc/Number(localStorage.getItem("exrate")));//USD
-                    }
+                        localStorage.setItem("" + localStorage.getItem("asset") + "_usd_value",Number(localStorage.getItem("" + localStorage.getItem("asset") + "_usd_value")) - Number(Number(usd_balance_fro_btc)/Number(localStorage.getItem("exrate"))));//USD
+                    } */
 
                     var initial_value = localStorage.getItem(crypto_asset_value);
                     var remaining_value = Number(initial_value) - Number(usd_balance_fro_btc);
+                    remaining_value = remaining_value.toFixed(2);
+
                     localStorage.setItem(crypto_asset_value,remaining_value);//USD
-    
-                    mkt_operation = mkt_operation +'You sold ' + order_btc_quantity + ' ' + localStorage.getItem("asset") + ' worth ' + localStorage.getItem("ccode") + ' ' + usd_balance_fro_btc + ' at ' + localStorage.getItem("ccode") + ' ' + localStorage.getItem("buy_price");
+                    //var crypt_value_remainning = Number(localStorage.getItem(crypto_asset_value));
+                    //crypt_value_remainning = crypt_value_remainning.toFixed(8);
+                    //localStorage.setItem(crypto_asset_value,crypt_value_remainning);//USD
+
+                    mysnackbar_mkt_operation = 'You sold ' + order_btc_quantity + ' ' + localStorage.getItem("asset") + ' worth ' + localStorage.getItem("ccode") + ' ' + usd_balance_fro_btc + ' at ' + localStorage.getItem("ccode") + ' ' + localStorage.getItem("buy_price");
     
                     var is_empty = 'no';
-                    dsh_contact('Mo-pal' ,username,'',mkt_operation,is_empty);
+                    buy_cliwecked = 1;
+                    Query_Kline_Book();   
+
+                    //alert("crypto_asset_balance " + localStorage.getItem(crypto_asset_balance) + " usd_account_balance " + localStorage.getItem("usd_account_balance") )
+                    dsh_contact(localStorage.getItem("asset") ,username,'',mysnackbar_mkt_operation,is_empty);
      
                     var order_quantity = 0;
                     order_quantity = order_quantity.toFixed(2);
@@ -1827,13 +1889,8 @@ function account_mkt_balance(aisa_options) {
             mysnackbar("Enter Quantity");
         }        
     }
-    account_balance_called = 1;
-    Query_Kline_Book();
-    /**new_account_balanceData[0] = {
-     "account_balance": "account_balance",
-     crypto_asset_balance: "account_balance",
-     "price": ["results_open", "results_high", "results_low", "results_close"]
-    }; */
+    //account_balance_called = 1;
+    //Query_Kline_Book();
 }
 var new_leads_chart_params = 0;
 var new_simple_candlestick_params = 0;
@@ -1854,7 +1911,11 @@ var seriesData = [{
     y: [52.76, 57.35, 52.15, 57.03]
 }];
 
-
+function show_charts_cry(params,action,name,seriesData){
+    new_leads_chart(params,action);
+    dash_revenue_chart(params,name);
+    simple_candlestick(seriesData);
+}
 function new_leads_chart(params,action) {
     new_leads_chart_params++;
 
@@ -2007,7 +2068,9 @@ function dsh_contact(user_name,con_from,conn_id,chat_message,is_empty) {
         processData: true,
         url: api_server_url + '/cordova/loli/contact.php',
         success: function searchSuccess(response) {
-            mysnackbar(chat_message);
+            //mysnackbar(chat_message);
+            account_balance_called = 1;
+            Query_Kline_Book();
         },
         error: function searchError(xhr, err) {
             mysnackbar('Error on ajax call: ' + err  + ' ' + JSON.stringify(xhr) + '');
@@ -2055,37 +2118,46 @@ $(".pills-assets-tab").click(function(){
 }); 
 $(document).on('input', '.order_quantity_range', function() {
     $(".order_quantity_range").val($(this).val());
-    var crypto_asset_balance = localStorage.getItem("asset");
-    crypto_asset_balance = "" + crypto_asset_balance + "_balance";
-    if(localStorage.getItem(crypto_asset_balance) == null) {
-        localStorage.setItem(crypto_asset_balance,0);//BTC
-    }
+    
     var max_va = $(this).val();// max 5 => 100%
     var order_quantity_pct = (max_va/5)*100;
     
-    var account_balance = localStorage.getItem("account_balance");//USD
-    var pct_account_balance = (Number(account_balance)*Number(order_quantity_pct))/100;
-    pct_account_balance = pct_account_balance.toFixed(2);
     
-    var bitcoin_balance = localStorage.getItem(crypto_asset_balance);//BTC
-    var pct_bitcoin_balance = (Number(bitcoin_balance) *Number(order_quantity_pct))/100;
-    pct_bitcoin_balance = pct_bitcoin_balance.toFixed(8);
+    
+    
     // && localStorage.getItem("account_balance") > 0
     //if (localStorage.getItem(crypto_asset_balance) <= 0) {
     //    mysnackbar("Deficient " + crypto_asset_balance + ", try buying some");
     //} else 
-    if (localStorage.getItem("account_balance") <= 0) {
-        mysnackbar("Insufficient balance, load your account.");
-        display_account_action("show");
-    } else {
-        if (localStorage.getItem("aisa_options") == "sell") {
+    if (localStorage.getItem("aisa_options") == "sell") {
+        var crypto_asset_balance = localStorage.getItem("asset");
+        crypto_asset_balance = "" + crypto_asset_balance + "_balance";
+        if(localStorage.getItem(crypto_asset_balance) == null) {
+            localStorage.setItem(crypto_asset_balance,0);//BTC
+        }
+
+        var bitcoin_balance = localStorage.getItem(crypto_asset_balance);//BTC
+        var pct_bitcoin_balance = (Number(bitcoin_balance) *Number(order_quantity_pct))/100;
+        pct_bitcoin_balance = pct_bitcoin_balance.toFixed(8);
+        if (localStorage.getItem(crypto_asset_balance) <= 0) {
+            mysnackbar("Deficient " + crypto_asset_balance + ", try buying some");
+        } else {
             $(".order_quantity").val(pct_bitcoin_balance);
-            mysnackbar(pct_bitcoin_balance);
+        }
+
+    } else {
+        //var account_balance = localStorage.getItem("account_balance");//USD
+        var account_balance = Number(localStorage.getItem("usd_account_balance"))*Number(localStorage.getItem("exrate"));//CC
+        var pct_account_balance = (Number(account_balance)*Number(order_quantity_pct))/100;
+        pct_account_balance = pct_account_balance.toFixed(2);
+        if (localStorage.getItem("account_balance") <= 0) {
+            mysnackbar("Insufficient balance, load your account.");
+            display_account_action("show");
         } else {
             $(".order_quantity").val(pct_account_balance);
-            mysnackbar(pct_account_balance);
         }
     }
+    
     
 });
 
