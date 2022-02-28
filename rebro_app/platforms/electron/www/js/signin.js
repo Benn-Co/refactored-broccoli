@@ -97,7 +97,7 @@ function login_user(login_email,login_password,login_details_username,login_deta
             try {
                // response.data = JSON.parse(response.data);
                 if (response.message == "success") {
-                    mysnackbar("Welcome " + response.username);
+                    //mysnackbar("Welcome " + response.username);
                     username = response.username;
                     var role = response.role;
                     var email = response.email;
@@ -146,6 +146,7 @@ function login_user(login_email,login_password,login_details_username,login_deta
                     var price = balanceDataObj[0].price;
 
                     localStorage.setItem("usd_account_balance", account_balance_Data);
+                    localStorage.setItem("account_balance_Data", account_balance_Data);
 
                     for (let index = 0; index < balanceDataObj.length; index++) {
                         var asset_balance_Data = balanceDataObj[index].account_balance;
@@ -176,7 +177,7 @@ function login_user(login_email,login_password,login_details_username,login_deta
 
                     localStorage.setItem("account_balance", account_balance);
                     localStorage.setItem("account_balance_potential_usd_account_balance",account_balance);// Set account_balance_potential_usd_account_balance
-                    localStorage.setItem("actual_account_balance", account_balance);
+                    //localStorage.setItem("actual_account_balance", account_balance);
 
                     localStorage.setItem("username_pic", username_pic);
                     localStorage.setItem("user_location", user_location);
