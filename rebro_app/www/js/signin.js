@@ -176,7 +176,7 @@ function login_user(login_email,login_password,login_details_username,login_deta
 
                     localStorage.setItem("account_balance", account_balance);
                     localStorage.setItem("account_balance_potential_usd_account_balance",account_balance);// Set account_balance_potential_usd_account_balance
-                    localStorage.setItem("actual_account_balance", account_balance);
+                    //localStorage.setItem("actual_account_balance", account_balance);
 
                     localStorage.setItem("username_pic", username_pic);
                     localStorage.setItem("user_location", user_location);

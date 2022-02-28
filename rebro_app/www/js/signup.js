@@ -139,7 +139,7 @@ function signup_user(signup_username,signup_email,signup_password) {
                     $(".account_balance").html(localStorage.getItem("ccode") + " " + account_balance);
                     localStorage.setItem("account_balance", account_balance);
                     localStorage.setItem("account_balance_potential_usd_account_balance",account_balance);// Set account_balance_potential_usd_account_balance
-                    localStorage.setItem("actual_account_balance", account_balance);
+                    //localStorage.setItem("actual_account_balance", account_balance);
 
                     localStorage.setItem("username_pic", username_pic);
                     localStorage.setItem("user_location", user_location);

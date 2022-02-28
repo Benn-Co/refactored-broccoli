@@ -100,6 +100,7 @@ function onDeviceReady() {
         //localStorage.clear();
         $("#index_html").hide();
         $("#signin_html").show();
+        $(".loader_center").hide();
 
         $(".username").html(username);
         $(".username_seen").html("last seen " + new Date());
@@ -128,7 +129,8 @@ function onDeviceReady() {
     } else if (user_pass == null || user_pass == '') {
         $("#pills-account-tab").removeClass("d-none");
         //localStorage.clear();
-        
+        $(".loader_center").hide();
+
         $("#index_html").hide();
         $("#signin_html").show();
 
@@ -185,6 +187,7 @@ function index_login_user(login_email,login_password,login_details_username,logi
                 if (response.message == "success") {
                     if (index_login_user_callerd == 0) {
                         mysnackbar("Welcome " + response.username); 
+                        $(".loader_center").hide();
                     } else {
                         //alert(mysnackbar_mkt_operation);
                     }
@@ -223,6 +226,14 @@ function index_login_user(login_email,login_password,login_details_username,logi
                     var account_balance_symbol = balanceDataObj[0].account_balance_symbol;
                     var price = balanceDataObj[0].price;
                     
+                    if (index_login_user_callerd == 1) {
+                        if (account_balance_Data == localStorage.getItem("usd_account_balance")) {
+                            $("#mysnackbar_mkt_operationModal").modal('hide');
+                        }
+                        //alert("account_balance_Data " + account_balance_Data + " usd_account_balance " + localStorage.getItem("usd_account_balance"))
+                    }
+
+
                     var acc_cry_ba = 0;
                     for (let index = 0; index < balanceDataObj.length; index++) {
                         var asset_balance_Data = balanceDataObj[index].account_balance;
@@ -259,7 +270,7 @@ function index_login_user(login_email,login_password,login_details_username,logi
                     
                     localStorage.setItem("account_balance", account_balance);
                     localStorage.setItem("account_balance_potential_usd_account_balance",account_balance);// Set account_balance_potential_usd_account_balance
-                    localStorage.setItem("actual_account_balance", account_balance);
+                    //localStorage.setItem("actual_account_balance", account_balance);
 
                     localStorage.setItem("username_pic", username_pic);
                     localStorage.setItem("user_location", user_location);
@@ -267,6 +278,9 @@ function index_login_user(login_email,login_password,login_details_username,logi
                     localStorage.setItem("user_phone", phone_number);
                     $(".username").html(username);
                     $(".username_seen").html("last seen " + new Date());
+                    //<input type="image" src="logg.png" name="fileToUpload[]" class="btTxt submit" id="saveForm" />
+                    //$(".username_pic").html('<input type="file" class="avatar-img uploadFile img" name="fileToUpload[]" src="' + localStorage.getItem("username_pic") + '">');
+
                     $(".username_pic").html('<img class="avatar-img" src="' + localStorage.getItem("username_pic") + '" alt="#">');
                     $(".user_location").html(localStorage.getItem("user_location"));
                     $(".user_email").html(localStorage.getItem("user_email"));
@@ -294,6 +308,10 @@ function index_login_user(login_email,login_password,login_details_username,logi
                             $(".complete_trasaction").html("Deposit");
                             Query_Kline_Book();
                         }
+                        //if (account_balance_Data == localStorage.getItem("usd_account_balance")) {
+                           // $("#mysnackbar_mkt_operationModal").modal('hide');     
+                        //}
+
                         //alert(index_login_user_callerd);
                         //Query_Kline_Book();                       
 
@@ -302,14 +320,19 @@ function index_login_user(login_email,login_password,login_details_username,logi
                     onDeviceReady();
 
                 } else {
+                    $(".loader_center").hide();
 
                 }
             } catch(e) {
                 mysnackbar('JSON parsing error');
+                $(".loader_center").hide();
+
             }
          
         },
         error: function searchError(xhr, err) {
+            $(".loader_center").hide();
+
           mysnackbar("Error on ajax call: " + api_server_url + '/cordova/login_user.php');
         }
     });
@@ -694,6 +717,7 @@ function loadconnects() {
 var is_true = 0;
 var crypto_account_data_length = 0;
 var new_chg_balanceData = 1;
+var crypto_init_data_length = 0;
 var index_login_user_callerd = 0;
 var proccess_transaction_callerd = 0;
 
@@ -707,14 +731,26 @@ function loadchat(item_connect_from) {
         var new_crypto_json_data = JSON.stringify(crypto_account_data);
         new_chg_balanceData = crypto_account_data.length;
     } else */
-    if(buy_cliwecked_do ==1){
+    //mysnackbar(crypto_account_data.length);
+    if (proccess_transaction_callerd == 0) {
+        var new_crypto_json_data = JSON.stringify(crypto_account_data);
+        new_chg_balanceData = crypto_account_data.length; 
+        //crypto_init_data_length = crypto_account_data.length; 
+
+    } else {
+        new_chg_balanceData = 0;
+    }
+    
+
+    /**if(buy_cliwecked_do ==1){
         var new_crypto_json_data = JSON.stringify(crypto_account_data);
         new_chg_balanceData = crypto_account_data.length;
         //alert(new_crypto_json_data);
 
     } else {
         new_chg_balanceData = 0;
-    }
+    } */
+
     var username = localStorage.getItem("username");
     var email = localStorage.getItem("email");
     var user_pass = localStorage.getItem("user_pass");
@@ -746,31 +782,73 @@ function loadchat(item_connect_from) {
                     
                     var acc_cry_ba = 0; */
 
-                        var usd_account_balance = response.account_balance;
+                        var account_balance = response.account_balance;
                         var char = '"';
-                        let balanceData = usd_account_balance.replace(/&quot;/g,char);
+                        let balanceData = account_balance.replace(/&quot;/g,char);
                         var balanceDataObj  = JSON.parse(balanceData);
-                        length_of_asset = balanceDataObj.length;
+                        //length_of_asset = balanceDataObj.length;
     
-                        var initial_balance = balanceDataObj[0].initial_balance;
-                        var account_balance_Data = balanceDataObj[0].account_balance;
-                        var coin_fird_value = balanceDataObj[0].coin_usd_value;
-                        acc_balanc = account_balance_Data;
-                        var account_balance_symbol = balanceDataObj[0].account_balance_symbol;
-                        var price = balanceDataObj[0].price;
-                        var usd_account_balance = localStorage.getItem("usd_account_balance");
+                        //var initial_balance = balanceDataObj[0].initial_balance;
+                        //var account_balance_Data = balanceDataObj[0].account_balance;
+                        //var coin_fird_value = balanceDataObj[0].coin_usd_value;
+                        //acc_balanc = account_balance_Data;
+                        //var account_balance_symbol = balanceDataObj[0].account_balance_symbol;
+                        //var price = balanceDataObj[0].price;
+                        //var usd_account_balance = localStorage.getItem("usd_account_balance");
 
-                        if (account_balance_Data == usd_account_balance) {
-                            
-                        } else {
-                            
-                            if (buy_cliwecked_do == 1) { 
-                                buy_cliwecked_do = 0;
-                                mysnackbar(mysnackbar_mkt_operation);
+                        if (balanceDataObj[0].account_balance == localStorage.getItem("usd_account_balance")) {
+                            var inspect = balanceDataObj.length + ' <h1>usd_account_balance '+ localStorage.getItem("usd_account_balance") + '</h1><br><h2>account_balance '+ balanceDataObj[0].account_balance + '<h2> <br> <span>';
+
+                            for (let index = 0; index < balanceDataObj.length; index++) {
+                                //var asset_balance_Data = balanceDataObj[index].account_balance;
+                                //var asset_balance_symbol = balanceDataObj[index].account_balance_symbol;
+                                //var coin_usd_value = balanceDataObj[index].coin_usd_value;
+                                //var crypto_asset_balance = "" + asset_balance_symbol + "_balance";
+                                //localStorage.setItem("" + crypto_asset_balance + "", asset_balance_Data);
+                                //localStorage.setItem("" + asset_balance_symbol + "_usd_value",coin_usd_value);//USD
+                               // acc_cry_ba = Number(acc_cry_ba) + Number(coin_usd_value);//USD
+                               // acc_cry_ba = Number(acc_cry_ba)/Number(coin_fird_value);//USD
+
+                               inspect = inspect + '<br>' + balanceDataObj[index].account_balance_symbol +' '+ balanceDataObj[index].account_balance;
+
                             }
+                            inspect = inspect + '</span>';
+
+                            //$(".snackbar_mkt_operation").html(localStorage.getItem("mysnackbar_mkt_operation") + '<br>' + inspect);                                
+                            //$("#mysnackbar_mkt_operationModal").modal('show');
+                            //$(".loader_center").hide();
+                        } else {                            
                             if (proccess_transaction_callerd == 1) {
                                 index_login_user_callerd = 1;
                                 index_login_user(localStorage.getItem("email"),localStorage.getItem("user_pass"),localStorage.getItem("username"),localStorage.getItem("email"));
+                            }                            
+                        }
+                        if (buy_cliwecked_do == 1) {
+                            if (balanceDataObj[0].account_balance == localStorage.getItem("usd_account_balance")) {
+                                var crypto_asset_balance = localStorage.getItem("asset");
+                                crypto_asset_balance = "" + crypto_asset_balance + "_balance";
+
+                                var inspect = balanceDataObj.length + ' <h1>'+ localStorage.getItem(crypto_asset_balance) + ' ' + localStorage.getItem("asset") + '</h1>';
+    
+                                /**for (let index = 0; index < balanceDataObj.length; index++) {
+                                    inspect = inspect + '<br>' + balanceDataObj[index].account_balance_symbol +' '+ balanceDataObj[index].account_balance;
+                                }
+                                inspect = inspect + '</span>'; */
+    
+                                $(".snackbar_mkt_operation").html(localStorage.getItem("mysnackbar_mkt_operation") + '<br>' + inspect);                                
+                                $("#mysnackbar_mkt_operationModal").modal('show');
+                                $(".loader_center").hide();
+                                buy_cliwecked_do = 0;
+                                index_login_user_callerd = 1;
+                                //setTimeout(index_login_user(localStorage.getItem("email"),localStorage.getItem("user_pass"),localStorage.getItem("username"),localStorage.getItem("email")), 3000);    
+                                setTimeout(function(){ 
+                                    index_login_user(localStorage.getItem("email"),localStorage.getItem("user_pass"),localStorage.getItem("username"),localStorage.getItem("email"));
+
+                                }, 5000);
+
+                            
+                            } else{
+                                loadchat(localStorage.getItem("connect_from"));
                             }
                             
                         }
