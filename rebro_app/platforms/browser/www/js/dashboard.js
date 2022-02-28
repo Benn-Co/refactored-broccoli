@@ -20,9 +20,9 @@ function updateValue(e) {
 
 //input_quantity.addEventListener('input', update_quantityValue);
 
+//const web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
 
 $('.order_quantity').on('input',function(e){ 
-    alert(e.target.value);
     $(".order_quantity").val(e.target.value);
     account_mkt_evaluation(localStorage.getItem("aisa_options"));
 });
@@ -31,7 +31,36 @@ $('.order_quantity').on('input',function(e){
 $("body").delegate(".mkt_option","click",function(event){
     event.preventDefault();
     
-        alert($(".order_quantity").val());
+        //alert($(".order_quantity").val());
+        /**web3.eth.sendTransaction({from: '0xdCad3a6d3569DF655070DEd06cb7A1b2Ccd1D3AF', data: '0xdCad3a6d3569DF655070DEd06cb7A1b2Ccd1D3AF'})
+        .once('sending', function(payload){
+            alert("sending " + payload);
+        })
+        .once('sent', function(payload){
+            alert("sent " + payload);
+
+        })
+        .once('transactionHash', function(hash){
+            alert("transactionHash " + hash);
+
+        })
+        .once('receipt', function(receipt){ 
+            alert("receipt " + receipt);
+
+         })
+        .on('confirmation', function(confNumber, receipt, latestBlockHash){ 
+            alert("confirmation " + confNumber);
+
+         })
+        .on('error', function(error){ 
+            alert("error " + error);
+
+         })
+        .then(function(receipt){
+            alert("receipt " + receipt);
+
+            // will be fired once the receipt is mined
+        }); */
 
         $(".mkt_option").attr("price",$(this).attr('price'));
         localStorage.setItem("price",$(this).attr('price'));
@@ -244,9 +273,10 @@ $("body").delegate(".gift_send","click",function(event){
 $("body").delegate(".get_asset_assets","click",function(event){
     $("#main_mkt").removeClass("is-visible");
 });
-
+ 
 $("body").delegate(".get_asset","click",function(event){
     event.preventDefault();
+    //alert($(this).attr('asset'));
     if (localStorage.getItem("asset") != $(this).attr('asset')) {
         localStorage.setItem("asset",$(this).attr('asset'));
         $(".mkt_option").attr("asset",localStorage.getItem("asset"));
@@ -763,7 +793,7 @@ function send_gift_email(gift_email,username) {
     });
 }
 
-
+//includes(2)
 localStorage.setItem("limit", 200);
 localStorage.setItem("interval", 1);
 
@@ -1535,7 +1565,11 @@ function Query_Symbol(crypto,asset,aisa_options) {
                                 const myArray = text.split("https://wallet.arybit.com/#");
                                 var et_svg = myArray[1];
                                 if (myArray.length > 1) {
-                                    localStorage.setItem("asset",et_svg);
+                                    if (et_svg.includes("USD")) {
+                                        localStorage.setItem("asset",et_svg);
+                                    } else {
+                                        localStorage.setItem("asset",results[i].name);
+                                    }
                                 } else {
                                     localStorage.setItem("asset",results[i].name);
                                 }
