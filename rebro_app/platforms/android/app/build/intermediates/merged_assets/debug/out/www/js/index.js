@@ -34,46 +34,73 @@ $(document).ready(function(){
     if (hostname.includes("benn-co.github.io") || hostname.includes("oramla") || hostname.includes("localhost") || hostname.includes("192.")) {
         if (hostname.includes("localhost") || hostname.includes("192.")) {            
             onDeviceReady();
-            //get_country_codes('lo','la');
         } else {
             if (location.protocol !== 'https:') {
                 path_protocol = "https:";
                 window.location.href="" + path_protocol + "//" + window.location.hostnam + "";
             }
-            //get_country_codes('lo','la');
             onDeviceReady();
         }
     } else {
-        //alert(localStorage.getItem("username")); 
         onDeviceReady();
-        //get_country_codes('lo','la');
-        //document.addEventListener('deviceready', onDeviceReady, false);
     }
 });
 
 var username = '';
 var api_server_url = 'https://oramla.com';
-//var api_server_url = 'http://localhost';
 localStorage.setItem("api_server_url", api_server_url);
+var crypto_account_data = [];
 
 var updte_is_typing = 0;
 
 var IMAGE_url_path_name = 'https://'  + api_server_url + '/product_images/';
 var user_permited = 0;
 function onDeviceReady() {
-    // Cordova is now initialized. Have fun!  
-    //localStorage.setItem("ccode", '$');
-    //localStorage.setItem("exrate", 1);
-    //get_country_codes('','');  
+    /**username = '';
+    api_server_url = 'https://oramla.com';
+    localStorage.setItem("api_server_url", api_server_url);
+    crypto_account_data = [];
+    
+    updte_is_typing = 0;
+    
+    IMAGE_url_path_name = 'https://'  + api_server_url + '/product_images/';
+    user_permited = 0;
+    caller_inf = 0;
+    mysnackbar_mkt_operation = "";
+    acc_balanc = 0;
+    index_login_useronDeviceReady = 0;
+    IMAGE_pic_url = 0;
+    data_length = 0;
+    var is_true = 0;
+    var crypto_account_data_length = 0;
+    var new_chg_balanceData = 1;
+    var index_login_user_callerd = 0;
+    var buy_cliwecked_do = 0;
+    var length_of_asset = 0;
+    var bum = 0;
+    var tab_count_chats = 0;
+    var bumcondition = 0;
+    var connects_datalength = 0;
+    var connects_datalengthnow = 0;
+    var connect_messages = 0;
+    var is_typing = "";
+    var is_online = "";
+    var reply_message_on = 0;
+    var reply_message_connect_from = '';
+    var reply_message_connect_message = '';
+    var reply_message_connect_messages_id = ''; */
+
+    let hostname = window.location.hostname;
+    let path_protocol = location.protocol;
     username = localStorage.getItem("username");
     var email = localStorage.getItem("email");
     var user_pass = localStorage.getItem("user_pass");
-    //get_country_codes('','');
     if (email == null || email == '') {
         $("#pills-account-tab").removeClass("d-none");
         //localStorage.clear();
         $("#index_html").hide();
         $("#signin_html").show();
+        $(".loader_center").hide();
 
         $(".username").html(username);
         $(".username_seen").html("last seen " + new Date());
@@ -102,7 +129,8 @@ function onDeviceReady() {
     } else if (user_pass == null || user_pass == '') {
         $("#pills-account-tab").removeClass("d-none");
         //localStorage.clear();
-        
+        $(".loader_center").hide();
+
         $("#index_html").hide();
         $("#signin_html").show();
 
@@ -138,12 +166,14 @@ function onDeviceReady() {
             $(".order_quantity_range").val(0);            
             loadconnects();
         } else {
-            index_login_user(email,user_pass,username,email);
+            index_login_user(localStorage.getItem("email"),localStorage.getItem("user_pass"),localStorage.getItem("username"),localStorage.getItem("email"));
         }
-    }
-    //get_country_codes('','');
-    //bybit_mkt('Query Symbol','','');        
+    }       
 }
+var caller_inf = 0;
+var mysnackbar_mkt_operation = "";
+var acc_balanc = 0;
+var index_login_useronDeviceReady = 0;
 function index_login_user(login_email,login_password,login_details_username,login_details_email) {
     $.ajax({
         type: "POST", // Type of request to be send, called as
@@ -155,7 +185,17 @@ function index_login_user(login_email,login_password,login_details_username,logi
             //alert(response.message);
             try {
                 if (response.message == "success") {
-                    mysnackbar("Welcome " + response.username);
+                    if (index_login_user_callerd == 0) {
+                        mysnackbar("Welcome " + response.username);
+                        //var is_empty = 'no';
+                        //contact('Mo-pal' ,response.username,'','Hello ' + username + ', Welcome'  + '.',is_empty);
+
+                        $(".loader_center").hide();
+                    } else {
+                        //alert(mysnackbar_mkt_operation);
+                    }
+                    //alert(mysnackbar_mkt_operation);
+                    
                     username = response.username;
                     var role = response.role;
                     var email = response.email;
@@ -180,14 +220,27 @@ function index_login_user(login_email,login_password,login_details_username,logi
                     var char = '"';
                     let balanceData = usd_account_balance.replace(/&quot;/g,char);
                     var balanceDataObj  = JSON.parse(balanceData);
+                    length_of_asset = balanceDataObj.length;
+
                     var initial_balance = balanceDataObj[0].initial_balance;
                     var account_balance_Data = balanceDataObj[0].account_balance;
+                    var coin_fird_value = balanceDataObj[0].coin_usd_value;
+                    acc_balanc = account_balance_Data;
                     var account_balance_symbol = balanceDataObj[0].account_balance_symbol;
                     var price = balanceDataObj[0].price;
                     
-                    //localStorage.setItem("initial_balance", initial_balance);
-                    //localStorage.setItem("usd_account_balance", account_balance_Data);
-                    //localStorage.setItem("usd_account_balance", usd_account_balance);
+                    if (index_login_user_callerd == 1) {
+                        if (account_balance_Data == localStorage.getItem("usd_account_balance")) {
+                            $("#mysnackbar_mkt_operationModal").modal('hide');
+                        }
+                        //alert("account_balance_Data " + account_balance_Data + " usd_account_balance " + localStorage.getItem("usd_account_balance"))
+                    }
+
+
+                    var acc_cry_ba = 0;
+                    //alert(balanceDataObj.length);
+
+                    balanceDataObj_length = balanceDataObj.length;
 
                     for (let index = 0; index < balanceDataObj.length; index++) {
                         var asset_balance_Data = balanceDataObj[index].account_balance;
@@ -196,14 +249,16 @@ function index_login_user(login_email,login_password,login_details_username,logi
                         var crypto_asset_balance = "" + asset_balance_symbol + "_balance";
                         localStorage.setItem("" + crypto_asset_balance + "", asset_balance_Data);
                         localStorage.setItem("" + asset_balance_symbol + "_usd_value",coin_usd_value);//USD
-                        //alert("login " + localStorage.getItem("" + asset_balance_symbol + "_usd_value"));
-                    }
-                    //if (localStorage.getItem(crypto_asset_balance) == null){
+                       // acc_cry_ba = Number(acc_cry_ba) + Number(coin_usd_value);//USD
+                       // acc_cry_ba = Number(acc_cry_ba)/Number(coin_fird_value);//USD
 
-                    //}
- 
+                    }
+                    
                     localStorage.setItem("usd_account_balance", account_balance_Data);
+                    localStorage.setItem("account_balance_Data", account_balance_Data);
+
                     if (balanceDataObj.length > 1) {
+                        //alert("initial_balance " + initial_balance + " acc_cry_ba " + acc_cry_ba);
                         localStorage.setItem("initial_balance", initial_balance);
                     } else {
                         localStorage.setItem("initial_balance", localStorage.getItem("usd_account_balance"));
@@ -217,10 +272,14 @@ function index_login_user(login_email,login_password,login_details_username,logi
                     }
                     //var account_balance = localStorage.getItem("account_balance");
                     $(".account_balance").attr("account_balance",account_balance);
-                    $(".account_balance").html(localStorage.getItem("ccode") + " " + account_balance);
+                    //alert(caller_inf);
+                    if (index_login_user_callerd == 0) {
+                        $(".account_balance").html(localStorage.getItem("ccode") + " " + account_balance);
+                    }
+                    
                     localStorage.setItem("account_balance", account_balance);
                     localStorage.setItem("account_balance_potential_usd_account_balance",account_balance);// Set account_balance_potential_usd_account_balance
-                    localStorage.setItem("actual_account_balance", account_balance);
+                    //localStorage.setItem("actual_account_balance", account_balance);
 
                     localStorage.setItem("username_pic", username_pic);
                     localStorage.setItem("user_location", user_location);
@@ -228,6 +287,9 @@ function index_login_user(login_email,login_password,login_details_username,logi
                     localStorage.setItem("user_phone", phone_number);
                     $(".username").html(username);
                     $(".username_seen").html("last seen " + new Date());
+                    //<input type="image" src="logg.png" name="fileToUpload[]" class="btTxt submit" id="saveForm" />
+                    //$(".username_pic").html('<input type="file" class="avatar-img uploadFile img" name="fileToUpload[]" src="' + localStorage.getItem("username_pic") + '">');
+
                     $(".username_pic").html('<img class="avatar-img" src="' + localStorage.getItem("username_pic") + '" alt="#">');
                     $(".user_location").html(localStorage.getItem("user_location"));
                     $(".user_email").html(localStorage.getItem("user_email"));
@@ -247,17 +309,40 @@ function index_login_user(login_email,login_password,login_details_username,logi
 
                     
                     user_permited = user_permited + 1;
+                    if (index_login_user_callerd == 1) {
+                        index_login_user_callerd = 0;
+                        if (proccess_transaction_callerd == 1) {
+                            proccess_transaction_callerd = 0;
+                            $("#account_deposit").modal('toggle');
+                            $(".complete_trasaction").html("Deposit");
+                            Query_Kline_Book();
+                        }
+                        //if (account_balance_Data == localStorage.getItem("usd_account_balance")) {
+                           // $("#mysnackbar_mkt_operationModal").modal('hide');     
+                        //}
+
+                        //alert(index_login_user_callerd);
+                        
+                        Query_Kline_Book();                       
+
+                    }
+                    
                     onDeviceReady();
 
                 } else {
+                    $(".loader_center").hide();
 
                 }
             } catch(e) {
                 mysnackbar('JSON parsing error');
+                $(".loader_center").hide();
+
             }
          
         },
         error: function searchError(xhr, err) {
+            $(".loader_center").hide();
+
           mysnackbar("Error on ajax call: " + api_server_url + '/cordova/login_user.php');
         }
     });
@@ -265,7 +350,9 @@ function index_login_user(login_email,login_password,login_details_username,logi
 var IMAGE_pic_url = 0;
 var data_length = 0;
 function contact(user_name,con_from,conn_id,chat_message,is_empty) {
+    //alert();
     if (con_from != '') {
+        //mysnackbar(crypto_account_data.length);
         $.ajax({
             type: "POST", // Type of request to be send, called as
             dataType: 'json',
@@ -393,7 +480,7 @@ function chat_contacts_datamyFunction(item, index) {
             var message_is_type  = message_text;
         }
         var connect_messages = '<div id="message_' + item.connect_messages_id + '" class="message" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
-        '<a href="#" data-bs-toggle="modal" data-bs-target="#modal-user-profile" class="avatar avatar-responsive">' +
+        '<a href="" data-bs-toggle="modal" data-bs-target="#modal-user-profile" class="avatar avatar-responsive">' +
         '<img class="avatar-img" src="' + svg_src + '" alt="">' +
         '</a>' +
 
@@ -404,13 +491,13 @@ function chat_contacts_datamyFunction(item, index) {
         '<!-- Dropdown -->' +
         '<div class="message-action">' +
         '<div class="dropdown">' +
-        '<a class="icon text-muted" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">' +
+        '<a class="icon text-muted" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">' +
         '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>' +
         '</a>' +
 
         '<ul class="dropdown-menu">' +
         '<li>' +
-        '<a class="dropdown-item d-flex align-items-center edit_message" href="#" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
+        '<a class="dropdown-item d-flex align-items-center edit_message" href="" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
         '<span class="me-auto">Edit</span>' +
         '<div class="icon">' +
         '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>' +
@@ -418,7 +505,7 @@ function chat_contacts_datamyFunction(item, index) {
         '</a>' +
         '</li>' +
         '<li>' +
-        '<a class="dropdown-item d-flex align-items-center reply_message" href="#" connect_message="' + is_message + '" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
+        '<a class="dropdown-item d-flex align-items-center reply_message" href="" connect_message="' + is_message + '" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
         '<span class="me-auto">Reply</span>' +
         '<div class="icon">' +
         '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-corner-up-left"><polyline points="9 14 4 9 9 4"></polyline><path d="M20 20v-7a4 4 0 0 0-4-4H4"></path></svg>' +
@@ -429,7 +516,7 @@ function chat_contacts_datamyFunction(item, index) {
         '<hr class="dropdown-divider">' +
         '</li>' +
         '<li>' +
-        '<a class="dropdown-item d-flex align-items-center text-danger delete_message" href="#" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
+        '<a class="dropdown-item d-flex align-items-center text-danger delete_message" href="" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
         '<span class="me-auto">Delete</span>' +
         '<div class="icon">' +
         '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>' +
@@ -513,7 +600,7 @@ function chat_contacts_datamyFunction(item, index) {
         }
 
         var connect_messages  = '<div id="message_' + item.connect_messages_id + '" class="message message-out" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
-        '<a href="#" data-bs-toggle="modal" data-bs-target="#modal-profile" class="avatar avatar-responsive">' +
+        '<a href="" data-bs-toggle="modal" data-bs-target="#modal-profile" class="avatar avatar-responsive">' +
         '<img class="avatar-img" src="' + localStorage.getItem("username_pic") + '" alt="">' +
         '</a>' +
 
@@ -524,13 +611,13 @@ function chat_contacts_datamyFunction(item, index) {
         '<!-- Dropdown -->' +
         '<div class="message-action">' +
         '<div class="dropdown">' +
-        '<a class="icon text-muted" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">' +
+        '<a class="icon text-muted" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">' +
         '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>' +
         '</a>' +
 
         '<ul class="dropdown-menu">' +
         '<li>' +
-        '<a class="dropdown-item d-flex align-items-center edit_message" href="#" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
+        '<a class="dropdown-item d-flex align-items-center edit_message" href="" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
         '<span class="me-auto">Edit</span>' +
         '<div class="icon">' +
         '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>' +
@@ -538,7 +625,7 @@ function chat_contacts_datamyFunction(item, index) {
         '</a>' +
         '</li>' +
         '<li>' +
-        '<a class="dropdown-item d-flex align-items-center reply_message" href="#" connect_message="' + is_message + '" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
+        '<a class="dropdown-item d-flex align-items-center reply_message" href="" connect_message="' + is_message + '" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
         '<span class="me-auto">Reply</span>' +
         '<div class="icon">' +
         '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-corner-up-left"><polyline points="9 14 4 9 9 4"></polyline><path d="M20 20v-7a4 4 0 0 0-4-4H4"></path></svg>' +
@@ -549,7 +636,7 @@ function chat_contacts_datamyFunction(item, index) {
         '<hr class="dropdown-divider">' +
         '</li>' +
         '<li>' +
-        '<a class="dropdown-item d-flex align-items-center text-danger delete_message" href="#" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
+        '<a class="dropdown-item d-flex align-items-center text-danger delete_message" href="" connect_from="' + item.connect_from + '" connect_messages_id="' + item.connect_messages_id + '">' +
         '<span class="me-auto">Delete</span>' +
         '<div class="icon">' +
         '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>' +
@@ -581,7 +668,7 @@ function chat_contacts_datamyFunction(item, index) {
         
         if (is_typing == 'is typing') {
             var typing = '<div class="message">' +
-            '<a href="#" data-bs-toggle="modal" data-bs-target="#modal-user-profile" class="avatar avatar-responsive">' +
+            '<a href="" data-bs-toggle="modal" data-bs-target="#modal-user-profile" class="avatar avatar-responsive">' +
             '<img class="avatar-img" src="' + IMAGE_pic_url + '" alt="">' +
             '</a>' +
     
@@ -635,21 +722,141 @@ function loadconnects() {
         update_direct_chat(localStorage.getItem("is_typing"),localStorage.getItem("is_online"),localStorage.getItem("connects_time"));
     }
     loadchat(localStorage.getItem("connect_from"));
-    setTimeout(loadconnects, 3000);    
+    setTimeout(loadconnects, 10000);    
 }
 var is_true = 0;
+var crypto_account_data_length = 0;
+var new_chg_balanceData = 0;
+var crypto_init_data_length = 0;
+var balanceDataObj_length = 0;
+
+var index_login_user_callerd = 0;
+var proccess_transaction_callerd = 0;
+
+var buy_cliwecked_do = 0;
+var length_of_asset = 0;
 function loadchat(item_connect_from) { 
-    //alert(api_server_url + '/cordova/loli/chat_main_container.php');
+    
+    if (proccess_transaction_callerd == 0) {
+        if (crypto_account_data.length > 1) {
+            if (localStorage.getItem("account_balance_Data") != localStorage.getItem("usd_account_balance") || crypto_init_data_length != crypto_account_data.length) {
+                var new_crypto_json_data = JSON.stringify(crypto_account_data);
+                new_chg_balanceData = crypto_account_data.length;
+                localStorage.setItem("account_balance_Data", localStorage.getItem("usd_account_balance"));
+                crypto_init_data_length = crypto_account_data.length; 
+                //alert(crypto_account_data.length + " buy_cliwecked_do " + buy_cliwecked_do);
+                //balanceDataObj_length = 0;
+
+            } else {
+                new_chg_balanceData = 0;
+            }
+        } else {
+            new_chg_balanceData = 0;
+        }        
+    } else {
+        new_chg_balanceData = 0;
+    }
+    /**if(buy_cliwecked_do ==1){
+        var new_crypto_json_data = JSON.stringify(crypto_account_data);
+        new_chg_balanceData = crypto_account_data.length;
+        //alert(new_crypto_json_data);
+
+    } else {
+        new_chg_balanceData = 0;
+    } */
+    var username = localStorage.getItem("username");
+    var email = localStorage.getItem("email");
+    var user_pass = localStorage.getItem("user_pass");
+
     $.ajax({
         type: "POST", // Type of request to be send, called as
         dataType: 'json',
-        data: { chat_main_container: 12, username: username,is_online: is_online,is_typing: is_typing, item_connect_from: item_connect_from },
+        data: { chat_main_container: 12, username: username,is_online: is_online,is_typing: is_typing, item_connect_from: item_connect_from, login_email: email, login_password:user_pass, login_details_username:username, login_details_email:email, new_account_balanceData: new_crypto_json_data, new_chg_balanceData:new_chg_balanceData},
         processData: true,
-        url: api_server_url + '/cordova/loli/chat_main_container.php',
+        url: api_server_url + '/cordova/loli/arybit_chat_main_container.php',
         success: function searchSuccess(response) {
+           //alert(response.message);
             try {
                 if (response.message == "success") {
                     var connects_data = response.connects;
+
+                    /**var usd_account_balance = response.account_balance;
+                    var char = '"';
+                    let balanceData = usd_account_balance.replace(/&quot;/g,char);
+                    var balanceDataObj  = JSON.parse(balanceData);
+                    length_of_asset = balanceDataObj.length;
+
+                    var initial_balance = balanceDataObj[0].initial_balance;
+                    var account_balance_Data = balanceDataObj[0].account_balance;
+                    var coin_fird_value = balanceDataObj[0].coin_usd_value;
+                    acc_balanc = account_balance_Data;
+                    var account_balance_symbol = balanceDataObj[0].account_balance_symbol;
+                    var price = balanceDataObj[0].price;
+                    
+                    var acc_cry_ba = 0; */
+
+                        var account_balance = response.account_balance;
+                        var char = '"';
+                        let balanceData = account_balance.replace(/&quot;/g,char);
+                        var balanceDataObj  = JSON.parse(balanceData);
+                        //length_of_asset = balanceDataObj.length;
+    
+                        //var initial_balance = balanceDataObj[0].initial_balance;
+                        //var account_balance_Data = balanceDataObj[0].account_balance;
+                        //var coin_fird_value = balanceDataObj[0].coin_usd_value;
+                        //acc_balanc = account_balance_Data;
+                        //var account_balance_symbol = balanceDataObj[0].account_balance_symbol;
+                        //var price = balanceDataObj[0].price;
+                        //var usd_account_balance = localStorage.getItem("usd_account_balance");
+                        
+                        //mysnackbar(balanceDataObj.length);
+
+                        if (balanceDataObj[0].account_balance == localStorage.getItem("usd_account_balance")) {
+                            //alert(balanceDataObj_length != balanceDataObj.length);
+                            if (balanceDataObj_length != balanceDataObj.length) {
+                                balanceDataObj_length = balanceDataObj.length;
+                                index_login_user_callerd = 1;
+                                index_login_user(localStorage.getItem("email"),localStorage.getItem("user_pass"),localStorage.getItem("username"),localStorage.getItem("email"));
+                            
+                                //mysnackbar(balanceDataObj.length);
+
+                            }
+                        } else {                            
+                            if (proccess_transaction_callerd == 1) {
+                                index_login_user_callerd = 1;
+                                index_login_user(localStorage.getItem("email"),localStorage.getItem("user_pass"),localStorage.getItem("username"),localStorage.getItem("email"));
+                            }                            
+                        }
+
+
+                        if (buy_cliwecked_do == 1) {
+                            if (balanceDataObj[0].account_balance == localStorage.getItem("usd_account_balance")) {
+                                var crypto_asset_balance = localStorage.getItem("asset");
+                                crypto_asset_balance = "" + crypto_asset_balance + "_balance";
+
+                                var inspect = balanceDataObj.length + ' <h1>'+ localStorage.getItem(crypto_asset_balance) + ' ' + localStorage.getItem("asset") + '</h1>';
+    
+                                /**for (let index = 0; index < balanceDataObj.length; index++) {
+                                    inspect = inspect + '<br>' + balanceDataObj[index].account_balance_symbol +' '+ balanceDataObj[index].account_balance;
+                                }
+                                inspect = inspect + '</span>'; */
+                                
+                                $(".snackbar_mkt_operation").html(localStorage.getItem("mysnackbar_mkt_operation") + '<br>' + inspect);                                
+                                $("#mysnackbar_mkt_operationModal").modal('show');
+                                $(".loader_center").hide();
+                                buy_cliwecked_do = 0;
+                                index_login_user_callerd = 1;
+                                setTimeout(function(){ 
+                                    index_login_user(localStorage.getItem("email"),localStorage.getItem("user_pass"),localStorage.getItem("username"),localStorage.getItem("email"));
+                                }, 5000);
+                            
+                            } else{
+                                loadchat(localStorage.getItem("connect_from"));
+                            }
+                            
+                        }
+                   
+
                     connects_datalength = connect_messages;
                     connect_messages = response.connect_messages;
                     if (connects_datalength < connect_messages || connects_datalength > connect_messages) {
@@ -668,6 +875,9 @@ function loadchat(item_connect_from) {
                     $("#connects_chat").html('');
                     connects_data.forEach(connects_datamyFunction);                    
                 } else {
+                    var is_empty = 'no';
+                    contact('Mo-pal' ,response.username,'','Hello ' + username + ', Welcome'  + '.',is_empty);
+
                     //var is_empty = 'no';
                     //contact('Mo-pal' ,username,'','Hello ' + username + ', My name is ' + 'Mo-pal'  + '. How can i help you?',is_empty);
                 }
@@ -1032,7 +1242,7 @@ $("body").delegate(".edit_message","click",function(event){
 });
 $("body").delegate(".reply_ref","click",function(event){
     //var connect_from = $(this).attr('mess_ref');
-    window.location.href="#" + $(this).attr('mess_ref') + "";
+    window.location.href="" + $(this).attr('mess_ref') + "";
 });
 $("body").delegate(".logout_me","click",function(event){
     event.preventDefault();

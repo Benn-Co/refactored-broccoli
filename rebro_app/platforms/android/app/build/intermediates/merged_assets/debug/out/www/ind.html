@@ -1,0 +1,2587 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    Customize this policy to fit your own app's needs. For more guidance, see:
+      https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+    Some notes:
+      * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+      * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+      * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+    -->
+  <!-- Removing 'unsafe-eval'. If needed, I will figure out a way around it -->
+  <meta name="robots" content="THE LEADING PLATFORM FOR GLOBAL TRADE. WE CONNECT AND SERVE MILLIONS OF BUYERS AND SELLERS AROUND THE WORLD" />
+
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com https://polyfill.io https://developers.google.com https://maps.googleapis.com/maps/api/staticmap https://maps.googleapis.com https://js.api.here.com https://developer.here.com https://image.maps.ls.hereapi.com https://oramla.com http://192.168.0.102 http://localhost https://itunes.apple.com 'unsafe-eval' 'unsafe-inline' ws://*; style-src 'self' 'unsafe-inline'; media-src *; img-src * data:">
+
+  <!-- Required meta tags-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <link rel="stylesheet" href="lib/font-awesome-4.5.0/css/font-awesome.min.css" />
+  <meta name="color-scheme" content="light dark">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+  <meta name="msapplication-TileImage" content="img/favicon-32x32.png">
+  <link rel="shortcut icon" href="img/favicon-32x32.png">
+  
+
+  <link rel="stylesheet" href="css/menu_container_top_tab.css">
+  <link rel="stylesheet" href="css/menu_container_left_tab.css">
+  <link rel="stylesheet" href="css/menu_container_bottom_tab.css">
+  <link rel="stylesheet" href="css/menu_container_apps_tab.css">
+
+  <link rel="stylesheet" href="css/arrow_navigation_container.css">
+
+  <link rel="stylesheet" href="css/product_container.css">
+  <link rel="stylesheet" href="css/product_add_client_container.css">
+
+  <link rel="stylesheet" href="css/chat_container.css">
+  <link rel="stylesheet" href="css/cart_container.css">
+  <link rel="stylesheet" href="css/location_container.css">
+  <link rel="stylesheet" href="css/user_container.css">
+  <link rel="stylesheet" href="css/orders_container.css">
+  <link rel="stylesheet" href="css/order_items_container.css">
+  <link rel="stylesheet" href="bulma/css/bulma.css">
+  
+  <link rel='stylesheet' href='bootstrap/4.3.1/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/authentication.css">
+
+  
+  <title>Oramla | The leading platform for global trade </title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-186803693-1">
+  </script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-186803693-1');
+  </script>
+</head>
+
+<body>
+
+  <div id="app-coverin" class="app-cover">
+    <div class="app-coverh1">
+      <h1>
+        Oramla
+      </h1>
+    </div>
+    <div class="app-coverh6">
+      <h6>The leading platform for global trade</h6> 
+    </div>
+  </div>
+
+  <div id="app-cover-spin" class="">
+    <button id="app_cover_close" class="delete right app-cover-spinbutton" aria-label="close"></button>
+
+  </div> 
+
+  <div id="maincontainer" class="main">
+
+
+    <div id="menu_container_top_tab" class="menu-container">  
+      <div class="top_container_menu" id="top_menu">
+        
+        <input class="top_container_input" type="radio" id="radio-0" name="menu" checked />
+        <label class="tab top_container_label" for="radio-0">
+          <div class="item">
+            <img src="img/panorama_fish_eye-24px.svg" alt="">
+          </div>
+        </label>
+
+        <input class="top_container_input" type="radio" id="radio-1" name="menu" />
+        <label class="tab top_container_label" for="radio-1">
+          <div class="item">
+            <img src="img/search-24px.svg" alt="">
+          </div>
+        </label>             
+        
+        
+        <input class="top_container_input" type="radio" id="radio-2" name="menu" />
+        <label class="tab top_container_label" for="radio-2">
+          <div class="item">
+            <img src="img/group_work-24px.svg" alt="">
+          </div>
+        </label>
+        
+        <input class="top_container_input" type="radio" id="radio-3" name="menu"  />
+        <label class="tab top_container_label" for="radio-3">
+          <div class="item">
+            <img src="img/apps-24px.svg" alt="">
+          </div>
+        </label>
+        
+        <div class="blob-container">
+          <div class="blob"></div>
+        </div>
+    
+      </div>
+      <div class="top_container_search" id="search">
+        <!-- -->
+        <div class="search-form">
+          <input id="search_value" type="search" value="" placeholder="Search" class="search-input">
+          <button type="submit" class="search-button">
+            <svg class="submit-button">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#searchicon"></use>
+            </svg>
+          </button>
+          <div class="search-option">
+
+            <div>
+              <input name="type" type="radio" value="type-images" id="type-images">
+              <label for="type-images">
+                <svg class="edit-pen-title">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#search-images"></use>
+                </svg>
+                <span>Products</span>
+              </label>
+            </div>                  
+            
+            <div>
+              <input name="type" type="radio" value="type-posts" id="type-posts">
+              <label for="type-posts">
+                <svg class="edit-pen-title">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#search-post"></use>
+                </svg>
+                <span>Industries</span>
+              </label>
+            </div>
+            
+            <div>
+              <input name="type" type="radio" value="type-special" id="type-special" checked="">
+              <label for="type-special">
+                <svg class="edit-pen-title">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#search-special"></use>
+                </svg>
+                <span>Categories</span>
+              </label>
+            </div>
+
+            <div>
+              <input name="type" type="radio" value="type-users" id="type-users">
+              <label for="type-users">
+                <svg class="edit-pen-title">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#useracc"></use>
+                </svg>
+                <span>Agents</span>
+              </label>
+            </div>
+
+          </div>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" display="none">
+          <symbol id="searchicon" viewBox="0 0 32 32">
+            <path d="M 19.5 3 C 14.26514 3 10 7.2651394 10 12.5 C 10 14.749977 10.810825 16.807458 12.125 18.4375 L 3.28125 27.28125 L 4.71875 28.71875 L 13.5625 19.875 C 15.192542 21.189175 17.250023 22 19.5 22 C 24.73486 22 29 17.73486 29 12.5 C 29 7.2651394 24.73486 3 19.5 3 z M 19.5 5 C 23.65398 5 27 8.3460198 27 12.5 C 27 16.65398 23.65398 20 19.5 20 C 15.34602 20 12 16.65398 12 12.5 C 12 8.3460198 15.34602 5 19.5 5 z" />
+          </symbol>
+          <symbol id="useracc" viewBox="0 0 32 32">
+            <path d="M 16 4 C 12.145852 4 9 7.1458513 9 11 C 9 13.393064 10.220383 15.517805 12.0625 16.78125 C 8.485554 18.302923 6 21.859881 6 26 L 8 26 C 8 21.533333 11.533333 18 16 18 C 20.466667 18 24 21.533333 24 26 L 26 26 C 26 21.859881 23.514446 18.302923 19.9375 16.78125 C 21.779617 15.517805 23 13.393064 23 11 C 23 7.1458513 19.854148 4 16 4 z M 16 6 C 18.773268 6 21 8.2267317 21 11 C 21 13.773268 18.773268 16 16 16 C 13.226732 16 11 13.773268 11 11 C 11 8.2267317 13.226732 6 16 6 z" /></symbol>
+          <symbol id="search-images" viewbox="0 0 32 32">
+            <path d="M 2 5 L 2 6 L 2 26 L 2 27 L 3 27 L 29 27 L 30 27 L 30 26 L 30 6 L 30 5 L 29 5 L 3 5 L 2 5 z M 4 7 L 28 7 L 28 20.90625 L 22.71875 15.59375 L 22 14.875 L 21.28125 15.59375 L 17.46875 19.40625 L 11.71875 13.59375 L 11 12.875 L 10.28125 13.59375 L 4 19.875 L 4 7 z M 24 9 C 22.895431 9 22 9.8954305 22 11 C 22 12.104569 22.895431 13 24 13 C 25.104569 13 26 12.104569 26 11 C 26 9.8954305 25.104569 9 24 9 z M 11 15.71875 L 20.1875 25 L 4 25 L 4 22.71875 L 11 15.71875 z M 22 17.71875 L 28 23.71875 L 28 25 L 23.03125 25 L 18.875 20.8125 L 22 17.71875 z" />
+          </symbol>
+          <symbol id="search-post" viewbox="0 0 32 32">
+            <path d="M 3 5 L 3 6 L 3 23 C 3 25.209804 4.7901961 27 7 27 L 25 27 C 27.209804 27 29 25.209804 29 23 L 29 13 L 29 12 L 28 12 L 23 12 L 23 6 L 23 5 L 22 5 L 4 5 L 3 5 z M 5 7 L 21 7 L 21 12 L 21 13 L 21 23 C 21 23.73015 21.221057 24.41091 21.5625 25 L 7 25 C 5.8098039 25 5 24.190196 5 23 L 5 7 z M 7 9 L 7 10 L 7 13 L 7 14 L 8 14 L 18 14 L 19 14 L 19 13 L 19 10 L 19 9 L 18 9 L 8 9 L 7 9 z M 9 11 L 17 11 L 17 12 L 9 12 L 9 11 z M 23 14 L 27 14 L 27 23 C 27 24.190196 26.190196 25 25 25 C 23.809804 25 23 24.190196 23 23 L 23 14 z M 7 15 L 7 17 L 12 17 L 12 15 L 7 15 z M 14 15 L 14 17 L 19 17 L 19 15 L 14 15 z M 7 18 L 7 20 L 12 20 L 12 18 L 7 18 z M 14 18 L 14 20 L 19 20 L 19 18 L 14 18 z M 7 21 L 7 23 L 12 23 L 12 21 L 7 21 z M 14 21 L 14 23 L 19 23 L 19 21 L 14 21 z" />
+          </symbol>
+          <symbol id="search-special" viewbox="0 0 32 32">
+            <path d="M 4 4 L 4 5 L 4 27 L 4 28 L 5 28 L 27 28 L 28 28 L 28 27 L 28 5 L 28 4 L 27 4 L 5 4 L 4 4 z M 6 6 L 26 6 L 26 26 L 6 26 L 6 6 z M 16 8.40625 L 13.6875 13.59375 L 8 14.1875 L 12.3125 18 L 11.09375 23.59375 L 16 20.6875 L 20.90625 23.59375 L 19.6875 18 L 24 14.1875 L 18.3125 13.59375 L 16 8.40625 z M 16 13.3125 L 16.5 14.40625 L 17 15.5 L 18.1875 15.59375 L 19.40625 15.6875 L 18.5 16.5 L 17.59375 17.3125 L 17.8125 18.40625 L 18.09375 19.59375 L 17 19 L 16 18.40625 L 15 19 L 14 19.59375 L 14.3125 18.40625 L 14.5 17.3125 L 13.59375 16.5 L 12.6875 15.6875 L 13.90625 15.59375 L 15.09375 15.5 L 15.59375 14.40625 L 16 13.3125 z" />
+          </symbol>
+        </svg>
+      </div>
+      <div class="top_container_slider" id="top_slider"> 
+        <label for="top_slid_range"><span id="top_value_range" class="top_val_range badge bg-info">Geoshop loading products from agents near you... </span></label>             
+        <input id="top_slid_range" name="top_slid_range" type="range" min="0" max="100" value="50" class="range blue"/>
+      </div>            
+    </div>         
+
+    <nav id="menu_container_left_tab" role='navigation' class="navigation" style="display: none;">
+      <input type="checkbox" id="post" class="postToggle" />
+      <label for="post" class="postBtn"></label>
+      <ul>
+        <li id="" class="pending_orders text">Add products</li>
+        <li id="" class="active_orders quote">Orders</li>
+        <li id="" class="confirmed_orders link">Sell</li>
+        <li id="" class="complete_orders chat">Connects</li>
+        <li id="" class="user_orders video">Currency</li>
+      </ul>
+    </nav>
+    
+
+    <nav id="menu_container_apps_tab" class="nav-drill">
+      <ul id="apps_categories" class="apps_nav-items nav-level-1">
+          
+      </ul>
+      <ul id="apps_brands" class="apps_nav-items nav-level-1 apps_brands">
+          
+      </ul>
+    </nav>
+    
+    <div id="product_container" class="product_main_container container is-fullhd"> 
+           
+      <div id="product_error" class="w-full sm:w-1/2 md:w-1/3 flex flex-col p-3 product_error_container">
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col">
+          <div class="bg-cover h-48" style="background-image: url(https://images.unsplash.com/photo-1523978591478-c753949ff840?w=900);"></div>
+          <div class="p-4 flex-1 flex flex-col" >
+            <h3 id="product_row_h" class="mb-4 text-2xl">Error!</h3>
+            <div class="mb-4 text-grey-darker text-sm flex-1">
+              <p id="product_row_p"></p>
+            </div>
+            <a href="https://oramla.com/" class="border-t border-grey-light pt-2 text-xs text-grey hover:text-red uppercase no-underline tracking-wide" >Oramla.com</a>
+          </div>
+        </div>  
+      </div>
+
+
+      <!--<div class="card">
+        <div class="alpha_video"> <video class="vdo" src="https://mdbootstrap.com/img/video/Sail-Away.mp4" loop="1" preload="auto" muted=""></video> </div>
+        
+      </div>-->
+      
+
+      <div id="product_row_container">
+        <div id="product_data_container"  class="row">
+
+        </div>
+        
+        <div class="action_buttons">
+        <a id="add_products_agent"  class="product_float">
+          <i class="fa fa-plus-circle product_my-float"></i>
+        </a>
+        <div class="product_label-container">
+          <div class="product_label-text">Add products</div>
+          <i class="fa fa-play product_label-arrow"></i>
+        </div>
+    
+        
+        <a id="action_float_id" class="float">
+          <i class="fa fa-plus-circle my-float"></i>
+        </a>
+        <div class="label-container">
+          <div class="label-text">You would like to </div>
+          <i class="fa fa-play label-arrow"></i>
+        </div>
+      </div>
+
+      </div>
+
+      <div id="product_add_client_container" class="product_add_client">
+        <!-- not responsive yet -->
+        <nav class="nav nav-justified nav_add_client sticky-top">
+          <a class="nav-item nav-link active" href="#agentclient">
+            <div class="tags"> 
+              <img id="otheaddlimg" src="img/logo.png" class="tag" alt="">   
+              <video id="otheaddlvideo" class="vdo tag tagvideo" src="" loop="1" preload="auto" muted=""></video>
+
+              <span class="tag is-black"><span id="otheaddl"></span> <span class="fa fa-star" id="rating_num" > 3</span></span>              
+            </div>
+          </a>
+          <a class="nav-item nav-link" href="#addloactionagent">
+            <i class="fa fa-map-marker" aria-hidden="true"></i>
+          </a>
+          <a class="nav-item nav-link" href="#productshipping">
+            <img src="img/fast-shipping.png" alt="" width="25px" height="25px">
+          </a>
+          <a class="nav-item nav-link" href="#paymentmethods">
+            <i class="fa fa-credit-card" aria-hidden="true"></i>
+          </a>
+
+          <div class="my-2 my-lg-0">
+            <button id="arrow_add_client_back"  class="button is-black"><i class="fa fa-arrow-left"></i></button>
+          </div>
+        </nav>
+        
+        <section class="buy-grid container-fluid">          
+          <div class="hero-image-wrapper image">
+            <div class="hero-image-element alpha_video">
+              <img id="add_imageadd_" src="http://localhost/product_images/amphibolite.jpg" class="hero-image-element" alt="alt">
+              <video id="add_videoadd_" class="vdo hero-image-element hero-imagevideo " src="" loop="1" preload="auto" muted=""></video>
+
+              <div id="other_title" class="row">                    
+              </div>
+            </div>            
+          </div>
+          <header class="header_header">
+            <h5 id="add_carousel_title"></h5>
+            <div class="tags">
+              <span class="tag is-black fa fa-star"></span>
+              <span class="tag is-black fa fa-star"></span>
+              <span class="tag is-black fa fa-star"></span>
+              <span class="tag is-light fa fa-star"></span>
+              <span class="tag is-light fa fa-star"></span>
+            </div>
+          </header>
+
+          <div class="">
+            <div class="tags">
+              <p class="card-price"><span id="add_carousel_currency"></span><span id="add_carousel_price"></span></p>
+              <span class="tag" id="add_carousel_buynow"></span>
+            </div>
+
+            <div class="tags">
+              <a class="tag is-black" id="list-shipping-list" href="#productshipping">shipping</a>
+              <a class="tag is-black" id="list-condition-list" href="#productcondition">condition</a>
+              <a class="tag is-black" id="list-brand-list" href="#productbrand">brand</a>
+              <a class="tag is-black" id="list-availability-list" href="#productavailability">availability</a>
+              <a class="tag is-black" id="list-tax-list" href="#producttax">tax</a>
+            </div>
+            
+            <div class="addContent">
+
+              <div class="" id="productshipping">
+                <h5 class="text sticky-top">Shipping</h5>
+                
+                <div class="card overflow-auto">
+                  
+                  <div class="d-flex w-100 justify-content-between">
+                    <h6 id="shippingvalue" class="mb-1 text-success">US:CA:Overnight:16.00 USD:1:1:2:3</h6>
+                    <span id="shippingupdate">Updated 3 days ago</span>
+                  </div>
+
+                  <p class="mb-1">shipping cost, shipping speeds, and the locations your product ships from.<br>Supported prices : 0–1000 USD (check for other currencies)</p>
+
+                  <div id="shippingbox" class="box">         
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="addtabContent" id="productcondition">
+                <h5 class="text sticky-top">condition</h5>
+                
+                <div class="card overflow-auto">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h6 id="conditionvalue" class="mb-1 text-success"></h6>
+                    <span id="conditionupdate"></span>
+                  </div>
+
+                  <p class="mb-1">The condition of the product at time of sale</p>
+
+                  <div id="conditionbox" class="box">                    
+
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="addtabContent" id="productavailability">
+                <h5 class="text sticky-top">availability</h5>
+                
+                <div class="card overflow-auto">
+                  
+                  <div class="d-flex w-100 justify-content-between">
+                    <h6 id="availabilityvalue" class="mb-1 text-success"></h6>
+                    <span id="availabilityupdate"></span>
+                  </div>
+
+                  <p class="mb-1">Product’s availability.</p>
+
+                  <div id="availabilitybox" class="box">
+                    
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="addtabContent" id="producttax">
+                <h5 class="text sticky-top">tax</h5>
+                
+                <div class="card overflow-auto">
+                  
+                  <div class="d-flex w-100 justify-content-between">
+                    <h6 id="taxvalue" class="mb-1 text-success"></h6>
+                    <span id="taxupdate"></span>
+                  </div>
+
+                  <p class="mb-1">Your product’s sales tax rate in percent. A category that classifies your product by specific tax rules </p>
+
+                  <div id="taxbox" class="box">
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="addtabContent" id="productbrand">
+                <h5 class="text sticky-top">brand</h5>
+                
+                <div class="card overflow-auto">
+                  
+                  <div class="d-flex w-100 justify-content-between">
+                    <h6 id="brandvalue" class="mb-1 text-success"></h6>
+                    <span id="brandupdate"></span>
+                  </div>
+
+                  <p class="mb-1">Product’s brand name</p>
+
+                  <div id="brandbox" class="box">
+                    
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <div id="paymentmethods"  class="">
+              <h5 class="text sticky-top">Payment options</h5>
+
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title"><a class="tag is-black" id="list-paywithrams-list" href="#productpaywithrams">Pay With Rams</a></h5>
+                  <p class="card-text">You'll send your payment in crypto through Oramla. You can track each transaction, manage your earnings, convert the funds into local currencies, and more.</p>
+              
+                  <h6 class="card-text">More supported payment options</h6>
+
+                  <div id="specscarouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <div class="tags">
+                          <span class="tag is-black">Bank Transfer</span>
+                          <span class="tag is-black">Cash</span>
+                          <span class="tag is-black">Neteller</span>
+                          <span class="tag is-black">Skrill</span>
+                          <span class="tag is-black">PayPal</span>
+                          <span class="tag is-black">Ethereum</span>
+                          <span class="tag is-black">Bitcoin</span>
+                          <span class="tag is-black">Litecoin</span>
+                          <span class="tag is-black">Amazon gift cards</span>
+                          <span class="tag is-black">Cash In-Person</span>
+                        </div>
+                      </div>
+                      <div class="carousel-item">
+                        <div class="tags">
+                          <span class="tag is-black">Bank Transfer</span>
+                          <span class="tag is-black">Cash</span>
+                          <span class="tag is-black">Neteller</span>
+                          <span class="tag is-black">Skrill</span>
+                          <span class="tag is-black">PayPal</span>
+                          <span class="tag is-black">Ethereum</span>
+                          <span class="tag is-black">Bitcoin</span>
+                          <span class="tag is-black">Litecoin</span>
+                          <span class="tag is-black">Amazon gift cards</span>
+                          <span class="tag is-black">Cash In-Person</span>
+                        </div>
+                      </div>
+                      <div class="carousel-item">
+                        <div class="tags">
+                          <span class="tag is-black">Bank Transfer</span>
+                          <span class="tag is-black">Cash</span>
+                          <span class="tag is-black">Neteller</span>
+                          <span class="tag is-black">Skrill</span>
+                          <span class="tag is-black">PayPal</span>
+                          <span class="tag is-black">Ethereum</span>
+                          <span class="tag is-black">Bitcoin</span>
+                          <span class="tag is-black">Litecoin</span>
+                          <span class="tag is-black">Amazon gift cards</span>
+                          <span class="tag is-black">Cash In-Person</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+                
+              </div>
+
+              
+            </div>
+            
+            <hr>
+            
+            <div class="specs-table">              
+  
+              <h4 class="text sticky-top">Specifications</h4>
+  
+              <div class="specs-table-row card">
+                <div class="spec-table-label">=></div>
+                <div id="add_carousel_desc" class="spec-table-description">This is the description</div>
+              </div>
+              
+            </div>
+
+            <section id="agentclient" class="">
+              <h3 class="text sticky-top">Other Products from Agent <b id="otheadd"></b></h3>
+    
+              <div class="card">
+                <div id="carouselExampleIndicators" class="carousel slide bg-dark text-white  row" data-ride="carousel">
+                  <ol id="add_carousel_indicators" class="carousel-indicators _carousel_indicators" style="z-index: 0;">
+        
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        
+                  </ol>
+                  <div id="add_carousel_other" class="carousel-inner">                  
+        
+                  </div>
+                  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </div>
+              </div>  
+
+            </section>
+            
+
+          </div>          
+          
+
+        </section> 
+        
+        <section id="addloactionagent" class="callout  container-fluid">
+          <h3 class="text sticky-top">Agent Agent <b class="agent_name_class"></b> location</h3>
+          
+          <div id="agentlocation" class="addagenttext row" style="text-align:center;">
+          </div>
+          <div id="agent_location_map" class="row"> </div>    
+          
+        </section>
+        
+        <section class="callout  container-fluid">
+          <h3 class="text">Similar products </h3>
+
+          <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+            <div id="other_similar_products" class="carousel-inner">
+              <div class="carousel-item active" data-interval="10000">
+                <div id="other_mySlides1" class="mySlides ">
+                  <div id="other_similar_products_row1"  class="row">
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item" data-interval="2000">
+                <div id="other_mySlides2"  class="mySlides ">
+                  <div  id="other_similar_products_row2" class="row">
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div id="other_mySlides3"  class="mySlides ">
+                  <div  id="other_similar_products_row3" class="row">
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+          
+
+          <a id="add_fload_id" connect_from="" connects_id="" connects_time="" class="add_float">
+            <input class="bottom_input" type="radio" name="s" id="add_s5">
+            <label class="bottom_label" for="add_s5"><img src="img/bubble_chart-24px.svg" alt=""></label>
+          </a>
+
+        </section>
+        
+      </div>
+
+      <div id="arrow_navigation_container" class="arrow_navigation_cont">
+        <ul class="v-effect-link">
+          <li id="product_previous">
+            <a id="pr_previous" class="arrow left">
+              <i></i>
+              <svg>
+                <use xlink:href="#circle">
+              </svg>
+            </a>
+          </li>
+          <li id="product_next">
+            <a id="pr_next" class="arrow">
+              <i></i>
+              <svg>
+                  <use xlink:href="#circle">
+              </svg>
+            </a>
+          </li>
+        </ul>
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+          <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44px" height="44px" id="circle" fill="none" stroke="currentColor">
+              <circle r="20" cy="22" cx="22" id="test">
+          </symbol>
+        </svg> 
+      </div>      
+
+            
+         
+    </div>
+
+    <div id="chat_container" class="chat_main_container is-fullhd"> 
+      
+      <nav  id="center_top_id" class="navbar navbar-light bg-light fixed-top sticky-top">
+        <div class="is-centered">
+           <h2>Connects</h2>
+        </div>
+        <div class="my-2 my-lg-0">
+          <button id="contacts_back"  class="button is-black"><i class="fa fa-arrow-left"></i></button>
+        </div>
+      </nav>
+      <div id="connects_contacts">
+        
+        <div id="connects" class="center_connects">                
+        </div>
+      </div>
+      <div id="connects_messages" class="contacts_messanges">             
+
+        <div class="chat">  
+
+          <div class="contact bar">
+            <div id="namepic" class="pic picbar stark"></div>
+            <div id="contactname" class="name">
+            </div>
+            <div id="cotacttime" class="seen">
+            </div>
+
+            <div class="add_li add_active" style="float:right">
+              <button id="connects_back"  class="button is-black"><i class="fa fa-arrow-left"></i></button>
+
+            </div>
+            
+          </div>
+
+          <div class="messages" id="chat">
+            <div class="time">
+            </div>
+          </div>  
+
+          <div id="chat_message_input" class="chat_input">
+            <div class="list-group list-group-horizontal">
+              <input id="chat_message" placeholder="Type your message here!" type="text" class="is-link text-dark float-left" />
+              <button  id="radio-send"  class="button is-black float-right" style="border-radius: 45%;"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+            </div>
+            
+          </div>
+          
+          <!-- -->
+
+        </div>             
+
+      </div>          
+
+    </div>
+    
+    <div id="cart_container" class="cart">
+      <nav class="navbar navbar-light bg-light sticky-top">
+        <div class="is-centered">
+            <h2>shopping cart</h2>
+        </div>
+        <div class="my-2 my-lg-0">
+          <button id="cart_back"  class="button is-black"><i class="fa fa-arrow-left"></i></button>
+        </div>
+      </nav>
+      
+      <div class="flex flex-wrap -m-3 container cart_main_container"> 
+
+        <div id="cart_error" class="w-full sm:w-1/2 md:w-1/3 flex flex-col p-3 cart_error_container">
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col">
+            <div class="bg-cover h-48" style="background-image: url(https://images.unsplash.com/photo-1523978591478-c753949ff840?w=900);"></div>
+            <div class="p-4 flex-1 flex flex-col" >
+              <h3 id="cart_row_h" class="mb-4 text-2xl"></h3>
+              <div class="mb-4 text-grey-darker text-sm flex-1">
+                <p id="cart_row_p"></p>
+              </div>
+              <a href="https://oramla.com/" class="border-t border-grey-light pt-2 text-xs text-grey hover:text-red uppercase no-underline tracking-wide" >Oramla.com</a>
+            </div>
+          </div>  
+        </div>
+        
+      </div>
+
+      <div id="cart_row_container" class="container">
+        
+      </div> 
+
+      <div id="arrow_navigation_cart" class="arrow_navigation_cont mx-auto">
+        
+        <ul class="v-effect-link">
+          <li id="cart_previous">
+            <a id="cr_previous" class="arrow left">
+              <i></i>
+              <svg>
+                <use xlink:href="#circle">
+              </svg>
+            </a>
+          </li>
+          <li id="cart_next">
+            <a id="cr_next" class="arrow">
+              <i></i>
+              <svg>
+                  <use xlink:href="#circle">
+              </svg>
+            </a>
+          </li>
+        </ul>
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+          <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44px" height="44px" id="circle" fill="none" stroke="currentColor">
+              <circle r="20" cy="22" cx="22" id="test">
+          </symbol>
+        </svg>
+        
+
+        <footer class="footer container-fluid ">
+
+          <div class="container mx-auto "> 
+            <div class="list-group list-group-horizontal  columns is-multiline is-mobile block">
+              <div class="float-left column is-6">                 
+                <div class="select is-link">
+                  <select id="_shipping">
+                    <option value="0" selected>Delivery option</option>
+                    <option value="Pick up">Pick up</option>
+                    <option value="Door to door">Door to door</option>
+                    <option value="Drop point">Drop point</option>
+                    <option value="Shipping">Shipping</option>
+                  </select>
+                  <span id="_shippingerror"></span>
+                </div>                
+              </div>
+              <div class="float-right column is-6">
+                <div class="select is-link">              
+                  <select id="_pay">
+                    <option value="0" selected>Payment option</option>
+                    <option value="M-Pesa">M-Pesa</option>
+                    <option value="Paypal">Paypal</option>
+                    <option value="Google pay">Google pay</option>
+                    <option value="Ali pay">Ali pay</option>
+                    <option value="Amozon pay">Amozon pay</option>
+                    <option value="Apple pay">Apple pay</option>
+                    <option value="Payment on delivery">Payment on delivery</option>
+                  </select>
+                  <span id="_payerror"></span>
+                </div> 
+                
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <span id="total_pay" class="subtotal">Subtotal: $<span>00.00</span></span>
+                <span id="total_tax" class="tax">Taxes (16%): $<span>0.0</span></span>
+                <span id="total_shipping" class="shipping">Delivery: $<span>0.00</span></span>
+              </div>
+              <div class="col">
+                <h3 id="total_total" class="total">Total: $<span>00.00</span></h3>
+                <a id="checkout_total" class="btn btn-primary">Checkout</a>    
+              </div>
+            </div>
+      
+          </div>
+  
+        </footer>
+        
+      </div>
+
+      
+      
+      
+    
+    </div>
+
+    <div id="orders_container" class="orders_">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+          <button class="d-lg-none button is-black"  data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></button>
+          <img src="https://bootdey.com/img/Content/avatar/avatar3.png" width="50" height="50" class="rounded-circle d-none d-lg-block" alt="Angelica Ramos">
+
+          
+          <!--<button type="button" class="button is-dark d-block">
+            <span class="svg-icon svg-icon-1">
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <rect x="5" y="5" width="5" height="5" rx="1" fill="#000000"></rect>
+                  <rect x="14" y="5" width="5" height="5" rx="1" fill="#000000" opacity="0.3"></rect>
+                  <rect x="5" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3"></rect>
+                  <rect x="14" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3"></rect>
+                </g>
+              </svg>
+            </span>
+          </button>-->
+          <div class="collapse navbar-collapse row justify-content-md-center mt-3" id="navbarNav">
+            <form class="form-inline">
+              <button type="button" class="btn btn-outline-secondary btn-sm user_orders">
+                <div class="icon youtube">
+                  <div class="tooltip">Orders</div>
+                  <span id="menu_container_role" class=""></span>
+                </div>
+              </button>
+              <button type="button" class="btn btn-outline-warning btn-sm pending_orders">
+                <div class="icon facebook" data-toggle="tooltip" data-placement="bottom" title="Pending orders">
+                  <span id="menu_container_pending_orders_count" class=""></span>
+                </div>
+              </button>
+              <button type="button" class="btn btn-outline-success btn-sm active_orders">
+                <div class="icon twitter" data-toggle="tooltip" data-placement="bottom" title="Active orders">
+                  <span id="menu_container_active_orders_count" class=""></span>
+                </div>
+              </button>
+              <button type="button" class="btn btn-outline-danger btn-sm confirmed_orders">
+                <div class="icon instagram" data-toggle="tooltip" data-placement="bottom" title="Cancelled orders">
+                  <span id="menu_container_confirmed_orders_count" class=""></span>
+                </div>
+              </button>
+              <button type="button" class="btn btn-outline-info btn-sm complete_orders">
+                <div class="icon github" data-toggle="tooltip" data-placement="bottom" title="Completed orders">
+                  <span id="menu_container_complete_orders_count" class=""></span>
+                </div>
+              </button>
+            </form>          
+          </div>
+          <div class="form-inline topRight">
+            <div id="moreaction">
+              <button class="button d-inline p-2 bg-primary text-white d-lg-none" id="mystore">Store</button>
+              <button class="button d-inline p-2 bg-dark text-white d-lg-none" id="mystoreorders">Orders</button>
+            </div>
+            <a href="#" class="generate-qr-code" qr_code_id="1" data-display="static">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal align-middle"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+            </a>
+
+            <button id="order_back" class="button is-black"><i class="fa fa-arrow-left"></i></button>
+          </div>        
+      </nav>  
+      
+      <div class="row">
+        <div class="col-xl-4 d-none d-lg-block" id="mystorecol">          
+          <div class="card">
+            <div class="card-header">
+              <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title mb-0">Store</h5>
+                  </div>
+                  <div class="d-inline p-2">
+                    <a href="#" id="storegheader">Analysis</a>                    
+                  </div>
+                  <div class="col col-lg-2">
+                    <div class="card-actions right">
+                      <div class="dropdown show">
+                        <a href="#" data-toggle="dropdown" data-display="static">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal align-middle"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                        </a>
+        
+                        <div class="dropdown-menu dropdown-menu-right">
+                          <a class="dropdown-item" href="#" id="useranalysis">Analysis</a>
+                          <a class="dropdown-item" href="#"id="useractivity">Activity</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>              
+            </div>
+            <div class="card-body">
+              <!-- Card -->
+              <div class="card" id="useranalysiscard">
+                <div class="card-body">
+                  <p class="text-uppercase small mb-2 d-inline p-2"><strong>PERFORMANCE</strong></p>
+                  <h5 class="font-weight-bold mb-0 d-inline p-2">Total orders</h5>
+                </div>
+                <hr class="my-0">
+                <div class="card-body">
+                  <ul class="chart">
+                    <li>
+                      <span style="height:5%" title="New Orders"></span>
+                    </li>
+                    <li>
+                      <span style="height:70%" title="Customers"></span>
+                    </li>
+                    <li>
+                      <span style="height:50%" title="Ticket Resolved"></span>
+                    </li>
+                    <li>
+                      <span style="height:15%" title="Revenue Today"></span>
+                    </li>
+                  </ul>    
+                  
+                  
+                </div>
+              </div>
+
+              
+
+              <div class="card" id="useractivitycard" style="display: none;">
+                <div class="card-body">
+                  <p class="text-uppercase small mb-2 d-inline p-2"><strong>Activity</strong></p>
+                  <h5 class="font-weight-bold mb-0 d-inline p-2">Recent</h5>
+                </div>
+                <hr class="my-0">
+                <div class="card-body">
+                  <ul class="timeline mt-2 mb-0">
+                    <li class="timeline-item">
+                      <strong>Signed out</strong>
+                      <span class="float-right text-muted text-sm">30m ago</span>
+                      <p>Nam pretium turpis et arcu. Duis arcu tortor, suscipit...</p>
+                    </li>
+                    <li class="timeline-item">
+                      <strong>Created invoice #1204</strong>
+                      <span class="float-right text-muted text-sm">2h ago</span>
+                      <p>Sed aliquam ultrices mauris. Integer ante arcu...</p>
+                    </li>
+                    <li class="timeline-item">
+                      <strong>Discarded invoice #1147</strong>
+                      <span class="float-right text-muted text-sm">3h ago</span>
+                      <p>Nam pretium turpis et arcu. Duis arcu tortor, suscipit...</p>
+                    </li>
+                    <li class="timeline-item">
+                      <strong>Signed in</strong>
+                      <span class="float-right text-muted text-sm">3h ago</span>
+                      <p>Curabitur ligula sapien, tincidunt non, euismod vitae...</p>
+                    </li>
+                    <li class="timeline-item">
+                      <strong>Signed up</strong>
+                      <span class="float-right text-muted text-sm">2d ago</span>
+                      <p>Sed aliquam ultrices mauris. Integer ante arcu...</p>
+                    </li>
+                  </ul>
+                  
+                  
+                </div>
+              </div>              
+              <!-- Card -->  
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-8" id="mystoreorderscol">
+          <div class="card">
+            <div class="card-header pb-0">
+              <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title mb-0 agent-orders">Orders</h5>
+                  </div>
+                  <div class="d-inline p-2">
+                    Summary
+                  </div>
+                  <div class="col col-lg-2">
+                    <div class="card-actions right">
+                      <div class="dropdown show">
+                        <a href="#" data-toggle="dropdown" data-display="static">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal align-middle"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                        </a>
+        
+                        <div class="dropdown-menu dropdown-menu-right">
+                          <a class="dropdown-item " href="Barcodescan.html">Barcodescan</a>
+
+                          <a class="dropdown-item " href="Qrscan.html">Qrscan</a>
+
+                          <a class="dropdown-item user_orders" href="#">All orders</a>
+                          <a class="dropdown-item pending_orders" href="#">Pending orders</a>
+                          <a class="dropdown-item active_orders" href="#">Active orders</a>
+                          <a class="dropdown-item confirmed_orders" href="#">Cancelled orders</a>
+                          <a class="dropdown-item complete_orders" href="#">Completed orders</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <table class="table table-striped" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>Customer</th>
+                    <th>Details</th>
+                    <th>Order</th>
+                  </tr>
+                </thead>
+                <tbody id="orders_made">
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>  
+        
+      </div>
+      
+
+      <div id="arrow_navigation_order" class="arrow_navigation_cont">
+
+      <ul class="v-effect-link">
+        <li id="order_previous">
+          <a id="or_previous" class="arrow left">
+            <i></i>
+            <svg>
+              <use xlink:href="#circle">
+            </svg>
+          </a>
+        </li>
+        <li id="order_next">
+          <a id="or_next" class="arrow">
+            <i></i>
+            <svg>
+                <use xlink:href="#circle">
+            </svg>
+          </a>
+        </li>
+      </ul>
+      <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44px" height="44px" id="circle" fill="none" stroke="currentColor">
+            <circle r="20" cy="22" cx="22" id="test">
+        </symbol>
+      </svg>
+    
+      </div>
+      
+    </div>
+
+    <div id="order_items_container" class="order_items"> 
+      
+      <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="form-inline gutters-sm">
+          <button class="d-lg-none button is-black mr-3"  data-toggle="collapse" data-target="#navbarNav_items" aria-controls="navbarNav_items" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></button>
+          <button class="button is-success is-outlined order_view_outline ">Order <b id="orderid"></b></button>          
+        </div>
+
+        <div class="collapse navbar-collapse row justify-content-md-center mt-3" id="navbarNav_items">
+          <form class="form-inline">
+            <button type="button" class="btn btn-outline-secondary btn-sm user_orders_items">
+              <div class="icon youtube">
+                <div class="tooltip">All Items</div>
+                <span id="menu_container_role_items" class=""></span>
+              </div>
+            </button>
+            <button type="button" class="btn btn-outline-warning btn-sm pending_orders_items">
+              <div class="icon facebook" data-toggle="tooltip" data-placement="bottom" title="Pending order items">
+                <span id="menu_container_pending_orders_items_count" class=""></span>
+              </div>
+            </button>
+            <button type="button" class="btn btn-outline-success btn-sm active_orders_items">
+              <div class="icon twitter" data-toggle="tooltip" data-placement="bottom" title="Active order items">
+                <span id="menu_container_active_orders_items_count" class=""></span>
+              </div>
+            </button>
+            <button type="button" class="btn btn-outline-danger btn-sm confirmed_orders_items">
+              <div class="icon instagram" data-toggle="tooltip" data-placement="bottom" title="Cancelled order items">
+                <span id="menu_container_confirmed_orders_items_count" class=""></span>
+              </div>
+            </button>
+            <button type="button" class="btn btn-outline-info btn-sm complete_orders_items">
+              <div class="icon github" data-toggle="tooltip" data-placement="bottom" title="Completed order items">
+                <span id="menu_container_complete_orders_items_count" class=""></span>
+              </div>
+            </button>
+          </form>          
+        </div>
+        <div class="form-inline topRight">
+          <button id="order_items_back" class="button is-black"><i class="fa fa-arrow-left"></i></button>
+        </div>
+       
+      </nav>
+
+      <div class="container padding-bottom-3x mb-1" style="display: none;">
+        <div class="card mb-3">
+          <div class="p-4 text-center text-white text-lg bg-dark rounded-top"><span class="text-uppercase">Tracking Order No - </span><span class="text-medium">34VB5540K83</span></div>
+          <div class="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-2 bg-secondary">
+            <div class="w-100 text-center py-1 px-2"><span class="text-medium">Shipped Via:</span> UPS Ground</div>
+            <div class="w-100 text-center py-1 px-2"><span class="text-medium">Status:</span> Checking Quality</div>
+            <div class="w-100 text-center py-1 px-2"><span class="text-medium">Expected Date:</span> SEP 09, 2017</div>
+          </div>
+          <div class="card-body">
+            <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
+              <div class="step completed">
+                <div class="step-icon-wrap">
+                  <div class="step-icon"><i class="pe-7s-cart"></i></div>
+                </div>
+                <h4 class="step-title">Confirmed Order</h4>
+              </div>
+              <div class="step completed">
+                <div class="step-icon-wrap">
+                  <div class="step-icon"><i class="pe-7s-config"></i></div>
+                </div>
+                <h4 class="step-title">Processing Order</h4>
+              </div>
+              <div class="step completed">
+                <div class="step-icon-wrap">
+                  <div class="step-icon"><i class="pe-7s-medal"></i></div>
+                </div>
+                <h4 class="step-title">Quality Check</h4>
+              </div>
+              <div class="step">
+                <div class="step-icon-wrap">
+                  <div class="step-icon"><i class="pe-7s-car"></i></div>
+                </div>
+                <h4 class="step-title">Product Dispatched</h4>
+              </div>
+              <div class="step">
+                <div class="step-icon-wrap">
+                  <div class="step-icon"><i class="pe-7s-home"></i></div>
+                </div>
+                <h4 class="step-title">Product Delivered</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex flex-wrap flex-md-nowrap justify-content-center justify-content-sm-between align-items-center">
+          <div class="custom-control custom-checkbox mr-3">
+            <input class="custom-control-input" type="checkbox" id="notify_me" checked="">
+            <label class="custom-control-label" for="notify_me">Notify me when order is delivered</label>
+          </div>
+          <div class="text-left text-sm-right"><a class="btn btn-outline-primary btn-rounded btn-sm" href="orderDetails" data-toggle="modal" data-target="#orderDetails">View Order Details</a></div>
+        </div>
+      </div>
+      
+
+      <div id="orders_items_made" class="caercontainer container-fluid">
+        
+      </div>
+      <div id="arrow_navigation_order_items" class="arrow_navigation_cont">
+      
+        <ul class="v-effect-link">
+          <li id="orders_items_previous">
+            <a id="ori_previous" class="arrow left">
+              <i></i>
+              <svg>
+                <use xlink:href="#circle">
+              </svg>
+            </a>
+          </li>
+          <li id="orders_items_next">
+            <a id="ori_next" class="arrow ">
+              <i></i>
+              <svg>
+                  <use xlink:href="#circle">
+              </svg>
+            </a>
+          </li>
+        </ul>
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+          <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44px" height="44px" id="circle" fill="none" stroke="currentColor">
+              <circle r="20" cy="22" cx="22" id="test">
+          </symbol>
+        </svg>
+      
+      </div>
+    </div>
+
+    <div id="location_container" class="location_main_container">
+      <nav class="navbar bg-light sticky-top">
+        <span>Your delivery Location </span>
+      </nav>
+
+      <section class="container">
+        <div class="hero-image-wrapper">
+          <div class="hero-image-element">
+            <img id="image_heremap" src="img/logo.png" alt="alt" width="auto" height="auto">
+
+          </div>            
+        </div>
+        
+      </section>
+
+      
+
+    </div>
+
+    <div id="user_container" class="user">
+ 
+      <div id="user_error" class="w-full sm:w-1/2 md:w-1/3 flex flex-col p-3 user_error_container">
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col">
+          <div class="bg-cover h-48" style="background-image: url(https://images.unsplash.com/photo-1523978591478-c753949ff840?w=900);"></div>
+          <div class="p-4 flex-1 flex flex-col" >
+            <h3 id="user_row_h" class="mb-4 text-2xl">Error!</h3>
+            <div class="mb-4 text-grey-darker text-sm flex-1">
+              <p id="user_row_p"></p>
+            </div>
+            <div class="btn btn-info">
+              <a class="logout">logout </a>
+      
+            </div>
+            <a href="https://oramla.com/" class="border-t border-grey-light pt-2 text-xs text-grey hover:text-red uppercase no-underline tracking-wide" >Oramla.com</a>
+          </div>
+        </div>  
+      </div>
+
+
+
+      <div id="user_row_container" >
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="main-breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
+            <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+          </ol>
+        </nav>
+        <!-- /Breadcrumb -->
+
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex flex-column align-items-center text-center">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                  <div class="mt-3">
+                    <h4>John Doe</h4>
+                    <p class="text-secondary mb-1">Full Stack Developer</p>
+                    <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                  </div>
+                </div>
+                <div class="row align-items-end">
+                  <div class="col">
+                    <button class="btn btn-outline-primary">Message</button>
+                  </div>
+                  <div class="col">
+                    <button class="btn btn-outline-primary">Message</button>
+                  </div>
+                  <div class="col">
+                    <button class="btn btn-outline-primary">Message</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card mt-3">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                  <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>Website</h6>
+                  <span class="text-secondary">https://bootdey.com</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                  <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github mr-2 icon-inline"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>Github</h6>
+                  <span class="text-secondary">bootdey</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                  <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter mr-2 icon-inline text-info"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>Twitter</h6>
+                  <span class="text-secondary">@bootdey</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                  <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram mr-2 icon-inline text-danger"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>Instagram</h6>
+                  <span class="text-secondary">bootdey</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                  <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook mr-2 icon-inline text-primary"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>Facebook</h6>
+                  <span class="text-secondary">bootdey</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="card">
+              <div class="card-body">
+                <div class="row gutters">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h6 class="mb-3 text-primary">Personal Details</h6>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                      <label for="fullName">Full Name</label>
+                      <input type="text" class="form-control" id="fullName" placeholder="Enter full name">
+                    </div>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                      <label for="eMail">Email</label>
+                      <input type="email" class="form-control" id="eMail" placeholder="Enter email ID">
+                    </div>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                      <label for="phone">Phone</label>
+                      <input type="text" class="form-control" id="phone" placeholder="Enter phone number">
+                    </div>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                      <label for="website">Website URL</label>
+                      <input type="url" class="form-control" id="website" placeholder="Website url">
+                    </div>
+                  </div>
+                </div>
+                <div class="row gutters">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h6 class="mb-3 text-primary">Address</h6>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                      <label for="Street">Street</label>
+                      <input type="name" class="form-control" id="Street" placeholder="Enter Street">
+                    </div>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                      <label for="ciTy">City</label>
+                      <input type="name" class="form-control" id="ciTy" placeholder="Enter City">
+                    </div>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                      <label for="sTate">State</label>
+                      <input type="text" class="form-control" id="sTate" placeholder="Enter State">
+                    </div>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                      <label for="zIp">Zip Code</label>
+                      <input type="text" class="form-control" id="zIp" placeholder="Zip Code">
+                    </div>
+                  </div>
+                </div>
+                <div class="row gutters">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="text-right">
+                      <button type="button" id="submit" name="submit" class="btn btn-secondary">Cancel</button>
+                      <button type="button" id="submit" name="submit" class="btn btn-primary">Update</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row gutters-sm mt-3">
+              <div class="col-sm-6 mb-3">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h5 class="d-flex align-items-center mb-3">Project Status</h5>
+                    <p>Web Design</p>
+                    <div class="progress mb-3" style="height: 5px">
+                      <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p>Website Markup</p>
+                    <div class="progress mb-3" style="height: 5px">
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p>One Page</p>
+                    <div class="progress mb-3" style="height: 5px">
+                      <div class="progress-bar bg-success" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p>Mobile Template</p>
+                    <div class="progress mb-3" style="height: 5px">
+                      <div class="progress-bar bg-warning" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p>Backend API</p>
+                    <div class="progress" style="height: 5px">
+                      <div class="progress-bar bg-info" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 mb-3">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h5 class="d-flex align-items-center mb-3">Project Status</h5>
+                    <p>Web Design</p>
+                    <div class="progress mb-3" style="height: 5px">
+                      <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p>Website Markup</p>
+                    <div class="progress mb-3" style="height: 5px">
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p>One Page</p>
+                    <div class="progress mb-3" style="height: 5px">
+                      <div class="progress-bar bg-success" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p>Mobile Template</p>
+                    <div class="progress mb-3" style="height: 5px">
+                      <div class="progress-bar bg-warning" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p>Backend API</p>
+                    <div class="progress" style="height: 5px">
+                      <div class="progress-bar bg-info" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>            
+          </div>
+        </div>
+        
+        
+       
+
+        <div class="col raww">                       
+          <div class="card card-profile shadow raww">
+            <a class="btn btn-sm btn-secondary left"><b class="">Account</b></a>
+            <a class="btn btn-sm btn-secondary right"><span>Balance</span> <b><span><i id="user_rams_symbol">V </i><b id="user_rams">0.00</b></span></b></a>
+    
+            <div class="row justify-content-center">
+              <div class="col-lg-3 order-lg-2">
+                <div class="card-profile-image">
+                  <a id="user_name_image">
+                    <img id="user_name_image_src" src="img/49806f3f1c7483093855ebca1b8ae2c4.jpg" class="rounded-circle">
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+              <div class="d-flex justify-content-between">
+                
+                
+                <a id="logout" class="btn btn-sm btn-info mr-4 logout">Logout</a>
+                <a id="track_order" class="btn btn-sm btn-secondary float-right">Track Order(s)</a>
+              </div>
+            </div>
+            <div class="card-body pt-0 pt-md-4">
+              <div class="userpt-8 text-center">
+                <h5 id="user_orders" class="mb-0 btn btn-info user_orders"><b id="_orders_count" class=""></b> Orders</h5>                        
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="card-profile-stats d-flex justify-content-center mt-md-5 ">
+                    
+                    <div class="btn-group">
+                      
+                      <a id="pending_orders" class="pending_orders btn btn-warning" role="button"><span id="pending_orders_count" class="heading">0</span>Pending</a>
+                      <a id="active_orders" class="active_orders btn btn-success" role="button"><span id="active_orders_count" class="heading">0</span>Active</a>
+                      <a id="confirmed_orders" class="confirmed_orders btn btn-danger" role="button"><span id="confirmed_orders_count" class="heading">0</span>Cancelled</a>
+                      <a id="complete_orders" class="complete_orders btn btn-info" role="button"><span id="complete_orders_count" class="heading">0</span>Complete</a>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="text-center">
+                <h3 id="user_name">
+                </h3>
+                <div id="user_review_acc" class="h5 font-weight-300">
+                </div>
+                <div id="user_rating_acc" class="h5 font-weight-300">
+                </div>
+              </div>
+
+              <div id="uersdash" class="userpt-8 text-center">                                                
+                <h5 id="user_dashboard" class="mb-0">Dashboard</h5>
+              </div>
+              <div id="uersdashro" class="row">
+                <div class="col">
+                  <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                    <div>
+                      <span id="product_sold_count" class="heading">22</span>
+                      <span id="products_sold" class="description btn btn-sm btn-primary">Products sold</span>
+                    </div>
+                    <div>
+                      <span id="in_stock_count" class="heading">10</span>
+                      <span id="in_stock" class="description btn btn-sm btn-success">In stock</span>
+                    </div>
+                    <div>
+                      <span id="products_count" class="heading">89</span>
+                      <span id="user_products" class="description btn btn-sm btn-info">Products</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col raww">
+          <div class="card bg-secondary shadow raww">                    
+            <div class="card-body">
+              <form>
+                <h6 class="heading-small text-muted mb-4">User information</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-username">Username</label>
+                        <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Username" value="lucky.jesse">
+                        <small id="input-username_help" class="form-text text-muted"></small>
+                      </div>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-email">Email address</label>
+                        <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="jesse@example.com">
+                        <small id="input-email_help" class="form-text text-muted"></small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-phone">Phone number</label>
+                      <input type="number" id="input-phone" class="form-control form-control-alternative" placeholder="#">
+                      <small id="input-phone_help" class="form-text text-muted"></small>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-first-name">First name</label>
+                        <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" value="Lucky">
+                        <small id="input-first-name_help" class="form-text text-muted"></small>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-last-name">Last name</label>
+                        <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" value="Jesse">
+                        <small id="input-last-name_help" class="form-text text-muted"></small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-4">
+                <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-address">Address</label>
+                        <input id="input-address" class="form-control form-control-alternative" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text">
+                        <small id="input-address_help" class="form-text text-muted"></small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-city">City</label>
+                        <input type="text" id="input-city" class="form-control form-control-alternative" placeholder="City" value="New York">
+                        <small id="input-city_help" class="form-text text-muted"></small>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-country">Country</label>
+                        <input type="text" id="input-country" class="form-control form-control-alternative" placeholder="Country" value="United States">
+                        <small id="input-country_help" class="form-text text-muted"></small>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-country">Postal code</label>
+                        <input type="number" id="input-postal-code" class="form-control form-control-alternative" placeholder="Postal code">
+                        <small id="input-postal-code_help" class="form-text text-muted"></small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-4">                        
+
+                <div class="pl-lg-4">
+                  <div class="form-group focused">
+                    <label>About Our Service</label>
+                    <textarea id="user_review" rows="4" class="form-control form-control-alternative" placeholder="Say a few words about us ..."></textarea>
+                  </div> 
+                  
+                  <b>Give us stars</b>
+                  <nav class="rating">
+                    <ul>
+                      <li star="1" class="current give_us_stars">
+                        <svg>
+                          <use xlink:href="#star"></use>
+                        </svg>
+                      </li>
+                      <li star="2" class="give_us_stars">
+                        <svg>
+                          <use xlink:href="#star"></use>
+                        </svg>
+                      </li>
+                      <li star="3" class="give_us_stars">
+                        <svg>
+                          <use xlink:href="#star"></use>
+                        </svg>
+                      </li>
+                      <li star="4" class="give_us_stars"><span></span>
+                        <svg>
+                          <use xlink:href="#star"></use>
+                        </svg>
+                      </li>
+                      <li star="5" class="give_us_stars"><span></span>
+                        <svg>
+                          <use xlink:href="#star"></use>
+                        </svg>
+                      </li>
+                    </ul>
+                    <div><span>
+                        <svg>
+                          <use xlink:href="#star"></use>
+                        </svg></span></div>
+                  </nav>
+                  <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+                    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 34" id="star">
+                      <path fill="currentColor" d="M19.6859343,0.861782958 L24.8136328,8.05088572 C25.0669318,8.40601432 25.4299179,8.6717536 25.8489524,8.80883508 L34.592052,11.6690221 C35.6704701,12.021812 36.2532905,13.1657829 35.8938178,14.2241526 C35.8056709,14.4836775 35.6647294,14.7229267 35.4795411,14.9273903 L29.901129,21.0864353 C29.5299163,21.4962859 29.3444371,22.0366367 29.3872912,22.5833831 L30.1116131,31.8245163 C30.1987981,32.9368499 29.3506698,33.9079379 28.2172657,33.993502 C27.9437428,34.0141511 27.6687736,33.9809301 27.4085205,33.8957918 L18.6506147,31.0307612 C18.2281197,30.8925477 17.7713439,30.8925477 17.3488489,31.0307612 L8.59094317,33.8957918 C7.51252508,34.2485817 6.34688429,33.6765963 5.98741159,32.6182265 C5.90066055,32.3628116 5.86681029,32.0929542 5.88785051,31.8245163 L6.61217242,22.5833831 C6.65502653,22.0366367 6.46954737,21.4962859 6.09833466,21.0864353 L0.519922484,14.9273903 C-0.235294755,14.0935658 -0.158766688,12.8167745 0.690852706,12.0755971 C0.899189467,11.8938516 1.14297067,11.7555303 1.40741159,11.6690221 L10.1505113,8.80883508 C10.5695458,8.6717536 10.9325319,8.40601432 11.1858308,8.05088572 L16.3135293,0.861782958 C16.9654141,-0.0521682813 18.2488096,-0.274439442 19.1800736,0.365326425 C19.3769294,0.500563797 19.5481352,0.668586713 19.6859343,0.861782958 Z"></path>
+                    </symbol>
+                    <path class="shadow" d="M18.7022469,29.7633426 L29.1611722,33.6861584 C28.8859085,33.8576358 28.5650147,33.9672494 28.2172657,33.993502 C27.9437428,34.0141511 27.6687736,33.9809301 27.4085205,33.8957918 L18.6506147,31.0307612 C18.2281197,30.8925477 17.7713439,30.8925477 17.3488489,31.0307612 L8.59094317,33.8957918 C7.98083887,34.0953792 7.34281791,33.9989813 6.83864817,33.6859784 L17.2977531,29.7633426 C17.7505234,29.5935537 18.2494766,29.5935537 18.7022469,29.7633426 Z"></path>
+                  </svg>
+                                          
+                </div>
+
+                <hr class="my-4">                        
+                <div class="col-4 text-right">
+                  <a id="update_user_data" class="btn btn-sm btn-primary">Update</a>
+                </div>
+                <small id="update_user_data_help" class="form-text text-muted"></small>
+
+                <hr class="my-4">                        
+
+                
+                
+
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+      
+     
+    </div>
+
+    <div id="contact_information" class="modal"  tabindex="-1" role="dialog" aria-labelledby="contact_informationTitle" aria-hidden="true">
+      <div class="modal-background"></div>
+
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="contact_informationTitle">Contact information</h5>
+            <button id="contact_information_close" class="delete" aria-label="close"></button>
+          </div>
+          <div class="modal-body">
+
+            <div class="list-group list-group-horizontal">
+              <div class="form-group float-left">                 
+                <input type="text" class="is-link is-valid input" id="user_first" name="user_first" placeholder="First name">
+                <span id="user_first_help" class="form-text text-muted"></span>            
+                </div>
+              <div class="form-group float-right">
+                <input type="text" class="is-link is-valid input" id="user_last" name="user_last" placeholder="Last name">
+                <span id="user_last_help" class="form-text text-muted"></span>              
+              </div>
+            </div>  
+
+            <div class="list-group list-group-horizontal">
+              <div class="form-group is-valid float-md-left px-2">
+                <span>Country code:</span>
+                <select id="user_countrycode_phone" class="input" >
+                  <option class="countrycode_phone" country_code="AR" value="54">Argentina (+54)</option>
+                  <option class="countrycode_phone" country_code="AR" value="54">Argentina (+54)</option>
+                </select>  
+                <span id="user_countrycode_phone_help" class="form-text text-muted"></span>            
+              </div> 
+              <div class="form-group is-valid float-md-right px-2">
+                <span>Phone number:</span>
+                <input type="number" class="form-control is-valid" id="user_phone" name="user_phone" placeholder="#">
+                <span id="user_phone_help" class="form-text text-muted">Provide phone number</span>
+              </div>             
+            </div>
+
+            <div class="form-group">
+              <input type="text" class="form-control is-valid" id="user_address" name="user_address" placeholder="i.e 16th st. south hollad">
+              <span id="user_address_help" class="form-text text-muted">Your address</span>
+            </div>
+            <div class="form-group">
+              <input type="number" class="form-control is-valid" id="user_postal" name="user_postal" placeholder="00901">
+              <span id="user_postal_help" class="form-text text-muted">Postal code</span>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control is-valid" id="user_city" name="user_city" placeholder="Ngewa">
+              <span id="user_city_help" class="form-text text-muted">City</span>
+            </div>
+            <div class="form-group">
+              <div class="select is-link is-valid">
+                <select id="user_country">
+                  <option value="Argentina">Argentina</option>
+                </select>
+              </div>
+              <span id="user_country_help" class="form-text text-muted">Country</span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="contact_information_footer_close" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button id="contact_information_save" type="button" class="btn btn-primary">Save changes</button>
+            <span id="contact_information_save_help" class="form-text text-muted"></span>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="add_products_new" class="modal bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="add_products_newTitle" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-background"></div>
+
+        <div class="modal-content">
+          <div class="modal-header red">
+            <h5 class="modal-title" id="add_products_newTitle">Add your product(s)</h5>
+            <button id="add_products_close" class="delete" aria-label="close"></button>
+          </div>
+          <div class="modal-body">
+            <form class="fileToUploadForm" enctype="multipart/form-data">
+            
+            <div class="form-group" style="display: none;">
+              <input type="text" class="form-control is-valid" id="product_client" name="product_client" value="">
+            </div>
+            <div class="form-group" style="display: none;">
+              <input type="text" class="form-control is-valid" id="product_data_upload_from" name="product_data_upload_from" value="">
+              <input type="text" class="form-control is-valid" id="api_server_url" name="api_server_url" value="">
+              <input type="text" class="form-control is-valid" id="edit_product_id" name="edit_product_id" value="">
+              <input type="text" class="form-control is-valid" id="product_data_tax" name="product_data_tax" value="">
+              <input type="text" class="form-control is-valid" id="product_data_sale_price" name="product_data_sale_price" value="">
+              <input type="text" class="form-control is-valid" id="product_data_net_price" name="product_data_net_price" value="">
+              <input type="text" class="form-control is-valid" id="product_data_product_list_price" name="product_data_product_list_price" value="">
+              <input type="text" class="form-control is-valid" id="product_data_product_price" name="product_data_product_price" value="">
+              <input type="text" class="form-control is-valid" id="product_data_pricing_strategy" name="product_data_pricing_strategy" value="">
+              <input type="text" class="form-control is-valid" id="product_data_product_type" name="product_data_product_type" value="">
+              <input type="text" class="form-control is-valid" id="product_data_shipping_strategies" name="product_data_shipping_strategies" value="">
+              <input type="text" class="form-control is-valid" id="product_data_shipping_rates" name="product_data_shipping_rates" value="">
+              <input type="text" class="form-control is-valid" id="product_data_tax_category" name="product_data_tax_category" value="">
+              <input type="text" class="form-control is-valid" id="product_data_shipping" name="product_data_shipping" value="">
+              <input type="text" class="form-control is-valid" id="product_data_shipping_label" name="product_data_shipping_label" value="">
+              <input type="text" class="form-control is-valid" id="product_data_shipping_weight" name="product_data_shipping_weight" value="">
+              <input type="text" class="form-control is-valid" id="product_data_shipping_length" name="product_data_shipping_length" value="">
+              <input type="text" class="form-control is-valid" id="product_data_shipping_width" name="product_data_shipping_width" value="">
+              <input type="text" class="form-control is-valid" id="product_data_shipping_height" name="product_data_shipping_height" value="">
+              <input type="text" class="form-control is-valid" id="product_data_ships_from_country" name="product_data_ships_from_country" value="">
+              <input type="text" class="form-control is-valid" id="product_data_transit_time_label" name="product_data_transit_time_label" value="">
+              <input type="text" class="form-control is-valid" id="product_data_max_handling_time" name="product_data_max_handling_time" value="">
+              <input type="text" class="form-control is-valid" id="product_data_min_handling_time" name="product_data_min_handling_time" value="">
+              <input type="text" class="form-control is-valid" id="product_data_excluded_destination" name="product_data_excluded_destination" value="">
+              <input type="text" class="form-control is-valid" id="product_data_included_destination" name="product_data_included_destination" value="">
+              <input type="text" class="form-control is-valid" id="product_data_shopping_ads_excluded_country" name="product_data_shopping_ads_excluded_country" value="">
+              <input type="text" class="form-control is-valid" id="product_data_condition" name="product_data_condition" value="">
+              <input type="text" class="form-control is-valid" id="product_data_adult" name="product_data_adult" value="">
+              <input type="text" class="form-control is-valid" id="product_data_multipack" name="product_data_multipack" value="">
+              <input type="text" class="form-control is-valid" id="product_data_is_bundle" name="product_data_is_bundle" value="">
+              <input type="text" class="form-control is-valid" id="product_data_energy_efficiency_class" name="product_data_energy_efficiency_class" value="">
+              <input type="text" class="form-control is-valid" id="product_data_min_energy_efficiency_class" name="product_data_min_energy_efficiency_class" value="">
+              <input type="text" class="form-control is-valid" id="product_data_max_energy_efficiency_class" name="product_data_max_energy_efficiency_class" value="">
+              <input type="text" class="form-control is-valid" id="product_data_age_group" name="product_data_age_group" value="">
+              <input type="text" class="form-control is-valid" id="product_data_color" name="product_data_color" value="">
+              <input type="text" class="form-control is-valid" id="product_data_gender" name="product_data_gender" value="">
+              <input type="text" class="form-control is-valid" id="product_data_material" name="product_data_material" value="">
+              <input type="text" class="form-control is-valid" id="product_data_pattern" name="product_data_pattern" value="">
+              <input type="text" class="form-control is-valid" id="product_data_size" name="product_data_size" value="">
+              <input type="text" class="form-control is-valid" id="product_data_size_system" name="product_data_size_system" value="">
+              <input type="text" class="form-control is-valid" id="product_data_item_group_id" name="product_data_item_group_id" value="">
+              <input type="text" class="form-control is-valid" id="product_data_product_detail" name="product_data_product_detail" value="">
+              <input type="text" class="form-control is-valid" id="product_data_product_highlight" name="product_data_product_highlight" value="">
+              <input type="text" class="form-control is-valid" id="product_data_brand" name="product_data_brand" value="">
+              <input type="text" class="form-control is-valid" id="product_data_gtin" name="product_data_gtin" value="">
+              <input type="text" class="form-control is-valid" id="product_data_MPN" name="product_data_MPN" value="">
+              <input type="text" class="form-control is-valid" id="product_data_identifier_exists" name="product_data_identifier_exists" value="">
+              <input type="text" class="form-control is-valid" id="product_data_availability" name="product_data_availability" value="">
+              <input type="text" class="form-control is-valid" id="product_data_availability_date" name="product_data_availability_date" value="">
+              <input type="text" class="form-control is-valid" id="product_data_cost_of_goods_sold" name="product_data_cost_of_goods_sold" value="">
+              <input type="text" class="form-control is-valid" id="product_data_expiration_date" name="product_data_expiration_date" value="">
+              <input type="text" class="form-control is-valid" id="product_data_sale_price_effective_date" name="product_data_sale_price_effective_date" value="">
+              <input type="text" class="form-control is-valid" id="product_data_unit_pricing_measure" name="product_data_unit_pricing_measure" value="">
+              <input type="text" class="form-control is-valid" id="product_data_unit_price_base_measure" name="product_data_unit_price_base_measure" value="">
+              <input type="text" class="form-control is-valid" id="product_data_installment" name="product_data_installment" value="">
+              <input type="text" class="form-control is-valid" id="product_data_subscription_cost" name="product_data_subscription_cost" value="">
+              <input type="text" class="form-control is-valid" id="product_data_loyalty_points" name="product_data_loyalty_points" value="">
+              <input type="text" class="form-control is-valid" id="product_data_product_category" name="product_data_product_category" value="">
+              <input type="text" class="form-control is-valid" id="product_data_product_title" name="product_data_product_title" value="">
+              <input type="text" class="form-control is-valid" id="product_data_product_industry" name="product_data_product_industry" value="">
+              <input type="text" class="form-control is-valid" id="product_data_product_description" name="product_data_product_description" value="">
+              <input type="text" class="form-control is-valid" id="product_data_product_quantity" name="product_data_product_quantity" value="">
+
+            </div>
+            <div class="form-group">
+              <label class="label" for="product_title">Product Title:</label>
+              <input type="text" class="form-control is-valid" id="product_title" name="product_title" placeholder="Enter name ">
+              <span id="product_title_help" class="form-text text-muted">
+                <span class="text-danger">Required</span>.<span class="text-dark"> Your product’s name. Example </span><span class="text-success"> Mens Pique Polo Shirt. </span><span class="text-dark">Syntax Max 150 characters. Schema.org property </span><span class="text-info">Product.name</span>
+              </span>
+            </div>
+            <div class="form-group">
+              <div class="list-group list-group-horizontal mx-auto row" style="width: 100%;">
+                <div class="form-group is-valid float-md-left px-2 col-6 ">
+                  <span>Price:</span>
+                  <input type="text" class="form-control is-valid" id="product_price" name="product_price" placeholder="#">
+                  <span id="product_price_help" class="form-text text-muted"><span class="text-danger">Required</span>. Your product’s price. Example $<span class="text-success">15.00</span></span>
+                </div>
+                <div class="form-group is-valid float-md-right px-2 col-6">
+                  <span>Pricing strategy types:</span>
+                  <select id="pricing_strategy" class="input" >
+                    <option value="markup_pricing">Markup pricing</option>
+                    <option value="cost_plus_pricing">Cost-plus pricing</option>
+                    <option value="charm_pricing">Charm Pricing</option>
+                    <option value="skim_pricing">Skim Pricing</option>
+                    <option value="anchor_pricing">Anchor Pricing</option>
+                    <option value="discounts_and_promotions_pricing">Price for Discounts and Promotions</option>
+                    <option value="multiple_pricing">Multiple pricing</option>
+                    <option value="keystone_pricing">Keystone pricing</option>
+                    <option value="dynamic_segments_pricing">Dynamic pricing in segments</option>
+                    <option value="dynamic_time_pricing">Dynamic pricing by time</option>
+                    <option value="penetration_pricing">Penetration pricing</option>
+                    <option value="repricing">Repricing</option>
+                    <option value="private_labels_pricing">Private Labels</option>
+                    <option value="MSRP">Manufacturer Suggested Retail Price (MSRP)</option>
+                    <option value="stable_pricing">Stable Pricing</option>
+                  </select>  
+                </div>   
+                <span id="pricing_strategy_help" class="form-text text-muted"></span>            
+             
+              </div>
+              <span  id="product_price_strategy_help"  class="help"><span class="help is-success">Calculated as (<b id="percent_price"></b>)% of the product price</span></span>
+
+            </div>           
+
+            <div class="form-group">
+              <div class="list-group list-group-horizontal mx-auto row" style="width: 100%;">
+                <div class="form-group is-valid float-md-left px-2 col-6 ">
+                  <span>Industry/Department:</span>
+                  <select id="product_industry" class="input" >
+                    <option value="">Select Industry/Department</option>
+
+                  </select>  
+                  <span id="product_industry_help" class="form-text text-muted"><span class="text-danger">Required.</span> Oramla-defined product Industry/Department for your product</span>
+                </div>
+                <div class="form-group is-valid float-md-right px-2 col-6">
+                  <span>Category:</span>
+                  <select id="product_category" class="input" >
+                    <option value="">Select Industry/Department</option>
+                  
+                  </select>  
+                  <span id="product_category_help" class="form-text text-muted"><span class="text-danger">Required.</span> Oramla-defined product category for your product</span>            
+                </div>                
+              </div>
+              <div id="admin_product_industry_category" class="form-group">
+                <span>Category:</span>
+                <select id="admin_product_category" class="input" >
+                  <option value="">Select Industry/Department</option>
+                
+                </select> 
+              </div>
+              <label class="label" for="product_type">Product Type:</label>
+              <input type="text" class="form-control is-valid" id="product_type" name="product_type" placeholder="For example, include Maxi Dresses instead of just Dresses">
+              <span id="product_type_help" class="form-text text-muted">Product category that you define for your product</span>
+            </div>
+            
+            <div class="form-group">
+              <div class="list-group list-group-horizontal mx-auto row" style="width: 100%;">
+                <div class="form-group is-valid float-md-left px-2 col-6 ">
+                  <span>Shipping strategies:</span>
+                  <select id="shipping_strategies" class="input" >
+                    <option class="is-link" value="2-day shipping"> 2-day shipping</option>
+                    <option class="is-link" value="Same-day delivery"> Same-day delivery</option>
+                    <option class="is-link" value="Overnight shipping"> Overnight shipping</option>
+                    <option class="is-link" value="Expedited shipping"> Expedited shipping</option>
+                    <option class="is-link" value="International shipping"> International shipping</option>
+                    <option class="is-link" value="Freight shipping"> Freight shipping</option>                    
+                    <option class="is-link" value="Free in-store pickup"> Free in-store pickup</option>
+                    <option class="is-link" value="Mixed and alternative shipping"> Mixed and alternative shipping</option>
+                  </select>  
+                  <span id="shipping_strategies_help" class="form-text text-muted"></span>
+                </div>
+                <div class="form-group is-valid float-md-right px-2 col-6">
+                  <span>Shipping rates:</span>
+                  <select id="shipping_rates" class="input" >
+                    <option class="is-link" value="Flat rate shipping"> Flat rate shipping</option>
+                    <option class="is-link" value="Real-time carrier rates"> Real-time carrier rates</option>
+                    <option class="is-link" value="Offering free shipping"> Offering free shipping</option>
+                  </select>  
+                  <span id="shipping_rates_help" class="form-text text-muted"></span>            
+                </div> 
+
+              </div>
+              <span class="heading">shipping:</span>
+              <div class="list-group list-group-horizontal mx-auto row" style="width: 100%;">
+                <div class="form-group is-valid float-md-left px-2 col-6 ">
+                  <span id="product_data_shipping_title"> shipping:</span>
+                  <input type="text" class="form-control is-valid" id="product_shipping" name="product_shipping" placeholder="">
+                  <span id="product_shipping_help" class="form-text text-muted">i.e <span class="text-success">US:CA:Overnight:16.00 USD:1:1:2:3</span> </span>
+                </div>
+                <div class="form-group is-valid float-md-right px-2 col-6">
+                  <span>shipping:</span>
+                  <select id="shipping_strategy" class="input" >
+                    <option value="shipping">shipping</option>
+                    <option value="shipping label">shipping label</option>
+                    <option value="shipping weight">shipping weight</option>
+                    <option value="shipping length">shipping length</option>
+                    <option value="shipping width">shipping width</option>
+                    <option value="shipping height">shipping height</option>
+                    <option value="ships from country">ships from country</option>
+                    <option value="transit time label">transit time label</option>
+                    <option value="max handling time">max handling time</option>
+                    <option value="min handling time">min handling time</option>
+
+                  </select>  
+                </div> 
+                <span id="shipping_strategy_help" class="form-text text-muted">Your product's shipping cost, shipping speeds, and the locations your product ships to.</span>            
+
+              </div>
+              <span id="product_data_shipping_help" class="help help is-link"><span class="help is-link">Use this setting to override the Merchant Center account shipping settings for an individual product or to specify shipping cost, speed, or additional countries your product ships to.</span>
+              
+            </div>            
+            <div class="form-group">
+              <label class="label" for="product_description">Product Description:</label>
+              <textarea type="text" class="form-control is-valid" id="product_description" name="product_description" placeholder="Describe your product"></textarea>
+              <span id="product_description_help" class="form-text text-muted">
+                <span class="text-danger">Required. </span>
+                <span class="text-dark">Your product’s description. Example </span>
+                <span class="text-success">Made from 100% organic cotton, this classic red men’s polo has a slim fit and signature logo embroidered on the left chest. Machine wash cold; imported. </span>
+                <span class="text-dark">Syntax Max 5000 characters. Schema.org property </span>
+                <span class="text-info">Product.description</span>                
+              </span>
+            </div>
+            <div class="form-group">
+              <span class="heading">Product data specification:</span>
+              <div class="list-group list-group-horizontal mx-auto row" style="width: 100%;">
+                <div class="form-group is-valid float-md-left px-2 col-6 ">
+                  <span id="product_data_specification_title"> Availability:</span>
+                  <input type="text" class="form-control is-valid" id="product_availability" name="product_availability" placeholder="">
+                  <span id="product_availability_help" class="form-text text-muted">i.e  <span class="text-success">in stock</span> , <span class="text-success">preorder </span></span>
+                </div>
+                <div class="form-group is-valid float-md-right px-2 col-6">
+                  <span>Availability strategy:</span>
+                  <select id="availability_strategy" class="input" >
+                    <option value="availability">availability</option>
+                    <option value="availability ​​date">availability ​​date</option>
+                    <option value="cost of goods sold">cost of goods sold</option>
+                    <option value="expiration date">expiration date</option>
+                    <option value="sale price effective date">sale price effective date</option>
+                    <option value="unit pricing measure">unit pricing measure</option>
+                    <option value="unit price base measure">unit price base measure</option>
+                    <option value="installment">installment</option>
+                    <option value="subscription cost">subscription cost</option>
+                    <option value="loyalty points">loyalty points</option>
+
+                  </select>                                
+                </div> 
+                <span id="availability_strategy_help" class="form-text text-muted">
+                  Accurately submit the product's availability and match the availability from your landing page. Supported values <span class="text-danger">in stock</span>,<span class="text-danger"> out of stock</span>,<span class="text-danger"> preorder</span>, <span class="text-danger"> backorder </span>
+                </span>
+              </div>
+              <span  id="product_data_specification_help"  class="help is-link"><span class="help is-link">Use this specification to format your product information for Merchant Center programs, such as <span class="text-danger">Shopping ads</span>, <span class="text-danger">free product listings</span>, and <span class="text-danger">Buy on Oramla</span>. Submitting your product data to Oramla in the correct format is important for creating successful ads and free listings for your products. We use this data to make sure that it's matched to the right queries.</span></span>
+
+            </div>
+            <div class="form-group">
+              <span class="heading">Product identifiers:</span>
+              <div class="list-group list-group-horizontal mx-auto row" style="width: 100%;">
+                <div class="form-group is-valid float-md-left px-2 col-6 ">
+                  <span id="product_data_brand_title"> brand:</span>
+                  <input type="text" class="form-control is-valid" id="product_brand" name="product_brand" placeholder="">
+                  <span id="product_brand_help" class="form-text text-muted">i.e <span class="text-success">oramla</span> </span>
+                </div>
+                <div class="form-group is-valid float-md-right px-2 col-6">
+                  <span>Drand strategy:</span>
+                  <select id="brand_strategy" class="input" >
+                    <option value="brand">brand</option>
+                    <option value="gtin">gtin</option>
+                    <option value="MPN">MPN</option>
+                    <option value="identifier exists">identifier exists</option>
+
+                  </select>  
+                              
+                </div> 
+                <span id="brand_strategy_help" class="form-text text-muted">Provide the brand name of the product generally recognized by consumers
+                  Only provide your store name as the brand in case you manufacture the product, or your product falls into a generic brand category. For example, you could submit your store name as the brand if you sell white label products or customized jewelry
+                  If the product doesn’t have a brand, submit the manufacturer or supplier name under the brand attribute.
+                  Don't submit values such as N/A, Generic, No brand, or Does not exist.
+                  For compatible products:
+                  Submit the GTIN and brand from the manufacturer who actually built the compatible product
+                  Don't provide the Original Equipment Manufacturer (OEM) brand to indicate that your product is compatible with or a replica of the OEM brand's product
+                </span>
+              </div>
+              <span  id="product_data_brand_help"  class="help is-link"><span class="help is-link">These attributes are used to provide product identifiers that define the products you're selling in the global marketplace. We use product identifiers to understand what you're selling. When we understand what you're selling, we can help boost the performance of your ads and free listings by adding valuable details about the product and serving it in a more relevant way to users. </span>
+              
+            </div>
+            <div class="form-group">
+              <span class="heading">Detailed product description:</span>
+              <div class="list-group list-group-horizontal mx-auto row" style="width: 100%;">
+                <div class="form-group is-valid float-md-left px-2 col-6 ">
+                  <span id="product_data_condition_title"> condition:</span>
+                  <input type="text" class="form-control is-valid" id="product_condition" name="product_condition" placeholder="">
+                  <span id="product_condition_help" class="form-text text-muted">i.e <span class="text-success">new</span> </span>
+                </div>
+                <div class="form-group is-valid float-md-right px-2 col-6">
+                  <span>Condition strategy:</span>
+                  <select id="condition_strategy" class="input" >
+                    <option value="condition">condition</option>
+                    <option value="adult">adult</option>
+                    <option value="multipack">multipack</option>
+                    <option value="is bundle">is bundle</option>
+                    <option value="energy efficiency class">energy efficiency class</option>
+                    <option value="min energy efficiency class">min energy efficiency class</option>
+                    <option value="max energy efficiency class">max energy efficiency class</option>
+                    <option value="age group">age group</option>
+                    <option value="color">color</option>
+                    <option value="gender">gender</option>
+                    <option value="material">material</option>
+                    <option value="pattern">pattern</option>
+                    <option value="size">size</option>
+                    <option value="size system">size system</option>
+                    <option value="item group id">item group id</option>
+                    <option value="product detail">product detail</option>
+                    <option value="product highlight">product highlight</option>
+
+                  </select>  
+                </div> 
+                <span id="condition_strategy_help" class="form-text text-muted">The condition of your product at time of sale</span>            
+
+              </div>
+              <span  id="product_data_condition_help"  class="help is-link"><span class="help is-link">These attributes are used to submit particular product characteristics that users commonly search for. The attributes can help you control how your products show when you show products that have variants. These attributes are also used to help potential customers filter by attributes when searching for products on Oramla. </span>
+              
+            </div>
+            <div class="form-group">
+              <span class="heading">Destinations:</span>
+              <div class="list-group list-group-horizontal mx-auto row" style="width: 100%;">
+                <div class="form-group is-valid float-md-left px-2 col-6 ">
+                  <span id="product_data_destinations_title"> destinations:</span>
+                  <input type="text" class="form-control is-valid" id="product_destinations" name="product_destinations" placeholder="">
+                  <span id="product_destinations_help" class="form-text text-muted">i.e <span class="text-success">Shopping ads</span> </span>
+                </div>
+                <div class="form-group is-valid float-md-right px-2 col-6">
+                  <span>Destinations strategy:</span>
+                  <select id="destinations_strategy" class="input" >
+                    <option value="excluded destination">excluded destination</option>
+                    <option value="included destination">included destination</option>
+                    <option value="shopping ads excluded country">shopping ads excluded country</option>
+
+                  </select>  
+                </div> 
+                <span id="destinations_strategy_help" class="form-text text-muted">A setting that you can use to exclude a product from participating in a specific type of advertising campaign</span>            
+
+              </div>
+              <span id="product_data_destinations_help" class="help help is-link"><span class="help is-link">These attributes can be used to control the different locations where your content can appear. For example, you could use this attribute if you want a product to appear in a dynamic remarketing campaign. </span>
+              
+            </div>
+            <div class="form-group">
+              <span class="heading">tax:</span>
+              <div class="list-group list-group-horizontal mx-auto row" style="width: 100%;">
+                <div class="form-group is-valid float-md-left px-2 col-6 ">
+                  <span id="product_data_tax_title"> tax:</span>
+                  <input type="text" class="form-control is-valid" id="product_tax" name="product_tax" placeholder="">
+                  <span id="product_tax_help" class="form-text text-muted">i.e <span class="text-success">KE:CA:5.00:y</span> </span>
+                </div>
+                <div class="form-group is-valid float-md-right px-2 col-6">
+                  <span>tax strategy:</span>
+                  <select id="tax_strategy" class="input" >
+                    <option value="tax">tax</option>
+                    <option value="tax category">tax category</option>
+
+
+                  </select>  
+                              
+                </div> 
+                <span id="tax_strategy_help" class="form-text text-muted">Use this setting only to override the account tax settings for an individual product. We recommend that you submit tax information for all your products using the account settings in Merchant Center
+                  For the US and Canada
+                  Don't include tax in the price attribute. For the US only, include the tax in the tax attribute if you need to override your account settings
+                  For all other countries
+                  Include value added tax (VAT) or Goods and Services Tax (GST) in the price attribute and do not use the tax attribute
+                </span>
+              </div>
+              <span id="product_data_tax_help" class="help help is-link"><span class="help is-link">
+                <span class="text-danger">Required (Available for the KE only)</span>. Your product’s sales tax rate in percent. Example <span class="text-danger">US:CA:5.00:y</span>. Syntax tax uses 4 sub-attributes: <span class="text-danger">rate (required)</span> tax rate as a percentage, <span class="text-warning">country (optional)</span> ISO 3166 country code, <span class="text-warning">region</span> or <span class="text-warning">postal ​code</span> or <span class="text-warning">location id (optional)</span>, <span class="text-warning">tax ship (optional)</span>. Specify if you charge tax on shipping. Accepted values are <span class="text-danger">yes </span> or <span class="text-danger">no</span>
+              </span>
+              
+            </div>
+            <div class="form-group">
+              <label class="label" for="product_quantity">Product Quantity:</label>
+              <input type="text" class="form-control is-valid" id="product_quantity" name="product_quantity" placeholder="#">
+              <span id="product_quantity_help" class="form-text text-muted"><span class="text-danger">Required</span>. Allows store owners to sell products in decimal quantities and restrict checkout to control <span class="text-info">product</span> & <span class="text-info">cart</span> quantities.</span>
+            </div>
+            <div class="form-group">
+
+              <div class="is-link is-valid">
+                <span class="label">Image: 
+                  <span id="upload_from_url" class="button is-black upload_from_url is-link is-black">
+                    Upload from URL
+                  </span>
+                  <span id="upload_from_file" class="button is-black upload_from_file is-link s-black">
+                    Upload from File 
+                  </span>
+                </span>
+                
+              </div>
+
+
+            </div>            
+            <div class="field">             
+
+              <div id="upload_from_file_container" class="container upload_from_file_container">
+                                      
+
+                <div class="row">
+                  <div class="col imgUp">
+                    <div class="imagePreview"></div>
+                      <label class="btn btn-primary">
+                        Choose file 
+                        <input type="file" name="fileToUpload[]" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;">
+                      </label>                    
+                  </div>
+                  <i class="fa fa-plus imgAdd imgAdd_file"></i>
+                </div>
+                <span id="upload_from_file_container_help" class="form-text text-muted"><span class="text-danger">Required</span>. The file of your product’s main image. Example <span class="text-success">​image1.​jpg</span>
+
+              </div>
+
+              <div id="upload_from_url_container" class="field upload_from_url_container">
+                <div class="row">
+                  <div class="col imgUp">
+                    <div class="imagePreview"></div>
+                    <div class="control"><input id="value_from_url" type="url" name="urlToUpload[]" class="uploadUrl img input is-success" placeholder="Enter url i.e http://oramla.com" style="width:auto;height:0px;overflow:hidden;"></div>
+                    
+                  </div>
+                  <i class="fa fa-plus imgAdd imgAdd_url"></i>
+                </div>
+                <span id="upload_from_url_container_help" class="form-text text-muted"><span class="text-danger">Required</span>. The URL of your product’s main image. Example <span class="text-success">http://​www.example.​com/​image1.​jpg</span>
+                </span>
+              </div>
+
+            </div> 
+
+            </form>
+          </div>
+          <div class="modal-footer red">
+            <span id="upload_from_help" class="is-link is-black "></span>
+
+            <button id="product_footer_close" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button id="product_save" type="button" class="btn btn-primary">Add</button>
+            <small id="product_help" class="form-text text-muted"></small>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div id="menu_container_bottom_tab" class="phone">           
+
+        <input class="bottom_input" type="radio" name="s" id="s1" checked="checked">
+        <input class="bottom_input" type="radio" name="s" id="s5">
+        <input class="bottom_input" type="radio" name="s" id="s2">
+
+        <input class="bottom_input" type="radio" name="s" id="s3">
+        
+        <input class="bottom_input" type="radio" name="s" id="s4">
+        <label class="bottom_label" for="s1"><img src="img/home-svgrepo-com.svg" alt=""></label>
+        <label class="bottom_label" for="s5">
+          <img src="img/bubble_chart-24px.svg" alt="">
+          <span id="chat_num" class="circle_num badge badge-danger">0</span>
+        </label>
+        <label class="bottom_label" for="s2">
+          <img src="img/shopping-cart-svgrepo-com.svg" alt="">
+          <span id="shopping_cart_num" class="circle_num badge badge-danger">0</span>
+        </label>
+
+        <label class="bottom_label" for="s3">
+          <!--<img src="img/location-svgrepo-com.svg" alt="">-->
+          <img src="img/orders.png" alt="">
+
+          <span id="menu_container_orders_count" class="circle_num badge badge-info">0</span>
+        </label>
+        <label class="bottom_label" for="s4"><img src="img/user-svgrepo-com.svg" alt=""></label>
+
+        <div class="circle"></div>
+        <div class="phone_content">
+          <div class="phone_bottom">
+            <span class="indicator"></span>
+          </div>
+        </div> 
+
+        
+    </div>
+    
+
+  </div> 
+  
+  <div id="authentication_modal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-header bg-light">
+      <button id="authentication" class="button is-dark" aria-label="close">Oramla</button>
+
+      <button id="authentication_close" class="delete" aria-label="close"></button>
+    </div>
+
+    <div class="tab-content">
+      <ul class="nav nav-pills" role="tablist">
+        <li class="nav-item">
+          <a id="login_pill" class="nav-link active" data-toggle="pill" href="#login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a id="regis_pill" class="nav-link" data-toggle="pill" href="#regis">Register</a>
+        </li>
+      </ul>
+
+      <div id="login" class="login-tab-content container tab-pane active">
+        <form >
+          <div class="form-group">
+            <input type="text" class="form-control is-valid" id="login_email" name="login_email" placeholder="name@example.com">
+            <small id="login_email_help" class="form-text text-muted">Provide email address or username</small>
+          </div>
+          <div class="form-group">                
+            <input type="password" class="form-control is-invalid" id="login_password" name="login_password" placeholder="Password">
+            <small id="login_password_help" class="form-text text-muted">Password needed.</small>
+          </div>
+          <a id="login_button" type="" class="btn btn-primary">Login</a>
+          <small id="login_button_help" class="form-text text-muted"></small>
+
+        </form>
+        <span id="forgot_password" class="nav-link" data-toggle="pill" >Forgot password?</span>
+
+      </div>
+
+      <div id="forgot" class="regis-tab-content container tab-pane">
+          <span>Password reset</span>
+
+          <div class="form-group">
+            <input type="email" class="form-control is-valid" id="forgot_login_email" name="forgot_login_email" placeholder="name@example.com">
+            <small id="forgot_login_email_help" class="form-text text-muted">Enter email address</small>
+          </div>
+          <a id="forgot_login_button" type="" class="btn btn-primary">Verify</a>
+          <small id="forgot_login_button_help" class="form-text text-muted"></small>
+
+      </div>
+
+      <div id="reset_code" class="regis-tab-content container tab-pane">
+          <span>Verify the code</span>
+
+          <div class="form-group">
+            <input type="number" class="form-control is-valid" id="forgot_code_email" name="forgot_code_email" placeholder="#">
+            <small id="forgot_code_email_help" class="form-text text-muted">Enter the code sent to <i id="code_email"></i></small>
+          </div>
+          <a id="code_button" type="button" class="btn btn-primary">Continue</a>
+          <small id="code_button_help" class="form-text text-muted"></small>
+
+      </div>
+
+      <div id="new_password" class="regis-tab-content container tab-pane">
+          <span>Create new password</span>
+
+          <div class="form-group">
+            <input type="password" class="form-control is-invalid" id="create_new_password" name="create_new_password" placeholder="New password">
+            <small id="create_new_password_help" class="form-text text-muted">At least 8 characters...</small>
+          </div>
+
+          <div class="form-group">
+            <input type="password" class="form-control is-invalid" id="confirm_new_password" name="confirm_new_password" placeholder="Confirm Password">
+            <small id="confirm_new_password_help" class="form-text text-muted"></small>
+          </div>
+
+
+          <a id="new_password_button" type="" class="btn btn-primary">Create</a>
+          <small id="new_password_button_help" class="form-text text-muted"></small>
+
+      </div>
+
+      <div id="regis" class="regis-tab-content container tab-pane fade">
+        <form >                      
+          <div class="form-group">
+            <input type="text" class="form-control is-valid" id="signup_username"  name="signup_username" placeholder="Username">
+            <small id="signup_username_help" class="form-text text-muted">Your username</small>
+          </div>
+          <div class="form-group">
+            <input type="email" class="form-control is-valid" id="signup_email" name="signup_email" placeholder="name@example.com">
+            <small id="signup_email_help" class="form-text text-muted">Valid email address, name@example.com</small>
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control is-invalid" id="signup_password" name="signup_password" placeholder="Password">
+            <small id="signup_password_help" class="form-text text-muted">At least 8 characters...</small>
+          </div>
+          
+          <a id="signup_button" type="" class="btn btn-primary">Sign Up</a>
+          <small id="signup_button_help" class="form-text text-muted"></small>
+
+        </form>
+      </div>
+
+    </div>
+    
+
+  </div> 
+
+  <div id="qrcodemodal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card  mx-auto" style="width: auto;">
+      <header class="modal-card-head">
+        <div class="container">
+          <div class="row">
+            <button class="button is-primary is-outlined generate-qr-code mr-3" qr_code_id="1">Generate QR</button>
+            <button class="button is-link is-outlined scan-qr-code" href="#">Scan QR</button>
+          </div>
+        </div>
+        <button id="qr-deletemodal" class="delete" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="card" id="qrcode" style="align-self: center;width: auto"></div>
+        <div class="card" id="qrcodescanner" style="display: none; width: 18rem;" >
+              <!--<div id="qr-reader" style="display: inline-block;"></div>-->
+              <video id="qr-reader" class="card-body" style="max-width: 18rem;max-height: 18rem;" ></video>              
+              <footer class="modal-card-foot">
+                <label class="button is-success is-outlined">
+                  <input type="radio" name="options" value="1" autocomplete="off" checked>1
+                </label>
+                <label class="button is-link is-outlined">
+                  <input type="radio" name="options" value="2" autocomplete="off">2
+                </label>
+                <label class="button is-link is-danger scan-qr-stop">
+                  <span>Stop</span>
+                </label>                
+              </footer>
+              <span id="qr-reader-results" class="is-success"></span>
+              <span id="qr-reader-error" class="is-danger"></span>          
+        </div>        
+      </section>
+    </div>
+  </div>
+  <!---->
+  <!-- <script type="text/template7" id="results">
+    {{#if @global.ios}}
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="left sliding">
+                <a href="#" class="back link">
+                  <i class="icon icon-back"></i>
+                  <span>Search</span>
+                </a>
+            </div>
+            <div class="center sliding">Results</div>
+        </div>
+    </div>
+    {{/if}}
+
+    <div class="page" data-page="results">
+        {{#if @global.material}}
+        <div class="navbar">
+            <div class="navbar-inner">
+              <div class="left">
+                <a href="#" class="back link"><i class="icon icon-back"></i></a>
+              </div>
+              <div class="center">Results</div>
+            </div>
+        </div>
+        {{/if}}
+
+        <div class="page-content">
+          <div class="content-block-title">{{tracks.count}} tracks returned</div>
+          <div class="list-block media-list">
+            <ul>
+              {{#each tracks.items}}
+              <li>
+                <a href="#" class="item-link item-content"
+                  data-item="{{@index}}"
+                  data-context="{{stringify this}}"
+                  data-template="details"
+                >
+                  <div class="item-media">
+                    <img width="80" src="{{this.artworkUrl60}}">
+                  </div>
+                  <div class="item-inner">
+                    <div class="item-title-row">
+                      <div class="item-title">{{this.trackName}}</div>
+                      <div class="item-after">{{durationFromMs this.trackTimeMillis}}</div>
+                    </div>
+                    <div class="item-subtitle">{{this.artistName}}</div>
+                    <div class="item-text">{{this.collectionName}}</div>
+                  </div>
+                </a>
+              </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+    </div>
+  </script> -->
+
+  
+  <!-- <script type="text/template7" id="details">
+    {{#if @global.ios}}
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left sliding">
+          <a href="#" class="back link">
+            <i class="icon icon-back"></i>
+              <span>Results</span>
+          </a>
+        </div>
+        <div class="center sliding">Track details</div>
+        <div class="right">
+          <a href="#" class="link star">
+            <i class="fa fa-star-o"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    <div class="page" data-page="details">
+        {{#if @global.material}}
+        <div class="navbar">
+            <div class="navbar-inner">
+              <div class="left">
+                <a href="#" class="back link"><i class="icon icon-back"></i></a>
+              </div>
+              <div class="center">Track details</div>
+              <div class="right">
+                <a href="#" class="link star">
+                  <i class="fa fa-star-o"></i>
+                </a>
+              </div>
+            </div>
+        </div>
+        {{/if}}
+
+        <div class="page-content">
+          <div class="card">
+            <div class="card-header no-border no-padding">
+              <img src="{{this.artworkUrl100}}" width="100%" />
+            </div>
+            <div class="card-content">
+              <div class="card-content-inner">
+                <div class="track-name">{{this.trackName}}</div>
+                <div class="artists-name">by {{this.artistName}}</div>
+                <div class="album-title">{{this.collectionName}}</div>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="card-content-inner preview">
+                <div class="playback-controls">
+                  <a class="play-button play displayed" href="#">
+                    <div class="arrow-right play"></div>
+                  </a>
+                  <a class="pending-button pending" href="#">
+                    <span class="preloader pending"></span>
+                  </a>
+                  <a class="stop-button stop" href="#">
+                    <div class="square stop"></div>
+                  </a>
+                  <div class="duration">
+                    <span data-progress="0" class="progressbar"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div>Track duration</div>
+              <div>{{durationFromMs this.trackTimeMillis}}</div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </script> -->
+
+  
+  <!-- <script type="text/template7" id="favorites">
+    {{#if @global.ios}}
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+          <a href="#" class="link icon-only open-panel"><i class="fa fa-bars"></i></a>
+        </div>
+        <div class="center sliding">Favorites</div>
+      </div>
+    </div>
+    {{/if}}
+
+    <div class="page" data-page="favorites">
+        {{#if @global.material}}
+          <div class="navbar">
+            <div class="navbar-inner">
+              <div class="left">
+                <a href="#" class="link icon-only open-panel"><i class="fa fa-bars"></i></a>
+              </div>
+            <div class="center sliding">Favorites</div>
+          </div>
+        </div>
+        {{/if}}
+
+        <div class="page-content">
+          {{#if tracks}}
+          <div class="content-block-title">Tracks</div>
+          <div class="list-block media-list">
+            <ul>
+              {{#each tracks}}
+              <li>
+                <a href="#" class="item-link item-content"
+                  data-item="{{@index}}"
+                  data-context="{{stringify this}}"
+                  data-template="details"
+                >
+                  <div class="item-media">
+                    <img width="80" src="{{this.artworkUrl100}}">
+                  </div>
+                  <div class="item-inner">
+                    <div class="item-title-row">
+                      <div class="item-title">{{this.trackName}}</div>
+                      <div class="item-after">{{durationFromMs this.trackTimeMillis}}</div>
+                    </div>
+                    <div class="item-subtitle">{{this.artistName}}</div>
+                    <div class="item-text">{{this.collectionName}}</div>
+                  </div>
+                </a>
+              </li>
+              {{/each}}
+            </ul>
+          </div>
+          {{else}}
+          <div class="content-block">
+            <p>You haven't favorited any tracks! Use the search function and add some to favorites.</p>
+          </div>
+          {{/if}}
+        </div>
+    </div>
+  </script> -->
+
+  <!-- <script type="text/javascript" src="cordova.js"></script>
+  <script type="text/javascript" src="lib/MSOpenTech/winstore-jscompat.js"></script>
+  <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
+  <script type="text/javascript" src="js/init-styles.js"></script>
+   -->
+
+  <!-- <script type="text/javascript" src="js/my-app.js"></script> -->
+  
+  <script src="foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
+
+  <script src='ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+  <script src='ajax/libs/popper.js/1.14.7/umd/popper.min.js'></script>
+  <script src='bootstrap/4.3.1/js/bootstrap.min.js'></script>  
+  <script src="cordova.js"></script>
+  
+  <script src="js/menu_container_top_tab.js"></script>
+  <script src="js/menu_container_left_tab.js"></script>
+  <script src="js/menu_container_bottom_tab.js"></script>
+  <script src="js/arrow_navigation_container.js"></script>
+  <script src="js/menu_container_apps_tab.js"></script>
+
+  <script type="text/javascript" src="qr/src/jquery.qrcode.js"></script>
+  <script type="text/javascript" src="qr/src/qrcode.js"></script>
+  <script type="text/javascript" src="qr/instascan-builds/master/instascan.min.js"></script>
+
+  <script src="js/index.js"></script>
+  <script src="js/modal.js"></script>
+
+
+  <script src="js/product_add_client_container.js"></script>
+  <script src="js/product_container.js"></script>
+
+  <script src="js/chat_container.js"></script>
+  <script src="js/cart_container.js"></script>
+  <script src="js/location_container.js"></script>
+  <script src="js/user_container.js"></script>
+  <script src="js/orders_container.js"></script>
+
+
+  
+    <!-- <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(event) {
+      init();
+    });
+  </script> -->
+
+</body>
+
+</html>
