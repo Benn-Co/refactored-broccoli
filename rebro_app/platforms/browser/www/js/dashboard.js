@@ -1514,8 +1514,7 @@ function arybit(crypto,asset,aisa_options) {
                         if (buy_cliwecked == 1) {
                             buy_cliwecked = 0;
                             buy_cliwecked_do = 1;
-
-                            //alert(JSON.stringify(crypto_account_data));
+                            
                              dash_called_ind_loadchat = 1;
                             loadchat(localStorage.getItem("connect_from"));
                         } else {
@@ -1524,40 +1523,8 @@ function arybit(crypto,asset,aisa_options) {
                                 loadchat(localStorage.getItem("connect_from"));
                             }
                         }
-
-                        //alert(JSON.stringify(crypto_account_data));
-
-                        /**if (localStorage.getItem("account_balance_Data") != localStorage.getItem("usd_account_balance") || crypto_init_data_length != crypto_account_data.length) {
-                            if (buy_cliwecked == 1) {
-                                buy_cliwecked = 0;
-                                buy_cliwecked_do = 1;                                
-                            }
-                            var new_crypto_json_data = JSON.stringify(crypto_account_data);
-                            new_chg_balanceData = crypto_account_data.length;
-                            localStorage.setItem("account_balance_Data", localStorage.getItem("usd_account_balance"));
-                            crypto_init_data_length = crypto_account_data.length;
-
-                            loadchat(localStorage.getItem("connect_from")); 
-                            //mysnackbar(new_chg_balanceData);
-                            //balanceDataObj_length = 0;            
-                        } else {
-                            new_chg_balanceData = 0;
-                        } */
-
-                        //alert("asset " + new_chg_balanceData + " " + new_crypto_json_data);
-
-
-                        /**if (buy_cliwecked == 1) {
-                            buy_cliwecked = 0;
-                            buy_cliwecked_do = 1;
-
-                            alert(JSON.stringify(crypto_account_data));
-                             
-                            loadchat(localStorage.getItem("connect_from"));
-                        } */
-                        
                         if (caller== 0) {
-                            //Query_Kline_Book();   
+                            Query_Kline_Book();   
                         }
                         localStorage.setItem("pr_exrate", localStorage.getItem("exrate"));
 

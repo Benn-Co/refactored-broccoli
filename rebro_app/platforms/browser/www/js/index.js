@@ -750,7 +750,7 @@ function loadchat(item_connect_from) {
                 crypto_init_data_length = crypto_account_data.length;
                 dash_called_ind_loadchat = 0;
                 dash_called_ind_loadchat_done = 1;
-                alert("new_chg_balanceData " + new_chg_balanceData + " " + new_crypto_json_data); 
+                //alert("new_chg_balanceData " + new_chg_balanceData + " " + new_crypto_json_data); 
                 //mysnackbar(new_chg_balanceData);
                 //balanceDataObj_length = 0;
 
@@ -807,37 +807,18 @@ function loadchat(item_connect_from) {
                         var char = '"';
                         let balanceData = account_balance.replace(/&quot;/g,char);
                         var balanceDataObj  = JSON.parse(balanceData);
-
-                        //length_of_asset = balanceDataObj.length;    
-                        //var initial_balance = balanceDataObj[0].initial_balance;
-                        //var account_balance_Data = balanceDataObj[0].account_balance;
-                        //var coin_fird_value = balanceDataObj[0].coin_usd_value;
-                        //acc_balanc = account_balance_Data;
-                        //var account_balance_symbol = balanceDataObj[0].account_balance_symbol;
-                        //var price = balanceDataObj[0].price;
-                        //var usd_account_balance = localStorage.getItem("usd_account_balance");                        
-                        //mysnackbar(balanceDataObj.length);
-
-                        //alert(new_chg_balanceData);
-
+                        
                         if (dash_called_ind_loadchat_done == 1) {
-                            //var resultsaccount_balance = response.resultsaccount_balance;
                             if (response.resultsaccount_balance) {
                                 dash_called_ind_loadchat_done = 0;
+                                
                                 if (buy_cliwecked_do == 1) {
-                            
-                                    alert("balanceDataObj.length " + balanceDataObj.length + " buy_cliwecked_do " + buy_cliwecked_do + " account_balance " + balanceDataObj[0].account_balance + " usd_account_balance " + localStorage.getItem("usd_account_balance"));                           
-        
+                                    
                                     if (balanceDataObj[0].account_balance == localStorage.getItem("usd_account_balance")) {
                                         var crypto_asset_balance = localStorage.getItem("asset");
                                         crypto_asset_balance = "" + crypto_asset_balance + "_balance";
-        
+                                        
                                         var inspect = balanceDataObj.length + ' <h1>'+ localStorage.getItem(crypto_asset_balance) + ' ' + localStorage.getItem("asset") + '</h1>';
-            
-                                        /**for (let index = 0; index < balanceDataObj.length; index++) {
-                                            inspect = inspect + '<br>' + balanceDataObj[index].account_balance_symbol +' '+ balanceDataObj[index].account_balance;
-                                        }
-                                        inspect = inspect + '</span>'; */
                                         
                                         $(".snackbar_mkt_operation").html(localStorage.getItem("mysnackbar_mkt_operation") + '<br>' + inspect);                                
                                         $("#mysnackbar_mkt_operationModal").modal('show');
@@ -846,36 +827,17 @@ function loadchat(item_connect_from) {
                                         index_login_user_callerd = 1;
                                         setTimeout(function(){ 
                                             index_login_user(localStorage.getItem("email"),localStorage.getItem("user_pass"),localStorage.getItem("username"),localStorage.getItem("email"));
-                                        }, 5000);
-                                    
-                                    } else{
-                                        //loadchat(localStorage.getItem("connect_from"));
-                                    }
-                                    
+                                        }, 5000);                                    
+                                    }                                    
                                 } else {
                                     if (balanceDataObj[0].account_balance == localStorage.getItem("usd_account_balance")) {
                                         if (balanceDataObj_length != balanceDataObj.length) {
                                             balanceDataObj_length = balanceDataObj.length;
                                             index_login_user_callerd = 1;
-            
-                                            alert(balanceDataObj.length);
-            
                                             index_login_user(localStorage.getItem("email"),localStorage.getItem("user_pass"),localStorage.getItem("username"),localStorage.getItem("email"));
                                         }
                                     }
-                                }
-                                
-                            }
-                        } else {
-                            if (balanceDataObj[0].account_balance == localStorage.getItem("usd_account_balance")) {
-                                if (balanceDataObj_length != balanceDataObj.length) {
-                                    balanceDataObj_length = balanceDataObj.length;
-                                    index_login_user_callerd = 1;
-    
-                                    alert(balanceDataObj.length);
-    
-                                    index_login_user(localStorage.getItem("email"),localStorage.getItem("user_pass"),localStorage.getItem("username"),localStorage.getItem("email"));
-                                }
+                                }                                
                             }
                         }
                         
