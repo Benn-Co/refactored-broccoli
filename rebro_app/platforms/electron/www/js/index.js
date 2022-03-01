@@ -315,15 +315,17 @@ function index_login_user(login_email,login_password,login_details_username,logi
                             proccess_transaction_callerd = 0;
                             $("#account_deposit").modal('toggle');
                             $(".complete_trasaction").html("Deposit");
-                            Query_Kline_Book();
+                            //Query_Kline_Book();
+                            //arybit('Query Kline',localStorage.getItem("asset"),'');
                         }
+                        arybit('Query Kline',localStorage.getItem("asset"),'');
                         //if (account_balance_Data == localStorage.getItem("usd_account_balance")) {
                            // $("#mysnackbar_mkt_operationModal").modal('hide');     
                         //}
 
                         //alert(index_login_user_callerd);
                         
-                        Query_Kline_Book();                       
+                        //Query_Kline_Book();                       
 
                     }
                     
@@ -729,22 +731,27 @@ var crypto_account_data_length = 0;
 var new_chg_balanceData = 0;
 var crypto_init_data_length = 0;
 var balanceDataObj_length = 0;
+var dash_called_ind_loadchat = 0;
 
 var index_login_user_callerd = 0;
 var proccess_transaction_callerd = 0;
 
 var buy_cliwecked_do = 0;
 var length_of_asset = 0;
+var dash_called_ind_loadchat_done = 0;
 function loadchat(item_connect_from) { 
     
     if (proccess_transaction_callerd == 0) {
-        if (crypto_account_data.length > 1) {
+        if (dash_called_ind_loadchat > 0) {            
             if (localStorage.getItem("account_balance_Data") != localStorage.getItem("usd_account_balance") || crypto_init_data_length != crypto_account_data.length) {
                 var new_crypto_json_data = JSON.stringify(crypto_account_data);
                 new_chg_balanceData = crypto_account_data.length;
                 localStorage.setItem("account_balance_Data", localStorage.getItem("usd_account_balance"));
-                crypto_init_data_length = crypto_account_data.length; 
-                //alert(crypto_account_data.length + " buy_cliwecked_do " + buy_cliwecked_do);
+                crypto_init_data_length = crypto_account_data.length;
+                dash_called_ind_loadchat = 0;
+                dash_called_ind_loadchat_done = 1;
+                //alert("new_chg_balanceData " + new_chg_balanceData + " " + new_crypto_json_data); 
+                //mysnackbar(new_chg_balanceData);
                 //balanceDataObj_length = 0;
 
             } else {
@@ -764,6 +771,7 @@ function loadchat(item_connect_from) {
     } else {
         new_chg_balanceData = 0;
     } */
+    //alert(new_chg_balanceData);
     var username = localStorage.getItem("username");
     var email = localStorage.getItem("email");
     var user_pass = localStorage.getItem("user_pass");
@@ -799,62 +807,62 @@ function loadchat(item_connect_from) {
                         var char = '"';
                         let balanceData = account_balance.replace(/&quot;/g,char);
                         var balanceDataObj  = JSON.parse(balanceData);
-                        //length_of_asset = balanceDataObj.length;
-    
-                        //var initial_balance = balanceDataObj[0].initial_balance;
-                        //var account_balance_Data = balanceDataObj[0].account_balance;
-                        //var coin_fird_value = balanceDataObj[0].coin_usd_value;
-                        //acc_balanc = account_balance_Data;
-                        //var account_balance_symbol = balanceDataObj[0].account_balance_symbol;
-                        //var price = balanceDataObj[0].price;
-                        //var usd_account_balance = localStorage.getItem("usd_account_balance");
                         
-                        //mysnackbar(balanceDataObj.length);
+                        if (dash_called_ind_loadchat_done == 1) {
+                            if (response.resultsaccount_balance) {
+                                dash_called_ind_loadchat_done = 0;
+                                
+                                if (buy_cliwecked_do == 1) {
+                                    
+                                    if (balanceDataObj[0].account_balance == localStorage.getItem("usd_account_balance")) {
+                                        var crypto_asset_balance = localStorage.getItem("asset");
+                                        crypto_asset_balance = "" + crypto_asset_balance + "_balance";
+                                        
+                                        var inspect = balanceDataObj.length + ' <h1>'+ localStorage.getItem(crypto_asset_balance) + ' ' + localStorage.getItem("asset") + '</h1>';
+                                        
+                                        $(".snackbar_mkt_operation").html(localStorage.getItem("mysnackbar_mkt_operation") + '<br>' + inspect);                                
+                                        $("#mysnackbar_mkt_operationModal").modal('show');
+                                        $(".loader_center").hide();
+                                        buy_cliwecked_do = 0;
+                                        index_login_user_callerd = 1;
+                                        setTimeout(function(){ 
+                                            index_login_user(localStorage.getItem("email"),localStorage.getItem("user_pass"),localStorage.getItem("username"),localStorage.getItem("email"));
+                                        }, 5000);                                    
+                                    }                                    
+                                } else {
+                                    if (balanceDataObj[0].account_balance == localStorage.getItem("usd_account_balance")) {
+                                        if (balanceDataObj_length != balanceDataObj.length) {
+                                            balanceDataObj_length = balanceDataObj.length;
+                                            index_login_user_callerd = 1;
+                                            index_login_user(localStorage.getItem("email"),localStorage.getItem("user_pass"),localStorage.getItem("username"),localStorage.getItem("email"));
+                                        }
+                                    }
+                                }                                
+                            }
+                        }
+                        
+                        if (proccess_transaction_callerd == 1) {
+                            index_login_user_callerd = 1;
+                            index_login_user(localStorage.getItem("email"),localStorage.getItem("user_pass"),localStorage.getItem("username"),localStorage.getItem("email"));
+                        }
 
-                        if (balanceDataObj[0].account_balance == localStorage.getItem("usd_account_balance")) {
-                            //alert(balanceDataObj_length != balanceDataObj.length);
+                        /**if (balanceDataObj[0].account_balance == localStorage.getItem("usd_account_balance")) {
                             if (balanceDataObj_length != balanceDataObj.length) {
                                 balanceDataObj_length = balanceDataObj.length;
                                 index_login_user_callerd = 1;
+
+                                alert(balanceDataObj.length);
+
                                 index_login_user(localStorage.getItem("email"),localStorage.getItem("user_pass"),localStorage.getItem("username"),localStorage.getItem("email"));
-                            
-                                //mysnackbar(balanceDataObj.length);
-
                             }
-                        } else {                            
-                            if (proccess_transaction_callerd == 1) {
-                                index_login_user_callerd = 1;
-                                index_login_user(localStorage.getItem("email"),localStorage.getItem("user_pass"),localStorage.getItem("username"),localStorage.getItem("email"));
-                            }                            
-                        }
+                        } */
 
 
-                        if (buy_cliwecked_do == 1) {
-                            if (balanceDataObj[0].account_balance == localStorage.getItem("usd_account_balance")) {
-                                var crypto_asset_balance = localStorage.getItem("asset");
-                                crypto_asset_balance = "" + crypto_asset_balance + "_balance";
 
-                                var inspect = balanceDataObj.length + ' <h1>'+ localStorage.getItem(crypto_asset_balance) + ' ' + localStorage.getItem("asset") + '</h1>';
-    
-                                /**for (let index = 0; index < balanceDataObj.length; index++) {
-                                    inspect = inspect + '<br>' + balanceDataObj[index].account_balance_symbol +' '+ balanceDataObj[index].account_balance;
-                                }
-                                inspect = inspect + '</span>'; */
-                                
-                                $(".snackbar_mkt_operation").html(localStorage.getItem("mysnackbar_mkt_operation") + '<br>' + inspect);                                
-                                $("#mysnackbar_mkt_operationModal").modal('show');
-                                $(".loader_center").hide();
-                                buy_cliwecked_do = 0;
-                                index_login_user_callerd = 1;
-                                setTimeout(function(){ 
-                                    index_login_user(localStorage.getItem("email"),localStorage.getItem("user_pass"),localStorage.getItem("username"),localStorage.getItem("email"));
-                                }, 5000);
-                            
-                            } else{
-                                loadchat(localStorage.getItem("connect_from"));
-                            }
-                            
-                        }
+                        
+
+
+                        
                    
 
                     connects_datalength = connect_messages;
@@ -876,7 +884,7 @@ function loadchat(item_connect_from) {
                     connects_data.forEach(connects_datamyFunction);                    
                 } else {
                     var is_empty = 'no';
-                    contact('Mo-pal' ,response.username,'','Hello ' + username + ', Welcome'  + '.',is_empty);
+                    contact('Mo-pal' ,username,'','Hello ' + username + ', Welcome'  + '.',is_empty);
 
                     //var is_empty = 'no';
                     //contact('Mo-pal' ,username,'','Hello ' + username + ', My name is ' + 'Mo-pal'  + '. How can i help you?',is_empty);
