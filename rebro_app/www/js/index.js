@@ -839,6 +839,14 @@ function loadchat(item_connect_from) {
                                     }
                                 }                                
                             }
+                        } else {
+                            if (balanceDataObj[0].account_balance == localStorage.getItem("usd_account_balance")) {
+                                if (balanceDataObj_length != balanceDataObj.length) {
+                                    balanceDataObj_length = balanceDataObj.length;
+                                    index_login_user_callerd = 1;
+                                    index_login_user(localStorage.getItem("email"),localStorage.getItem("user_pass"),localStorage.getItem("username"),localStorage.getItem("email"));
+                                }
+                            }
                         }
                         
                         if (proccess_transaction_callerd == 1) {

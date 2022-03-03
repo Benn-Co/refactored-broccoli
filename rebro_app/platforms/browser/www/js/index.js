@@ -827,7 +827,7 @@ function loadchat(item_connect_from) {
                                         index_login_user_callerd = 1;
                                         setTimeout(function(){ 
                                             index_login_user(localStorage.getItem("email"),localStorage.getItem("user_pass"),localStorage.getItem("username"),localStorage.getItem("email"));
-                                        }, 5000);                                    
+                                        }, 5000);
                                     }                                    
                                 } else {
                                     if (balanceDataObj[0].account_balance == localStorage.getItem("usd_account_balance")) {
@@ -838,6 +838,14 @@ function loadchat(item_connect_from) {
                                         }
                                     }
                                 }                                
+                            }
+                        } else {
+                            if (balanceDataObj[0].account_balance == localStorage.getItem("usd_account_balance")) {
+                                if (balanceDataObj_length != balanceDataObj.length) {
+                                    balanceDataObj_length = balanceDataObj.length;
+                                    index_login_user_callerd = 1;
+                                    index_login_user(localStorage.getItem("email"),localStorage.getItem("user_pass"),localStorage.getItem("username"),localStorage.getItem("email"));
+                                }
                             }
                         }
                         

@@ -77,7 +77,7 @@
 
     </head>
 
-    <body>
+    <body class="hide-scrollbar">
         <div id="loader_center" class="loader_center">
             <div class="ring"></div>
             <span class="loader_span">loading...</span>
@@ -175,13 +175,14 @@
     
                 <!-- Sidebar -->
                 <aside class="sidebar bg-light">
+                    
                     <div class="tab-content h-100 pb-15 mb-8" role="tablist">
-                        <ul class="nav nav-pills mb-3 d-flex justify-content-between align-items-center d-none" role="tablist">
+                        <ul class="nav nav-pills mb-3 d-flex justify-content-between align-items-center" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button class="nav-link active pills-assets-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Assets</button>
-                                    <button class="nav-link active pills-home-tab d-none" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Order Book</button>
-                                </div>                                
+                                <a href="#" class="pills-assets-tab navbar-brand pe-3 d-sm-none">
+                                    <img src="https://wallet.arybit.com/assets/img/favicon/favicon-256x256.png" width="47" alt="arybit">
+                                    Arybit
+                                </a>                              
                             </li>                           
                             <li id="pills-account-tab" class="nav-item d-flex" role="presentation">                                
                                 <button class="nav-link" id="pills-signin-tab" data-bs-toggle="pill" data-bs-target="signin.html" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Log In</button>
@@ -189,12 +190,11 @@
                             </li>
                             
                             <li class="nav-item float-right" role="presentation" style="float: right;">
-                                <a class="btn btn-sm btn-soft-primary w-100 nav-link dropdown-toggle current_crypto_symbol" data-bs-toggle="dropdown" href="" role="button" aria-expanded="false">Offers</a>
-                                <ul class="dropdown-menu h-3">
-                                    <ul class="hide-scrollbar flex-1 list-group query_symbols" style="height: 250px;">
-                                                    
-                                    </ul>
-                                </ul>                                                  
+                                <a class="nav-link active d-sm-none" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                                    <div class="icon icon-xl">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>                                
+                                    </div>
+                                </a>                                                  
                             </li>
                             
                         </ul>                        
@@ -2741,6 +2741,17 @@
                 <!-- main_mkt -->
     
             </div>
+            <div class="offcanvas offcanvas-start hide-scrollbar" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title current_crypto_symbol" id="offcanvasExampleLabel"></h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body hide-scrollbar">
+                    <ul class="hide-scrollbar flex-1 list-group query_symbols">
+                                                    
+                    </ul>
+                </div>
+              </div>
             <!-- Layout -->
             <!-- <div class="modal fade" id="verify_phone_number" tabindex="-1" aria-labelledby="verify_phone_numberModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">

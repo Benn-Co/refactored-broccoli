@@ -27,6 +27,8 @@ $('.order_quantity').on('input',function(e){
     account_mkt_evaluation(localStorage.getItem("aisa_options"));
 });
 
+var button_loader = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Loading...</span>';
+
 //https://silicon.createx.studio/assets/img/landing/conference/hero-video.mp4
 $("body").delegate(".mkt_option","click",function(event){
     event.preventDefault();
@@ -155,9 +157,38 @@ $("body").delegate(".mkt_option","click",function(event){
         mkt_option_clicked = 1;
 });
 $("body").delegate(".order_book_mkt","click",function(event){
-    event.preventDefault();    
-       
+    event.preventDefault(); 
     if ($(this).attr('order_book_side') =="Buy") {
+        localStorage.setItem("aisa_options","sell");
+        localStorage.setItem("price",$(this).attr('order_book_price'));
+
+    } else {
+        localStorage.setItem("aisa_options","buy");
+        localStorage.setItem("price",$(this).attr('order_book_price'));
+    }
+    if ($(".order_price").val(localStorage.getItem("price")) == '' || $(".order_price").val(localStorage.getItem("price")) == null) {
+        $(".order_price").val(localStorage.getItem("price"));  
+    }
+
+    if ($(this).attr('order_book_side') =="Buy") {
+        localStorage.setItem("aisa_options","sell");
+        localStorage.setItem("price",$(this).attr('order_book_price'));
+
+    } else {
+        localStorage.setItem("aisa_options","buy");
+        localStorage.setItem("price",$(this).attr('order_book_price'));
+
+    }
+    
+    if ($(".order_price").val(localStorage.getItem("price")) == '' || $(".order_price").val(localStorage.getItem("price")) == null) {
+        $(".order_price").val(localStorage.getItem("price"));  
+    }
+
+    account_mkt_evaluation(localStorage.getItem("aisa_options"));
+    $("#current_crypto_symbolModal").modal('show');
+
+       
+    /**if ($(this).attr('order_book_side') =="Buy") {
         localStorage.setItem("aisa_options","sell");
         localStorage.setItem("price",$(this).attr('order_book_price'));
 
@@ -191,7 +222,7 @@ $("body").delegate(".order_book_mkt","click",function(event){
     } else {
         $(".order_price").removeClass("is-valid");
         $(".order_price").addClass("is-invalid");
-    }
+    } */
 });
 
 $("body").delegate(".currency_option","click",function(event){
@@ -266,9 +297,15 @@ $(".query_symbols").hover(function(){
     $(".langsright").hide();
 });
 $("body").delegate(".gift_send","click",function(event){
-    event.preventDefault();    
-    localStorage.setItem("gift_email",$(".gift_email").val());
-    send_gift_email(localStorage.getItem("gift_email"),localStorage.getItem("username"));
+    event.preventDefault();   
+    var email_format =/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    if (email_format.test($(".gift_email").val()) && $(".gift_email").val() !='') {
+        localStorage.setItem("gift_email",$(".gift_email").val());
+        $(".gift_send").html(button_loader);
+        send_gift_email(localStorage.getItem("gift_email"),localStorage.getItem("username"));
+    } else {
+        mysnackbar("Enter a valid email address, e.g name@example.com"); 
+    }    
 });
 $("body").delegate(".get_asset_assets","click",function(event){
     $("#main_mkt").removeClass("is-visible");
@@ -750,6 +787,7 @@ function send_gift_email(gift_email,username) {
             try {
                 if (response.message == "success") {
                     mysnackbar(response.validate_message);
+                    $(".gift_send").html("Send invites");
                     $(".gift_email").val("");
                     //$("#code_email").html(forgot_login_email);
                     /**if (response.validate_message == 'Your mail has been sent successfully.') {
