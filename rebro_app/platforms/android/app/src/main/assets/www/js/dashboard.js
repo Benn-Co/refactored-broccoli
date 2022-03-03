@@ -798,6 +798,7 @@ localStorage.setItem("limit", 200);
 localStorage.setItem("interval", 1);
 
 function Query_Kline_Book() {
+    //alert('Query_Kline_Book');
     new_seriesData = [];
     let text = window.location.href;
     const myArray = text.split("https://wallet.arybit.com/#");
@@ -858,6 +859,8 @@ $(function() {
 
 //var buy_cliwecked_do=0;
 function arybit(crypto,asset,aisa_options) {
+    //alert('arybit');
+
     $.ajax({
         type: "POST", // Type of request to be send, called as 
         dataType: 'json',
@@ -866,16 +869,7 @@ function arybit(crypto,asset,aisa_options) {
         url: 'https://arybit.com/cordova/',
         success: function searchSuccess(response) {
             try {
-                if (response.message == "success") {
-
-                    if (buy_cliwecked_do == 1) {
-                        //alert(buy_cliwecked_do);
-                    } else {
-                        //alert(buy_cliwecked_do);
-
-                        //$(".loader_center").hide();
-  
-                    }
+                if (response.message == "success") {                    
 
                     if (lacal_asset_not_eq_to_this == 1) {
                         lacal_asset_not_eq_to_this = 0;
@@ -1495,13 +1489,14 @@ function arybit(crypto,asset,aisa_options) {
                             }
                             if (i == results.length-1) {
                                 if (buy_cliwecked == 1) {
-                                    buy_cliwecked = 0;
+                                    //buy_cliwecked = 0;
                                     //alert("crypto_account_data " + new_account_balanceData_asset);
                                     //$(".snackbar_mkt_operation").html(mysnackbar_mkt_operation);
                                     //$("#mysnackbar_mkt_operationModal").modal('show');
                                     //localStorage.setItem("mysnackbar_mkt_operation", user_pass);
 
-                                    buy_cliwecked_do = 1;
+                                    //buy_cliwecked_do = 1;
+                                    //loadchat(localStorage.getItem("connect_from"));
                                     //proccess_transaction_callerd = 1;
                                     //account_balanceData(new_account_balanceData_asset);
                                 } else {
@@ -1516,9 +1511,18 @@ function arybit(crypto,asset,aisa_options) {
                         //alert("crypto_account_data " + new_account_balanceData_asset);
 
                         crypto_account_data = new_account_balanceData_asset;
-
-                       // alert("crypto_account_data " + new_account_balanceData_asset);
-
+                        if (buy_cliwecked == 1) {
+                            buy_cliwecked = 0;
+                            buy_cliwecked_do = 1;
+                            
+                             dash_called_ind_loadchat = 1;
+                            loadchat(localStorage.getItem("connect_from"));
+                        } else {
+                            if (localStorage.getItem("account_balance_Data") != localStorage.getItem("usd_account_balance") || crypto_init_data_length != crypto_account_data.length) {
+                                dash_called_ind_loadchat = 1;
+                                loadchat(localStorage.getItem("connect_from"));
+                            }
+                        }
                         if (caller== 0) {
                             Query_Kline_Book();   
                         }
@@ -1969,9 +1973,10 @@ function account_mkt_balance(aisa_options) {
 
                     $(".loader_center").show();
 
-                    Query_Kline_Book();   
+                    //Query_Kline_Book(); 
+                    arybit('Query Kline',localStorage.getItem("asset"),'');  
 
-                    dsh_contact(localStorage.getItem("asset") ,username,'',mysnackbar_mkt_operation,is_empty);
+                    dsh_contact(localStorage.getItem("asset") ,username,'',localStorage.getItem("mysnackbar_mkt_operation"),is_empty);
     
                     var order_quantity = 0;
                     order_quantity = order_quantity.toFixed(8);
@@ -2061,10 +2066,11 @@ function account_mkt_balance(aisa_options) {
                     $("#current_crypto_symbolModal").modal('hide');
                     $(".loader_center").show();
 
-                    Query_Kline_Book();   
+                    //Query_Kline_Book();  
+                    arybit('Query Kline',localStorage.getItem("asset"),''); 
 
                     //alert("crypto_asset_balance " + localStorage.getItem(crypto_asset_balance) + " usd_account_balance " + localStorage.getItem("usd_account_balance") )
-                    dsh_contact(localStorage.getItem("asset") ,username,'',mysnackbar_mkt_operation,is_empty);
+                    dsh_contact(localStorage.getItem("asset") ,username,'',localStorage.getItem("mysnackbar_mkt_operation"),is_empty);
      
                     var order_quantity = 0;
                     order_quantity = order_quantity.toFixed(2);
@@ -2286,7 +2292,7 @@ function dsh_contact(user_name,con_from,conn_id,chat_message,is_empty) {
         success: function searchSuccess(response) {
             //mysnackbar(chat_message);
             account_balance_called = 1;
-            Query_Kline_Book();
+            //Query_Kline_Book();
         },
         error: function searchError(xhr, err) {
             mysnackbar('Error on ajax call: ' + err  + ' ' + JSON.stringify(xhr) + '');
