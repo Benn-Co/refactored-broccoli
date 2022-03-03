@@ -2568,11 +2568,60 @@
                                         
     
                                     </div>
-                                    <div id="leanders_mkt" class="py-1 d-none">                                        
-                                        <div class="row g-0 leanders_mkt_assets">
+
+                                    <div id="leanders_mkt" class="py-1 d-none"> 
+                                        <div class="mt-3 alert alert-warning alert-dismissible fade show" role="alert">
+                                            <strong>Finish setting up your Arybit account!</strong>.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                        <div class="card-group">
+                                            <a class="card border-info mb-3 card_account_action_options">
+                                                <div class="card-body text-info">
+                                                  <h5 class="card-title">Verify Your Identity</h5>
+                                                  <p class="card-text">Get verified to enable account funding.</p>
+                                                </div>
+                                            </a>
+                                            <!--                                                            <button type="button" class="btn btn-sm btn-primary w-100 account_action_options" data-bs-toggle="modal" data-bs-target="#account_deposit">Deposit</button>
+-->
+                                            <a class="card border-info mb-3 card_account_action_options" data-bs-toggle="modal" data-bs-target="#account_deposit">
+                                                <div class="card-body text-info">
+                                                  <h5 class="card-title">Fund Your Account</h5>
+                                                  <p class="card-text">Add funds to buy and sell cryptocurrency. </p>
+                                                </div>
+                                            </a>
+                                            <a class="card border-info mb-3 card_account_action_options">
+                                                <div class="card-body text-info">
+                                                    <h4 class="card-title">Secure Your Account</h4>
+                                                    <p class="card-text">Sign-in Two-Factor Authentication keeps your account secure by adding an additional authentication method.</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        
+                                        <div class="card mb-3">
+                                            <div class="row g-0">
+                                              <div class="col-md-4">
+                                                <div class="card">
+                                                    <img src="https://www.ledger.com/wp-content/uploads/2021/10/satoshi-unite-mesure-bitcoin-btc.jpg" class="card-img-top" alt="Bitcoin">
+                                                </div>
+                                              </div>
+                                              <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h4 class="card-title">Invest in crypto</h4>
+                                                    <p class="card-text">Start your crypto investing journey by setting up a payment method and buying your first cryptocurrency on Arybit</p>
+                                                    <p class="card-text"><small class="text-muted">
+                                                        <button class="nav-link btn btn-sm btn-success w-100 mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="buy">Buy</button>
+                                                    </small></p>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row g-0 leanders_mkt_assets d-none">
 
                                         </div>                                        
                                     </div>
+
+
                                 </div>
                             </div>
                             <!-- Chat: Content -->
@@ -2741,6 +2790,7 @@
                 <!-- main_mkt -->
     
             </div>
+
             <div class="offcanvas offcanvas-start hide-scrollbar" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title current_crypto_symbol" id="offcanvasExampleLabel"></h5>
@@ -2751,7 +2801,9 @@
                                                     
                     </ul>
                 </div>
-              </div>
+            </div>
+
+
             <!-- Layout -->
             <!-- <div class="modal fade" id="verify_phone_number" tabindex="-1" aria-labelledby="verify_phone_numberModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -3041,6 +3093,7 @@
                 </div>
             </div>
 
+            <!-- Buy/Sell -->
             <div class="modal fade" id="current_crypto_symbolModal" tabindex="-1" aria-labelledby="current_crypto_symbolModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -3073,8 +3126,9 @@
                                     </div>                                            
                                 </div>                                        
                             </div>
-                            <p class="mb-0 text-muted"> ≈ <span class="mkt_evaluation text-warning"></span> This may vary based on market volatility.
-                            </p>
+                            <p class="mb-0 text-muted"> ≈ <span class="mkt_evaluation text-warning"></span> This may vary based on market volatility.</p>
+                            <p class="mb-0 text-muted"><span class="mkt_err_evaluation text-danger"></span></p>
+
                         </div>
                         <div class="modal-footer">
                             <div class="row w-100">
@@ -3090,7 +3144,7 @@
                 </div>
             </div>
 
-
+            <!-- Trade Complete -->
             <div class="modal fade" id="mysnackbar_mkt_operationModal" tabindex="-1" aria-labelledby="mysnackbar_mkt_operationModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">

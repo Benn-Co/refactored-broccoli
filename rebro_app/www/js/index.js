@@ -56,6 +56,8 @@ var updte_is_typing = 0;
 var IMAGE_url_path_name = 'https://'  + api_server_url + '/product_images/';
 var user_permited = 0;
 function onDeviceReady() {
+    $("#leanders_mkt_c").addClass("d-none");
+    $("#leanders_mkt").removeClass("d-none");
     /**username = '';
     api_server_url = 'https://oramla.com';
     localStorage.setItem("api_server_url", api_server_url);
