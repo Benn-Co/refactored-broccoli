@@ -306,11 +306,57 @@ $("body").delegate(".gift_send","click",function(event){
     if (email_format.test($(".gift_email").val()) && $(".gift_email").val() !='') {
         localStorage.setItem("gift_email",$(".gift_email").val());
         $(".gift_send").html(button_loader);
-        send_gift_email(localStorage.getItem("gift_email"),localStorage.getItem("username"));
+        send_email(localStorage.getItem("gift_email"),localStorage.getItem("username"),"gift_card");
     } else {
         mysnackbar("Enter a valid email address, e.g name@example.com"); 
     }    
 });
+
+var div_loader = '<div class="div_loader"></div>';
+$("body").delegate(".account_activation","click",function(event){
+    event.preventDefault();
+    $(".account_activation").html(div_loader); 
+    send_email(localStorage.getItem("email"),localStorage.getItem("username"),"account_activation");
+});
+
+$("body").delegate(".activation_code_button","click",function(event){
+    event.preventDefault();
+    if ($("#activation-code").val() == '') {
+        $(".activation_code_button_err").html('Enter the code');
+    } else {
+        $(".activation_code_button_err").html('');
+        $(".activation_code_button").html(button_loader);
+        send_email(localStorage.getItem("email"),localStorage.getItem("username"),$("#activation-code").val());
+
+    }    
+});
+
+$("body").delegate(".complete_account_authentication","click",function(event){
+    event.preventDefault();
+    if ($(".account_authentication_phone_number").val() == '') {
+        $(".account_authentication_phone_numberfeedback").html('<span class="text-danger">Enter phone number</span>');
+    } else {
+        var phone_num = $(".account_authentication_phone_number").val();
+        phone_num = "" + phone_num + "";
+        if(phone_num.charAt(0) === "0"){
+            phone_num = phone_num.replace(0, "");
+        }
+        if (phone_num.length < 9 || phone_num.length > 9) {
+            $(".account_authentication_phone_numberfeedback").html('<span class="text-danger">Enter valid phone number</span>');
+
+        } else {
+            var mcode = localStorage.getItem("mcode");
+            phone_num = mcode + "" + phone_num;
+            $(".account_authentication_phone_numberfeedback").html('<span class="text-success">'+ phone_num + '</span>');
+            $(".complete_account_authentication").html(button_loader);
+            localStorage.setItem("user_phone", phone_num);
+
+            send_email(localStorage.getItem("email"),localStorage.getItem("username"),'account_authentication');
+
+        }      
+    }    
+});
+
 $("body").delegate(".get_asset_assets","click",function(event){
     $("#main_mkt").removeClass("is-visible");
 });
@@ -390,6 +436,7 @@ $("body").delegate(".selected_payment_option","click",function(event){
         $(".payment_option").removeClass("btn-danger");
         $(".payment_option").removeClass("btn-info");
         $(".payment_option").addClass("btn-success");
+        
     } else if ($(this).html() == "Paying with Paypal"){
         $(".entrer_phoner").hide();
         $(".entrer_cards").hide();
@@ -422,6 +469,8 @@ $("body").delegate(".selected_payment_option","click",function(event){
 //var clientToken = '';
 
 $(".complete_trasaction").click(function(){
+    //alert(localStorage.getItem("email_account_activation") == 0);
+
     var intenti = $(this).attr("intenti");
     var intent = $(this).attr("intenti");
     $(".complete_trasaction").html(intent);
@@ -536,6 +585,7 @@ $(".complete_trasaction").click(function(){
                         $(".user_phone_number").addClass("is-invalid");
                         $(".user_phone_numberfeedback").addClass("invalid-feedback");
                         $(".user_phone_numberfeedback").html("Please provide a valid 10 digits phone number.");
+                        
                     }                
                 } else {
                     if ($(this).attr("intenti") == "withdraw") {
@@ -733,22 +783,25 @@ $(".complete_trasaction").click(function(){
 });
 
 function complete_trasaction(amount_to_deposit,selected_payment_option,useremail_,proccessing_number,intent) {
+    //alert(localStorage.getItem("email_account_activation"));
     if (amount_to_deposit == "" || amount_to_deposit < 1) {
         mysnackbar("Enter valid amount");
-    } else {
+    } else if(localStorage.getItem("email_account_activation") == 0){
         if (selected_payment_option == "Paying with Card") {
             $(".complete_card_trasaction").removeClass("btn-primary");
             $(".complete_card_trasaction").addClass("btn-warning");
-            $(".complete_card_trasaction").html("Proccessing...");
+            $(".complete_card_trasaction").html(button_loader);
         } else {
             $(".complete_trasaction").removeClass("btn-primary");
             $(".complete_trasaction").addClass("btn-warning");
-            $(".complete_trasaction").html("Proccessing...");
+            $(".complete_trasaction").html(button_loader);
         }
         
         //$(".complete_trasaction").show();
         //$(".complete_card_trasaction").hide();
         proccess_transaction(localStorage.getItem("cname"),localStorage.getItem("exrate"), amount_to_deposit,selected_payment_option,useremail_,proccessing_number,intent);               
+    } else {
+        $(".user_phone_numberfeedback").html('<span class="text-danger ">Verify your email to continue funding!</span>');
     }
 }
 
@@ -780,19 +833,48 @@ function rebro_Aisha(asset,aisa_options,price,price_open,day_high,day_low) {
         }
     });   
 }
-function send_gift_email(gift_email,username) {
+function send_email(gift_email,username,main) {
     $.ajax({
         type: "POST", // Type of request to be send, called as 
         dataType: 'json',
-        data: { gift_email: gift_email, username: username},
+        data: { gift_email: gift_email, username: username, main: main, user_phone:localStorage.getItem("user_phone")},
         processData: true,
-        url: api_server_url + '/cordova/send_gift_email.php',
+        url: 'https://oramla.com/cordova/arybit.php',
         success: function searchSuccess(response) {
             try {
                 if (response.message == "success") {
-                    mysnackbar(response.validate_message);
-                    $(".gift_send").html("Send invites");
-                    $(".gift_email").val("");
+                    //alert(response.validate_message);
+                    if (main == "gift_card") {
+                        $(".gift_send").html("Send invites");
+                        $(".gift_email").val("");
+                        mysnackbar(response.validate_message);
+
+                    }else if (main == "account_activation") {
+                        var account_activation = '<div class="card-body text-info">'+
+                        '<h5 class="card-title">Verify Your Identity</h5>'+
+                        '<p class="card-text">Get verified to enable account funding.</p>'+
+                        '</div>';
+                        $(".account_activation").html(account_activation);
+                        $("#account_code_activation").modal('show');
+                        mysnackbar(response.validate_message);
+
+                    } else if(main == "account_authentication"){
+                        if (response.validate_message) {
+                            $(".account_authentication_phone_numberfeedback").html('<span class="text-success">'+ response.validate_message + '</span>');
+                            $(".complete_account_authentication").html('Authenticate');
+                            $("#account_authentication").modal('hide');
+                            $(".method_account_authentication").hide();
+                        }                        
+                    } else {
+                        if (response.validate_message == main) {
+                            $(".activation_code_button").html('Verify code');
+                            $("#account_code_activation").modal('hide');
+                        } else {
+                            $(".activation_code_button").html('Verify code');
+                            $(".activation_code_button_err").html('Invalid code'); 
+                        }
+                    }
+                    
                     //$("#code_email").html(forgot_login_email);
                     /**if (response.validate_message == 'Your mail has been sent successfully.') {
                         //$("#forgot").removeClass("active");
@@ -2469,6 +2551,10 @@ function display_account_action(action) {
     if (action == "hide") {
         $("#account_action").hide();
     } else {
+        setTimeout(function(){ 
+            $("#current_crypto_symbolModal").modal('hide');
+            $("#account_deposit").modal('show');
+        }, 3000);
         $("#account_action").show();
     }
 }

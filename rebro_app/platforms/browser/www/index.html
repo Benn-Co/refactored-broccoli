@@ -2570,26 +2570,26 @@
                                     </div>
 
                                     <div id="leanders_mkt" class="py-1 d-none"> 
-                                        <div class="mt-3 alert alert-warning alert-dismissible fade show" role="alert">
+                                        <div class="mt-3 alert alert-warning alert-dismissible fade show setting_up_your_account" role="alert">
                                             <strong>Finish setting up your Arybit account!</strong>.
                                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                         </div>
                                         <div class="card-group">
-                                            <a class="card border-info mb-3 card_account_action_options">
+                                            <a class="card border-info mb-3 card_account_action_options account_activation">
                                                 <div class="card-body text-info">
-                                                  <h5 class="card-title">Verify Your Identity</h5>
+                                                  <h5 class="card-title">Verify Your Email</h5>
                                                   <p class="card-text">Get verified to enable account funding.</p>
                                                 </div>
                                             </a>
                                             <!--                                                            <button type="button" class="btn btn-sm btn-primary w-100 account_action_options" data-bs-toggle="modal" data-bs-target="#account_deposit">Deposit</button>
 -->
-                                            <a class="card border-info mb-3 card_account_action_options" data-bs-toggle="modal" data-bs-target="#account_deposit">
+                                            <a class="card border-info mb-3 card_account_action_options account_funding" data-bs-toggle="modal" data-bs-target="#account_deposit">
                                                 <div class="card-body text-info">
                                                   <h5 class="card-title">Fund Your Account</h5>
                                                   <p class="card-text">Add funds to buy and sell cryptocurrency. </p>
                                                 </div>
                                             </a>
-                                            <a class="card border-info mb-3 card_account_action_options">
+                                            <a class="card border-info mb-3 card_account_action_options method_account_authentication" data-bs-toggle="modal" data-bs-target="#account_authentication">
                                                 <div class="card-body text-info">
                                                     <h4 class="card-title">Secure Your Account</h4>
                                                     <p class="card-text">Sign-in Two-Factor Authentication keeps your account secure by adding an additional authentication method.</p>
@@ -2847,6 +2847,82 @@
                 </div>
             </div> -->
             
+
+            <div class="modal fade" id="account_code_activation" tabindex="-1" aria-labelledby="account_code_activationModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        
+                        <div class="modal-body">
+
+                            <div class="container">                                
+                                <div class="card card-shadow border-0">
+                                    <div class="card-body">
+                                        <div class="row g-6">
+                                            <div class="col-12">
+                                                <div class="text-center">
+                                                    <h3 class="fw-bold mb-2">Verification</h3>
+                                                    <p>Enter the activation code sent to the email</p>
+                                                </div>
+                                            </div>
+            
+                                            <div class="col-12">
+                                                <div class="form-floating">
+                                                    <input type="number" class="form-control" id="activation-code" placeholder="Code">
+                                                    <label for="activation-code">Code</label>
+                                                </div>
+                                            </div>
+            
+                                            <div class="col-12">
+                                                <button id="" class="btn btn-block btn-lg btn-primary w-100 activation_code_button" type="submit">Verify code</button>
+                                            </div>
+                                            <span class="text-danger activation_code_button_err"></span>
+                                            <a id="resend_activation_code" href="#">Resend code</a>
+            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="account_authentication" tabindex="-1" aria-labelledby="account_authenticationModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row justify-content-md-cente mt-3">
+                                    <div class="col">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-text" style="width:auto ">
+                                                <span class="mcode dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"> </span>
+                                                <ul class="dropdown-menu mcode_list hide-scrollbar" style="height: 200px;">
+                                                
+                                                </ul>
+                                            </div>
+                                            <input type="number" class="form-control is-valid account_authentication_phone_number" value="" required>
+                                            
+                                        </div>
+                                        <div class="account_authentication_phone_numberfeedback">
+                                            <span class="text-success">Enter phone number</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary complete_account_authentication text-center w-50">Authenticate</button>
+
+                            </div>                            
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+
+
 
             <!-- account_deposit -->
             <div class="modal fade" id="account_deposit" tabindex="-1" aria-labelledby="account_depositModalLabel" aria-hidden="true">
@@ -3704,8 +3780,10 @@
                                 <div class="col-12">
                                     <button id="code_button" class="btn btn-block btn-lg btn-primary w-100" type="submit">Verify code</button>
                                 </div>
+                                
                             </div>
                         </div>
+                        
                     </div>
 
                     <!-- Text -->

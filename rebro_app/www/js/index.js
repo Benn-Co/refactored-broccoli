@@ -283,6 +283,15 @@ function index_login_user(login_email,login_password,login_details_username,logi
                     localStorage.setItem("account_balance_potential_usd_account_balance",account_balance);// Set account_balance_potential_usd_account_balance
                     //localStorage.setItem("actual_account_balance", account_balance);
 
+                    if (phone_number.charAt(0) === "+") {
+                        $(".setting_up_your_account").hide();
+                        $(".method_account_authentication").hide();
+                    } else {
+                        $(".method_account_authentication").show();
+                        $(".setting_up_your_account").show();
+
+                    }
+                    
                     localStorage.setItem("username_pic", username_pic);
                     localStorage.setItem("user_location", user_location);
                     localStorage.setItem("user_email", email);
@@ -741,6 +750,8 @@ var proccess_transaction_callerd = 0;
 var buy_cliwecked_do = 0;
 var length_of_asset = 0;
 var dash_called_ind_loadchat_done = 0;
+var email_account_activation = 0;
+
 function loadchat(item_connect_from) { 
     
     if (proccess_transaction_callerd == 0) {
@@ -804,12 +815,38 @@ function loadchat(item_connect_from) {
                     var price = balanceDataObj[0].price;
                     
                     var acc_cry_ba = 0; */
+                    
+                       var account_activation = response.account_activation;
+                       //mysnackbar(account_activation);
+                       if (account_activation =='0') {
+                           $(".account_activation").hide();
+                           $(".setting_up_your_account").hide();
+                           email_account_activation = account_activation;
+                           localStorage.setItem("email_account_activation", email_account_activation);
+
+                       } else {
+                           $(".setting_up_your_account").show();
+                           $(".account_activation").show();
+                           email_account_activation = account_activation;
+                           localStorage.setItem("email_account_activation", email_account_activation);
+
+                       }
 
                         var account_balance = response.account_balance;
                         var char = '"';
                         let balanceData = account_balance.replace(/&quot;/g,char);
                         var balanceDataObj  = JSON.parse(balanceData);
                         
+                        if (balanceDataObj[0].account_balance > 0) {
+                            $(".account_funding").hide();
+                            //$(".setting_up_your_account").hide();
+                            //display_account_action("hide");                            
+                        } else {
+                            //display_account_action("show");
+                            //$(".setting_up_your_account").show();
+                            $(".account_funding").show();
+                        }
+
                         if (dash_called_ind_loadchat_done == 1) {
                             if (response.resultsaccount_balance) {
                                 dash_called_ind_loadchat_done = 0;
