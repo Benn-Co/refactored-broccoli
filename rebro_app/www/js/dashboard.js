@@ -702,13 +702,14 @@ $(".complete_trasaction").click(function(){
 
                                   var transaction_id = transaction.id;
                                   var transaction_status = transaction.status;
+                                  var transaction_amount = transaction.amount;
 
                                   var payer = orderData.payer;
 
                                   //alert(full_name);
 
                                   //alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
-                                  complete_trasaction(amount_to_deposit,selected_payment_option,'useremail_',transaction.id,intent);
+                                  complete_trasaction(amount_to_deposit,selected_payment_option,'useremail_',transaction_id,intent);
     
                               // When ready to go live, remove the alert and show a success message within this page. For example:
                               // var element = document.getElementById('paypal-button-container');
