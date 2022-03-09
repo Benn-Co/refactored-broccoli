@@ -647,8 +647,14 @@ $(".complete_trasaction").click(function(){
                         onApprove: function(data, actions) {
                             return actions.order.capture().then(function(orderData) {
                               // Successful capture! For dev/demo purposes:
-                                  //var element = document.getElementById('paypal-button-container');
+                              $(".deposit_footer").show();
+                              $(".complete_trasaction").show();
+                              $(".complete_trasaction").html(button_loader);
+
+                              //var element = document.getElementById('paypal-button-container');
                                   //element.innerHTML = JSON.stringify(orderData, null, 2);
+                                  /**var element = document.getElementById('paypal-button-container');
+                                  element.innerHTML = JSON.stringify(orderData, null, 2);
 
                                   var elementjson = { 
                                       "id": "2LD38181TF5660020", 
@@ -689,9 +695,11 @@ $(".complete_trasaction").click(function(){
                                       "create_time": "2022-02-11T11:10:09Z", 
                                       "update_time": "2022-02-11T11:19:25Z", 
                                       "links": [ { "href": "https://api.sandbox.paypal.com/v2/checkout/orders/2LD38181TF5660020", "rel": "self", "method": "GET" } ] 
-                                  };
+                                  }; */
+
+                                  /**{ "id": "6U89135944570623Y", "intent": "CAPTURE", "status": "COMPLETED", "purchase_units": [ { "reference_id": "default", "amount": { "currency_code": "USD", "value": "10.00" }, "payee": { "email_address": "wambuistephen@outlook.com", "merchant_id": "7SWMQRBNCGS62" }, "soft_descriptor": "PAYPAL *ORAMLA", "shipping": { "name": { "full_name": "Stephen Wambui" }, "address": { "address_line_1": "60", "admin_area_2": "Ngewa", "admin_area_1": "Select region", "postal_code": "00901", "country_code": "KE" } }, "payments": { "captures": [ { "id": "91L58246WD634093A", "status": "COMPLETED", "amount": { "currency_code": "USD", "value": "10.00" }, "final_capture": true, "seller_protection": { "status": "NOT_ELIGIBLE" }, "create_time": "2022-03-07T18:17:47Z", "update_time": "2022-03-07T18:17:47Z" } ] } } ], "payer": { "name": { "given_name": "Stephen", "surname": "Wambui" }, "email_address": "karitustephen@gmail.com", "payer_id": "P9Z5XKWZ85JYY", "address": { "country_code": "KE" } }, "create_time": "2022-03-07T18:13:52Z", "update_time": "2022-03-07T18:17:47Z", "links": [ { "href": "https://api.paypal.com/v2/checkout/orders/6U89135944570623Y", "rel": "self", "method": "GET" } ] } */
                                   
-                                  var id = orderData.id;
+                                  var orderData_id = orderData.id;
                                   var inteent = orderData.intent;
                                   var status = orderData.status;
                                   var email_address = orderData.purchase_units[0].payee.email_address;
@@ -705,11 +713,16 @@ $(".complete_trasaction").click(function(){
                                   var transaction_amount = transaction.amount;
 
                                   var payer = orderData.payer;
+                                  if (transaction_status == 'COMPLETED') {
+                                    complete_trasaction(amount_to_deposit,selected_payment_option,'useremail_',orderData_id,intent);
+                                  } else {
+                                      
+                                  }
 
                                   //alert(full_name);
 
                                   //alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
-                                  complete_trasaction(amount_to_deposit,selected_payment_option,'useremail_',transaction_id,intent);
+                                  //complete_trasaction(amount_to_deposit,selected_payment_option,'useremail_',transaction_id,intent);
     
                               // When ready to go live, remove the alert and show a success message within this page. For example:
                               // var element = document.getElementById('paypal-button-container');
@@ -2018,16 +2031,26 @@ function proccess_transaction(ccode,exrate,amount_to_deposit,selected_payment_op
                     $(".complete_card_trasaction").hide();
                     //$("#dropin-container").html("");
 
-                } else {
-                    //$(".complete_trasaction").removeClass("btn-warning");
-                    //$(".complete_trasaction").addClass("btn-success");
-                    //$(".complete_trasaction").html(response.message);
+                } else if(selected_payment_option == "Paying with Paypal") {
+                    $(".deposit_footer").show();
+                    $(".complete_trasaction").show();
+                    $(".complete_trasaction").removeClass("btn-warning");
+                    $(".complete_trasaction").addClass("btn-success");
+                    $(".complete_trasaction").html(response.message);
+                    setTimeout(function(){ 
+                        proccess_transaction_callerd = 1;
+                    }, 5000);
+
+                } else  if(selected_payment_option == "Paying with M-Pesa") {
+                    $(".complete_trasaction").removeClass("btn-warning");
+                    $(".complete_trasaction").addClass("btn-success");
+                    $(".complete_trasaction").html(response.message);                 
+                    setTimeout(function(){ 
+                        proccess_transaction_callerd = 1;
+                    }, 5000);
                 }
-                $(".complete_trasaction").removeClass("btn-warning");
-                $(".complete_trasaction").addClass("btn-success");
-                $(".complete_trasaction").html(response.message);
-                 
-                proccess_transaction_callerd = 1;
+
+                
                 //onDeviceReady();
                 //index_login_user(localStorage.getItem("user_email"),localStorage.getItem("user_pass"),username,localStorage.getItem("user_email"));
 

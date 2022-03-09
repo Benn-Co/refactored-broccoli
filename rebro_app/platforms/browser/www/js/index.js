@@ -840,11 +840,11 @@ function loadchat(item_connect_from) {
                         if (balanceDataObj[0].account_balance > 0) {
                             $(".account_funding").hide();
                             //$(".setting_up_your_account").hide();
-                            display_account_action("hide");                            
+                            //display_account_action("hide");                            
                         } else {
-                            display_account_action("show");
-                            $(".setting_up_your_account").show();
-                            //$(".account_funding").show();
+                            //display_account_action("show");
+                            //$(".setting_up_your_account").show();
+                            $(".account_funding").show();
                         }
 
                         if (dash_called_ind_loadchat_done == 1) {
