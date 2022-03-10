@@ -2092,7 +2092,7 @@ function proccess_transaction(ccode,exrate,amount_to_deposit,selected_payment_op
                     $(".complete_trasaction").html(response.message);
                     setTimeout(function(){ 
                         proccess_transaction_callerd = 1;
-                    }, 5000);
+                    }, 5000); 
 
                 } else  if(selected_payment_option == "Paying with M-Pesa") {
                     $(".complete_trasaction").removeClass("btn-warning");
