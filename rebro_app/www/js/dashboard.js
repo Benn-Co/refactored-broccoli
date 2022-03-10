@@ -26,7 +26,14 @@ $('.order_quantity').on('input',function(e){
     $(".order_quantity").val(e.target.value);
     account_mkt_evaluation(localStorage.getItem("aisa_options"));
 });
-
+$('.amount_to_deposit').on('input',function(e){ 
+    $(".amount_to_deposit").val(e.target.value);
+    amount_to_deposit_usd();
+});
+$('.amount_to_withdraw').on('input',function(e){ 
+    $(".amount_to_withdraw").val(e.target.value);
+    amount_to_deposit_usd();
+});
 var button_loader = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Loading...</span>';
 
 //https://silicon.createx.studio/assets/img/landing/conference/hero-video.mp4
@@ -505,6 +512,7 @@ $(".complete_trasaction").click(function(){
             //$(".payment_option").addClass("btn-success");
             $(".payment_option").html(localStorage.getItem("selected_payment_option")); 
     
+             
             if ($(this).attr("intenti") == "withdraw") {
                 if ($(".amount_to_withdraw").val() == '') {
                     $(".amount_to_withdraw").removeClass("is-valid");
@@ -513,7 +521,7 @@ $(".complete_trasaction").click(function(){
                     $(".amount_to_withdraw_feedback").addClass("invalid-feedback");
                     $(".amount_to_withdraw_feedback").html("Please provide a valid amount.");
                     var amount_to_deposit =0;
-    
+        
                 } else {
                     $(".amount_to_withdraw").removeClass("is-invalid");
                     $(".amount_to_withdraw_feedback").removeClass("invalid-feedback");
@@ -522,10 +530,10 @@ $(".complete_trasaction").click(function(){
                     $(".amount_to_withdraw_feedback").html("Looks good!");
                     var amount_to_deposit = Number($(".amount_to_withdraw").val());
                     //var amount_to_deposit = Number($(".amount_to_deposit").val());
-                    var amount_in_usd = amount_to_deposit/Number(localStorage.getItem("exrate"));
+                    amount_in_usd = amount_to_deposit/Number(localStorage.getItem("exrate"));
                     amount_in_usd = amount_in_usd.toFixed(2);
                     $(".amount_to_withdraw_feedback").html("$" + amount_in_usd + " will be withdrew.");
-
+        
                 }            
             } else {
                 if ($(".amount_to_deposit").val() == '') {
@@ -535,7 +543,7 @@ $(".complete_trasaction").click(function(){
                     $(".amount_to_deposit_feedback").addClass("invalid-feedback");
                     $(".amount_to_deposit_feedback").html("Please provide a valid amount.");
                     var amount_to_deposit =0;
-    
+        
                 } else {
                     $(".amount_to_deposit").removeClass("is-invalid");
                     $(".amount_to_deposit_feedback").removeClass("invalid-feedback");
@@ -543,11 +551,11 @@ $(".complete_trasaction").click(function(){
                     $(".amount_to_deposit_feedback").addClass("valid-feedback");
                     $(".amount_to_deposit_feedback").html("Looks good!");
                     var amount_to_deposit = Number($(".amount_to_deposit").val());
-                    var amount_in_usd = amount_to_deposit/Number(localStorage.getItem("exrate"));
+                    amount_in_usd = amount_to_deposit/Number(localStorage.getItem("exrate"));
                     amount_in_usd = amount_in_usd.toFixed(2);
                     $(".amount_to_deposit_feedback").html("$" + amount_in_usd + " will be deposited.");
                 }            
-            }        
+            }      
     
             var selected_payment_option  = localStorage.getItem("selected_payment_option");
     
@@ -2011,7 +2019,52 @@ function braintree_gettoken(amount_in_usd,selected_payment_option,useremail_,inf
         }
     });
 }
+var amount_in_usd = 0;
+function amount_to_deposit_usd() {
+    if ($(this).attr("intenti") == "withdraw") {
+        if ($(".amount_to_withdraw").val() == '') {
+            $(".amount_to_withdraw").removeClass("is-valid");
+            $(".amount_to_withdraw_feedback").removeClass("valid-feedback");
+            $(".amount_to_withdraw").addClass("is-invalid");
+            $(".amount_to_withdraw_feedback").addClass("invalid-feedback");
+            $(".amount_to_withdraw_feedback").html("Please provide a valid amount.");
+            var amount_to_deposit =0;
 
+        } else {
+            $(".amount_to_withdraw").removeClass("is-invalid");
+            $(".amount_to_withdraw_feedback").removeClass("invalid-feedback");
+            $(".amount_to_withdraw").addClass("is-valid");
+            $(".amount_to_withdraw_feedback").addClass("valid-feedback");
+            $(".amount_to_withdraw_feedback").html("Looks good!");
+            var amount_to_deposit = Number($(".amount_to_withdraw").val());
+            //var amount_to_deposit = Number($(".amount_to_deposit").val());
+            amount_in_usd = amount_to_deposit/Number(localStorage.getItem("exrate"));
+            amount_in_usd = amount_in_usd.toFixed(2);
+            $(".amount_to_withdraw_feedback").html("$" + amount_in_usd + " will be withdrew.");
+
+        }            
+    } else {
+        if ($(".amount_to_deposit").val() == '') {
+            $(".amount_to_deposit").removeClass("is-valid");
+            $(".amount_to_deposit_feedback").removeClass("valid-feedback");
+            $(".amount_to_deposit").addClass("is-invalid");
+            $(".amount_to_deposit_feedback").addClass("invalid-feedback");
+            $(".amount_to_deposit_feedback").html("Please provide a valid amount.");
+            var amount_to_deposit =0;
+
+        } else {
+            $(".amount_to_deposit").removeClass("is-invalid");
+            $(".amount_to_deposit_feedback").removeClass("invalid-feedback");
+            $(".amount_to_deposit").addClass("is-valid");
+            $(".amount_to_deposit_feedback").addClass("valid-feedback");
+            $(".amount_to_deposit_feedback").html("Looks good!");
+            var amount_to_deposit = Number($(".amount_to_deposit").val());
+            amount_in_usd = amount_to_deposit/Number(localStorage.getItem("exrate"));
+            amount_in_usd = amount_in_usd.toFixed(2);
+            $(".amount_to_deposit_feedback").html("$" + amount_in_usd + " will be deposited.");
+        }            
+    }
+}
 function proccess_transaction(ccode,exrate,amount_to_deposit,selected_payment_option,useremail_,phone_num,intent){
     $.ajax({
         type: "POST", // Type of request to be send, called as 

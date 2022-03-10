@@ -26,6 +26,15 @@ $('.order_quantity').on('input',function(e){
     $(".order_quantity").val(e.target.value);
     account_mkt_evaluation(localStorage.getItem("aisa_options"));
 });
+$('.amount_to_deposit').on('input',function(e){ 
+    $(".amount_to_deposit").val(e.target.value);
+    amount_to_deposit_usd();
+});
+$('.amount_to_withdraw').on('input',function(e){ 
+    $(".amount_to_withdraw").val(e.target.value);
+    amount_to_deposit_usd();
+});
+var button_loader = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Loading...</span>';
 
 //https://silicon.createx.studio/assets/img/landing/conference/hero-video.mp4
 $("body").delegate(".mkt_option","click",function(event){
@@ -126,7 +135,8 @@ $("body").delegate(".mkt_option","click",function(event){
 
         var order_price = $(".order_price").val();
         if (localStorage.getItem("username") == null || localStorage.getItem("username") == "") {
-            mysnackbar("Please sign in to proceed");
+            $(".mkt_err_evaluation").html("Please sign in to proceed");
+            //mysnackbar("Please sign in to proceed");
         } else {
             if (order_price !== "") {
                 $(".order_price").removeClass("is-invalid");
@@ -144,6 +154,9 @@ $("body").delegate(".mkt_option","click",function(event){
                 } else {
                     $(".order_quantity").removeClass("is-valid");
                     $(".order_quantity").addClass("is-invalid");
+
+                    $(".mkt_err_evaluation").html("Enter Quantity");
+
                     //mysnackbar("Enter Quantity");
     
                 }
@@ -155,9 +168,38 @@ $("body").delegate(".mkt_option","click",function(event){
         mkt_option_clicked = 1;
 });
 $("body").delegate(".order_book_mkt","click",function(event){
-    event.preventDefault();    
-       
+    event.preventDefault(); 
     if ($(this).attr('order_book_side') =="Buy") {
+        localStorage.setItem("aisa_options","sell");
+        localStorage.setItem("price",$(this).attr('order_book_price'));
+
+    } else {
+        localStorage.setItem("aisa_options","buy");
+        localStorage.setItem("price",$(this).attr('order_book_price'));
+    }
+    if ($(".order_price").val(localStorage.getItem("price")) == '' || $(".order_price").val(localStorage.getItem("price")) == null) {
+        $(".order_price").val(localStorage.getItem("price"));  
+    }
+
+    if ($(this).attr('order_book_side') =="Buy") {
+        localStorage.setItem("aisa_options","sell");
+        localStorage.setItem("price",$(this).attr('order_book_price'));
+
+    } else {
+        localStorage.setItem("aisa_options","buy");
+        localStorage.setItem("price",$(this).attr('order_book_price'));
+
+    }
+    
+    if ($(".order_price").val(localStorage.getItem("price")) == '' || $(".order_price").val(localStorage.getItem("price")) == null) {
+        $(".order_price").val(localStorage.getItem("price"));  
+    }
+
+    account_mkt_evaluation(localStorage.getItem("aisa_options"));
+    $("#current_crypto_symbolModal").modal('show');
+
+       
+    /**if ($(this).attr('order_book_side') =="Buy") {
         localStorage.setItem("aisa_options","sell");
         localStorage.setItem("price",$(this).attr('order_book_price'));
 
@@ -191,7 +233,7 @@ $("body").delegate(".order_book_mkt","click",function(event){
     } else {
         $(".order_price").removeClass("is-valid");
         $(".order_price").addClass("is-invalid");
-    }
+    } */
 });
 
 $("body").delegate(".currency_option","click",function(event){
@@ -266,10 +308,62 @@ $(".query_symbols").hover(function(){
     $(".langsright").hide();
 });
 $("body").delegate(".gift_send","click",function(event){
-    event.preventDefault();    
-    localStorage.setItem("gift_email",$(".gift_email").val());
-    send_gift_email(localStorage.getItem("gift_email"),localStorage.getItem("username"));
+    event.preventDefault();   
+    var email_format =/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    if (email_format.test($(".gift_email").val()) && $(".gift_email").val() !='') {
+        localStorage.setItem("gift_email",$(".gift_email").val());
+        $(".gift_send").html(button_loader);
+        send_email(localStorage.getItem("gift_email"),localStorage.getItem("username"),"gift_card");
+    } else {
+        mysnackbar("Enter a valid email address, e.g name@example.com"); 
+    }    
 });
+
+var div_loader = '<div class="div_loader"></div>';
+$("body").delegate(".account_activation","click",function(event){
+    event.preventDefault();
+    $(".account_activation").html(div_loader); 
+    send_email(localStorage.getItem("email"),localStorage.getItem("username"),"account_activation");
+});
+
+$("body").delegate(".activation_code_button","click",function(event){
+    event.preventDefault();
+    if ($("#activation-code").val() == '') {
+        $(".activation_code_button_err").html('Enter the code');
+    } else {
+        $(".activation_code_button_err").html('');
+        $(".activation_code_button").html(button_loader);
+        send_email(localStorage.getItem("email"),localStorage.getItem("username"),$("#activation-code").val());
+
+    }    
+});
+
+$("body").delegate(".complete_account_authentication","click",function(event){
+    event.preventDefault();
+    if ($(".account_authentication_phone_number").val() == '') {
+        $(".account_authentication_phone_numberfeedback").html('<span class="text-danger">Enter phone number</span>');
+    } else {
+        var phone_num = $(".account_authentication_phone_number").val();
+        phone_num = "" + phone_num + "";
+        if(phone_num.charAt(0) === "0"){
+            phone_num = phone_num.replace(0, "");
+        }
+        if (phone_num.length < 9 || phone_num.length > 9) {
+            $(".account_authentication_phone_numberfeedback").html('<span class="text-danger">Enter valid phone number</span>');
+
+        } else {
+            var mcode = localStorage.getItem("mcode");
+            phone_num = mcode + "" + phone_num;
+            $(".account_authentication_phone_numberfeedback").html('<span class="text-success">'+ phone_num + '</span>');
+            $(".complete_account_authentication").html(button_loader);
+            localStorage.setItem("user_phone", phone_num);
+
+            send_email(localStorage.getItem("email"),localStorage.getItem("username"),'account_authentication');
+
+        }      
+    }    
+});
+
 $("body").delegate(".get_asset_assets","click",function(event){
     $("#main_mkt").removeClass("is-visible");
 });
@@ -349,6 +443,7 @@ $("body").delegate(".selected_payment_option","click",function(event){
         $(".payment_option").removeClass("btn-danger");
         $(".payment_option").removeClass("btn-info");
         $(".payment_option").addClass("btn-success");
+        
     } else if ($(this).html() == "Paying with Paypal"){
         $(".entrer_phoner").hide();
         $(".entrer_cards").hide();
@@ -381,6 +476,8 @@ $("body").delegate(".selected_payment_option","click",function(event){
 //var clientToken = '';
 
 $(".complete_trasaction").click(function(){
+    //alert(localStorage.getItem("email_account_activation") == 0);
+
     var intenti = $(this).attr("intenti");
     var intent = $(this).attr("intenti");
     $(".complete_trasaction").html(intent);
@@ -415,6 +512,7 @@ $(".complete_trasaction").click(function(){
             //$(".payment_option").addClass("btn-success");
             $(".payment_option").html(localStorage.getItem("selected_payment_option")); 
     
+             
             if ($(this).attr("intenti") == "withdraw") {
                 if ($(".amount_to_withdraw").val() == '') {
                     $(".amount_to_withdraw").removeClass("is-valid");
@@ -423,7 +521,7 @@ $(".complete_trasaction").click(function(){
                     $(".amount_to_withdraw_feedback").addClass("invalid-feedback");
                     $(".amount_to_withdraw_feedback").html("Please provide a valid amount.");
                     var amount_to_deposit =0;
-    
+        
                 } else {
                     $(".amount_to_withdraw").removeClass("is-invalid");
                     $(".amount_to_withdraw_feedback").removeClass("invalid-feedback");
@@ -432,10 +530,10 @@ $(".complete_trasaction").click(function(){
                     $(".amount_to_withdraw_feedback").html("Looks good!");
                     var amount_to_deposit = Number($(".amount_to_withdraw").val());
                     //var amount_to_deposit = Number($(".amount_to_deposit").val());
-                    var amount_in_usd = amount_to_deposit/Number(localStorage.getItem("exrate"));
+                    amount_in_usd = amount_to_deposit/Number(localStorage.getItem("exrate"));
                     amount_in_usd = amount_in_usd.toFixed(2);
                     $(".amount_to_withdraw_feedback").html("$" + amount_in_usd + " will be withdrew.");
-
+        
                 }            
             } else {
                 if ($(".amount_to_deposit").val() == '') {
@@ -445,7 +543,7 @@ $(".complete_trasaction").click(function(){
                     $(".amount_to_deposit_feedback").addClass("invalid-feedback");
                     $(".amount_to_deposit_feedback").html("Please provide a valid amount.");
                     var amount_to_deposit =0;
-    
+        
                 } else {
                     $(".amount_to_deposit").removeClass("is-invalid");
                     $(".amount_to_deposit_feedback").removeClass("invalid-feedback");
@@ -453,11 +551,11 @@ $(".complete_trasaction").click(function(){
                     $(".amount_to_deposit_feedback").addClass("valid-feedback");
                     $(".amount_to_deposit_feedback").html("Looks good!");
                     var amount_to_deposit = Number($(".amount_to_deposit").val());
-                    var amount_in_usd = amount_to_deposit/Number(localStorage.getItem("exrate"));
+                    amount_in_usd = amount_to_deposit/Number(localStorage.getItem("exrate"));
                     amount_in_usd = amount_in_usd.toFixed(2);
                     $(".amount_to_deposit_feedback").html("$" + amount_in_usd + " will be deposited.");
                 }            
-            }        
+            }      
     
             var selected_payment_option  = localStorage.getItem("selected_payment_option");
     
@@ -495,6 +593,7 @@ $(".complete_trasaction").click(function(){
                         $(".user_phone_number").addClass("is-invalid");
                         $(".user_phone_numberfeedback").addClass("invalid-feedback");
                         $(".user_phone_numberfeedback").html("Please provide a valid 10 digits phone number.");
+                        
                     }                
                 } else {
                     if ($(this).attr("intenti") == "withdraw") {
@@ -556,8 +655,14 @@ $(".complete_trasaction").click(function(){
                         onApprove: function(data, actions) {
                             return actions.order.capture().then(function(orderData) {
                               // Successful capture! For dev/demo purposes:
-                                  //var element = document.getElementById('paypal-button-container');
+                              $(".deposit_footer").show();
+                              $(".complete_trasaction").show();
+                              $(".complete_trasaction").html(button_loader);
+
+                              //var element = document.getElementById('paypal-button-container');
                                   //element.innerHTML = JSON.stringify(orderData, null, 2);
+                                  /**var element = document.getElementById('paypal-button-container');
+                                  element.innerHTML = JSON.stringify(orderData, null, 2);
 
                                   var elementjson = { 
                                       "id": "2LD38181TF5660020", 
@@ -598,9 +703,11 @@ $(".complete_trasaction").click(function(){
                                       "create_time": "2022-02-11T11:10:09Z", 
                                       "update_time": "2022-02-11T11:19:25Z", 
                                       "links": [ { "href": "https://api.sandbox.paypal.com/v2/checkout/orders/2LD38181TF5660020", "rel": "self", "method": "GET" } ] 
-                                  };
+                                  }; */
+
+                                  /**{ "id": "6U89135944570623Y", "intent": "CAPTURE", "status": "COMPLETED", "purchase_units": [ { "reference_id": "default", "amount": { "currency_code": "USD", "value": "10.00" }, "payee": { "email_address": "wambuistephen@outlook.com", "merchant_id": "7SWMQRBNCGS62" }, "soft_descriptor": "PAYPAL *ORAMLA", "shipping": { "name": { "full_name": "Stephen Wambui" }, "address": { "address_line_1": "60", "admin_area_2": "Ngewa", "admin_area_1": "Select region", "postal_code": "00901", "country_code": "KE" } }, "payments": { "captures": [ { "id": "91L58246WD634093A", "status": "COMPLETED", "amount": { "currency_code": "USD", "value": "10.00" }, "final_capture": true, "seller_protection": { "status": "NOT_ELIGIBLE" }, "create_time": "2022-03-07T18:17:47Z", "update_time": "2022-03-07T18:17:47Z" } ] } } ], "payer": { "name": { "given_name": "Stephen", "surname": "Wambui" }, "email_address": "karitustephen@gmail.com", "payer_id": "P9Z5XKWZ85JYY", "address": { "country_code": "KE" } }, "create_time": "2022-03-07T18:13:52Z", "update_time": "2022-03-07T18:17:47Z", "links": [ { "href": "https://api.paypal.com/v2/checkout/orders/6U89135944570623Y", "rel": "self", "method": "GET" } ] } */
                                   
-                                  var id = orderData.id;
+                                  var orderData_id = orderData.id;
                                   var inteent = orderData.intent;
                                   var status = orderData.status;
                                   var email_address = orderData.purchase_units[0].payee.email_address;
@@ -611,13 +718,19 @@ $(".complete_trasaction").click(function(){
 
                                   var transaction_id = transaction.id;
                                   var transaction_status = transaction.status;
+                                  var transaction_amount = transaction.amount;
 
                                   var payer = orderData.payer;
+                                  if (transaction_status == 'COMPLETED') {
+                                    complete_trasaction(amount_to_deposit,selected_payment_option,'useremail_',orderData_id,intent);
+                                  } else {
+                                      
+                                  }
 
                                   //alert(full_name);
 
                                   //alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
-                                  complete_trasaction(amount_to_deposit,selected_payment_option,'useremail_',transaction.id,intent);
+                                  //complete_trasaction(amount_to_deposit,selected_payment_option,'useremail_',transaction_id,intent);
     
                               // When ready to go live, remove the alert and show a success message within this page. For example:
                               // var element = document.getElementById('paypal-button-container');
@@ -692,22 +805,25 @@ $(".complete_trasaction").click(function(){
 });
 
 function complete_trasaction(amount_to_deposit,selected_payment_option,useremail_,proccessing_number,intent) {
+    //alert(localStorage.getItem("email_account_activation"));
     if (amount_to_deposit == "" || amount_to_deposit < 1) {
         mysnackbar("Enter valid amount");
-    } else {
+    } else if(localStorage.getItem("email_account_activation") == 0){
         if (selected_payment_option == "Paying with Card") {
             $(".complete_card_trasaction").removeClass("btn-primary");
             $(".complete_card_trasaction").addClass("btn-warning");
-            $(".complete_card_trasaction").html("Proccessing...");
+            $(".complete_card_trasaction").html(button_loader);
         } else {
             $(".complete_trasaction").removeClass("btn-primary");
             $(".complete_trasaction").addClass("btn-warning");
-            $(".complete_trasaction").html("Proccessing...");
+            $(".complete_trasaction").html(button_loader);
         }
         
         //$(".complete_trasaction").show();
         //$(".complete_card_trasaction").hide();
         proccess_transaction(localStorage.getItem("cname"),localStorage.getItem("exrate"), amount_to_deposit,selected_payment_option,useremail_,proccessing_number,intent);               
+    } else {
+        $(".user_phone_numberfeedback").html('<span class="text-danger ">Verify your email to continue funding!</span>');
     }
 }
 
@@ -739,18 +855,48 @@ function rebro_Aisha(asset,aisa_options,price,price_open,day_high,day_low) {
         }
     });   
 }
-function send_gift_email(gift_email,username) {
+function send_email(gift_email,username,main) {
     $.ajax({
         type: "POST", // Type of request to be send, called as 
         dataType: 'json',
-        data: { gift_email: gift_email, username: username},
+        data: { gift_email: gift_email, username: username, main: main, user_phone:localStorage.getItem("user_phone")},
         processData: true,
-        url: api_server_url + '/cordova/send_gift_email.php',
+        url: 'https://oramla.com/cordova/arybit.php',
         success: function searchSuccess(response) {
             try {
                 if (response.message == "success") {
-                    mysnackbar(response.validate_message);
-                    $(".gift_email").val("");
+                    //alert(response.validate_message);
+                    if (main == "gift_card") {
+                        $(".gift_send").html("Send invites");
+                        $(".gift_email").val("");
+                        mysnackbar(response.validate_message);
+
+                    }else if (main == "account_activation") {
+                        var account_activation = '<div class="card-body text-info">'+
+                        '<h5 class="card-title">Verify Your Identity</h5>'+
+                        '<p class="card-text">Get verified to enable account funding.</p>'+
+                        '</div>';
+                        $(".account_activation").html(account_activation);
+                        $("#account_code_activation").modal('show');
+                        mysnackbar(response.validate_message);
+
+                    } else if(main == "account_authentication"){
+                        if (response.validate_message) {
+                            $(".account_authentication_phone_numberfeedback").html('<span class="text-success">'+ response.validate_message + '</span>');
+                            $(".complete_account_authentication").html('Authenticate');
+                            $("#account_authentication").modal('hide');
+                            $(".method_account_authentication").hide();
+                        }                        
+                    } else {
+                        if (response.validate_message == main) {
+                            $(".activation_code_button").html('Verify code');
+                            $("#account_code_activation").modal('hide');
+                        } else {
+                            $(".activation_code_button").html('Verify code');
+                            $(".activation_code_button_err").html('Invalid code'); 
+                        }
+                    }
+                    
                     //$("#code_email").html(forgot_login_email);
                     /**if (response.validate_message == 'Your mail has been sent successfully.') {
                         //$("#forgot").removeClass("active");
@@ -860,6 +1006,7 @@ $(function() {
 //var buy_cliwecked_do=0;
 function arybit(crypto,asset,aisa_options) {
     //alert('arybit');
+//    $(".card_img_asset").html('<img class="avatar-img" src="' + localStorage.getItem("username_pic") + '" alt="#">');
 
     $.ajax({
         type: "POST", // Type of request to be send, called as 
@@ -875,6 +1022,14 @@ function arybit(crypto,asset,aisa_options) {
                         lacal_asset_not_eq_to_this = 0;
                         $("#current_crypto_symbolModal").modal('show');
                     }
+
+                    let text = localStorage.getItem("asset");
+                    const myArray = text.split("USD");
+                    var et_svg = myArray[0];
+                    et_svg = et_svg.toLowerCase();
+                    var svg_src = "https://s1.bycsi.com/assets/image/coins/light/" + et_svg + ".svg";
+                    //$(".card_img_asset").html('<img class="card-img-top" src="' + svg_src + '" alt="' + localStorage.getItem("asset") + '">');
+
 
                     var query_kline = response.query_kline;
                     if (query_kline !=null) {
@@ -1005,6 +1160,7 @@ function arybit(crypto,asset,aisa_options) {
                         et_svg = et_svg.toLowerCase();
                         var svg_src = "https://s1.bycsi.com/assets/image/coins/light/" + et_svg + ".svg";
 
+                        
                         var current_crypto_symbol = '<span class="">' + 
                         '<span class="rounded-circle" style="width: 32px; height: 32px;">'+
                         '<img src="'+ svg_src + '" class="rounded-circle" width="28" alt="Avatar"> ' + 
@@ -1863,7 +2019,52 @@ function braintree_gettoken(amount_in_usd,selected_payment_option,useremail_,inf
         }
     });
 }
+var amount_in_usd = 0;
+function amount_to_deposit_usd() {
+    if ($(this).attr("intenti") == "withdraw") {
+        if ($(".amount_to_withdraw").val() == '') {
+            $(".amount_to_withdraw").removeClass("is-valid");
+            $(".amount_to_withdraw_feedback").removeClass("valid-feedback");
+            $(".amount_to_withdraw").addClass("is-invalid");
+            $(".amount_to_withdraw_feedback").addClass("invalid-feedback");
+            $(".amount_to_withdraw_feedback").html("Please provide a valid amount.");
+            var amount_to_deposit =0;
 
+        } else {
+            $(".amount_to_withdraw").removeClass("is-invalid");
+            $(".amount_to_withdraw_feedback").removeClass("invalid-feedback");
+            $(".amount_to_withdraw").addClass("is-valid");
+            $(".amount_to_withdraw_feedback").addClass("valid-feedback");
+            $(".amount_to_withdraw_feedback").html("Looks good!");
+            var amount_to_deposit = Number($(".amount_to_withdraw").val());
+            //var amount_to_deposit = Number($(".amount_to_deposit").val());
+            amount_in_usd = amount_to_deposit/Number(localStorage.getItem("exrate"));
+            amount_in_usd = amount_in_usd.toFixed(2);
+            $(".amount_to_withdraw_feedback").html("$" + amount_in_usd + " will be withdrew.");
+
+        }            
+    } else {
+        if ($(".amount_to_deposit").val() == '') {
+            $(".amount_to_deposit").removeClass("is-valid");
+            $(".amount_to_deposit_feedback").removeClass("valid-feedback");
+            $(".amount_to_deposit").addClass("is-invalid");
+            $(".amount_to_deposit_feedback").addClass("invalid-feedback");
+            $(".amount_to_deposit_feedback").html("Please provide a valid amount.");
+            var amount_to_deposit =0;
+
+        } else {
+            $(".amount_to_deposit").removeClass("is-invalid");
+            $(".amount_to_deposit_feedback").removeClass("invalid-feedback");
+            $(".amount_to_deposit").addClass("is-valid");
+            $(".amount_to_deposit_feedback").addClass("valid-feedback");
+            $(".amount_to_deposit_feedback").html("Looks good!");
+            var amount_to_deposit = Number($(".amount_to_deposit").val());
+            amount_in_usd = amount_to_deposit/Number(localStorage.getItem("exrate"));
+            amount_in_usd = amount_in_usd.toFixed(2);
+            $(".amount_to_deposit_feedback").html("$" + amount_in_usd + " will be deposited.");
+        }            
+    }
+}
 function proccess_transaction(ccode,exrate,amount_to_deposit,selected_payment_option,useremail_,phone_num,intent){
     $.ajax({
         type: "POST", // Type of request to be send, called as 
@@ -1883,16 +2084,26 @@ function proccess_transaction(ccode,exrate,amount_to_deposit,selected_payment_op
                     $(".complete_card_trasaction").hide();
                     //$("#dropin-container").html("");
 
-                } else {
-                    //$(".complete_trasaction").removeClass("btn-warning");
-                    //$(".complete_trasaction").addClass("btn-success");
-                    //$(".complete_trasaction").html(response.message);
+                } else if(selected_payment_option == "Paying with Paypal") {
+                    $(".deposit_footer").show();
+                    $(".complete_trasaction").show();
+                    $(".complete_trasaction").removeClass("btn-warning");
+                    $(".complete_trasaction").addClass("btn-success");
+                    $(".complete_trasaction").html(response.message);
+                    setTimeout(function(){ 
+                        proccess_transaction_callerd = 1;
+                    }, 5000);
+
+                } else  if(selected_payment_option == "Paying with M-Pesa") {
+                    $(".complete_trasaction").removeClass("btn-warning");
+                    $(".complete_trasaction").addClass("btn-success");
+                    $(".complete_trasaction").html(response.message);                 
+                    setTimeout(function(){ 
+                        proccess_transaction_callerd = 1;
+                    }, 5000);
                 }
-                $(".complete_trasaction").removeClass("btn-warning");
-                $(".complete_trasaction").addClass("btn-success");
-                $(".complete_trasaction").html(response.message);
-                 
-                proccess_transaction_callerd = 1;
+
+                
                 //onDeviceReady();
                 //index_login_user(localStorage.getItem("user_email"),localStorage.getItem("user_pass"),username,localStorage.getItem("user_email"));
 
@@ -1932,11 +2143,15 @@ function account_mkt_balance(aisa_options) {
             var actual_aqunt_balance = Number(localStorage.getItem("usd_account_balance"))*Number(localStorage.getItem("exrate"));
 
             if (actual_aqunt_balance <= 0) {
-                mysnackbar("Insufficient balance, load your account.");
+                $(".mkt_err_evaluation").html("Insufficient balance, load your account.");
+
+                //mysnackbar("Insufficient balance, load your account.");
                 display_account_action("show");
 
             } else {
                 if (order_usd_quantity <= actual_aqunt_balance) {
+                    $(".mkt_err_evaluation").html();
+
                     if (localStorage.getItem("" + localStorage.getItem("asset") + "_usd_value") == null || localStorage.getItem("" + localStorage.getItem("asset") + "_usd_value") == 0) {
                         localStorage.setItem("" + localStorage.getItem("asset") + "_usd_value",Number(order_usd_quantity)/Number(localStorage.getItem("exrate")));//USD
                     } else {
@@ -1984,7 +2199,9 @@ function account_mkt_balance(aisa_options) {
                     $(".order_quantity_range").val(0);
                 } else {
                     $(".order_quantity").val(localStorage.getItem("usd_account_balance"));
-                    mysnackbar("You do not have enough money");
+                    $(".mkt_err_evaluation").html("You do not have enough money.");
+
+                    //mysnackbar("You do not have enough money");
                     $(".order_quantity_range").val(0);
                 } 
             }            
@@ -1992,6 +2209,8 @@ function account_mkt_balance(aisa_options) {
             $(".order_quantity").addClass("is-invalid");
             $(".order_quantity").removeClass("is-valid");
             var order_usd_quantity = 0;//localStorage.getItem("account_balance");//USD
+            $(".mkt_err_evaluation").html("Enter Quantity.");
+
             //mysnackbar("Enter Quantity");
         }        
     } else if (aisa_options =="sell") {
@@ -2006,14 +2225,22 @@ function account_mkt_balance(aisa_options) {
             var assetbalanc = localStorage.getItem(crypto_asset_balance);
 
             if (assetbalanc < order_btc_quantity) {
-                mysnackbar("You do not have enough crypto!");
+                $(".mkt_err_evaluation").html("You do not have enough crypto!.");
+
+                //mysnackbar("You do not have enough crypto!");
                 //var bitcoin_balance = localStorage.getItem(crypto_asset_balance);//USD
                 $(".order_quantity").val(localStorage.getItem(crypto_asset_balance))
 
             } else if (localStorage.getItem(crypto_asset_balance) <= 0) {
-                mysnackbar("Deficient crypto, try buying some");
+                //$(".mkt_err_evaluation").html("Deficient crypto, try buying some");
+
+                $(".mkt_err_evaluation").html("Deficient " + localStorage.getItem("asset") + " Balance, try buying some");
+
+                //mysnackbar("Deficient crypto, try buying some");
             } else {
                 if (localStorage.getItem(crypto_asset_balance) > 0) {
+                    $(".mkt_err_evaluation").html();
+
                     var bitcoin_balance = localStorage.getItem(crypto_asset_balance);//USD
                     var Ibitcoin_balance = bitcoin_balance;
                     bitcoin_balance = Number(bitcoin_balance) - Number(order_btc_quantity);
@@ -2078,7 +2305,9 @@ function account_mkt_balance(aisa_options) {
                     $(".order_quantity_range").val(0);
                 } else{
                     $(".order_quantity").val(localStorage.getItem(crypto_asset_balance));
-                    mysnackbar("You do not have enough crypto");
+                    $(".mkt_err_evaluation").html("You do not have enough crypto");
+
+                    //mysnackbar("You do not have enough crypto");
                     $(".order_quantity_range").val(0);
                 }
             }            
@@ -2087,6 +2316,8 @@ function account_mkt_balance(aisa_options) {
             $(".order_quantity").addClass("is-invalid");
             $(".order_quantity").removeClass("is-valid");
             var order_btc_quantity = 0;//localStorage.getItem(crypto_asset_balance);//BTC
+            $(".mkt_err_evaluation").html("Enter Quantity");
+
             //mysnackbar("Enter Quantity");
         }        
     }
@@ -2362,8 +2593,12 @@ $(document).on('input', '.order_quantity_range', function() {
         var pct_bitcoin_balance = (Number(bitcoin_balance) *Number(order_quantity_pct))/100;
         pct_bitcoin_balance = pct_bitcoin_balance.toFixed(8);
         if (localStorage.getItem(crypto_asset_balance) <= 0) {
-            mysnackbar("Deficient " + crypto_asset_balance + ", try buying some");
+            $(".mkt_err_evaluation").html("Deficient " + localStorage.getItem("asset") + " Balance, try buying some");
+
+            //mysnackbar("Deficient " + crypto_asset_balance + ", try buying some");
         } else {
+            $(".mkt_err_evaluation").html();
+
             $(".order_quantity").val(pct_bitcoin_balance);
         }
 
@@ -2373,9 +2608,13 @@ $(document).on('input', '.order_quantity_range', function() {
         var pct_account_balance = (Number(account_balance)*Number(order_quantity_pct))/100;
         pct_account_balance = pct_account_balance.toFixed(2);
         if (localStorage.getItem("account_balance") <= 0) {
-            mysnackbar("Insufficient balance, load your account.");
+            $(".mkt_err_evaluation").html("Insufficient balance, load your account.");
+
+            //mysnackbar("Insufficient balance, load your account.");
             display_account_action("show");
         } else {
+            $(".mkt_err_evaluation").html();
+
             $(".order_quantity").val(pct_account_balance);
         }
     }
@@ -2389,6 +2628,10 @@ function display_account_action(action) {
     if (action == "hide") {
         $("#account_action").hide();
     } else {
+        setTimeout(function(){ 
+            $("#current_crypto_symbolModal").modal('hide');
+            $("#account_deposit").modal('show');
+        }, 3000);
         $("#account_action").show();
     }
 }
