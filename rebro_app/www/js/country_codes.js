@@ -17,6 +17,8 @@ function get_country_codes(lo,la) {
          for (let i = 0; i < fLen; i++) {
            if (i < 1) {
              $(".select_currency").html(countries[i].cname);
+             $(".select_currency_price").html(countries[i].exrate + " " + countries[i].ccode);
+
              $(".mcode").html(countries[i].mcode);
              localStorage.setItem("mcode", countries[i].mcode);
              localStorage.setItem("ccode", countries[i].ccode);

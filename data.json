@@ -1,1 +1,7 @@
-{ "price": "47269", "price_open": "47267.5","day_high": "47267.5" ,"day_low": "47267.5", "options":"hold", "asset":"BTCUSD"}
+{
+"price":"14.00",
+"price_open": "14.6",
+"day_high": "14.6",
+"day_low": "13.5",
+"options": "buy"
+}

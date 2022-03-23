@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    
+    arybit_Aisha("BTCUSD","buy",21,21,24,19);
+
+  });
+});
+
+
+var Aisha_url = 'https://still-inlet-29435.herokuapp.com/';
+var Aisha_url = 'https://still-inlet-29435.herokuapp.com/?price=112&price_open=112&day_high=112&day_low=112&options=hold&user_name=Jon';
+var Aisha_url = 'https://oramla.com/cordova/arybit_Aisha.php';
+
+function arybit_Aisha(asset,aisa_options,price,price_open,day_high,day_low) {
+    $.ajax({
+        type: "POST", // Type of request to be send, called as
+        dataType: 'json',
+        data: { price: price, price_open: price_open, day_high: day_high, day_low:day_low, options:aisa_options, asset:asset},
+        processData: true,
+        url: Aisha_url,
+        success: function searchSuccess(response) { 
+            try {
+            
+                $("#div1").html(response.options + " buy_price " + localStorage.getItem("buy_price") + " sell_price " + localStorage.getItem("sell_price"));
+                
+            } catch (error) {
+                $("#div1").html(error);
+            }
+        },
+        error: function searchError(xhr, err) {
+          $("#div1").html(" Error on ajax call: " + err  + " " + JSON.stringify(xhr));
+        }
+    });   
+}
+</script>
+</head>
+<body>
+
+<div><h2>Delivering top-notch personal finance assistance to customers. Case in point, AI-powered applications </h2></div>
+
+<button>Train Your Model</button>
+
+<div id="div1"><h2></h2></div>
+
+
+</body>
+</html>

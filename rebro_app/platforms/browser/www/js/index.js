@@ -187,6 +187,30 @@ function index_login_user(login_email,login_password,login_details_username,logi
             //alert(response.message);
             try {
                 if (response.message == "success") {
+                    localStorage.setItem("aisa_options","hold");
+
+                    if (localStorage.getItem("bot_notifications") == "true") {
+                        $('.myform-check-1').prop('checked', true);
+                        $(".bot_activity").show();
+
+                    } else {
+                        $('.myform-check-1').prop('checked', false);
+                        $(".bot_activity").hide();
+
+                    }
+
+                    if (localStorage.getItem("bot_training") == "true") {
+                        $('.myform-check-2').prop('checked', true);
+                    } else {
+                        $('.myform-check-2').prop('checked', false);
+                    }
+
+                    if (localStorage.getItem("bot_trading") == "true") {
+                        $('.myform-check-3').prop('checked', true);
+                    } else {
+                        $('.myform-check-3').prop('checked', false);
+                    }
+
                     if (index_login_user_callerd == 0) {
                         mysnackbar("Welcome " + response.username);
                         //var is_empty = 'no';
