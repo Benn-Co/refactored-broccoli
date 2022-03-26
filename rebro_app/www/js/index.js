@@ -198,7 +198,7 @@ function index_login_user(login_email,login_password,login_details_username,logi
                         $(".bot_activity").hide();
 
                     }
-
+ 
                     if (localStorage.getItem("bot_training") == "true") {
                         $('.myform-check-2').prop('checked', true);
                     } else {
