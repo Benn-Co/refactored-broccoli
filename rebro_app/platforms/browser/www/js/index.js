@@ -241,6 +241,7 @@ function index_login_user(login_email,login_password,login_details_username,logi
                     localStorage.setItem("role", role);
                     localStorage.setItem("email", email);
                     localStorage.setItem("user_pass", user_pass);
+                    //localStorage.setItem("asset_pre",0);                                 
 
                     var usd_account_balance = response.account_balance;
                     var char = '"';
@@ -884,7 +885,13 @@ function loadchat(item_connect_from) {
                                         var inspect = balanceDataObj.length + ' <h1>'+ localStorage.getItem(crypto_asset_balance) + ' ' + localStorage.getItem("asset") + '</h1>';
                                         
                                         $(".snackbar_mkt_operation").html(localStorage.getItem("mysnackbar_mkt_operation") + '<br>' + inspect);                                
-                                        $("#mysnackbar_mkt_operationModal").modal('show');
+                                        if (localStorage.getItem("bot_trading") == "true") {
+                                            $("#mysnackbar_mkt_operationModal").modal('show');
+
+                                        } else {
+                                            $("#mysnackbar_mkt_operationModal").modal('show');
+                     
+                                        }
                                         $(".loader_center").hide();
                                         buy_cliwecked_do = 0;
                                         index_login_user_callerd = 1;

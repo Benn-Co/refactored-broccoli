@@ -50,7 +50,9 @@ function updateValue(e) {
 //input_quantity.addEventListener('input', update_quantityValue);
 
 //const web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
- var condition_aisa_options_cliked = 0;
+localStorage.setItem("asset_pre",0);                                 
+
+var condition_aisa_options_cliked = 0;
 $('.order_quantity').on('input',function(e){ 
     $(".order_quantity").val(e.target.value);
     condition_aisa_options_cliked = 1;
@@ -1200,6 +1202,8 @@ $('#myform-check-3').on('change', ':checkbox', function () {
         localStorage.setItem("bot_trading", 'false');
     }
 });
+localStorage.setItem("cad_bot_interval", 1);
+localStorage.setItem("tradeview_bot_interval", "1m");
 
 $("body").delegate(".bot_timer","click",function(event){
     event.preventDefault();
@@ -1209,7 +1213,16 @@ $("body").delegate(".bot_timer","click",function(event){
     $(this).addClass("bg-primary");
     one_min_timmer = one_min_timmer*Number($(this).attr('bot_timer'));
     localStorage.setItem("bot_interval", one_min_timmer);
-    $(".bot_activity").html('');
+    localStorage.setItem("cad_bot_interval", $(this).attr('bot_timer'));
+
+    var text = $(this).attr('bot_timer');
+    text = text + "m";
+    //text.replace(" ","");
+    localStorage.setItem("asset_pre",0);   
+    localStorage.setItem("tradeview_bot_interval", text);
+    $(".bot_activity").html(text);
+
+    //$(".bot_activity").html('');
     $(".bot_inter").html($(this).html());
     Query_Kline_Book();
 });
@@ -1276,12 +1289,12 @@ function rebro_Aisha(training,user_name,asset,aisa_options,price,price_open,day_
                     const element_obj_aisha_options_myArray = element.split(":");
                     Predicted_value = element_obj_aisha_options_myArray[1];
                 }
-                obj_smy += "Predicted_value " + Predicted_value + "<br>";
+                //obj_smy += "Predicted_value " + Predicted_value + "<br>";
 
 
                 //obj_smy +=  obj.training + "<br>";
-                obj_smy +=  obj.noaim + "<br>";
-                obj_smy +=  obj.noas + "<br>";
+                //obj_smy +=  obj.noaim + "<br>";
+                //obj_smy +=  obj.noas + "<br>";
 
                 var smy = obj.smy;
                 smy = smy.replace(/Name/g,",,Name");
@@ -1296,7 +1309,7 @@ function rebro_Aisha(training,user_name,asset,aisa_options,price,price_open,day_
                 for (let index = 0; index < myArray.length; index++) {
                     const element = myArray[index];
                     if (index >= myArray.length - 8) {
-                        obj_smy += element + "<br>";
+                        //obj_smy += element + "<br>";
                     }
                 }
 
@@ -2004,6 +2017,44 @@ function arybit(crypto,asset,aisa_options) {
                                     params[new_leads_chart_params] = results_last_price;
     
                                 }
+                                if (localStorage.getItem("asset") !=localStorage.getItem("asset_pre")) {
+                                    new TradingView.widget( {
+                                        "autosize": true,
+                                        "symbol": "BYBIT:" + localStorage.getItem("asset") + "",
+                                        "interval": "" + localStorage.getItem("cad_bot_interval") + "",
+                                        "timezone": "Etc/UTC",
+                                        "theme": "dark",
+                                        "style": "1",
+                                        "locale": "en",
+                                        "toolbar_bg": "#f1f3f6",
+                                        "enable_publishing": false,
+                                        "allow_symbol_change": true,
+                                        "container_id": "tradingview_39940"
+                                    });
+                                    var script_data = '<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>{"symbol": "BYBIT:' + localStorage.getItem("asset") + '","width": 350,"colorTheme": "dark","isTransparent": true,"locale": "en"}</script>';
+                                    $("#script_data").html(script_data); 
+
+                                    var technical_script_data = '<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>{"interval": "' + localStorage.getItem("tradeview_bot_interval") + '","width": "425","isTransparent": true,"height": "450","symbol": "BYBIT:' + localStorage.getItem("asset") + '","showIntervalTabs": true,"locale": "en","colorTheme": "dark"}</script>';
+                                    $("#technical_script_data").html(technical_script_data); 
+
+                                    localStorage.setItem("asset_pre",localStorage.getItem("asset"));                                 
+                                }
+
+                                
+
+                                //var jsonScript = document.querySelector('script[id="data"]');
+                                // parse the json-data element into a JS object
+                                //var json = JSON.parse(jsonScript.innerHTML);
+                                
+                                // Set the object properties as required
+                                //json["symbol"] = "BYBIT:" + localStorage.getItem("asset") + "";
+                                //json["description"] = "My description"
+                                
+                                // write out the object back to the script tag (with pretty formatting)
+                                // check in your browser developer tools to see the modified tag
+                                //jsonScript.innerHTML = JSON.stringify(json, null, 2);
+
+
                                 //localStorage.setItem("" + results[i].symbol + "",results_last_price);// Set Symbol its price
 
                                 //show_charts_cry(params,'update',results[i].symbol,new_seriesData);
@@ -2849,8 +2900,13 @@ function account_mkt_balance(aisa_options) {
                     /////////////////////////////////////////////
                     localStorage.setItem(crypto_asset_balance,bitcoin_balance_fro_usd);//BTC
     
-                    var mysmkt_operation = 'You bought ' + btc_balance_fro_usd + ' ' + localStorage.getItem("asset") + ' worth ' + localStorage.getItem("ccode") + ' ' + localStorage.getItem(crypto_asset_value) + ' at ' + localStorage.getItem("ccode") + ' ' + localStorage.getItem("sell_price");
-                    
+                    if (localStorage.getItem("bot_trading") == "true") {
+                        var mysmkt_operation = '' + btc_balance_fro_usd + ' ' + localStorage.getItem("asset") + ' bought worth ' + localStorage.getItem("ccode") + ' ' + localStorage.getItem(crypto_asset_value) + ' at ' + localStorage.getItem("ccode") + ' ' + localStorage.getItem("sell_price");
+
+                    } else {
+                        var mysmkt_operation = 'You bought ' + btc_balance_fro_usd + ' ' + localStorage.getItem("asset") + ' worth ' + localStorage.getItem("ccode") + ' ' + localStorage.getItem(crypto_asset_value) + ' at ' + localStorage.getItem("ccode") + ' ' + localStorage.getItem("sell_price");
+ 
+                    }
                     localStorage.setItem("mysnackbar_mkt_operation", mysmkt_operation);
 
                     var usd_account_balance = Number(Number(localStorage.getItem("usd_account_balance"))*Number(localStorage.getItem("exrate"))) - Number(order_usd_quantity);//Number(Number(localStorage.getItem("" + localStorage.getItem("asset") + "_usd_value"))*Number(localStorage.getItem("exrate")));
@@ -2864,7 +2920,12 @@ function account_mkt_balance(aisa_options) {
 
                     $("#current_crypto_symbolModal").modal('hide');
 
-                    $(".loader_center").show();
+                    if (localStorage.getItem("bot_trading") == "true") {
+                        
+                    } else {
+                        $(".loader_center").show();
+ 
+                    }
 
                     //Query_Kline_Book();
                     if (localStorage.getItem("bot_trading") == "true") {
@@ -2969,15 +3030,25 @@ function account_mkt_balance(aisa_options) {
                     //crypt_value_remainning = crypt_value_remainning.toFixed(8);
                     //localStorage.setItem(crypto_asset_value,crypt_value_remainning);//USD
 
-                    var mysmkt_operation = 'You sold ' + order_btc_quantity + ' ' + localStorage.getItem("asset") + ' worth ' + localStorage.getItem("ccode") + ' ' + usd_balance_fro_btc + ' at ' + localStorage.getItem("ccode") + ' ' + localStorage.getItem("buy_price");
+                    if (localStorage.getItem("bot_trading") == "true") {
+                        var mysmkt_operation = '' + order_btc_quantity + ' ' + localStorage.getItem("asset") + ' sold worth ' + localStorage.getItem("ccode") + ' ' + usd_balance_fro_btc + ' at ' + localStorage.getItem("ccode") + ' ' + localStorage.getItem("buy_price");
+
+                    } else {
+                        var mysmkt_operation = 'You sold ' + order_btc_quantity + ' ' + localStorage.getItem("asset") + ' worth ' + localStorage.getItem("ccode") + ' ' + usd_balance_fro_btc + ' at ' + localStorage.getItem("ccode") + ' ' + localStorage.getItem("buy_price");
+ 
+                    }
                     localStorage.setItem("mysnackbar_mkt_operation", mysmkt_operation);
 
                     var is_empty = 'no';
                     buy_cliwecked = 1;
 
                     $("#current_crypto_symbolModal").modal('hide');
-                    $(".loader_center").show();
-
+                    if (localStorage.getItem("bot_trading") == "true") {
+                        
+                    } else {
+                        $(".loader_center").show();
+ 
+                    }
                     //Query_Kline_Book();  
                     
                     if (localStorage.getItem("bot_trading") == "true") {

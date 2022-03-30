@@ -18,7 +18,9 @@
         <script src="https://js.braintreegateway.com/web/3.85.2/js/client.min.js"></script>
         <script src="https://js.braintreegateway.com/web/3.85.2/js/data-collector.min.js"></script>
         <script src="https://js.braintreegateway.com/web/3.85.2/js/hosted-fields.min.js"></script>
-       
+        
+        <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+
         
         <link rel="stylesheet" href="./assets/css/template.dark.bundle.css">
 
@@ -302,8 +304,7 @@
                                             </div>
                                             <!-- Card -->
 
-                                            <!--chart-->
-                                            
+                                            <!--chart-->                       
 
 
 
@@ -616,6 +617,25 @@
                                             </div>
                                             <!-- Card -->
 
+                                            <div class="card mb-3 d-none">
+                                                <div class="row g-0">
+                                                  <div class="col-md-4">
+                                                    <div class="card">
+                                                        <img src="https://www.ledger.com/wp-content/uploads/2021/10/satoshi-unite-mesure-bitcoin-btc.jpg" class="card-img-top" alt="Bitcoin">
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-md-8">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title">Invest in crypto</h4>
+                                                        <p class="card-text">Start your crypto investing journey by setting up a payment method and buying your first cryptocurrency at Arybit</p>
+                                                        <p class="card-text"><small class="text-muted">
+                                                            <button class="nav-link btn btn-sm btn-success w-100 mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="buy">Buy</button>
+                                                        </small></p>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                            </div>
+
                                             <!-- gift -->
                                             <div class="card-list">
                                                 <div class="card border-0 mb-5">
@@ -806,7 +826,12 @@
                                             <div class="card-body">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <div class="row align-items-center">
+                                                        <div class="tradingview-widget-container">
+                                                            <div class="tradingview-widget-container__widget"></div>
+                                                            <div id="script_data"></div>
+                                                            
+                                                        </div>
+                                                        <div class="row align-items-center d-none">
                                                             <div class="col-6">
                                                                 <h5 class="text-muted fw-normal mt-0 text-truncate cur_crypto_symbol" title=""></h5>
                                                                 <h3 class="my-2 py-1 cur_crypto_symbol_price">3,254</h3>
@@ -2043,7 +2068,7 @@
                                                                 <a href="" class="accordion-button text-reset collapsed" data-bs-toggle="collapse" data-bs-target="#accordion-notifications-body-1" aria-expanded="false" aria-controls="accordion-notifications-body-1">
                                                                     <div>
                                                                         <h5>Arybit Bot Assistance</h5>
-                                                                        <p>Set custom trading</p>
+                                                                        <p>Delivering trades with high win-rate</p>
                                                                     </div>
                                                                 </a>
                                                             </div>
@@ -2072,9 +2097,9 @@
                                                                 
                                                                 <div class="row align-items-center">
                                                                     <div class="col">                                                                        
-                                                                        <h5><span class="text-success bot_inter">1 min</span> Bot training</h5>
+                                                                        <h5><span class="text-success bot_inter">1 min</span> Self-adapting strategies</h5>
 
-                                                                        <p>Enable Bot to learn your trading model</p>
+                                                                        <p>Set AI/ML models dynamically adapt to constantly changing market conditions.</p>
                                                                     </div>
                                                                     <div class="col-auto">
                                                                         <div id="myform-check-2" class="form-check form-switch">
@@ -2091,7 +2116,12 @@
                                                                 <div class="row align-items-center">
                                                                     <div class="col">
                                                                         <h5><span class="text-success bot_inter">1 min</span> Bot trading</h5>
-                                                                        <p>Enable Bot to trade based on your trading model</p>
+                                                                        <p>Enable trade on auto-pilot</p>
+
+                                                                        <label for="customRange3r" class="form-label">Amount in % of the account balance</label>
+
+                                                                        <input type="range" class="form-range order_quantity_range" min="0" max="5" step="0.5" id="customRange3r">
+                                                                    
                                                                     </div>
                                                                     <div class="col-auto">
                                                                         <div id="myform-check-3" class="form-check form-switch">
@@ -2444,6 +2474,11 @@
                                             <strong>Finish setting up your Arybit account!</strong>.
                                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                         </div>
+                                        
+                                        <div class="tradingview-widget-container card mb-3">
+                                            <div id="tradingview_39940" style="height: 450px;"></div>
+                                        </div>
+
                                         <div class="card-group">
                                             <a class="card border-info mb-3 card_account_action_options account_activation">
                                                 <div class="card-body text-info">
@@ -2466,31 +2501,27 @@
                                                 </div>
                                             </a>
                                         </div>
-                                        
-                                        <div class="card mb-3">
-                                            <div class="row g-0">
-                                              <div class="col-md-4">
-                                                <div class="card">
-                                                    <img src="https://www.ledger.com/wp-content/uploads/2021/10/satoshi-unite-mesure-bitcoin-btc.jpg" class="card-img-top" alt="Bitcoin">
+                                        <div class="card-group">
+                                            <div class="card mb-3">
+                                                <div class="row g-0">
+                                                    <!-- TradingView Widget BEGIN -->
+                                                    <div class="tradingview-widget-container">
+                                                        <div class="tradingview-widget-container__widget"></div>
+                                                        <div id="technical_script_data"></div>
+                                                    </div>
+                                                    <!-- TradingView Widget END -->
                                                 </div>
-                                              </div>
-                                              <div class="col-md-8">
-                                                <div class="card-body">
-                                                    <h4 class="card-title">Invest in crypto</h4>
-                                                    <p class="card-text">Start your crypto investing journey by setting up a payment method and buying your first cryptocurrency at Arybit</p>
-                                                    <p class="card-text"><small class="text-muted">
-                                                        <button class="nav-link btn btn-sm btn-success w-100 mkt_option" asset="btc" day_low="48189.06" price_open="48189.95" day_high="48245.18"  price="48230.33" aisa_options="buy">Buy</button>
-                                                    </small></p>
-                                                </div>
-                                              </div>
+                                            </div>
+                                            <div class="card mb-3">
+                                                <div class="row g-0">
+                                                        <ul class="list-group bot_activity overflow-auto hide-scrollbar"  style="max-height: 450px;">
+                                                
+                                                        </ul>
+                                                    </div>
                                             </div>
                                         </div>
 
-                                        <div class="card mb-3">
-                                            <ul class="list-group bot_activity">
-                                                
-                                            </ul>
-                                        </div>
+                                      
                                         
                                         <div class="row g-0 leanders_mkt_assets d-none">
 
@@ -3241,6 +3272,7 @@
                                         <!-- <div id="validationServer03Feedback" class="invalid-feedback">
                                             Quantity.
                                         </div> -->
+                                        
                                         <input type="range" class="form-range order_quantity_range" min="0" max="5" step="0.5" id="customRange3">
                                     </div>                                            
                                 </div>                                        
